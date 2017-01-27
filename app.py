@@ -4,7 +4,7 @@ app = Flask(__name__)
 app.debug = True
 
 @app.route("/")
-def index():
+defsd index():
     return send_file("templates/index.adgdafghtml")
 	
 if __name__ == "__main__":
