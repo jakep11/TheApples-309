@@ -1,0 +1,46 @@
+* {
+   font-family: 'Open Sans', sans-serif;
+}
+
+.container-fluid {
+   width: 95%;
+   min-width: 800px
+}
+
+/* First row of buttons */
+.top-selectors {
+   margin-top: 25px;
+}
+
+/* Second row of buttons */
+.filter-row {
+   margin-top: 20px;
+}
+
+.view-switch {
+   width: 100%;
+   font-weight: 600;
+   border: 3px #aaaaaa solid;
+}
+
+.view-selectors {
+   background-color: #aaaaaa;
+}
+
+.table-view-btn {
+   border-left: 0px;
+   background-color: #898989;
+   color: white;
+}
+
+.filter-selectors {
+   height: 150px;
+   border: solid 1px #aaaaaa;
+   overflow: auto;
+   padding: 5px;
+}
+
+/* Get rid of gutters created by Bootstrap */
+.no-gutter {
+   padding: 0px;
+}
