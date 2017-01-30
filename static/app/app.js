@@ -25,7 +25,7 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/facultyHome', {
        templateUrl: 'static/faculty/html/facultyHome.html',
        controller: "facultyHome",
-       css: "static/chair/css/chair.css"
+       css: "static/faculty/css/faculty.css"
     })
     .when('/viewScheduleCalendar', {
        templateUrl: 'static/student/html/viewScheduleCalendar.html',
