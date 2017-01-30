@@ -13,6 +13,9 @@ body {
    margin-top: 10px;
    margin-bottom: 10px;
 }
+#login-form button {
+  border-radius: 3px;
+}
 #logo {
    display: block;
     margin: 0 auto;
@@ -21,4 +24,7 @@ body {
 }
 #forgotPassword {
    text-align: right;
+}
+#loginBtn {
+  background-color: #00A4D3;
 }

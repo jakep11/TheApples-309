@@ -24,7 +24,8 @@ app.config(['$routeProvider', function($routeProvider) {
     })
     .when('/facultyHome', {
        templateUrl: 'static/faculty/html/facultyHome.html',
-       controller: "facultyHome"
+       controller: "facultyHome",
+       css: "static/chair/css/chair.css"
     })
     .when('/viewScheduleCalendar', {
        templateUrl: 'static/student/html/viewScheduleCalendar.html',
@@ -32,7 +33,8 @@ app.config(['$routeProvider', function($routeProvider) {
     })
     .when('/chairHome', {
        templateUrl: 'static/chair/html/chairHome.html',
-       controller: "chairHome"
+       controller: "chairHome",
+       css: "static/chair/css/chair.css"
     })
     
     //If none of the "when"s are matched then it defaults to the home page. 
