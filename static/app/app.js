@@ -31,6 +31,11 @@ app.config(['$routeProvider', function($routeProvider) {
        templateUrl: 'static/student/html/viewScheduleCalendar.html',
        controller: "viewScheduleCalendar"
     })
+    .when('/viewScheduleTable', {
+       templateUrl: 'static/student/html/viewScheduleTable.html',
+       controller: "student",
+       css: "static/student/css/table.css"
+    })
     .when('/chairHome', {
        templateUrl: 'static/chair/html/chairHome.html',
        controller: "chairHome",
