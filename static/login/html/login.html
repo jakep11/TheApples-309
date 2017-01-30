@@ -1,25 +1,30 @@
 <div class="container">
 
-	<div class="row">
-		<div class="col-md-4"></div>
+   <div class="row">
+      <div class="col-md-4"></div>
 
-		<div class="col-md-4">
-			<section class="login-form">
-				<form method="post" action="#" role="login">
-					<input type="text" name="username" ng-model="username" required class="form-control input-lg" />
+      <div class="col-md-4">
+         <div id="login-form">
+            <img id="logo" src="static/images/logo.png">
+            
+            <form ng-submit="login()">
+               <input type="text" name="username" ng-model="username" placeholder="Username" required class="form-control" />
 
-					<input type="password" class="form-control input-lg" id="password" ng-model="password" required="" />
+               <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password" required="" />
+               <p id="forgotPassword"><a href="#">Forgot password?</a></p>
+               
+               <div ng-show="error" class="alert alert-danger">Incorrect username and/or password</div>
 
-					<button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Log in</button>
-					<button name="guest" class="btn btn-lg btn-success btn-block">Continue as Guest</button>
-
-				</form>
-
-
-			</div>
-
-			<div class="col-md-4"></div>
+               <button type="submit"  class="btn btn-lg btn-primary btn-block">LOG IN</button>
+            </form>
+               <button name="guest" class="btn btn-lg btn-success btn-block" ng-click="continueAsGuest()">CONTINUE AS GUEST</button>
 
 
-		</div>
-	</div>
+         </div>
+
+         <div class="col-md-4"></div>
+
+
+      </div>
+   </div>
+</div>
