@@ -1,53 +1,43 @@
 <!doctype html>
 <html ng-app="TheApples">
 <head>
-   <title>The Apples App</title>
-   <meta charset="utf-8">
-   <!-- Bootstrap imports -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
-<!-- Angular imports -->
+ <title>The Apples App</title>
+ <meta charset="utf-8">
+ <!-- Bootstrap imports -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+ <!-- Angular imports -->
 
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-   <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.js"></script>
-   
-<!-- Google Fonts -->
-   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-   
-<!-- Angular setup page -->
-   <script src="static/app/app.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+ <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-cookies.js"></script>
+ 
+ <!-- Google Fonts -->
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+ 
+ <!-- Angular setup page -->
+ <script src="static/app/app.js"></script>
 
-   <!-- Other angular pages -->
-    <!-- <script src="static/accountManager/js/.."></script>
-    <script src="static/accountManager/js/.."></script>
-    <script src="static/chair/js/.."></script>
-    <script src="static/chair/js/.."></script>
-    <script src="static/faculty/js/.."></script>
-    <script src="static/faculty/js/.."></script> 
-   <script src="static/login/js/login.js"></script>
-    <script src="static/login/js/.."></script>
-    <script src="static/student/js/.."></script>
-    <script src="static/student/js/.."></script> 
-    <script src="static/chair/js/.."></script>
-    <script src="static/chair/js/.."></script>
-    <script src="static/chair/js/.."></script> -->
-    <script src="static/faculty/js/faculty.js"></script>
-    <script src="static/chair/js/chair.js"></script>
-    <script src="static/student/js/student.js"></script> 
-    <script src="static/login/js/login.js"></script>
+ <!-- Other angular pages -->
+ <script src="static/accountManager/js/accountManager.js"></script>
+ <script src="static/faculty/js/faculty.js"></script>
+ <script src="static/chair/js/chair.js"></script>
+ <script src="static/student/js/student.js"></script> 
+ <script src="static/login/js/login.js"></script>
 
-      <!-- <link rel="stylesheet" href="static/login/css/login.css"> -->
+ <!-- CSS files for every page -->
+ <!-- <link rel="stylesheet" href="static/login/css/login.css"> -->
 
 
-   
+ 
 </head>
 <body>
-   <h6 ng-hide="role == null || role == 'student'">Navbar placeholder</h6>
-   
-   
-   <div ng-view></div>
+ <h6 ng-hide="role == null || role == 'student'">Navbar placeholder</h6>
+ 
+ 
+ <div ng-view></div>
 </body>
 
 </html>
