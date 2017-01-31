@@ -10,6 +10,7 @@
 /* First row of buttons */
 .top-selectors {
    margin-top: 25px;
+   margin-left: -40px;
 }
 
 /* Second row of buttons */
@@ -33,6 +34,12 @@
    color: white;
 }
 
+.calendar-view-btn {
+   border-right: 0px;
+   background-color: #898989;
+   color: white;
+}
+
 .filter-selectors {
    height: 150px;
    border: solid 1px #aaaaaa;
@@ -48,4 +55,9 @@
 /* Get rid of gutters created by Bootstrap */
 .no-gutter {
    padding: 0px;
+}
+
+#arrow {
+  width: 40px; 
+  height: 40px;
 }
