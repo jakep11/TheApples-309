@@ -22,8 +22,15 @@
 	border-radius: 2px;
 	padding: 15px;
 }
+#box-container button:hover {
+	background-color: #20bae5;
+}
+
 #box-container #logoutBtn {
 	background-color: #A7A7A7;
+}
+#box-container #logoutBtn:hover {
+	background-color: #C0C0C0;
 }
 #reportBug {
 	text-align: center;

@@ -2,9 +2,29 @@
 
 'use strict';   // Enforces better JavaScript practices
 
-var app = angular.module('TheApples', ['ngRoute',  'ui.bootstrap']);
+var app = angular.module('TheApples', ['ngRoute',  'ui.bootstrap', 'ngCookies']);
 
+app.run(function($rootScope, $cookies) {
+  $rootScope.role = $cookies.get('role');
+  $rootScope.user = $cookies.get('user');
 
+})
+
+app.directive( 'goClick', function ( $location ) {
+  return function ( scope, element, attrs ) {
+    var path;
+
+    attrs.$observe( 'goClick', function (val) {
+      path = val;
+    });
+
+    element.bind( 'click', function () {
+      scope.$apply( function () {
+        $location.path( path );
+      });
+    });
+  };
+});
 
 //This is how Angular determines what page to display based on the URL.
 //Note: The controller will be in the same parent folder as the templateUrl but in the js folder
@@ -20,25 +40,97 @@ app.config(['$routeProvider', function($routeProvider) {
     //This specifies the controller and template html page for the login page
     .when('/login', {
        templateUrl: 'static/login/html/login.html',
-       controller: 'login'
+       controller: 'login',
+       css: 'static/login/css/login.css'
     })
+    
+    //Every page for a student to view
+    .when('/viewScheduleCalendarStudent', {
+       templateUrl: 'static/student/html/viewScheduleCalendarStudent.html',
+       controller: "viewScheduleCalendarStudent"
+    })
+    .when('/viewScheduleTableStudent', {
+       templateUrl: 'static/student/html/viewScheduleTableStudent.html',
+       controller: "viewScheduleTableStudent",
+       css: "static/student/css/table.css"
+    })
+
+    //Every page for a faculty to view
     .when('/facultyHome', {
        templateUrl: 'static/faculty/html/facultyHome.html',
        controller: "facultyHome",
        css: "static/faculty/css/faculty.css"
     })
+    .when('/preferences', {
+       templateUrl: 'static/faculty/html/preferences.html',
+       controller: "preferences",
+       css: "static/faculty/css/faculty.css"
+    })
     .when('/viewScheduleCalendar', {
-       templateUrl: 'static/student/html/viewScheduleCalendar.html',
-       controller: "viewScheduleCalendar"
+       templateUrl: 'static/faculty/html/viewScheduleCalendar.html',
+       controller: "viewScheduleCalendar",
+       css: "static/faculty/css/faculty.css"
     })
     .when('/viewScheduleTable', {
-       templateUrl: 'static/student/html/viewScheduleTable.html',
-       controller: "student",
-       css: "static/student/css/table.css"
+       templateUrl: 'static/faculty/html/viewScheduleTable.html',
+       controller: "viewScheduleTable",
+       css: "static/faculty/css/faculty.css"
     })
+    .when('/viewYourSchedule', {
+       templateUrl: 'static/faculty/html/viewYourSchedule.html',
+       controller: "viewYourSchedule",
+       css: "static/faculty/css/faculty.css"
+    })
+
+    //Every page for a chair to view
     .when('/chairHome', {
        templateUrl: 'static/chair/html/chairHome.html',
        controller: "chairHome",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/courseManager', {
+       templateUrl: 'static/chair/html/courseManager.html',
+       controller: "courseManager",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/facultyManager', {
+       templateUrl: 'static/chair/html/facultyManager.html',
+       controller: "facultyManager",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/facultyPreferences', {
+       templateUrl: 'static/chair/html/facultyPreferences.html',
+       controller: "facultyPreferences",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/generateSchedule', {
+       templateUrl: 'static/chair/html/generateSchedule.html',
+       controller: "generateSchedule",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/importData', {
+       templateUrl: 'static/chair/html/importData.html',
+       controller: "importData",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/notifications', {
+       templateUrl: 'static/chair/html/notifications.html',
+       controller: "notifications",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/roomManager', {
+       templateUrl: 'static/chair/html/roomManager.html',
+       controller: "roomManager",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/schedules', {
+       templateUrl: 'static/chair/html/schedules.html',
+       controller: "schedules",
+       css: "static/chair/css/chair.css"
+    })
+    .when('/viewSchedule', {
+       templateUrl: 'static/chair/html/viewSchedule.html',
+       controller: "viewSchedule",
        css: "static/chair/css/chair.css"
     })
     
