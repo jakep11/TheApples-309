@@ -5,6 +5,7 @@ angular.module('TheApples')
    $scope.name = "Timothy Kearns";
    $scope.numNotifications = 12;
 
+
    $scope.logout = function() {
       console.log("logging out");
       $rootScope.role = null;
@@ -13,6 +14,7 @@ angular.module('TheApples')
       $cookies.remove('role');
       $location.path("/login");
    }
+   
    
 })
 
