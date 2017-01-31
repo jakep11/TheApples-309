@@ -47,7 +47,8 @@ app.config(['$routeProvider', function($routeProvider) {
     //Every page for a student to view
     .when('/viewScheduleCalendarStudent', {
        templateUrl: 'static/student/html/viewScheduleCalendarStudent.html',
-       controller: "viewScheduleCalendarStudent"
+       controller: "viewScheduleCalendarStudent",
+       css: "static/student/css/student.css"
     })
     .when('/viewScheduleTableStudent', {
        templateUrl: 'static/student/html/viewScheduleTableStudent.html',
