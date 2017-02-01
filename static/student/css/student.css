@@ -74,3 +74,19 @@
    width: 40px;
    height: 40px;
 }
+
+textarea {
+  min-height:110px;
+}
+
+.noresize {
+  resize: none; 
+}
+
+.vresize {
+  resize: vertical; 
+}
+  
+.hresize {
+  resize: horizontal;  
+}  
