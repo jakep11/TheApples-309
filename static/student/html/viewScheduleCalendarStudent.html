@@ -12,9 +12,45 @@
               <a class="btn btn-default view-switch" href="#/viewScheduleTableStudent" role="button">TABLE VIEW</a>
            </div>
      </div>
-     <div class="col-xs-2 no-gutter col-xs-offset-2 secondary-btns">
-        <a class="btn btn-default view-switch" href="#" role="button">POST FEEDBACK</a>
-     </div>
+     
+
+     <div class="col-xs-2 no-gutter col-xs-offset-10 secondary-btns">
+        <button id="post-btn" type="button" class="btn btn-default view-switch" data-toggle="modal" data-target="#myModal">POST FEEDBACK</button>
+</div>
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="text-align: center">
+          <h4 class="modal-title">Feedback</h4>
+        </div>
+        <div class="modal-body">
+           <div class="form-group">
+            <label for="userID">User ID:</label>
+          <input class="form-control" id="userID">
+            </div>
+            <div class="form-group">
+                <label for="term">Term:</label>
+        </div>
+            
+            <div class="form-group">
+          <textarea rows="5" cols="78" id="feedbackText"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer" style="text-align: center">
+          <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">SUMBIT</button>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+
+
   </div>
   <div class="row filter-row">
      <div class="col-xs-2 no-gutter col-xs-offset-10 secondary-btns">

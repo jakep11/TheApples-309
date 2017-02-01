@@ -112,7 +112,7 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/importData', {
        templateUrl: 'static/chair/html/importData.html',
        controller: "importData",
-       css: "static/chair/css/chair.css"
+       css: "static/chair/css/importData.css"
     })
     .when('/notifications', {
        templateUrl: 'static/chair/html/notifications.html',
