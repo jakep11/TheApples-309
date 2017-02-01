@@ -7,13 +7,17 @@
    min-width: 800px
 }
 
+
 /* First row of buttons */
+
 .top-selectors {
    margin-top: 25px;
    margin-left: -40px;
 }
 
+
 /* Second row of buttons */
+
 .filter-row {
    margin-top: 20px;
 }
@@ -47,13 +51,42 @@
    padding: 5px;
 }
 
+.listing {
+   height: 200px;
+   overflow: auto;
+}
+
+
 /* Get rid of gutters created by Bootstrap */
+
 .no-gutter {
    padding: 0px;
 }
 
-
-#arrow {
-  width: 40px; 
-  height: 40px;
+.back-btn {
+   margin-top: -15px;
+   color: transparent;
+   background-color: transparent;
+   border-color: transparent;
 }
+
+.arrow {
+   width: 40px;
+   height: 40px;
+}
+
+textarea {
+  min-height:110px;
+}
+
+.noresize {
+  resize: none; 
+}
+
+.vresize {
+  resize: vertical; 
+}
+  
+.hresize {
+  resize: horizontal;  
+}  

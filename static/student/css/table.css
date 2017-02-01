@@ -57,7 +57,14 @@
    padding: 0px;
 }
 
-#arrow {
+.back-btn {
+   margin-top: -15px; 
+   color: transparent; 
+   background-color: transparent; 
+   border-color: transparent;
+}
+
+.arrow {
   width: 40px; 
   height: 40px;
 }
