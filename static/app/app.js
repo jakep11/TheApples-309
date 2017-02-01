@@ -4,9 +4,15 @@
 
 var app = angular.module('TheApples', ['ngRoute',  'ui.bootstrap', 'ngCookies']);
 
+//Runs every time the page is reloaded. Sets the role and user from the browser cookies
 app.run(function($rootScope, $cookies) {
   $rootScope.role = $cookies.get('role');
   $rootScope.user = $cookies.get('user');
+  //Resetting the breadcrumbs when view changes
+  $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+        $rootScope.bcrumb1Link = null;
+        $rootScope.bcrumb2 = null;
+    });
 
 })
 
@@ -43,7 +49,12 @@ app.config(['$routeProvider', function($routeProvider) {
        controller: 'login',
        css: 'static/login/css/login.css'
     })
-    
+    //Page for the admin to veiw
+    .when('/accountManager', {
+       templateUrl: 'static/admin/html/accountManager.html',
+       controller: "accountManager",
+       css: "static/admin/css/admin.css"
+    })
     //Every page for a student to view
     .when('/viewScheduleCalendarStudent', {
        templateUrl: 'static/student/html/viewScheduleCalendarStudent.html',
@@ -112,7 +123,7 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/importData', {
        templateUrl: 'static/chair/html/importData.html',
        controller: "importData",
-       css: "static/chair/css/importData.css"
+       //css: "static/chair/css/importData.css"
     })
     .when('/notifications', {
        templateUrl: 'static/chair/html/notifications.html',
