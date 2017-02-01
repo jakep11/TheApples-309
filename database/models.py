@@ -33,6 +33,7 @@ class Courses(db.Model):
 	lab_hours = db.Column(db.Integer)
 	course_sections = db.relationship("Sections", backref="course")
 	constraints = db.relationship("FacultyConstraint", backref="course")
+	final_schedules = db.relationship("ScheduleFinal", backref="course")
 
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):							
@@ -41,6 +42,7 @@ class Terms(db.Model):
 	term_sections = db.relationship("Sections", backref="term")
 	constraints = db.relationship("FacultyConstraint", backref="term")
 	comments = db.relationship("Comments", backref="term")
+	final_schedules = db.relationship("ScheduleFinal", backref="term")
 
 
 #-- Description: Stores all rooms with type and capacity
@@ -77,7 +79,13 @@ class RoomEquipment(db.Model):
 	equipment_id = db.Column(db.Integer, db.ForeignKey("equipment.id"))
 
 #-- Description: Stores the course and section enrollment/waitlist information for what was actually offered by the University in previous quarters
-#class ScheduleFinal(db.Model):
+class ScheduleFinal(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
+	course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+	number_sections = db.Column(db.Integer)
+	total_enrollment = db.Column(db.Integer)
+	
 
 #-- Description: Stores all of the sections that are planned in a specific term
 class ScheduleInitial(db.Model):
