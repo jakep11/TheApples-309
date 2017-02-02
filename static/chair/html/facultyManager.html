@@ -1,125 +1,131 @@
 <body>
-   <div class="container-fluid">
-      <!--   Page Title   -->
-      <div class="row title">
-         <h1>Faculty manager</h1>
-      </div>
-      <form>
-         <!--   Tables   -->
-         <div class="row">
-            <table class="table table-striped">
-               <tr class="success">
-                  <th>Select</th>
-                  <th>Username</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Min Workload</th>
-                  <th>Max Workload</th>
-                  <th>Notes</th>
-                  <th>Preferences</th>
-               </tr>
-               <tr>
-                  <td>
-                     <!--         Value had to change depending on the entry username           -->
-                     <input type="radio" name="faculty-entry" value="tkearns">
-                  </td>
-                  <td>tkearns</td>
-                  <td>Timothy</td>
-                  <td>Kearns</td>
-                  <td>10.00</td>
-                  <td>12.50</td>
-                  <td>None</td>
-                  <td>
-                     <button class="btn btn-default preference-btn">PREFERENCES</button>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <input type="radio" name="faculty-entry" value="tkearns">
-                  </td>
-                  <td>tkearns</td>
-                  <td>Timothy</td>
-                  <td>Kearns</td>
-                  <td>10.00</td>
-                  <td>12.50</td>
-                  <td>None</td>
-                  <td>
-                     <button class="btn btn-default preference-btn">PREFERENCES</button>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <input type="radio" name="faculty-entry" value="tkearns">
-                  </td>
-                  <td>tkearns</td>
-                  <td>Timothy</td>
-                  <td>Kearns</td>
-                  <td>10.00</td>
-                  <td>12.50</td>
-                  <td>None</td>
-                  <td>
-                     <button class="btn btn-default preference-btn">PREFERENCES</button>
-                  </td>
-               </tr>
-            </table>
-         </div>
-      </form>
-      <!--   Add, edit, and remove buttons   -->
-      <div class="row">
-         <div class="col-xs-2 col-xs-offset-3">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
-         </div>
-         <div id="add-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-body">
-                     <form>
-                        <div class="modal-title">
-                           <h3>Add User</h3>
-                        </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
-                              Username:
-                              <input type="text" class="form-control" name="username">
-                           </div>
-                           <div class="col-xs-6 add-text">
-                              Min Workload:
-                              <input type="text" class="form-control" name="min-workload">
-                           </div>
-                        </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
-                              First name:
-                              <input type="text" class="form-control" name="firstname">
-                           </div>
-                           <div class="col-xs-6 add-text">
-                              Max Workload:
-                              <input type="text" class="form-control" name="max-workload">
-                           </div>
-                        </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
-                              Last name:
-                              <input type="text" class="form-control" name="lastname">
-                           </div>
-                           <div class="col-xs-6 add-text">
-                              Notes:
-                              <textarea type="text" class="form-control" name="notes" placeholder="None"></textarea>
-                           </div>
-                        </div>
-                     </form>
-                  </div>
-               </div>
+    <div class="container-fluid">
+        <!--   Page Title   -->
+        <div class="row title">
+            <h1>Faculty manager</h1>
+        </div>
+        <form>
+            <!--   Tables   -->
+            <div class="row">
+                <table class="table table-striped">
+                    <tr class="success">
+                        <th>Select</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Min Workload</th>
+                        <th>Max Workload</th>
+                        <th>Notes</th>
+                        <th>Preferences</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <td>tkearns</td>
+                        <td>Timothy</td>
+                        <td>Kearns</td>
+                        <td>10.00</td>
+                        <td>12.50</td>
+                        <td>None</td>
+                        <td>
+                            <button class="btn btn-default preference-btn">PREFERENCES</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <td>tkearns</td>
+                        <td>Timothy</td>
+                        <td>Kearns</td>
+                        <td>10.00</td>
+                        <td>12.50</td>
+                        <td>None</td>
+                        <td>
+                            <button class="btn btn-default preference-btn">PREFERENCES</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <td>tkearns</td>
+                        <td>Timothy</td>
+                        <td>Kearns</td>
+                        <td>10.00</td>
+                        <td>12.50</td>
+                        <td>None</td>
+                        <td>
+                            <button class="btn btn-default preference-btn">PREFERENCES</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
-         </div>
-         <div class="col-xs-2">
-            <button class="btn btn-default preference-btn col-xs-12">Edit</button>
-         </div>
-         <div class="col-xs-2">
-            <button class="btn btn-default preference-btn col-xs-12">Remove</button>
-         </div>
-      </div>
-   </div>
+        </form>
+        <!--   Add, edit, and remove buttons   -->
+        <div class="row">
+            <div class="col-xs-2 col-xs-offset-3">
+                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
+            </div>
+            <div id="add-modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form>
+                                <div class="modal-title">
+                                    <h3>Add User</h3>
+                                </div>
+                                <div class="row modal-row">
+                                    <div class="col-xs-6 add-text">
+                                        Username:
+                                        <input type="text" class="form-control" name="username">
+                                    </div>
+                                    <div class="col-xs-6 add-text">
+                                        Min Workload:
+                                        <input type="text" class="form-control" name="min-workload">
+                                    </div>
+                                </div>
+                                <div class="row modal-row">
+                                    <div class="col-xs-6 add-text">
+                                        First name:
+                                        <input type="text" class="form-control" name="firstname">
+                                    </div>
+                                    <div class="col-xs-6 add-text">
+                                        Max Workload:
+                                        <input type="text" class="form-control" name="max-workload">
+                                    </div>
+                                </div>
+                                <div class="row modal-row">
+                                    <div class="col-xs-6 add-text">
+                                        Last name:
+                                        <input type="text" class="form-control" name="lastname">
+                                    </div>
+                                    <div class="col-xs-6 add-text">
+                                        Notes:
+                                        <textarea type="text" class="form-control noresize" name="notes" placeholder="None"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row modal-row" style="text-align: center">
+                                    <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">CANCEL</button>
+                                    <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">SUBMIT</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-default preference-btn col-xs-12">Edit</button>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-default preference-btn col-xs-12">Remove</button>
+            </div>
+        </div>
+    </div>
 
 
 
