@@ -17,6 +17,11 @@ angular.module('TheApples').controller("login", function($scope, $rootScope, $lo
          $cookies.put('role', 'chair');
          $location.path("/chairHome")
       }
+      else if ($scope.username == "admin" && $scope.password == "123") {
+         $rootScope.role = "admin";
+         $cookies.put('role', 'admin');
+         $location.path("/accountManager")
+      }
       else {
          $scope.error = true;
       }

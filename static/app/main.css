@@ -1,0 +1,17 @@
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:8px !important; 
+    padding-bottom:0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    height: 36px;
+    color: #428BCA !important;
+}
+.navbar-nav > li > a:hover {
+	color: gray !important;
+}
+.navbar-nav > .last-nav-item > a {
+	color: gray !important;
+}
+.navbar {
+	min-height:36px !important;
+}

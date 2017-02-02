@@ -1,7 +1,7 @@
 angular.module('TheApples')
 
 .controller("chairHome", function($scope, $rootScope, $location, $cookies) {
-   
+   $rootScope.bcrumb1 = null;
    $scope.name = "Timothy Kearns";
    $scope.numNotifications = 12;
 
@@ -18,39 +18,49 @@ angular.module('TheApples')
    
 })
 
-.controller("courseManager", function($scope) {
+.controller("courseManager", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Course Manager";
+})
+
+.controller("facultyManager", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Faculty Manager";
+   console.log("faculty manager page");
 
 })
 
-.controller("facultyManager", function($scope) {
-   
+.controller("facultyPreferences", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Faculty Manager";
+   $rootScope.bcrumb1Link = "#facultyManager";
+   $rootScope.bcrumb2 = "Faculty Preferences";
 })
 
-.controller("facultyPreferences", function($scope) {
-   
+.controller("generateSchedule", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Schedules";
+   $rootScope.bcrumb1Link = "#schedules";
+   $rootScope.bcrumb2 = "Current Schedule";
 })
 
-.controller("generateSchedule", function($scope) {
-   
+.controller("importData", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Import Data";
 })
 
-.controller("importData", function($scope) {
-   
+.controller("notifications", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Notifications";
 })
 
-.controller("notifications", function($scope) {
-   
+.controller("roomManager", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Room Manager";
+
 })
 
-.controller("roomManager", function($scope) {
-   
+.controller("schedules", function($scope, $rootScope) {
+      $rootScope.bcrumb1 = "Schedules";
+
 })
 
-.controller("schedules", function($scope) {
-   
-})
-
-.controller("viewSchedule", function($scope) {
-   
+.controller("viewSchedule", function($scope, $rootScope) {
+   $rootScope.bcrumb1 = "Schedules";
+   $rootScope.bcrumb1Link = "#schedules";
+   $rootScope.bcrumb2 = "Current Schedule";
 })
 
