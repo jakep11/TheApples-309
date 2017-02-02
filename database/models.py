@@ -89,6 +89,7 @@ class ScheduleFinal(db.Model):
 	course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
 	number_sections = db.Column(db.Integer)
 	total_enrollment = db.Column(db.Integer)
+	waitlist = db.Column(db.Integer)
 	
 
 #-- Description: Stores all of the sections that are planned in a specific term
