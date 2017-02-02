@@ -108,7 +108,7 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/facultyManager', {
        templateUrl: 'static/chair/html/facultyManager.html',
        controller: "facultyManager",
-       css: "static/chair/css/chair.css"
+       css: "static/chair/css/faculty-manager.css"
     })
     .when('/facultyPreferences', {
        templateUrl: 'static/chair/html/facultyPreferences.html',
@@ -184,8 +184,3 @@ app.directive('head', ['$rootScope','$compile',
   };
 }
 ]);
-
-    Contact GitHub API Training Shop Blog About 
-
-    © 2017 GitHub, Inc. Terms Privacy Security Status Help 
-
