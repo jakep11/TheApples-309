@@ -44,3 +44,18 @@
 .modal-row {
    margin-top: 10px;
 }
+
+.add-btns {
+   width: 100%;
+}
+
+.preference-table {
+   display: block;
+   height: 200px;
+   overflow: auto;
+   margin-bottom: 10px;
+}
+
+.preference-modal {
+   height: 600px;
+}
