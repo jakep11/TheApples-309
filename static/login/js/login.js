@@ -1,11 +1,31 @@
-angular.module('TheApples').controller("login", function($scope, $rootScope, $location, $cookies) {
-   
+angular.module('TheApples').controller("login", function($scope, $rootScope, $http, $location, $cookies) {
+
    $scope.continueAsGuest = function() {
       $rootScope.role = "student";
       $cookies.put('role', 'student');
-      $location.path("/viewScheduleTableStudent");
-   }
-   $scope.login = function() {
+      //$location.path("/viewScheduleTableStudent");
+
+      $http({
+          method: 'POST',
+          url: '/users/createUser',
+          headers: {
+            'Content-Type': "application/json"
+          },
+          data: {
+            'first_name': 'from',
+            'last_name': 'angular',
+            'username': 'uname',
+            'password': 'pleasehashme',
+            'role': 'adminaaa'
+          }
+      }).then(function successCallback(response) {
+         console.log("success");
+       }, function errorCallback(response) {
+         console.log("error");
+       });
+
+ }
+ $scope.login = function() {
       //Do stuff here
       if ($scope.username == "faculty" && $scope.password == "123") {
          $rootScope.role = "faculty";
