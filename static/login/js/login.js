@@ -2,7 +2,7 @@ angular.module('TheApples').controller("login", function($scope, $rootScope, $ht
 
   //Reset all rootScope variables when you go back to login page
   $rootScope.role = null;
-  $rootScope.username = null;
+  $rootScope.user = null;
   $rootScope.first_name = null;
   $rootScope.last_name = null;
   $cookies.remove('user');
