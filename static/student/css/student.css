@@ -28,6 +28,12 @@
    border: 3px #aaaaaa solid;
 }
 
+.bottom-btns {
+   width: 30px;
+   font-weight: 600;
+   border: 3px #aaaaaa solid;
+}
+
 .view-selectors {
    background-color: #aaaaaa;
 }
@@ -90,3 +96,8 @@ textarea {
 .hresize {
   resize: horizontal;  
 }  
+
+.preference-btn {
+    font-weight: 600;
+    border: 2px solid #aaaaaa;
+}

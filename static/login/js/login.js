@@ -1,13 +1,47 @@
-angular.module('TheApples').controller("login", function($scope, $rootScope, $location, $cookies) {
-   
+angular.module('TheApples').controller("login", function($scope, $rootScope, $http, $location, $cookies) {
+
+  //Reset all rootScope variables when you go back to login page
+  $rootScope.role = null;
+  $rootScope.user = null;
+  $rootScope.first_name = null;
+  $rootScope.last_name = null;
+  $cookies.remove('user');
+  $cookies.remove('role');
+
    $scope.continueAsGuest = function() {
       $rootScope.role = "student";
       $cookies.put('role', 'student');
       $location.path("/viewScheduleTableStudent");
-   }
-   $scope.login = function() {
-      //Do stuff here
-      if ($scope.username == "faculty" && $scope.password == "123") {
+
+      
+ }
+
+$scope.createUser = function() {
+  $http({
+          method: 'POST',
+          url: '/users/createUser',
+          headers: {
+            'Content-Type': "application/json"
+          },
+          data: {
+            'first_name': 'from',
+            'last_name': 'angular',
+            'username': 'uname',
+            'password': 'pleasehashme',
+            'role': 'admin'
+          }
+      }).then(function successCallback(response) {
+         console.log("success");
+       }, function errorCallback(response) {
+         console.log("error");
+       });
+
+}
+
+ $scope.login = function() {
+
+  //Leave this validation in until the database is stable
+  if ($scope.username == "faculty" && $scope.password == "123") {
          $rootScope.role = "faculty";
          $cookies.put('role', 'faculty');
          $location.path("/facultyHome");
@@ -23,8 +57,55 @@ angular.module('TheApples').controller("login", function($scope, $rootScope, $lo
          $location.path("/accountManager")
       }
       else {
-         $scope.error = true;
+         
+      
+
+      
+      $http({
+          method: 'POST',
+          url: '/users/validateLogin',
+          headers: {
+            'Content-Type': "application/json"
+          },
+          data: {
+            'username': $scope.username,
+            'password': $scope.password,
+          }
+      }).then(function successCallback(response) {
+         var data = response.data;
+         if (!data.isUser) {
+            $scope.error = true;
+         }
+         else {
+            if (data.role == "faculty") {
+               $rootScope.role = "faculty";
+               $location.path("/facultyHome");
+            }
+            else if (data.role == "chair") {
+               $rootScope.role = "chair";
+               $location.path("/chairHome")
+            }
+            else if (data.role == "admin") {
+               $rootScope.role = "admin";
+               $location.path("/accountManager")
+            }
+            else {
+               $rootScope.role = "student"; //Putting role as student for now if it doesn't match anything
+               $location.path("/viewScheduleTableStudent")
+            }
+            $rootScope.user = data.first_name + " " + data.last_name;
+            $cookies.put('role', $rootScope.role);
+            $cookies.put('user', $rootScope.user);
+
+
+
+         }
+       }, function errorCallback(response) {
+         console.log("error valdating login");
+       });
+
       }
+      
    }
 })
 
