@@ -1,14 +1,11 @@
 from flask import Flask, send_file
 from flask_sqlalchemy import SQLAlchemy
+
+from web_app import app
+
 import database.login
 
-
-app = Flask(__name__)
-app.register_blueprint(database.login.login_api)
-app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://db:password@35.160.55.128/cs2scheduling'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+app.register_blueprint(database.login.login_api, url_prefix="/users")
 
 @app.route("/")
 def index():

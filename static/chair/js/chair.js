@@ -3,16 +3,11 @@ var app = angular.module('TheApples')
 
 app.controller("chairHome", function($scope, $rootScope, $location, $cookies) {
    $rootScope.bcrumb1 = null;
-   $scope.name = "Timothy Kearns";
+   
    $scope.numNotifications = 12;
-
 
    $scope.logout = function() {
       console.log("logging out");
-      $rootScope.role = null;
-      $rootScope.user = null;
-      $cookies.remove('user');
-      $cookies.remove('role');
       $location.path("/login");
    }
    
