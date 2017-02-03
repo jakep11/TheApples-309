@@ -1,7 +1,8 @@
 angular.module('TheApples')
 
-.controller("accountManager", function($scope, $rootScope, $location) {
+.controller("accountManager", function($scope, $rootScope, $http, $location) {
 
+  $scope.users = [];
 	$scope.getUsers = function() {
 		$http({
           method: 'GET',
@@ -11,7 +12,8 @@ angular.module('TheApples')
           }
       }).then(function successCallback(response) {
          console.log("success");
-         console.log(response);
+         console.log(response.data);
+         $scope.users = response.data;
        }, function errorCallback(response) {
          console.log("error");
        });
