@@ -6,6 +6,7 @@ from web_app import app
 import database.login
 
 app.register_blueprint(database.login.login_api, url_prefix="/users")
+app.register_blueprint(database.create.create_api, url_prefix="/create")
 
 @app.route("/")
 def index():

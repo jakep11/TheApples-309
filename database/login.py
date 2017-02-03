@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, redirect, request, url_for, jsonify, json
+from flask import Blueprint, request, jsonify, json
 import bcrypt
 login_api = Blueprint('login_api', __name__)
 
