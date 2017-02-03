@@ -13,46 +13,42 @@ def sample_function():
 
 @login_api.route('/validateLogin', methods = ["POST"])
 def validate_login2():
-    uname = request.args.get('username') 
-    print 'yo'
-    print uname
-    print 'hi'
-    print 'hi'
-    user = User.query.filter_by(username=uname).first()
-    isUser = True
-    if user is None:
-        isUser = False
-    return jsonify(isUser=isUser)
-    #return jsonify(id=1, role='chair', username='jake')
+    data = request.json
+    username = data['username']
+    password = data['password']
 
-    # tree_id = request.args.get('id', -1, type = int)
-    # if tree_id >= 0: #non-invalid id in request
-    #     tree = models.Tree.query.filter_by(id=tree_id).first()
-    #     if tree is not None: #results produced
-    #         return jsonify(id=tree.id,
-    #                         topic=tree.topic,
-    #                         user=tree.user.username)
-    #     else:
-    #         return 'ERROR RETRIEVING TREE!'
+    #Retrieve User with specified username from the database
+    user = User.query.filter_by(username=username).first()
+
+    isUser = True
+    role = None
+    first_name = None
+    last_name = None
+    if user is None: #if username not in database
+        isUser = False
+    #username exists
+    elif bcrypt.hashpw(password.encode('utf8'), user.password_hash.encode('utf8')) == user.password_hash.encode('utf8'):
+        #Password matches
+        isUser = True
+        role = user.role
+        first_name = user.first_name
+        last_name = user.last_name
+
+    return jsonify(isUser=isUser, role=role, first_name=first_name, last_name=last_name)
+    
 
 
 @login_api.route('/createUser', methods = ["POST"])
 def retrieve_fact():
     data = request.json
-    
-    
 
-    username = data['username']
-    print data  
-    print username
-    print "!!!!!username!!!!"        
+    username = data['username']     
     password = data['password']
     first_name = data['first_name']
     last_name = data['last_name']
     role = data['role']
 
     hashed = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
-    #hashed = password
 
     newUser = User(username=username, password_hash=hashed, first_name=first_name, last_name=last_name, role=role)
     db.session.add(newUser)
