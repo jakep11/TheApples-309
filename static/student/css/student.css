@@ -1,103 +1,110 @@
 * {
-   font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container-fluid {
-   width: 95%;
-   min-width: 800px
+    width: 95%;
+    min-width: 800px
 }
 
 
 /* First row of buttons */
 
 .top-selectors {
-   margin-top: 25px;
-   margin-left: -40px;
+    margin-top: 25px;
+    margin-left: -40px;
 }
 
 
 /* Second row of buttons */
 
 .filter-row {
-   margin-top: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .view-switch {
-   width: 100%;
-   font-weight: 600;
-   border: 3px #aaaaaa solid;
+    width: 100%;
+    font-weight: 600;
+    border: 3px #aaaaaa solid;
 }
 
 .bottom-btns {
-   width: 30px;
-   font-weight: 600;
-   border: 3px #aaaaaa solid;
+    width: 30px;
+    font-weight: 600;
+    border: 3px #aaaaaa solid;
 }
 
 .view-selectors {
-   background-color: #aaaaaa;
+    background-color: #aaaaaa;
 }
 
 .table-view-btn {
-   border-left: 0px;
-   background-color: #898989;
-   color: white;
+    border-left: 0px;
+    background-color: #898989;
+    color: white;
 }
 
 .calendar-view-btn {
-   border-right: 0px;
-   background-color: #898989;
-   color: white;
+    border-right: 0px;
+    background-color: #898989;
+    color: white;
 }
 
 .filter-selectors {
-   height: 150px;
-   border: solid 1px #aaaaaa;
-   overflow: auto;
-   padding: 5px;
+    height: 150px;
+    border: solid 1px #aaaaaa;
+    overflow: auto;
+    padding: 5px;
 }
 
 .listing {
-   height: 200px;
-   overflow: auto;
+    margin-top: 20px;
+    overflow: auto;
 }
 
 
 /* Get rid of gutters created by Bootstrap */
 
 .no-gutter {
-   padding: 0px;
+    padding: 0px;
 }
 
 .back-btn {
-   margin-top: -15px;
-   color: transparent;
-   background-color: transparent;
-   border-color: transparent;
+    margin-top: -15px;
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .arrow {
-   width: 40px;
-   height: 40px;
+    width: 30px;
+    height: 30px;
+    margin-top: -3px;
 }
 
-textarea {
-  min-height:110px;
+sfsdf textarea {
+    min-height: 110px;
 }
 
 .noresize {
-  resize: none; 
+    resize: none;
 }
-
-.vresize {
-  resize: vertical; 
-}
-  
-.hresize {
-  resize: horizontal;  
-}  
 
 .preference-btn {
     font-weight: 600;
     border: 2px solid #aaaaaa;
+}
+
+.week-arrows {
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+    width: 40px;
+    height: 40px;
+}
+
+.week-selectors {
+    align-items: center;
+    text-align: center;
 }
