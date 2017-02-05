@@ -4,8 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from web_app import app
 
 import database.login
+import database.courses
 
 app.register_blueprint(database.login.login_api, url_prefix="/users")
+app.register_blueprint(database.courses.courses_api, url_prefix="/courses")
 
 @app.route("/")
 def index():
