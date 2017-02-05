@@ -3,12 +3,15 @@
 # The functions in this file enable the department scheduler to import a CSV file containing resource information
 # from the application.
 
-from flask import Flask
-from app import app, db
-from database import models
-import csv
+from flask import Blueprint, render_template, flash, redirect, request, url_for, jsonify, json
+
+csvImport_api = Blueprint('csvImport_api', __name__)
+
+from models import *
+from web_app import db
 
 # This function parses through a CSV file containing student plan data, and adds the information to the database
+@csvImport_api.route("/importStudentData/<inputFile>", methods = ['GET', 'POST'])
 def importStudentData(inputFile):
    with open(inputFile, 'rb') as csvfile:
       reader = csv.reader(csvfile, delimiter=',')
@@ -61,6 +64,7 @@ def importStudentData(inputFile):
          # Create a new student planning data row in the ScheduleFinal database table
          studentData = models.ScheduleFinal(term=term, course=course, number_sections=numSections,
                                             total_enrollment=totalEnrolled, waitlist=waitlist)
+         # Add new student planning data to database
          db.session.add(studentData)
          db.session.commit()
 
@@ -68,8 +72,8 @@ def importStudentData(inputFile):
 
 
 # This function parses through a CSV file containing historic plan data, and adds the information to the database
-def importHistoricData():
-   with open('HistoricDemandDataF14.txt', 'rb') as csvfile:
+def importHistoricData(inputFile):
+   with open(inputFile, 'rb') as csvfile:
       reader = csv.reader(csvfile, delimiter=',')
       for row in reader:
          print row

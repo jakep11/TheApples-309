@@ -38,6 +38,7 @@ app.controller("generateSchedule", function($scope, $rootScope) {
 
 app.controller("importData", function($scope, $rootScope) {
    $rootScope.bcrumb1 = "Import Data";
+
 })
 
 .controller("notifications", function($scope, $rootScope) {
