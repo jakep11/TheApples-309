@@ -13,11 +13,11 @@ class User(db.Model):
    def serialize(self):
       #"""Return object data in easily serializeable format"""
       return {
-          'id'         : self.id,
-          'first_name': self.first_name,
-          'last_name': self.last_name,
-          'username': self.username,
-          'role': self.role
+      'id'         : self.id,
+      'first_name': self.first_name,
+      'last_name': self.last_name,
+      'username': self.username,
+      'role': self.role
       }
 
 #-- Description: Stores all faculty available to work 
@@ -44,6 +44,22 @@ class Courses(db.Model):
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
+
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id'         : self.id,
+      'number': self.number,
+      'major': self.major,
+      'lecture_workload_units ': self.lecture_workload_units, 
+      'lecture_hours': self.lecture_hours,
+      'lab_workload_units': self.lab_workload_units, 
+      'lab_hours': self.lab_hours,
+      'course_sections': self.course_sections, 
+      'constraints': self.constraints,
+      'final_schedules': self.final_schedules, 
+      }
 
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
