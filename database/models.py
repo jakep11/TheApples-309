@@ -53,6 +53,7 @@ class Terms(db.Model):
    constraints = db.relationship("FacultyConstraint", backref="term")
    comments = db.relationship("Comments", backref="term")
    final_schedules = db.relationship("ScheduleFinal", backref="term")
+   preferences = db.relationship("FacultyPreferences", backref="term")
 
 
 #-- Description: Stores all rooms with type and capacity
@@ -113,7 +114,7 @@ class PublishedSchedule(db.Model):
 class FacultyPreferences(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
-   term = db.Column(db.Integer)     # Should this be a column, or a foreign key to Terms table
+   term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))     
    day = db.Column(db.String(1))    # 'M', 'T', etc.
    time_start = db.Column(db.Time)
    time_end = db.Column(db.Time)
