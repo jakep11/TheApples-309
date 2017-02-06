@@ -25,11 +25,73 @@
     </tbody>
   </table>
 
-  <div class="btn-container">
+  <!-- <div class="btn-container">
 <a class="btn btn-default view-switch" href="#" role="button">ADD</a>
 <a class="btn btn-default view-switch" href="#" role="button">EDIT</a>
 <a class="btn btn-default view-switch" href="#" role="button">REMOVE</a>
-</div>
+</div> -->
+
+     <div class="row">
+            <div class="col-xs-2 col-xs-offset-3">
+                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
+            </div>
+            <div id="add-modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form>
+                                <div class="modal-title">
+                                    <h3>Add User</h3>
+                                </div>
+                                <div class="row modal-row">
+                                    <div class="col-xs-6 add-text">
+                                        Username:
+                                        <input type="text" class="form-control" name="username">
+                                    </div>
+                                    <div class="col-xs-6 add-text">
+                                        Min Workload:
+                                        <input type="text" class="form-control" name="min-workload">
+                                    </div>
+                                </div>
+                                <div class="row modal-row">
+                                    <div class="col-xs-6 add-text">
+                                        First name:
+                                        <input type="text" class="form-control" name="firstname">
+                                    </div>
+                                    <div class="col-xs-6 add-text">
+                                        Max Workload:
+                                        <input type="text" class="form-control" name="max-workload">
+                                    </div>
+                                </div>
+                                <div class="row modal-row">
+                                    <div class="col-xs-6 add-text">
+                                        Last name:
+                                        <input type="text" class="form-control" name="lastname">
+                                    </div>
+                                    <div class="col-xs-6 add-text">
+                                        Notes:
+                                        <textarea type="text" class="form-control noresize" name="notes" placeholder="None"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row modal-row" style="text-align: center">
+                                    <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">CANCEL</button>
+                                    <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">SUBMIT</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-default preference-btn col-xs-12">Edit</button>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-default preference-btn col-xs-12">Remove</button>
+            </div>
+        </div>
+
 </div>
 
 

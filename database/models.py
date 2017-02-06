@@ -13,11 +13,11 @@ class User(db.Model):
    def serialize(self):
       #"""Return object data in easily serializeable format"""
       return {
-          'id'         : self.id,
-          'first_name': self.first_name,
-          'last_name': self.last_name,
-          'username': self.username,
-          'role': self.role
+      'id'         : self.id,
+      'first_name': self.first_name,
+      'last_name': self.last_name,
+      'username': self.username,
+      'role': self.role
       }
 
 #-- Description: Stores all faculty available to work 
@@ -44,6 +44,22 @@ class Courses(db.Model):
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
+
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id'         : self.id,
+      'number': self.number,
+      'major': self.major,
+      'lecture_workload_units ': self.lecture_workload_units, 
+      'lecture_hours': self.lecture_hours,
+      'lab_workload_units': self.lab_workload_units, 
+      'lab_hours': self.lab_hours,
+      'course_sections': self.course_sections, 
+      'constraints': self.constraints,
+      'final_schedules': self.final_schedules, 
+      }
 
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
@@ -97,7 +113,15 @@ class ScheduleFinal(db.Model):
    number_sections = db.Column(db.Integer)
    total_enrollment = db.Column(db.Integer)
    waitlist = db.Column(db.Integer)
-   
+
+#-- Description: Stores the student planning data information imported from CSV
+class StudentPlanningData(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
+   course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+   number_sections = db.Column(db.Integer)
+   total_enrollment = db.Column(db.Integer)
+   waitlist = db.Column(db.Integer)
 
 #-- Description: Stores all of the sections that are planned in a specific term
 class ScheduleInitial(db.Model):
