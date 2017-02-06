@@ -56,7 +56,7 @@ class Courses(db.Model):
       'lecture_hours': self.lecture_hours,
       'lab_workload_units': self.lab_workload_units, 
       'lab_hours': self.lab_hours,
-      'course_sections': self.course_sections, 
+      #'course_sections': self.course_sections,
       'constraints': self.constraints,
       'final_schedules': self.final_schedules, 
       }
@@ -89,7 +89,25 @@ class Sections(db.Model):
    section_type = db.Column(db.String(7))       # lecture of lab
    time_start = db.Column(db.Integer)
    time_end = db.Column(db.Integer)
-   days = db.Column(db.String(3))               # 'MWF' or "TR"      
+   days = db.Column(db.String(3))               # 'MWF' or "TR"
+
+   # want course name, faculty name, room number,
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id': self.id,
+      'course': (Courses.query.filter_by(id=self.course_id).first()).major,
+      'course_num': (Courses.query.filter_by(id=self.course_id).first()).number,
+      'term_id': (Terms.query.filter_by(id=self.term_id).first()).name, #term name
+      'faculty_id ': (Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
+      'room_id': self.room_id, #room number/id
+      'number': self.number,
+      'section_type': self.section_type,
+      'time_start': self.time_start,
+      'time_end': self.time_end,
+      'days': self.days,
+      }
 
 #-- Description: Stores all equipment types that will be used in various rooms
 class Equipment(db.Model):

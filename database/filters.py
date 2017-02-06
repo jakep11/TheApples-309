@@ -26,16 +26,22 @@ def all_sections():
    return jsonify([i.serialize for i in sections])
 
 # grab all sections
-@filters_api.route('/filteredSections', methods=["POST"])
+@filters_api.route('/filteredSections', methods=["GET"])
 def filtered_sections():
 
-   data = request.json
+   #data = request.json
+   data = {
+      'terms': 'Spring',
+      'courses': 'CPE 309',
+      'instructors': ['Kearns', 'Keen']
+   };
 
    terms = data['terms']
    courses = data['courses']
    instructors = data['instructors']
-   startTimes = data['startTimes']
-   endTimes = data['endTimes']
+   #startTimes = data['startTimes']
+  # endTimes = data['endTimes']
 
-   sections = Sections.query.all()
-   return jsonify([i.serialize for i in sections])
+   #sections = Sections.query.all()
+   #return jsonify([i.serialize for i in sections])
+   return jsonify(terms=terms, courses=courses, instructors=instructors)
