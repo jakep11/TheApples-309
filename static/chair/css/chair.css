@@ -1,168 +1,190 @@
 * {
-   font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #box-container {
-   background-color: white;
-   padding: 30px;
-   border-radius: 3px;
-   max-width: 600px;
-   margin: 0 auto;
-   margin-top: 2em;
+    background-color: white;
+    padding: 30px;
+    border-radius: 3px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2em;
 }
+
 #box-container * {
-	margin-bottom: 8px;
-	margin-top: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
+
 #box-container h2 {
-	text-align: center;
-	font-weight: bold;
-	margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
+
 #box-container button {
-	background-color: #00A4D3;
-	color: white;
-	border-radius: 2px;
-	padding: 15px;
+    background-color: #00A4D3;
+    color: white;
+    border-radius: 2px;
+    padding: 15px;
 }
+
 #box-container button:hover {
-	background-color: #20bae5;
+    background-color: #20bae5;
 }
 
 #box-container #logoutBtn {
-	background-color: #A7A7A7;
-}
-#box-container #logoutBtn:hover {
-	background-color: #C0C0C0;
-}
-#reportBug {
-	text-align: center;
+    background-color: #A7A7A7;
 }
 
-.bottom-btns {
-   font-weight: 600;
-   border: 3px #aaaaaa solid;
+#box-container #logoutBtn:hover {
+    background-color: #C0C0C0;
 }
+
+#reportBug {
+    text-align: center;
+}
+
 
 /* Get rid of gutters created by Bootstrap */
+
 .no-gutter {
-   padding: 0px;
+    padding: 0px;
 }
 
 .view-switch {
-   width: 100%;
-   font-weight: 600;
-   border: 3px #aaaaaa solid;
+    width: 100%;
+    font-weight: 600;
+    border: 3px #aaaaaa solid;
 }
 
 * {
-   font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container-fluid {
-   width: 95%;
-   min-width: 800px
+    width: 95%;
+    min-width: 800px
 }
+
 
 /* First row of buttons */
+
 .top-selectors {
-   margin-top: 25px;
-   margin-left: -40px;
+    margin-top: 25px;
+    margin-left: -40px;
 }
 
+
 /* Second row of buttons */
+
 .filter-row {
-   margin-top: 20px;
+    margin-top: 20px;
 }
 
 .view-switch {
-   width: 100%;
-   font-weight: 600;
-   border: 3px #aaaaaa solid;
+    width: 100%;
+    font-weight: 600;
+    border: 3px #aaaaaa solid;
 }
 
 .view-selectors {
-   background-color: #aaaaaa;
+    background-color: #aaaaaa;
 }
 
 .table-view-btn {
-   border-left: 0px;
-   background-color: #898989;
-   color: white;
+    border-left: 0px;
+    background-color: #898989;
+    color: white;
 }
 
 .calendar-view-btn {
-   border-right: 0px;
-   background-color: #898989;
-   color: white;
+    border-right: 0px;
+    background-color: #898989;
+    color: white;
 }
 
 .filter-selectors {
-   height: 150px;
-   border: solid 1px #aaaaaa;
-   overflow: auto;
-   padding: 5px;
+    height: 150px;
+    border: solid 1px #aaaaaa;
+    overflow: auto;
+    padding: 5px;
 }
 
 .listing {
-   height: 200px;
-   overflow: auto;
+    height: 200px;
+    overflow: auto;
 }
 
+.table td {
+    text-align: center;
+}
+
+
 /* Get rid of gutters created by Bootstrap */
+
 .no-gutter {
-   padding: 0px;
+    padding: 0px;
 }
 
 .back-btn {
-   margin-top: -15px; 
-   color: transparent; 
-   background-color: transparent; 
-   border-color: transparent;
+    margin-top: -15px;
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .arrow {
-  width: 40px; 
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
-
 * {
-   font-family: "Open Sans";
-   margin: 0px;
+    font-family: "Open Sans";
+    margin: 0px;
 }
 
 .container-fluid {
-   width: 95%;
+    width: 95%;
 }
 
 .title {
-   text-align: center;
+    text-align: center;
 }
 
 .table {
-   margin-top: 10px;
+    margin-top: 10px;
 }
 
-.preference-btn {
-   font-weight: 600;
-   border: 2px solid #aaaaaa;
+.upload-btn {
+    font-weight: 600;
+    border: 2px solid #aaaaaa;
+    width: 100px;
+}
+
+.choose-file-btn {
+    font-weight: 60;
 }
 
 .checkbox {
-   padding: 0px;
-   margin: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .add-text {
-   font-size: 14px;
-   font-weight: 600;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .modal-title {
-   text-align: center;
+    text-align: center;
 }
 
 .modal-row {
-   margin-top: 10px;
+    margin-top: 10px;
+}
+
+.week-selectors {
+    align-items: center;
+    text-align: center;
 }
