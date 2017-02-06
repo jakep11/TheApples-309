@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
 
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-bordered table-sm">
                         <tr class="success">
                             <th>Select</th>
                             <th>Name</th>
@@ -37,23 +37,28 @@
                 </div>
             </div>
         </form>
+
+
         <!--  bottom buttons   -->
+
         <div class="row">
-            <div class="col-xs-2 col-xs-offset-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">UPLOAD</button>
-            </div>
-            <div id="add-modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-<!--                            upload manager needed-->
-                        </div>
+            <div class="col-xs-6 col-xs-offset-3">
+                <form class="form-inline week-selectors">
+                    <div class="form-group">
+                        <input class="btn choose-file-btn" type="file" file-model="myFile" />
+
+
                     </div>
-                </div>
-            </div>
-            <div class="col-xs-2">
-                <button class="btn btn-default preference-btn col-xs-12">DELETE</button>
+                    <div class="form-group">
+                        <button class="btn btn-default upload-btn" ng-click="uploadFile()">UPLOAD</button>
+                    </div>
+
+                    <button class="btn btn-default upload-btn">DELETE</button>
+
+                </form>
             </div>
         </div>
+
     </div>
+
 </body>
