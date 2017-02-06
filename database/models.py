@@ -77,6 +77,7 @@ class Terms(db.Model):
 #-- Description: Stores all rooms with type and capacity
 class Rooms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
+   number = db.Column(db.Integer)
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")

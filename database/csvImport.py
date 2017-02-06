@@ -153,3 +153,31 @@ def importHistoricData(inputFile):
       db.session.commit()
 
    return "all good"
+
+@csvImport_api.route("/importRoomData/<inputFile>", methods = ['GET', 'POST'])
+def importRoomData(inputFile):
+   with open(inputFile, 'rb') as csvfile:
+      reader = csv.reader(csvfile, delimiter=',')
+      for row in reader:
+         column = 0
+         for entry in row:
+            column += 1
+
+            # Type
+            if column == 1:
+               roomType = entry
+
+            # Number
+            elif column == 2:
+               roomNum = entry
+
+            # Capacity
+            elif column == 3:
+               roomCapacity = entry
+
+         # Create a new student planning data row in the ScheduleFinal database table
+         room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
+
+         # Add new student planning data to database
+         db.session.add(room)
+         db.session.commit()
