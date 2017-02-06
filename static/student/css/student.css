@@ -58,9 +58,9 @@
     padding: 5px;
 }
 
-.listing {
+.cal-listing {
     margin-top: 20px;
-    overflow: auto;
+    height: auto;
 }
 
 
