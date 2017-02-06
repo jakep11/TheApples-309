@@ -44,6 +44,7 @@ class Courses(db.Model):
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
+   student_planning_data = db.relationship("StudentPlanningData", backref="course")
 
    @property
    def serialize(self):
@@ -70,6 +71,7 @@ class Terms(db.Model):
    comments = db.relationship("Comments", backref="term")
    final_schedules = db.relationship("ScheduleFinal", backref="term")
    preferences = db.relationship("FacultyPreferences", backref="term")
+   student_planning_data = db.relationship("StudentPlanningData", backref="term")
 
 
 #-- Description: Stores all rooms with type and capacity
@@ -121,8 +123,8 @@ class StudentPlanningData(db.Model):
    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
    number_sections = db.Column(db.Integer)
    capacity = db.Column(db.Integer)
-   seatDemand = db.Column(db.Integer)
-   unmetSeatDemand = db.Column(db.Integer)
+   seat_demand = db.Column(db.Integer)
+   unmet_seat_demand = db.Column(db.Integer)
 
 #-- Description: Stores all of the sections that are planned in a specific term
 class ScheduleInitial(db.Model):
