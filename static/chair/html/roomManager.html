@@ -8,7 +8,7 @@
       <div class="row title">
          <h1>Room Manager</h1>
       </div>
-      <div class="col-xs-2 col-xs-offset-5 room-type-editor">
+      <div class="col-xs-2 col-xs-offset-5 room-types-editor">
          <table class="table table-striped">
             <tr class="success">
                <th>Select</th>
@@ -16,7 +16,7 @@
             </tr>
             <tr>
                <td>
-                  <input type="radio" name="room-type" value="lecture">
+                  <input type="radio" name="room-type" value="lecture" checked>
                </td>
                <td>Lecture</td>
             </tr>
@@ -42,29 +42,240 @@
       </div>
       <div class="col-xs-4 col-xs-offset-4">
          <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12">Add</button>
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-add-modal">Add</button>
          </div>
          <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12">Edit</button>
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-edit-modal">Edit</button>
          </div>
          <div class="col-xs-4">
             <button class="btn btn-default preference-btn col-xs-12">Remove</button>
          </div>
       </div>
-
-
+      <div id="types-add-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Add Room Type</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Name:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="type-name">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="types-edit-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Edit Room Type</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Name:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="type-name">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 rooms-table">
+            <table class="table table-striped">
+               <tr class="success">
+                  <th></th>
+                  <th>Room Number</th>
+                  <th>Capacity</th>
+                  <th>Course Type</th>
+                  <th>Equipment</th>
+                  <th>Additional Comments</th>
+               </tr>
+               <tr>
+                  <td>
+                     <input type="radio" name="room" value="" checked>
+                  </td>
+                  <td>14-256</td>
+                  <td>24</td>
+                  <td>Lecture</td>
+                  <td>Projector</td>
+                  <td>None</td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="col-xs-4 col-xs-offset-4">
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
+         </div>
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal">Edit</button>
+         </div>
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12">Remove</button>
+         </div>
+      </div>
+      <div id="add-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Add Room</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Room number:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="room-number">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Capacity</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="capacity">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Course Type:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="course-type">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Equipment:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <textarea class="form-control" name="equipment"></textarea>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Comments:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <textarea class="form-control" name="comments"></textarea>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="edit-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Edit Room</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Room number:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="room-number">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Capacity</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="capacity">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Course Type:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="course-type">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Equipment:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <textarea class="form-control" name="equipment"></textarea>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Comments:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <textarea class="form-control" name="comments"></textarea>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
 
 
 
    </div>
-
-
-
-
-
-
-
-
-
-
 </body>
