@@ -88,7 +88,7 @@ def new_section():
     if course is None:
         return "ERROR COURSE NOT FOUND"
     term = Terms.query.filter_by(id=term_id).first()
-    if term in None:
+    if term is None:
         return "ERROR TERM NOT FOUND"
     faculty = Faculty.query.filter_by(id=faculty_id).first()
     if faculty is None:
@@ -153,6 +153,30 @@ def new_schedule_final():
     db.session.add(sf)
     db.session.commit()
     return "ScheduleFinal for term %s and course %s %d added to database" % (term.name, course.major, course.number)
+
+@create_api.route('/studentPlanningData', methods = ["POST"])
+def new_student_planning_data():
+    data = request.json
+    term_id = data['term_id']
+    course_id = data['course_id']
+    number_sections = data['number_sections']
+    capacity = data['capacity']
+    seat_demand = data['seat_demand']
+    unmet_seat_demand = data['unmet_seat_demand']
+
+    term = Terms.query.filter_by(id=term_id).first
+    if term is None:
+        return "ERROR TERM NOT FOUND"
+    course = Courses.query.filter_by(id=course_id).first()
+    if course is None:
+        return "ERROR COURSE NOT FOUND"
+
+    spd = StudentPlanningData(term=term, course=course, number_sections=number_sections,
+                                capacity=capacity, seat_demand=seat_demand,
+                                unmet_seat_demand=unmet_seat_demand)
+    db.session.add(spd)
+    db.session.commit()
+    return "StudentPlanningData added to database"
 
 @create_api.route('/scheduleInitial', methods = ['POST'])
 def new_schedule_inital():

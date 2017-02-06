@@ -112,6 +112,18 @@ def delete_schedule_final():
     db.session.commit()
     return  "Schedule Final: term %s course %s %d removed" % (sf.term.name, sf.course.major, sf.course.number)
 
+@delete_api.route('studentPlanningData', methods = ["POST"])
+def delete_student_planning_data():
+    data = request.json
+    id = data['id']
+
+    spd = StudentPlanningData.query.filter_by(id=id).first()
+    if spd is None:
+        return "ERROR STUDENT PLANNING DATA NOT FOUND"
+    db.session.delete(spd)
+    db.session.commit()
+    return "Student Planning Data removed form database"
+
 @delete_api.route('/scheduleInitial', methods = ["POST"])
 def delete_schedule_initial():
     data = request.json
