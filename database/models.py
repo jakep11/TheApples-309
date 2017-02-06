@@ -44,6 +44,7 @@ class Courses(db.Model):
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
+   student_planning_data = db.relationship("StudentPlanningData", backref="course")
 
    @property
    def serialize(self):
@@ -56,7 +57,7 @@ class Courses(db.Model):
       'lecture_hours': self.lecture_hours,
       'lab_workload_units': self.lab_workload_units, 
       'lab_hours': self.lab_hours,
-      'course_sections': self.course_sections, 
+      #'course_sections': self.course_sections,
       'constraints': self.constraints,
       'final_schedules': self.final_schedules, 
       }
@@ -70,11 +71,13 @@ class Terms(db.Model):
    comments = db.relationship("Comments", backref="term")
    final_schedules = db.relationship("ScheduleFinal", backref="term")
    preferences = db.relationship("FacultyPreferences", backref="term")
+   student_planning_data = db.relationship("StudentPlanningData", backref="term")
 
 
 #-- Description: Stores all rooms with type and capacity
 class Rooms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
+   number = db.Column(db.Integer)
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")
@@ -90,7 +93,25 @@ class Sections(db.Model):
    section_type = db.Column(db.String(7))       # lecture of lab
    time_start = db.Column(db.Integer)
    time_end = db.Column(db.Integer)
-   days = db.Column(db.String(3))               # 'MWF' or "TR"      
+   days = db.Column(db.String(3))               # 'MWF' or "TR"
+
+   # want course name, faculty name, room number,
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id': self.id,
+      'course': (Courses.query.filter_by(id=self.course_id).first()).major,
+      'course_num': (Courses.query.filter_by(id=self.course_id).first()).number,
+      'term_id': self.term_id, #(Terms.query.filter_by(id=self.term_id).first()).name, #term name
+      'faculty_id ': self.faculty_id, #(Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
+      'room_id': self.room_id, #room number/id
+      'number': self.number,
+      'section_type': self.section_type,
+      'time_start': self.time_start,
+      'time_end': self.time_end,
+      'days': self.days,
+      }
 
 #-- Description: Stores all equipment types that will be used in various rooms
 class Equipment(db.Model):
@@ -120,8 +141,9 @@ class StudentPlanningData(db.Model):
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
    number_sections = db.Column(db.Integer)
-   total_enrollment = db.Column(db.Integer)
-   waitlist = db.Column(db.Integer)
+   capacity = db.Column(db.Integer)
+   seat_demand = db.Column(db.Integer)
+   unmet_seat_demand = db.Column(db.Integer)
 
 #-- Description: Stores all of the sections that are planned in a specific term
 class ScheduleInitial(db.Model):
