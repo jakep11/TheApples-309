@@ -54,16 +54,10 @@ def importStudentData(inputFile):
             elif column == 14:
                unmetDemand = entry
 
-         # Using the collected enrollment data, set the totalEnrollment and waitlist fields
-         if unmetDemand == 0:
-            totalEnrolled = seatDemand
-         else:
-            totalEnrolled = enrollmentCapacity
-            waitlist = unmetDemand
-
          # Create a new student planning data row in the ScheduleFinal database table
          studentData = models.StudentPlanningData(term=term, course=course, number_sections=numSections,
-                                            total_enrollment=totalEnrolled, waitlist=waitlist)
+                                            capacity=enrollmentCapacity, seatDemand=seatDemand, unmetSeatDemand=unmetDemand)
+
          # Add new student planning data to database
          db.session.add(studentData)
          db.session.commit()
@@ -108,17 +102,17 @@ def importHistoricData(inputFile):
                   # Set the terms that the enrollment history is for
                   fallTerm = models.Terms.query.filter_by(name="Fall Quarter 2016").first()
                   if fallTerm is None:  # If the term doesn't already exist, add a new term to the table
-                     fallTerm = models.Terms(name="Fall Quarter 2016")
+                     fallTerm = models.Terms(name="Fall Quarter 2014")
                      db.session.add(fallTerm)
 
                   winterTerm = models.Terms.query.filter_by(name="Winter Quarter 2016").first()
                   if winterTerm is None:  # If the term doesn't already exist, add a new term to the table
-                     winterTerm = models.Terms(name="Winter Quarter 2016")
+                     winterTerm = models.Terms(name="Winter Quarter 2015")
                      db.session.add(winterTerm)
 
                   springTerm = models.Terms.query.filter_by(name="Spring Quarter 2016").first()
                   if springTerm is None:  # If the term doesn't already exist, add a new term to the table
-                     springTerm = models.Terms(name="Spring Quarter 2016")
+                     springTerm = models.Terms(name="Spring Quarter 2015")
                      db.session.add(springTerm)
 
                   # Set the term sections
