@@ -116,10 +116,10 @@
     height: 200px;
     overflow: auto;
 }
-
+/*
 .table td {
     text-align: center;
-}
+}*/
 
 
 /* Get rid of gutters created by Bootstrap */
@@ -151,10 +151,6 @@
 
 .title {
     text-align: center;
-}
-
-.table {
-    margin-top: 10px;
 }
 
 .upload-btn {
