@@ -192,8 +192,12 @@ def new_schedule_inital():
 @create_api.route('publishedSchedule', methods = ['POST'])
 def new_published_schedule():
     data = request.json
-    term = data['term']
+    term_id = data['term_id']
 
+    if term_id is None:
+        return "ERROR TERM NOT FOUND"
+
+    term = Terms.query.filter_by(id=term_id).first()
     publishedSchedule = PublishedSchedule(term=term)
     db.session.add(publishedSchedule)
     db.session.commit()

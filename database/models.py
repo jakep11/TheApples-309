@@ -72,6 +72,7 @@ class Terms(db.Model):
    final_schedules = db.relationship("ScheduleFinal", backref="term")
    preferences = db.relationship("FacultyPreferences", backref="term")
    student_planning_data = db.relationship("StudentPlanningData", backref="term")
+   published_schedules = db.relationship("PublishedSchedule", backref="term")
 
 
 #-- Description: Stores all rooms with type and capacity
@@ -155,7 +156,7 @@ class ScheduleInitial(db.Model):
 #-- Description: Stores which tentative schedules have been 'published'
 class PublishedSchedule(db.Model):
    id = db.Column(db.Integer, primary_key=True)
-   term = db.Column(db.Integer)
+   term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
 
 #-- Description: Stores faculty preferences for what days and times they would like to teach in a specific term 
 class FacultyPreferences(db.Model):
@@ -186,7 +187,7 @@ class Comments(db.Model):
 #-- Description: Stores notifications for the scheduler about changing preferences & new comments
 class Notifications(db.Model):
    id = db.Column(db.Integer, primary_key=True)
-   from_faculty = db.Column(db.Integer, db.ForeignKey("faculty.id"))
+   faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
    message = db.Column(db.Text)
    unread = db.Column(db.SmallInteger)
    time = db.Column(db.Time)
