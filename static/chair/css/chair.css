@@ -27,6 +27,7 @@
     color: white;
     border-radius: 2px;
     padding: 15px;
+    max-height: 60px;
 }
 
 #box-container button:hover {
@@ -187,4 +188,19 @@
 .week-selectors {
     align-items: center;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-btn {
+    font-weight: 600;
+    border: 2px solid #aaaaaa;
+    width: 200px;
+    margin-top: 8px;
+}
+
+.badge {
+    padding: 3px 9px 3px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
 }

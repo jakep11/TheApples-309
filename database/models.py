@@ -81,6 +81,7 @@ class Rooms(db.Model):
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")
+   equipment = db.relationship("Equipment", backref="room")
 
 #-- Description: Stores all sections that have occurred and are planned on the schedule
 class Sections(db.Model):
@@ -123,7 +124,7 @@ class Equipment(db.Model):
 #-- Description: Stores what equipment is required in each room type
 class RoomEquipment(db.Model):
    id = db.Column(db.Integer, primary_key=True)
-   room_type = db.Column(db.Integer)
+   room_id = db.Column(db.Integer, db.ForeignKey("rooms.id"))
    equipment_id = db.Column(db.Integer, db.ForeignKey("equipment.id"))
 
 #-- Description: Stores the course and section enrollment/waitlist information for what was actually offered by the University in previous quarters

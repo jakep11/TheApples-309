@@ -36,7 +36,7 @@ app.controller("generateSchedule", function ($scope, $rootScope) {
     $rootScope.bcrumb2 = "Current Schedule";
 })
 
-app.controller("importData", function ($scope, $rootScope, fileUpload) {
+app.controller("importData", function ($scope, $rootScope) {
     $rootScope.bcrumb1 = "Import Data";
 
 
@@ -50,42 +50,6 @@ app.controller("importData", function ($scope, $rootScope, fileUpload) {
         fileUpload.uploadFileToUrl(file, uploadUrl);
     }
 })
-
-// UPLOADING FILES
-//
-//app.directive('fileModel', ['$parse', function ($parse) {
-//    return {
-//        restrict: 'A',
-//        link: function (scope, element, attrs) {
-//            var model = $parse(attrs.fileModel);
-//            var modelSetter = model.assign;
-//
-//            element.bind('change', function () {
-//                scope.$apply(function () {
-//                    modelSetter(scope, element[0].files[0]);
-//                });
-//            });
-//        }
-//    };
-//}])
-//
-//app.service('fileUpload', ['$https:', function ($https: ) {
-//    this.uploadFileToUrl = function (file, uploadUrl) {
-//        var fd = new FormData();
-//        fd.append('file', file);
-//
-//        $https: .post(uploadUrl, fd, {
-//            transformRequest: angular.identity,
-//            headers: {
-//                'Content-Type': undefined
-//            }
-//        })
-//
-//        .success(function () {})
-//
-//        .error(function () {});
-//    }
-//}])
 
 app.controller("notifications", function ($scope, $rootScope) {
     $rootScope.bcrumb1 = "Notifications";
