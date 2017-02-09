@@ -1,6 +1,7 @@
 angular.module('TheApples')
 
-.controller("accountManager", function($scope, $rootScope, $http, $location) {
+.controller("accountManager", function($scope, $rootScope, $http, $location, $window, $filter) {
+
 
   $scope.users = [];
 	$scope.getUsers = function() {
@@ -14,6 +15,7 @@ angular.module('TheApples')
          console.log("success");
          console.log(response.data);
          $scope.users = response.data;
+         if ($scope.users) $scope.current = $scope.users[0];
        }, function errorCallback(response) {
          console.log("error");
        });
@@ -21,6 +23,11 @@ angular.module('TheApples')
 	}
 	$scope.getUsers();
 
+  $scope.radioSelected = function(user) {
+    $scope.edit = user;
+  }
+
+  $scope.new = {role: "faculty"};
 	$scope.createUser = function() {
 		$http({
           method: 'POST',
@@ -29,15 +36,14 @@ angular.module('TheApples')
             'Content-Type': "application/json"
           },
           data: {
-          	'first_name': $scope.firstName,
-          	'last_name': $scope.lastName,
-          	'username': $scope.username,
-          	'password': $scope.password,
-          	'role': $scope.role
+          	'first_name': $scope.new.firstName,
+          	'last_name': $scope.new.lastName,
+          	'username': $scope.new.username,
+          	'password': $scope.new.password,
+          	'role': $scope.new.role
           }
       }).then(function successCallback(response) {
-         console.log("success");
-         console.log(response);
+         $window.location.reload();
        }, function errorCallback(response) {
          console.log("error");
        });
