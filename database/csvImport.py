@@ -16,7 +16,7 @@ def importStudentData():
    print "in input data. Input file is "
    inputFile = request.files['file']
    print inputFile
-   with open(inputFile, 'rb') as csvfile:
+   with open(inputFile.name, 'rb') as csvfile:
       reader = csv.reader(csvfile, delimiter=',')
       for row in reader:
          column = 0
@@ -71,7 +71,7 @@ def importStudentData():
 # This function parses through a CSV file containing historic plan data, and adds the information to the database
 @csvImport_api.route("/importHistoricData/<inputFile>", methods = ['GET', 'POST'])
 def importHistoricData(inputFile):
-   with open('HistoricDemandDataF14.txt', 'rb') as csvfile:
+   with open(inputFile, 'rb') as csvfile:
       reader = csv.reader(csvfile, delimiter=',')
       rowNumber = 0
 
