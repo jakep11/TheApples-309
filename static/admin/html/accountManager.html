@@ -26,7 +26,7 @@
 </thead>
 <tbody>
   <tr ng-repeat="user in users">
-     <td><input type="radio" ng-model="$parent.id" value="{{user.id}}" ng-click="radioSelected(user)"/></td>
+     <td><input type="radio" ng-model="$parent.id" value="{{user.id}}" ng-click="radioChanged(user)"/></td>
      <td>{{user.username}}</td>
      <td>*******</td>
      <td>{{user.first_name}}</td>
@@ -92,7 +92,7 @@
     </div>
 </div>
 <div class="col-xs-2">
-    <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal">Edit</button>
+    <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-click="openEdit()" ng-disabled="!radioSelected">Edit</button>
 </div>
 
     <div id="edit-modal" class="modal fade" role="dialog">
@@ -147,7 +147,7 @@
     </div>
 </div>
 <div class="col-xs-2">
-    <button class="btn btn-default preference-btn col-xs-12" ng-click="deleteUser()">Remove</button>
+    <button class="btn btn-default preference-btn col-xs-12" ng-click="deleteUser()" ng-disabled="!radioSelected">Remove</button>
 </div>
 </div>
 

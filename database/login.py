@@ -20,7 +20,7 @@ def validate_login2():
     #Retrieve User with specified username from the database
     user = User.query.filter_by(username=username).first()
 
-    isUser = True
+    isUser = False
     role = None
     first_name = None
     last_name = None
