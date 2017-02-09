@@ -82,7 +82,7 @@ class Rooms(db.Model):
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")
-   equipment = db.relationship("Equipment", backref="room")
+   room_equipment = db.relationship("RoomEquipment", backref="room")
 
 #-- Description: Stores all sections that have occurred and are planned on the schedule
 class Sections(db.Model):
