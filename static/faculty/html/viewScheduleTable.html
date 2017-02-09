@@ -361,52 +361,104 @@ Things that change dynamically:
         </div>
         <div class="row">
             <div class="no-gutter week-selectors">
-                <button id="view-info-btn" type="button" class="btn btn-default info-btn" data-toggle="modal" data-target="#viewInfoModal">VIEW COURSE INFO</button>
+                <button id="view-info-btn" type="button" class="btn btn-default info-btn" data-toggle="modal" data-target="#info-modal">VIEW COURSE INFO</button>
             </div>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="viewInfoModal" role="dialog">
+        <div id="info-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-body" style="text-align: center">
-                        <h3 class="modal-title">Course Info</h3>
-                    </div>
+                <div class="modal-content info-modal">
                     <div class="modal-body">
-                        <div class="form-group col-xs-4">
-                            <label>Faculty able to teach:</label>
-
-
-
-
-
+                        <div class="row modal-title">
+                            <h3>Course Info</h3>
                         </div>
 
-                        <div class="form-group col-xs-4 col-xs-offset-2">
-                            <label>Suitable lab rooms:</label>
+                        <div class="row label-row" style="text-align: left">
+                            <div class="col-xs-4 col-xs-offset-1" style="font-weight: bold">
+                                <label>Faculty able to teach:</label>
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-2">
+                                <label>Suitable lab rooms:</label>
+                            </div>
                         </div>
+                        <div class="row">
+                            <!------------LEFT TABLE------------->
+                            <div class="col-xs-4 col-xs-offset-1" style="text-align: left">
+                                <div class="table-dim">
+                                    <table class="table info-table">
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!------------RIGHT TABLE------------->
+                            <div class="col-xs-4 col-xs-offset-2">
+                                <div class="table-dim">
 
-                        <div class="form-group col-xs-4">
-                            <label>Bellardo, J</label>
-
-
-
-
-
+                                    <table class="table info-table">
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group col-xs-4 col-xs-offset-2">
-                            <label>14-301</label>
+                        <div class="modal-body" style="text-align: center">
+                            <button class="btn btn-default close-btn" data-dismiss="modal">CLOSE</button>
                         </div>
-                    </div>
-                    <div class="modal-body form-group" style="text-align: center">
-                        <button type="button" class="btn btn-default close-btn" data-dismiss="modal">CLOSE</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
