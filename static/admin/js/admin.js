@@ -20,8 +20,8 @@ angular.module('TheApples')
          console.log("error");
        });
 
-	}
-	$scope.getUsers();
+    }
+    $scope.getUsers();
 
   $scope.radioSelected = function(user) {
     $scope.edit = user;
@@ -48,6 +48,11 @@ angular.module('TheApples')
          console.log("error");
        });
 
-	}
-   
+
+    }
+
+    $scope.backButtonClicked = function () {
+        $location.path("/login");
+    }
+
 })

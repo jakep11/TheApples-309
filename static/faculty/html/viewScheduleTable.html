@@ -1,0 +1,464 @@
+<!--
+Things that change dynamically:
+   - List of terms in the filters
+   - List of courses in the filters
+   - List of instructors
+   - Resulting tables that display (each term that is needed)
+   - Each entry for the term tables and its attributes
+   In post feedback popup:
+      - Terms available to leave feedback on
+-->
+
+<div class="container-fluid ">
+    <div class="row top-selectors">
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4 no-gutter view-selectors">
+                <div class="col-xs-6 no-gutter">
+                    <a class="btn btn-default view-switch" href="#/viewScheduleCalendar" role="button">CALENDAR VIEW</a>
+                </div>
+                <div class="col-xs-6 no-gutter">
+                    <div class="btn btn-default view-switch  table-view-btn">TABLE VIEW</div>
+                </div>
+            </div>
+        </div>
+        <div class="row filter-row">
+            <div class="col-xs-2 no-gutter col-xs-offset-10">
+                <a class="btn btn-default view-switch" href="#" role="button">APPLY FILTERS</a>
+            </div>
+        </div>
+
+        <div class="row filter-row">
+            <div class="col-xs-2 col-xs-offset-1">
+                <label>Terms:</label>
+                <div class="col-xs-12 filter-selectors">
+                    <form>
+                        <div class="checkbox">
+                            <label>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
+                     </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <label>Courses:</label>
+                <div class="col-xs-12 filter-selectors">
+                    <form>
+                        <div class="checkbox">
+                            <label>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
+                     </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <label>Instructors:</label>
+                <div class="col-xs-12 filter-selectors">
+                    <form>
+                        <div class="checkbox">
+                            <label>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
+                     </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <label>Start Times:</label>
+                <div class="col-xs-12 filter-selectors">
+                    <form>
+                        <div class="checkbox">
+                            <label>
+                        <input type="checkbox" name="starttime-filter" value="start-700">7:00AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-730">7:30AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-800">8:00AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-830">8:30AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-900">9:00AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-930">9:30AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1000">10:00AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1030">10:30AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1100">11:00AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1130">11:30AM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1200">12:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1230">12:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1300">1:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1330">1:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1400">2:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1430">2:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1500">3:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1530">3:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1600">4:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1630">4:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1700">5:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1730">5:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1800">6:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1830">6:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1900">7:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-1930">7:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-2000">8:00PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-2030">8:30PM<br>
+                        <input type="checkbox" name="starttime-filter" value="start-2100">9:00PM<br>
+                     </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <label>End Times:</label>
+                <div class="col-xs-12 filter-selectors">
+                    <form>
+                        <div class="checkbox">
+                            <label>
+                        <input type="checkbox" name="endtime-filter" value="end-800">8:00AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-830">8:30AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-900">9:00AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-930">9:30AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1000">10:00AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1030">10:30AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1100">11:00AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1130">11:30AM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1200">12:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1230">12:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1300">1:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1330">1:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1400">2:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1430">2:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1500">3:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1530">3:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1600">4:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1630">4:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1700">5:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1730">5:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1800">6:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1830">6:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1900">7:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-1930">7:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-2000">8:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-2030">8:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-2100">9:00PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-2130">9:30PM<br>
+                        <input type="checkbox" name="endtime-filter" value="end-2200">10:00PM<br>
+                     </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Spring Quarter</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 listing">
+                <table class="table table-striped">
+                    <tr class="success">
+                        <th> </th>
+                        <th>Course</th>
+                        <th>Section</th>
+                        <th>Type</th>
+                        <th>Hours</th>
+                        <th>Rooms</th>
+                        <th>Instructor</th>
+                        <th>Days</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Capacity</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--         Value had to change depending on the entry username           -->
+                            <input type="radio" name="faculty-entry" value="tkearns">
+                        </td>
+                        <th>CPE 225</th>
+                        <th>01</th>
+                        <th>Lec</th>
+                        <th>2</th>
+                        <th>14-255</th>
+                        <th>Wood</th>
+                        <th>MWF</th>
+                        <th>9:10AM</th>
+                        <th>10:00AM</th>
+                        <th>30</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="no-gutter week-selectors">
+                <button id="view-info-btn" type="button" class="btn btn-default info-btn" data-toggle="modal" data-target="#info-modal">VIEW COURSE INFO</button>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="info-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content info-modal">
+                    <div class="modal-body">
+                        <div class="row modal-title">
+                            <h3>Course Info</h3>
+                        </div>
+
+                        <div class="row label-row" style="text-align: left">
+                            <div class="col-xs-4 col-xs-offset-1" style="font-weight: bold">
+                                <label>Faculty able to teach:</label>
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-2">
+                                <label>Suitable lab rooms:</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!------------LEFT TABLE------------->
+                            <div class="col-xs-4 col-xs-offset-1" style="text-align: left">
+                                <div class="table-dim">
+                                    <table class="table info-table">
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bellardo, J</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!------------RIGHT TABLE------------->
+                            <div class="col-xs-4 col-xs-offset-2">
+                                <div class="table-dim">
+
+                                    <table class="table info-table">
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-301</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14-303</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body" style="text-align: center">
+                            <button class="btn btn-default close-btn" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

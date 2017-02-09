@@ -1,36 +1,83 @@
-
 #box-container {
-   background-color: white;
-   padding: 30px;
-   border-radius: 3px;
-   max-width: 600px;
-   margin: 0 auto;
-   margin-top: 2em;
+    background-color: white;
+    padding: 30px;
+    border-radius: 3px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2em;
 }
+
 #box-container * {
-	margin-bottom: 8px;
-	margin-top: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
+
 #box-container h2 {
-	text-align: center;
-	font-weight: bold;
-	margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
+
 #box-container button {
-	background-color: #00A4D3;
-	color: white;
-	border-radius: 2px;
-	padding: 15px;
+    background-color: #00A4D3;
+    color: white;
+    border-radius: 2px;
+    padding: 15px;
 }
+
 #box-container button:hover {
-	background-color: #20bae5;
+    background-color: #20bae5;
 }
+
 #box-container #logoutBtn {
-	background-color: #A7A7A7;
+    background-color: #A7A7A7;
 }
+
 #box-container #logoutBtn:hover {
-	background-color: #C0C0C0;
+    background-color: #C0C0C0;
 }
+
 #reportBug {
-	text-align: center;
+    text-align: center;
+}
+
+.close-btn {
+    font-weight: 600;
+    border: 2px solid #aaaaaa;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.cal-listing {
+    margin-top: 20px;
+    height: auto;
+    border: 0px;
+}
+
+.table th,
+.table td {
+    border-top: none !important;
+}
+
+.info-table {
+    text-align: left !important;
+    padding: 0px !important;
+    overflow: auto;
+    margin: 0px !important;
+}
+
+.label-row {
+    font-weight: bold !important;
+}
+
+.table-dim {
+    height: 200px;
+    overflow: auto;
+    padding: 0px !important;
+    border: 1px solid #A7A7A7;
+}
+
+.modal-title {
+    margin-bottom: 10px;
 }
