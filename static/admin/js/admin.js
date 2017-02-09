@@ -36,8 +36,8 @@ angular.module('TheApples')
             'Content-Type': "application/json"
           },
           data: {
-          	'first_name': $scope.new.firstName,
-          	'last_name': $scope.new.lastName,
+          	'first_name': $scope.new.first_name,
+          	'last_name': $scope.new.last_name,
           	'username': $scope.new.username,
           	'password': $scope.new.password,
           	'role': $scope.new.role
