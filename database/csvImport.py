@@ -5,6 +5,7 @@
 
 from flask import Blueprint, render_template, flash, redirect, request, url_for, jsonify, json
 import csv, models
+import io
 from models import *
 from web_app import db
 
@@ -16,54 +17,56 @@ def importStudentData():
    print "in input data. Input file is "
    inputFile = request.files['file']
    print inputFile
-   with open(inputFile.name, 'rb') as csvfile:
-      reader = csv.reader(csvfile, delimiter=',')
-      for row in reader:
-         column = 0
-         for entry in row:
-            column += 1
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+   # with open(inputFile.name, 'rb') as csvfile:
+      # reader = csv.reader(csvfile, delimiter=',')
+   for row in reader:
+      column = 0
+      for entry in row:
+         column += 1
 
-            # Term
-            if column == 1:
-               term = models.Terms.query.filter_by(name=entry).first()
-               if term is None: # If the term doesn't already exist, add a new term to the table
-                  term = models.Terms(name=entry)
-                  db.session.add(term)
+         # Term
+         if column == 1:
+            term = models.Terms.query.filter_by(name=entry).first()
+            if term is None: # If the term doesn't already exist, add a new term to the table
+               term = models.Terms(name=entry)
+               db.session.add(term)
 
-            # Course ID
-            elif column == 5:
-               courseId = entry
+         # Course ID
+         elif column == 5:
+            courseId = entry
 
-            # Subject Code
-            elif column == 6:
-               course = models.Courses.query.filter_by(major=courseId, number=entry).first()
-               if course is None: # If the course doesn't already exist, add a new course to the table
-                  course = models.Courses(major=courseId, number=entry)
-                  db.session.add(course)
+         # Subject Code
+         elif column == 6:
+            course = models.Courses.query.filter_by(major=courseId, number=entry).first()
+            if course is None: # If the course doesn't already exist, add a new course to the table
+               course = models.Courses(major=courseId, number=entry)
+               db.session.add(course)
 
-            # Seat Demand
-            elif column == 11:
-               seatDemand = entry
+         # Seat Demand
+         elif column == 11:
+            seatDemand = entry
 
-            # Sections Offered
-            elif column == 12:
-               numSections = entry
+         # Sections Offered
+         elif column == 12:
+            numSections = entry
 
-            # Enrollment Capacity
-            elif column == 13:
-               enrollmentCapacity = entry
+         # Enrollment Capacity
+         elif column == 13:
+            enrollmentCapacity = entry
 
-            # Unmet Seat Demand
-            elif column == 14:
-               unmetDemand = entry
+         # Unmet Seat Demand
+         elif column == 14:
+            unmetDemand = entry
 
-         # Create a new student planning data row in the ScheduleFinal database table
-         studentData = models.StudentPlanningData(term=term, course=course, number_sections=numSections,
+      # Create a new student planning data row in the ScheduleFinal database table
+      studentData = models.StudentPlanningData(term=term, course=course, number_sections=numSections,
                                             capacity=enrollmentCapacity, seatDemand=seatDemand, unmetSeatDemand=unmetDemand)
 
-         # Add new student planning data to database
-         db.session.add(studentData)
-         db.session.commit()
+      # Add new student planning data to database
+      db.session.add(studentData)
+      db.session.commit()
 
    return "all good"
 
