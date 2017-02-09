@@ -12,6 +12,7 @@ def edit_user():
     password = data['password']
     first_name = data['first_name']
     last_name = data['last_name']
+    role = data['role']
 
     user = User.query.filter_by(id=id).first()
     if user is None:
@@ -24,7 +25,8 @@ def edit_user():
     	user.first_name = first_name
     if last_name is not None:
     	user.last_name = last_name
-
+    if role is not None:
+    	user.role = role
     db.session.add(user)
     db.session.commit()
     # Re-set user variable to reflect any changes

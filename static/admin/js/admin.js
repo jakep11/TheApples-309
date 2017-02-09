@@ -15,7 +15,10 @@ angular.module('TheApples')
          console.log("success");
          console.log(response.data);
          $scope.users = response.data;
-         if ($scope.users) $scope.current = $scope.users[0];
+         if ($scope.users) {
+          $scope.edit = $scope.users[0];
+          console.log("has users");
+         } 
        }, function errorCallback(response) {
          console.log("error");
        });
@@ -47,9 +50,49 @@ angular.module('TheApples')
        }, function errorCallback(response) {
          console.log("error");
        });
-
-
     }
+
+$scope.editUser = function() {
+    $http({
+          method: 'POST',
+          url: '/edit/user',
+          headers: {
+            'Content-Type': "application/json"
+          },
+          data: {
+            'id': $scope.edit.id,
+            'first_name': $scope.edit.first_name,
+            'last_name': $scope.edit.last_name,
+            'username': $scope.edit.username,
+            'password': $scope.edit.password,
+            'role': $scope.edit.role
+          }
+      }).then(function successCallback(response) {
+        console.log("Calling edit user");
+         $window.location.reload();
+       }, function errorCallback(response) {
+         console.log("error");
+       });
+    }
+
+    $scope.deleteUser = function() {
+    $http({
+          method: 'POST',
+          url: '/delete/user',
+          headers: {
+            'Content-Type': "application/json"
+          },
+          data: {
+            'id': $scope.edit.id
+          }
+      }).then(function successCallback(response) {
+        console.log("Calling delete user");
+         $window.location.reload();
+       }, function errorCallback(response) {
+         console.log("error");
+       });
+    }
+
 
     $scope.backButtonClicked = function () {
         $location.path("/login");
