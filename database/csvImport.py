@@ -11,8 +11,11 @@ from web_app import db
 csvImport_api = Blueprint('csvImport_api', __name__)
 
 # This function parses through a CSV file containing student plan data, and adds the information to the database
-@csvImport_api.route("/importStudentData/<inputFile>", methods = ['GET', 'POST'])
-def importStudentData(inputFile):
+@csvImport_api.route("/importStudentData", methods = ['GET', 'POST'])
+def importStudentData():
+   print "in input data. Input file is "
+   inputFile = request.files['file']
+   print inputFile
    with open(inputFile, 'rb') as csvfile:
       reader = csv.reader(csvfile, delimiter=',')
       for row in reader:
