@@ -65,7 +65,7 @@ class Courses(db.Model):
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(15))
+   name = db.Column(db.String(64))
    term_sections = db.relationship("Sections", backref="term")
    constraints = db.relationship("FacultyConstraint", backref="term")
    comments = db.relationship("Comments", backref="term")

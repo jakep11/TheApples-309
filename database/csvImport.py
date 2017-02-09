@@ -19,54 +19,58 @@ def importStudentData():
    print inputFile
    stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
    reader = csv.reader(stream)
+   rowNum = 0
    # with open(inputFile.name, 'rb') as csvfile:
       # reader = csv.reader(csvfile, delimiter=',')
    for row in reader:
       column = 0
+      rowNum += 1
+      print row
       for entry in row:
          column += 1
 
          # Term
-         if column == 1:
+         if column == 1 and rowNum != 1:
             term = models.Terms.query.filter_by(name=entry).first()
             if term is None: # If the term doesn't already exist, add a new term to the table
                term = models.Terms(name=entry)
                db.session.add(term)
 
          # Course ID
-         elif column == 5:
+         elif column == 5 and rowNum != 1:
             courseId = entry
 
          # Subject Code
-         elif column == 6:
+         elif column == 6 and rowNum != 1:
             course = models.Courses.query.filter_by(major=courseId, number=entry).first()
             if course is None: # If the course doesn't already exist, add a new course to the table
                course = models.Courses(major=courseId, number=entry)
                db.session.add(course)
 
          # Seat Demand
-         elif column == 11:
+         elif column == 11 and rowNum != 1:
             seatDemand = entry
 
          # Sections Offered
-         elif column == 12:
+         elif column == 12 and rowNum != 1:
             numSections = entry
 
          # Enrollment Capacity
-         elif column == 13:
+         elif column == 13 and rowNum != 1:
             enrollmentCapacity = entry
 
          # Unmet Seat Demand
-         elif column == 14:
+         elif column == 14 and rowNum != 1:
             unmetDemand = entry
 
-      # Create a new student planning data row in the ScheduleFinal database table
-      studentData = models.StudentPlanningData(term=term, course=course, number_sections=numSections,
-                                            capacity=enrollmentCapacity, seatDemand=seatDemand, unmetSeatDemand=unmetDemand)
+            # Create a new student planning data row in the ScheduleFinal database table
+            studentData = models.StudentPlanningData(term=term, course=course, number_sections=numSections,
+                                                  capacity=enrollmentCapacity, seat_demand=seatDemand,
+                                                  unmet_seat_demand=unmetDemand)
 
-      # Add new student planning data to database
-      db.session.add(studentData)
-      db.session.commit()
+            # Add new student planning data to database
+            db.session.add(studentData)
+            db.session.commit()
 
    return "all good"
 
