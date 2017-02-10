@@ -116,6 +116,8 @@
     height: 200px;
     overflow: auto;
 }
+
+
 /*
 .table td {
     text-align: center;
@@ -159,6 +161,10 @@
     width: 100px;
 }
 
+.upload-row {
+    margin-top: 40px;
+}
+
 .choose-file-btn {
     font-weight: 60;
 }
@@ -199,4 +205,8 @@
     font-size: 14px;
     font-weight: bold;
     white-space: nowrap;
+}
+
+.import-table {
+    text-align: center;
 }

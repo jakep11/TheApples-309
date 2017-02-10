@@ -1,6 +1,12 @@
-angular.module('TheApples')
+var app = angular.module('TheApples')
 
-.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location) {
+app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location) {
+    $scope.applyFilters = function () {
+        $location.path("/view/allSections");
+    }
+})
+
+app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location) {
     $scope.backButtonClicked = function () {
         $location.path("/login");
     }
@@ -90,7 +96,7 @@ angular.module('TheApples')
     }
 })
 
-.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location) {
+app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location) {
     $scope.backButtonClicked = function () {
         $location.path("/login");
     }

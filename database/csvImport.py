@@ -5,62 +5,72 @@
 
 from flask import Blueprint, render_template, flash, redirect, request, url_for, jsonify, json
 import csv, models
+import io
 from models import *
 from web_app import db
 
 csvImport_api = Blueprint('csvImport_api', __name__)
 
 # This function parses through a CSV file containing student plan data, and adds the information to the database
-@csvImport_api.route("/importStudentData/<inputFile>", methods = ['GET', 'POST'])
-def importStudentData(inputFile):
-   with open(inputFile, 'rb') as csvfile:
-      reader = csv.reader(csvfile, delimiter=',')
-      for row in reader:
-         column = 0
-         for entry in row:
-            column += 1
+@csvImport_api.route("/importStudentData", methods = ['GET', 'POST'])
+def importStudentData():
+   print "in input data. Input file is "
+   inputFile = request.files['file']
+   print inputFile
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+   rowNum = 0
+   # with open(inputFile.name, 'rb') as csvfile:
+      # reader = csv.reader(csvfile, delimiter=',')
+   for row in reader:
+      column = 0
+      rowNum += 1
+      print row
+      for entry in row:
+         column += 1
 
-            # Term
-            if column == 1:
-               term = models.Terms.query.filter_by(name=entry).first()
-               if term is None: # If the term doesn't already exist, add a new term to the table
-                  term = models.Terms(name=entry)
-                  db.session.add(term)
+         # Term
+         if column == 1 and rowNum != 1:
+            term = models.Terms.query.filter_by(name=entry).first()
+            if term is None: # If the term doesn't already exist, add a new term to the table
+               term = models.Terms(name=entry)
+               db.session.add(term)
 
-            # Course ID
-            elif column == 5:
-               courseId = entry
+         # Course ID
+         elif column == 5 and rowNum != 1:
+            courseId = entry
 
-            # Subject Code
-            elif column == 6:
-               course = models.Courses.query.filter_by(major=courseId, number=entry).first()
-               if course is None: # If the course doesn't already exist, add a new course to the table
-                  course = models.Courses(major=courseId, number=entry)
-                  db.session.add(course)
+         # Subject Code
+         elif column == 6 and rowNum != 1:
+            course = models.Courses.query.filter_by(major=courseId, number=entry).first()
+            if course is None: # If the course doesn't already exist, add a new course to the table
+               course = models.Courses(major=courseId, number=entry)
+               db.session.add(course)
 
-            # Seat Demand
-            elif column == 11:
-               seatDemand = entry
+         # Seat Demand
+         elif column == 11 and rowNum != 1:
+            seatDemand = entry
 
-            # Sections Offered
-            elif column == 12:
-               numSections = entry
+         # Sections Offered
+         elif column == 12 and rowNum != 1:
+            numSections = entry
 
-            # Enrollment Capacity
-            elif column == 13:
-               enrollmentCapacity = entry
+         # Enrollment Capacity
+         elif column == 13 and rowNum != 1:
+            enrollmentCapacity = entry
 
-            # Unmet Seat Demand
-            elif column == 14:
-               unmetDemand = entry
+         # Unmet Seat Demand
+         elif column == 14 and rowNum != 1:
+            unmetDemand = entry
 
-         # Create a new student planning data row in the ScheduleFinal database table
-         studentData = models.StudentPlanningData(term=term, course=course, number_sections=numSections,
-                                            capacity=enrollmentCapacity, seatDemand=seatDemand, unmetSeatDemand=unmetDemand)
+            # Create a new student planning data row in the ScheduleFinal database table
+            studentData = models.StudentPlanningData(term=term, course=course, number_sections=numSections,
+                                                  capacity=enrollmentCapacity, seat_demand=seatDemand,
+                                                  unmet_seat_demand=unmetDemand)
 
-         # Add new student planning data to database
-         db.session.add(studentData)
-         db.session.commit()
+            # Add new student planning data to database
+            db.session.add(studentData)
+            db.session.commit()
 
    return "all good"
 
@@ -68,7 +78,7 @@ def importStudentData(inputFile):
 # This function parses through a CSV file containing historic plan data, and adds the information to the database
 @csvImport_api.route("/importHistoricData/<inputFile>", methods = ['GET', 'POST'])
 def importHistoricData(inputFile):
-   with open('HistoricDemandDataF14.txt', 'rb') as csvfile:
+   with open(inputFile, 'rb') as csvfile:
       reader = csv.reader(csvfile, delimiter=',')
       rowNumber = 0
 
