@@ -162,6 +162,14 @@
                      </div>
                      <div class="row modal-row">
                         <div class="col-xs-3 col-xs-offset-3">
+                           <label>Course Name:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="course-number">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
                            <label>Course Number:</label>
                         </div>
                         <div class="col-xs-4">
@@ -247,46 +255,80 @@
                <div class="modal-body">
                   <form>
                      <div class="modal-title">
-                        <h3>Edit Room</h3>
+                        <h3>Edit Course</h3>
                      </div>
                      <div class="row modal-row">
                         <div class="col-xs-3 col-xs-offset-3">
-                           <label>Room number:</label>
+                           <label>Course Name:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="room-number">
-                        </div>
-                     </div>
-                     <div class="row modal-row">
-                        <div class="col-xs-3 col-xs-offset-3">
-                           <label>Capacity</label>
-                        </div>
-                        <div class="col-xs-4">
-                           <input class="form-control" type="text" name="capacity">
+                           <input class="form-control" type="text" name="course-number">
                         </div>
                      </div>
                      <div class="row modal-row">
                         <div class="col-xs-3 col-xs-offset-3">
-                           <label>Course Type:</label>
+                           <label>Course Number:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="course-type">
+                           <input class="form-control" type="text" name="course-number">
                         </div>
                      </div>
                      <div class="row modal-row">
                         <div class="col-xs-3 col-xs-offset-3">
-                           <label>Equipment:</label>
+                           <label>Component 1</label>
                         </div>
                         <div class="col-xs-4">
-                           <textarea class="form-control" name="equipment"></textarea>
+                           <select class="form-control" name="component1">
+                              <option>Lecture</option>
+                              <option>Lab</option>
+                              <option>Supervisory</option>
+                              <option>Group</option>
+                           </select>
                         </div>
                      </div>
                      <div class="row modal-row">
                         <div class="col-xs-3 col-xs-offset-3">
-                           <label>Comments:</label>
+                           <label>Work Units</label>
                         </div>
                         <div class="col-xs-4">
-                           <textarea class="form-control" name="comments"></textarea>
+                           <input class="form-control" type="text" name="work-units1">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Class Hours</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="class-hours1">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Component 2</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <select class="form-control" name="component1">
+                              <option>Lecture</option>
+                              <option>Lab</option>
+                              <option>Supervisory</option>
+                              <option>Group</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Work Units</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="work-units2">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Class Hours</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="class-hours2">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -295,7 +337,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addCourse()">SAVE</button>
                            </div>
                         </div>
                      </div>
