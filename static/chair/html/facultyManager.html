@@ -44,14 +44,14 @@ Things that change dynamically:
                      <!-- Modal for chair to see specific faculty's preferences -->
                      <div id="preference-modal1" class="modal fade" role="dialog">
                         <div class="modal-dialog">
-                           <div class="modal-content preference-modal">
-                              <div class="modal-body">
-                                 <div class="row modal-title">
+                           <div class="modal-content">
+                              <div class=" modal-body ">
+                                 <div class="row modal-title ">
                                     <h3>Courses</h3>
                                  </div>
-                                 <div class="preference-table">
-                                    <table class="table table-striped">
-                                       <tr class="success">
+                                 <div class="preference-table ">
+                                    <table class="table table-striped ">
+                                       <tr class="success ">
                                           <th>Class</th>
                                           <th>Preference</th>
                                        </tr>
@@ -77,13 +77,13 @@ Things that change dynamically:
                                        </tr>
                                     </table>
                                  </div>
-                                 <div class="row modal-title">
+                                 <div class="row modal-title ">
                                     <h3>Times</h3>
                                  </div>
-                                 <div class="preference-table">
+                                 <div class="preference-table ">
                                     <!-- Preference must be generated dynamically -->
-                                    <table class="table table-striped">
-                                       <tr class="success">
+                                    <table class="table table-striped ">
+                                       <tr class="success ">
                                           <th>Time</th>
                                           <th>Preference</th>
                                        </tr>
@@ -149,8 +149,13 @@ Things that change dynamically:
                                        </tr>
                                     </table>
                                  </div>
-                                 <div class="col-xs-4 col-xs-offset-4">
-                                    <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CLOSE</button>
+                                 <div class="row modal-row ">
+                                    <div class="col-xs-4 col-xs-offset-2 ">
+                                       <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CLOSE</button>
+                                    </div>
+                                    <div class="col-xs-4 ">
+                                       <button class="btn btn-default preference-btn add-btns ">EDIT</button>
+                                    </div>
                                  </div>
                               </div>
                            </div>
@@ -162,55 +167,55 @@ Things that change dynamically:
          </div>
       </form>
       <!--   Add, edit, and remove buttons   -->
-      <div class="row">
-         <div class="col-xs-2 col-xs-offset-3">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
+      <div class="row ">
+         <div class="col-xs-2 col-xs-offset-3 ">
+            <button class="btn btn-default preference-btn col-xs-12 " data-toggle="modal " data-target="#add-modal ">Add</button>
          </div>
-         <div id="add-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-body">
+         <div id="add-modal " class="modal fade " role="dialog ">
+            <div class="modal-dialog ">
+               <div class="modal-content ">
+                  <div class="modal-body ">
                      <form>
-                        <div class="modal-title">
+                        <div class="modal-title ">
                            <h3>Add User</h3>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
+                        <div class="row modal-row ">
+                           <div class="col-xs-6 add-text ">
                               Username:
-                              <input type="text" class="form-control" name="username">
+                              <input type="text " class="form-control " name="username ">
                            </div>
-                           <div class="col-xs-6 add-text">
+                           <div class="col-xs-6 add-text ">
                               Min Workload:
-                              <input type="text" class="form-control" name="min-workload">
+                              <input type="text " class="form-control " name="min-workload ">
                            </div>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
+                        <div class="row modal-row ">
+                           <div class="col-xs-6 add-text ">
                               First name:
-                              <input type="text" class="form-control" name="firstname">
+                              <input type="text " class="form-control " name="firstname ">
                            </div>
-                           <div class="col-xs-6 add-text">
+                           <div class="col-xs-6 add-text ">
                               Max Workload:
-                              <input type="text" class="form-control" name="max-workload">
+                              <input type="text " class="form-control " name="max-workload ">
                            </div>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
+                        <div class="row modal-row ">
+                           <div class="col-xs-6 add-text ">
                               Last name:
-                              <input type="text" class="form-control" name="lastname">
+                              <input type="text " class="form-control " name="lastname ">
                            </div>
-                           <div class="col-xs-6 add-text">
+                           <div class="col-xs-6 add-text ">
                               Notes:
-                              <textarea type="text" class="form-control" name="notes" placeholder="None"></textarea>
+                              <textarea type="text " class="form-control " name="notes " placeholder="None "></textarea>
                            </div>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-offset-3">
-                              <div class="col-xs-4">
-                                 <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                        <div class="row modal-row ">
+                           <div class="col-xs-offset-3 ">
+                              <div class="col-xs-4 ">
+                                 <button class="btn btn-default preference-btn add-btns " data-dismiss="modal ">CANCEL</button>
                               </div>
-                              <div class="col-xs-4">
-                                 <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <div class="col-xs-4 ">
+                                 <button class="btn btn-default preference-btn add-btns ">SAVE</button>
                               </div>
                            </div>
                         </div>
@@ -219,54 +224,54 @@ Things that change dynamically:
                </div>
             </div>
          </div>
-         <div class="col-xs-2">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal">Edit</button>
+         <div class="col-xs-2 ">
+            <button class="btn btn-default preference-btn col-xs-12 " data-toggle="modal " data-target="#edit-modal ">Edit</button>
          </div>
-         <div id="edit-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-body">
+         <div id="edit-modal " class="modal fade " role="dialog ">
+            <div class="modal-dialog ">
+               <div class="modal-content ">
+                  <div class="modal-body ">
                      <form>
-                        <div class="modal-title">
+                        <div class="modal-title ">
                            <h3>Edit User</h3>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
+                        <div class="row modal-row ">
+                           <div class="col-xs-6 add-text ">
                               Username:
-                              <input type="text" class="form-control" name="username">
+                              <input type="text " class="form-control " name="username ">
                            </div>
-                           <div class="col-xs-6 add-text">
+                           <div class="col-xs-6 add-text ">
                               Min Workload:
-                              <input type="text" class="form-control" name="min-workload">
+                              <input type="text " class="form-control " name="min-workload ">
                            </div>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
+                        <div class="row modal-row ">
+                           <div class="col-xs-6 add-text ">
                               First name:
-                              <input type="text" class="form-control" name="firstname">
+                              <input type="text " class="form-control " name="firstname ">
                            </div>
-                           <div class="col-xs-6 add-text">
+                           <div class="col-xs-6 add-text ">
                               Max Workload:
-                              <input type="text" class="form-control" name="max-workload">
+                              <input type="text " class="form-control " name="max-workload ">
                            </div>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-6 add-text">
+                        <div class="row modal-row ">
+                           <div class="col-xs-6 add-text ">
                               Last name:
-                              <input type="text" class="form-control" name="lastname">
+                              <input type="text " class="form-control " name="lastname ">
                            </div>
-                           <div class="col-xs-6 add-text">
+                           <div class="col-xs-6 add-text ">
                               Notes:
-                              <textarea type="text" class="form-control" name="notes" placeholder="None"></textarea>
+                              <textarea type="text " class="form-control " name="notes " placeholder="None "></textarea>
                            </div>
                         </div>
-                        <div class="row modal-row">
-                           <div class="col-xs-offset-3">
-                              <div class="col-xs-4">
-                                 <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                        <div class="row modal-row ">
+                           <div class="col-xs-offset-3 ">
+                              <div class="col-xs-4 ">
+                                 <button class="btn btn-default preference-btn add-btns " data-dismiss="modal ">CANCEL</button>
                               </div>
-                              <div class="col-xs-4">
-                                 <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <div class="col-xs-4 ">
+                                 <button class="btn btn-default preference-btn add-btns ">SAVE</button>
                               </div>
                            </div>
                         </div>
@@ -275,8 +280,8 @@ Things that change dynamically:
                </div>
             </div>
          </div>
-         <div class="col-xs-2">
-            <button class="btn btn-default preference-btn col-xs-12">Remove</button>
+         <div class="col-xs-2 ">
+            <button class="btn btn-default preference-btn col-xs-12 ">Remove</button>
          </div>
       </div>
    </div>
