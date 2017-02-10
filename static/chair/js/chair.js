@@ -190,6 +190,10 @@ app.controller('importData', ['$scope', 'fileUpload', function($scope, fileUploa
             var uploadUrl = "/importHistoricData";
         }
 
+        else if (filename.includes("Faculty")) {
+            var uploadUrl = "/importFacultyData";
+        }
+
         else if (filename.includes("Student")) {
             var uploadUrl = "/importStudentData";
         }
