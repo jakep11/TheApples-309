@@ -133,9 +133,9 @@ class ScheduleFinal(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
-   number_sections = db.Column(db.Integer)
-   total_enrollment = db.Column(db.Integer)
-   waitlist = db.Column(db.Integer)
+   number_sections = db.Column(db.String(4))
+   total_enrollment = db.Column(db.String(4))
+   waitlist = db.Column(db.String(4))
 
 #-- Description: Stores the student planning data information imported from CSV
 class StudentPlanningData(db.Model):
