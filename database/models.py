@@ -38,12 +38,12 @@ class Courses(db.Model):
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   lecture_workload_units = db.Column(db.String(5))
-   lecture_units = db.Column(db.String(5))
-   lecture_hours = db.Column(db.String(5))
-   lab_workload_units = db.Column(db.String(5))
-   lab_units = db.Column(db.String(5))
-   lab_hours = db.Column(db.String(5))
+   component_one = db.relationship("Components", backref="course")
+   c1_workload_units = db.Column(db.String(5))
+   c1_hours = db.Column(db.String(5))
+   component_two = db.relationship("Components", backref="course")
+   c2_workload_units = db.Column(db.String(5))
+   c2_hours = db.Column(db.String(5))
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
@@ -65,6 +65,16 @@ class Courses(db.Model):
       #'constraints': self.constraints,
       #'final_schedules': self.final_schedules,
       }
+
+#-- Description: Stores the components of each of the courses
+class Components(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(20))
+
+#-- Description: Stores the names of the files that have been imported into the system
+class Files(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(32))
 
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    

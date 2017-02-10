@@ -70,7 +70,7 @@ def importStudentData():
             db.session.add(studentData)
             db.session.commit()
 
-   return "all good"
+   return "successfully uploaded student planning data"
 
 
 # This function parses through a CSV file containing historic plan data, and adds the information to the database
@@ -164,7 +164,7 @@ def importHistoricData():
             db.session.add(springData)
             db.session.commit()
 
-   return "all good"
+   return "successfully uploaded final schedule data"
 
 # This function parses through a CSV file containing room data, and adds the information to the database
 @csvImport_api.route("/importRoomData", methods = ['GET', 'POST'])
@@ -202,7 +202,7 @@ def importRoomData():
 
       rowNum += 1
 
-   return "all good"
+   return "successfully uploaded room data"
 
 # This function parses through a CSV file containing course data, and adds the information to the database
 @csvImport_api.route("/importCourseData", methods=['GET', 'POST'])
@@ -281,4 +281,17 @@ def importCourseData():
                                  lab_units=labUnits, lab_hours=numLabs)
          db.session.add(course)
 
-   return "all good"
+   return "successfully uploaded course data"
+
+
+# # This function parses through a CSV file containing course data, and adds the information to the database
+# @csvImport_api.route("/importCohortData", methods=['GET', 'POST'])
+# def importCohortData():
+#
+#    inputFile = request.files['file']
+#    stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+#    reader = csv.reader(stream)
+#
+#    for row in reader:
+#
+#    return "successfully uploaded cohort data"
