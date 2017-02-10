@@ -32,16 +32,22 @@ class Faculty(db.Model):
    notifications = db.relationship("Notifications", backref="faculty")
 
 
+#-- Description: Stores the components of each of the courses
+class Components(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(20))
+   #course = db.relationship("Courses", backref="component")
+
 #-- Description: Stores all courses taught by the University
 class Courses(db.Model):                  
    id = db.Column(db.Integer, primary_key=True)
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   component_one = db.relationship("Components", backref="course")
+   component_one = db.Column(db.Integer, db.ForeignKey("components.id"))
    c1_workload_units = db.Column(db.String(5))
    c1_hours = db.Column(db.String(5))
-   component_two = db.relationship("Components", backref="course")
+   component_two = db.Column(db.Integer, db.ForeignKey("components.id"))
    c2_workload_units = db.Column(db.String(5))
    c2_hours = db.Column(db.String(5))
    course_sections = db.relationship("Sections", backref="course")
@@ -60,7 +66,7 @@ class Courses(db.Model):
       'component_one': self.component_one,
       'c1_workload_units ': self.c1_workload_units,
       'c1_hours': self.c1_hours,
-      'component_two': self.component_two,
+      'component_two': self.component_two, 
       'c2_workload_units': self.c2_workload_units,
       'c2_hours': self.c2_hours,
       #'course_sections': self.course_sections,
@@ -68,10 +74,8 @@ class Courses(db.Model):
       #'final_schedules': self.final_schedules,
       }
 
-#-- Description: Stores the components of each of the courses
-class Components(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(20))
+
+
 
 #-- Description: Stores the names of the files that have been imported into the system
 class Files(db.Model):
@@ -102,7 +106,7 @@ class Terms(db.Model):
 #-- Description: Stores all rooms with type and capacity
 class Rooms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
-   number = db.Column(db.Integer)
+   number = db.Column(db.String(32))
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")
