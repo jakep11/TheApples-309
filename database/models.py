@@ -37,10 +37,13 @@ class Courses(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
-   lecture_workload_units = db.Column(db.Integer)
-   lecture_hours = db.Column(db.Integer)
-   lab_workload_units = db.Column(db.Integer)
-   lab_hours = db.Column(db.Integer)
+   course_name = db.Column(db.String(100))
+   lecture_workload_units = db.Column(db.String(5))
+   lecture_units = db.Column(db.String(5))
+   lecture_hours = db.Column(db.String(5))
+   lab_workload_units = db.Column(db.String(5))
+   lab_units = db.Column(db.String(5))
+   lab_hours = db.Column(db.String(5))
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
@@ -53,13 +56,14 @@ class Courses(db.Model):
       'id'         : self.id,
       'number': self.number,
       'major': self.major,
+      'course_name': self.course_name,
       'lecture_workload_units ': self.lecture_workload_units, 
       'lecture_hours': self.lecture_hours,
       'lab_workload_units': self.lab_workload_units, 
       'lab_hours': self.lab_hours,
       #'course_sections': self.course_sections,
       #'constraints': self.constraints,
-      #'final_schedules': self.final_schedules, 
+      #'final_schedules': self.final_schedules,
       }
 
 #-- Description: Stores the terms taught by the University
@@ -141,9 +145,9 @@ class ScheduleFinal(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
-   number_sections = db.Column(db.Integer)
-   total_enrollment = db.Column(db.Integer)
-   waitlist = db.Column(db.Integer)
+   number_sections = db.Column(db.String(4))
+   total_enrollment = db.Column(db.String(4))
+   waitlist = db.Column(db.String(4))
 
 #-- Description: Stores the student planning data information imported from CSV
 class StudentPlanningData(db.Model):

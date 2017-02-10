@@ -5,7 +5,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         $location.path("/login");
     }
     $scope.applyFilters = function () {
-        $location.path("/view/allSections");
+        $location.path("/view/filteredSections");
     }
     console.log("work?");
     $scope.getCourses = function() {
