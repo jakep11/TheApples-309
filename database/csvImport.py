@@ -14,14 +14,12 @@ csvImport_api = Blueprint('csvImport_api', __name__)
 # This function parses through a CSV file containing student plan data, and adds the information to the database
 @csvImport_api.route("/importStudentData", methods = ['GET', 'POST'])
 def importStudentData():
-   print "in input data. Input file is "
+
    inputFile = request.files['file']
-   print inputFile
    stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
    reader = csv.reader(stream)
    rowNum = 0
-   # with open(inputFile.name, 'rb') as csvfile:
-      # reader = csv.reader(csvfile, delimiter=',')
+
    for row in reader:
       column = 0
       rowNum += 1
@@ -76,103 +74,113 @@ def importStudentData():
 
 
 # This function parses through a CSV file containing historic plan data, and adds the information to the database
-@csvImport_api.route("/importHistoricData/<inputFile>", methods = ['GET', 'POST'])
-def importHistoricData(inputFile):
-   with open(inputFile, 'rb') as csvfile:
-      reader = csv.reader(csvfile, delimiter=',')
-      rowNumber = 0
+@csvImport_api.route("/importHistoricData", methods = ['GET', 'POST'])
+def importHistoricData():
 
-      for row in reader:
-         rowNumber += 1
-         # This is where the bulk of the information that we care about is held
-         if rowNumber > 10:
-            column = 1
-            # If a new course information block is started
-            if (len(row[column]) > 1):
+   inputFile = request.files['file']
+   rowNumber = 0
+   courseId = "CPE"
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
 
-               if (row[1] == "# of Sections") and (row[0] != ""):
-                  courseNum = row[0]
+   for row in reader:
 
-                  # If the course is not in the CSC/CPE Dept, figure out what dept its in. ex: DATA 301
-                  if len(courseNum) > 3:
-                     temp = courseNum.rsplit(' ', 1)
-                     courseId = temp[0]
-                     courseNum = temp[1]
+      rowNumber += 1
 
-                  # Set the course that the enrollment history is for
-                  course = models.Courses.query.filter_by(major="CPE", number=courseNum).first()
-                  if course is None:  # If the course doesn't exist in CPE, check CSC
-                     course = models.Courses.query.filter_by(major="CSC", number=courseNum).first()
-                     if course is None: # If the course doesn't exist in CSC or CPE, check other major
-                        course = models.Courses.query.filter_by(major=courseId, number=courseNum).first()
-                        if course is None: # If the course still doesn't exist, add it to the course table
-                           course = models.Courses(major=courseId, number=entry)
-                           db.session.add(course)
+      # This is where the bulk of the information that we care about is held
+      if rowNumber > 10:
 
-                  # Set the terms that the enrollment history is for
-                  fallTerm = models.Terms.query.filter_by(name="Fall Quarter 2016").first()
-                  if fallTerm is None:  # If the term doesn't already exist, add a new term to the table
-                     fallTerm = models.Terms(name="Fall Quarter 2014")
-                     db.session.add(fallTerm)
+         if (row[1] == "# of Sections" and row[0] != ''):
+            courseNum = row[0]
 
-                  winterTerm = models.Terms.query.filter_by(name="Winter Quarter 2016").first()
-                  if winterTerm is None:  # If the term doesn't already exist, add a new term to the table
-                     winterTerm = models.Terms(name="Winter Quarter 2015")
-                     db.session.add(winterTerm)
+            # If the course is not in the CSC/CPE Dept, figure out what dept its in. ex: DATA 301
+            if len(courseNum) > 4:
+               temp = courseNum.rsplit(' ', 1)
+               courseId = temp[0]
+               courseNum = temp[1]
+               print "course num is " + courseNum
+               print "course id is" + courseId
 
-                  springTerm = models.Terms.query.filter_by(name="Spring Quarter 2016").first()
-                  if springTerm is None:  # If the term doesn't already exist, add a new term to the table
-                     springTerm = models.Terms(name="Spring Quarter 2015")
-                     db.session.add(springTerm)
+            # Set the course that the enrollment history is for
+            course = models.Courses.query.filter_by(major="CPE", number=courseNum).first()
+            if course is None:  # If the course doesn't exist in CPE, check CSC
+               course = models.Courses.query.filter_by(major="CSC", number=courseNum).first()
+               if course is None: # If the course doesn't exist in CSC or CPE, check other major
+                  course = models.Courses.query.filter_by(major=courseId, number=courseNum).first()
+                  if course is None: # If the course still doesn't exist, add it to the course table
+                     course = models.Courses(major=courseId, number=courseNum)
+                     db.session.add(course)
 
-                  # Set the term sections
-                  fallSections = row[2]
-                  winterSections = row[3]
-                  springSections = row[4]
+            # Set the terms that the enrollment history is for
+            fallTerm = models.Terms.query.filter_by(name="Fall Quarter 2014").first()
+            if fallTerm is None:  # If the term doesn't already exist, add a new term to the table
+               fallTerm = models.Terms(name="Fall Quarter 2014")
+               db.session.add(fallTerm)
 
-               # Total Enrollment data
-               elif (row[1] == "Total Enrollment" and rowNumber < 400):
+            winterTerm = models.Terms.query.filter_by(name="Winter Quarter 2015").first()
+            if winterTerm is None:  # If the term doesn't already exist, add a new term to the table
+               winterTerm = models.Terms(name="Winter Quarter 2015")
+               db.session.add(winterTerm)
 
-                  fallEnrolled = row[2]
-                  winterEnrolled = row[3]
-                  springEnrolled = row[4]
+            springTerm = models.Terms.query.filter_by(name="Spring Quarter 2015").first()
+            if springTerm is None:  # If the term doesn't already exist, add a new term to the table
+               springTerm = models.Terms(name="Spring Quarter 2015")
+               db.session.add(springTerm)
 
-               # Last Waitlist data
-               elif row[1] == "Last Waitlist":
+            # Set the term sections
+            fallSections = row[2]
+            winterSections = row[3]
+            springSections = row[4]
 
-                  fallWaitlist = row[2]
-                  winterWaitlist = row[3]
-                  springWaitlist = row[4]
+         # Total Enrollment data
+         elif (row[1] == "Total Enrollment" and rowNumber < 400):
 
-                  # Add fall course history to the ScheduleFinal table
-                  fallData = models.ScheduleFinal(term=fallTerm, course=course, number_sections=fallSections,
-                                                           total_enrollment=fallEnrolled, waitlist=fallWaitlist)
+            fallEnrolled = row[2]
+            winterEnrolled = row[3]
+            springEnrolled = row[4]
 
-                  # Add winter course history to the ScheduleFinal table
-                  winterData = models.ScheduleFinal(term=winterTerm, course=course, number_sections=winterSections,
-                                                           total_enrollment=winterEnrolled, waitlist=winterWaitlist)
+         # Last Waitlist data
+         elif row[1] == "Last Waitlist":
 
-                  # Add spring course history to the ScheduleFinal table
-                  springData = models.ScheduleFinal(term=springTerm, course=course, number_sections=springSections,
-                                                           total_enrollment=springEnrolled, waitlist=springWaitlist)
+            fallWaitlist = row[2]
+            winterWaitlist = row[3]
+            springWaitlist = row[4]
 
-                  # Add new historic planning data to database
-                  db.session.add(fallData)
-                  db.session.add(winterData)
-                  db.session.add(springData)
-      db.session.commit()
+            # Add fall course history to the ScheduleFinal table
+            fallData = models.ScheduleFinal(term=fallTerm, course=course, number_sections=fallSections,
+                                                      total_enrollment=fallEnrolled, waitlist=fallWaitlist)
+
+            # Add winter course history to the ScheduleFinal table
+            winterData = models.ScheduleFinal(term=winterTerm, course=course, number_sections=winterSections,
+                                                      total_enrollment=winterEnrolled, waitlist=winterWaitlist)
+
+            # Add spring course history to the ScheduleFinal table
+            springData = models.ScheduleFinal(term=springTerm, course=course, number_sections=springSections,
+                                                      total_enrollment=springEnrolled, waitlist=springWaitlist)
+
+            # Add new historic planning data to database
+            db.session.add(fallData)
+            db.session.add(winterData)
+            db.session.add(springData)
+            db.session.commit()
 
    return "all good"
 
-@csvImport_api.route("/importRoomData/<inputFile>", methods = ['GET', 'POST'])
-def importRoomData(inputFile):
-   with open(inputFile, 'rb') as csvfile:
-      reader = csv.reader(csvfile, delimiter=',')
-      for row in reader:
-         column = 0
-         for entry in row:
-            column += 1
+# This function parses through a CSV file containing room data, and adds the information to the database
+@csvImport_api.route("/importRoomData", methods = ['GET', 'POST'])
+def importRoomData():
 
+   inputFile = request.files['file']
+   rowNum = 0
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+
+   for row in reader:
+      column = 0
+      for entry in row:
+         column += 1
+
+         if rowNum != 0:
             # Type
             if column == 1:
                roomType = entry
@@ -185,9 +193,92 @@ def importRoomData(inputFile):
             elif column == 3:
                roomCapacity = entry
 
-         # Create a new student planning data row in the ScheduleFinal database table
-         room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
+               # Create a new student planning data row in the ScheduleFinal database table
+               room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
 
-         # Add new student planning data to database
-         db.session.add(room)
-         db.session.commit()
+               # Add new student planning data to database
+               db.session.add(room)
+               db.session.commit()
+
+      rowNum += 1
+
+   return "all good"
+
+# This function parses through a CSV file containing course data, and adds the information to the database
+@csvImport_api.route("/importCourseData", methods=['GET', 'POST'])
+def importCourseData():
+
+   inputFile = request.files['file']
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+
+   for row in reader:
+
+      print row
+      column = 0
+      lectureUnits = 0
+      labUnits = 0
+      numLabs = 0
+      numLectures = 0
+
+      for entry in row:
+         column += 1
+
+         # Course dept and number
+         if column == 1:
+            temp = entry.rsplit(' ', 1)
+            courseDept = temp[0]
+            courseNum = temp[1]
+
+         # Course name
+         elif column == 2:
+            courseName = entry
+
+         # Subject Code
+         elif column > 2:
+            temp = entry.rsplit(' ', 1)
+            value = temp[0]
+            attribute = temp[1]
+
+            # Units
+            if attribute == "unit":
+
+               if "lect" in prev:
+                  lectureUnits = value
+
+               # elif "activity" in prev:
+               #   print "act"
+
+               # elif "supv" in prev:
+               #   print "sup"
+
+               elif "lab" in prev:
+                  labUnits = value
+
+            # Activity
+            #elif attribute == "activity":
+            #   print ""
+
+            # Supervisory
+            #elif attribute == "supv":
+            #   print ""
+
+            # Lecture
+            elif attribute == "lect":
+               numLectures = value
+
+            # Lab
+            elif attribute == "lab":
+               numLabs = value
+
+            prev = attribute
+
+      # Add the new course to the database if it is not currently in there
+      course = models.Courses.query.filter_by(major=courseDept, number=courseNum).first()
+      if course is None: # If the course doesn't already exist, add a new course to the table
+         course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
+                                 lecture_units=lectureUnits, lecture_hours=numLectures,
+                                 lab_units=labUnits, lab_hours=numLabs)
+         db.session.add(course)
+
+   return "all good"
