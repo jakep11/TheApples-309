@@ -16,7 +16,6 @@ csvImport_api = Blueprint('csvImport_api', __name__)
 def importStudentData():
 
    inputFile = request.files['file']
-
    stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
    reader = csv.reader(stream)
    rowNum = 0
@@ -81,7 +80,6 @@ def importHistoricData():
    inputFile = request.files['file']
    rowNumber = 0
    courseId = "CPE"
-
    stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
    reader = csv.reader(stream)
 
@@ -203,5 +201,84 @@ def importRoomData():
                db.session.commit()
 
       rowNum += 1
+
+   return "all good"
+
+# This function parses through a CSV file containing course data, and adds the information to the database
+@csvImport_api.route("/importCourseData", methods=['GET', 'POST'])
+def importCourseData():
+
+   inputFile = request.files['file']
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+
+   for row in reader:
+
+      print row
+      column = 0
+      lectureUnits = 0
+      labUnits = 0
+      numLabs = 0
+      numLectures = 0
+
+      for entry in row:
+         column += 1
+
+         # Course dept and number
+         if column == 1:
+            temp = entry.rsplit(' ', 1)
+            courseDept = temp[0]
+            courseNum = temp[1]
+
+         # Course name
+         elif column == 2:
+            courseName = entry
+
+         # Subject Code
+         elif column > 2:
+            temp = entry.rsplit(' ', 1)
+            value = temp[0]
+            attribute = temp[1]
+
+            # Units
+            if attribute == "unit":
+
+               if "lect" in prev:
+                  lectureUnits = value
+
+               # elif "activity" in prev:
+               #   print "act"
+
+               # elif "supv" in prev:
+               #   print "sup"
+
+               elif "lab" in prev:
+                  labUnits = value
+
+            # Activity
+            #elif attribute == "activity":
+            #   print ""
+
+            # Supervisory
+            #elif attribute == "supv":
+            #   print ""
+
+            # Lecture
+            elif attribute == "lect":
+               numLectures = value
+
+            # Lab
+            elif attribute == "lab":
+               numLabs = value
+
+            prev = attribute
+
+      # Add the new course to the database if it is not currently in there
+      course = models.Courses.query.filter_by(major=courseDept, number=courseNum).first()
+      if course is None: # If the course doesn't already exist, add a new course to the table
+         course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
+                                 lecture_units=lectureUnits, lecture_hours=numLectures,
+                                 lab_units=labUnits, lab_hours=numLabs)
+         db.session.add(course)
 
    return "all good"
