@@ -277,8 +277,8 @@ def importCourseData():
       course = models.Courses.query.filter_by(major=courseDept, number=courseNum).first()
       if course is None: # If the course doesn't already exist, add a new course to the table
          course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
-                                 lecture_units=lectureUnits, lecture_hours=numLectures,
-                                 lab_units=labUnits, lab_hours=numLabs)
+                                 c1_units=lectureUnits, c1_hours=numLectures,
+                                 c2_units=labUnits, c2_hours=numLabs)
          db.session.add(course)
 
    return "successfully uploaded course data"
