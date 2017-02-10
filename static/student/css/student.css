@@ -108,3 +108,7 @@ sfsdf textarea {
     align-items: center;
     text-align: center;
 }
+
+.checkbox label {
+    display: block;
+}
