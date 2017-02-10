@@ -58,8 +58,8 @@ class Courses(db.Model):
       'lab_workload_units': self.lab_workload_units, 
       'lab_hours': self.lab_hours,
       #'course_sections': self.course_sections,
-      'constraints': self.constraints,
-      'final_schedules': self.final_schedules, 
+      #'constraints': self.constraints,
+      #'final_schedules': self.final_schedules,
       }
 
 #-- Description: Stores the terms taught by the University

@@ -2,7 +2,7 @@ var app = angular.module('TheApples')
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location) {
     $scope.applyFilters = function () {
-        $location.path("/view/allSections");
+        $location.path("/view/filteredSections");
     }
 })
 
