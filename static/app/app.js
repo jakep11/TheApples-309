@@ -56,17 +56,16 @@ app.config(['$routeProvider', function($routeProvider) {
        //css: "static/admin/css/admin.css"
     })
     //Every page for a student to view
-    .when('/viewScheduleCalendarStudent', {
-       templateUrl: 'static/student/html/viewScheduleCalendarStudent.html',
-       controller: "viewScheduleCalendarStudent",
-       //css: "static/student/css/student.css"
-    })
     .when('/viewScheduleTableStudent', {
        templateUrl: 'static/student/html/viewScheduleTableStudent.html',
        controller: "viewScheduleTableStudent",
        //css: "static/student/css/table.css"
     })
-
+    .when('/viewScheduleCalendarStudent', {
+       templateUrl: 'static/student/html/viewScheduleCalendarStudent.html',
+       controller: "viewScheduleCalendarStudent",
+       //css: "static/student/css/student.css"
+    })
     //Every page for a faculty to view
     .when('/facultyHome', {
        templateUrl: 'static/faculty/html/facultyHome.html',

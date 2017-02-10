@@ -1,12 +1,78 @@
-var app = angular.module('TheApples')
+var app = angular.module('TheApples');
 
-app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location) {
-    $scope.applyFilters = function () {
-        $location.path("/view/allSections");
+app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http) {
+    $scope.backButtonClicked = function () {
+        $location.path("/login");
     }
-})
+    $scope.applyFilters = function () {
+        $location.path("/view/filteredSections");
+    }
+    console.log("work?");
+    $scope.getCourses = function() {
+        console.log("getting courses");
+      $http({
+          method: 'GET',
+          url: '/courses/allCourses',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      }).then(function successCallback(response) {
+        $scope.courses = response.data;
+         console.log('success');
+       }, function errorCallback(response) {
+         console.log('error');
+       });
+    }
+    $scope.getCourses();
+    $scope.getTerms = function() {
+      $http({
+          method: 'GET',
+          url: '/get/terms',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      }).then(function successCallback(response) {
+        $scope.terms = response.data;
+         console.log('success');
+       }, function errorCallback(response) {
+         console.log('error');
+       });
+    }
+    $scope.getTerms();
+});
 
-app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location) {
+app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location, $http) {
+
+    $scope.getCourses = function() {
+      $http({
+          method: 'GET',
+          url: '/courses/allCourses',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      }).then(function successCallback(response) {
+        $scope.courses = response.data;
+         console.log('success');
+       }, function errorCallback(response) {
+         console.log('error');
+       });
+    }
+    $scope.getCourses();
+    $scope.getTerms = function() {
+      $http({
+          method: 'GET',
+          url: '/get/terms',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      }).then(function successCallback(response) {
+        $scope.terms = response.data;
+         console.log('success');
+       }, function errorCallback(response) {
+         console.log('error');
+       });
+    }
+    $scope.getTerms();
     $scope.backButtonClicked = function () {
         $location.path("/login");
     }
@@ -94,10 +160,4 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
 
         return '';
     }
-})
-
-app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location) {
-    $scope.backButtonClicked = function () {
-        $location.path("/login");
-    }
-})
+});

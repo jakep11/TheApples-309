@@ -35,7 +35,7 @@ Things that change dynamically:
         </div>
         <div class="row filter-row">
             <div class="col-xs-2 no-gutter col-xs-offset-10">
-                <a class="btn btn-default view-switch" href="/view/allSections" role="button" ng-click="applyFilters()">APPLY FILTERS</a>
+                <a class="btn btn-default view-switch" href="/view/filteredSections" role="button" ng-click="applyFilters()">APPLY FILTERS</a>
             </div>
         </div>
         <!-- Modal -->
@@ -75,23 +75,13 @@ Things that change dynamically:
         </div>
         <div class="row filter-row">
             <div class="col-xs-2 col-xs-offset-1">
-                <label>Terms:</label>
+                <label>Terms1:</label>
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
-                            <label>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="terms-filter" value="Bike"> I have a bike<br>
-                     </label>
+                            <label ng-repeat="term in terms | orderBy: 'number'">
+                                <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="term.id">{{term.name}}
+                            </label>
                         </div>
                     </form>
                 </div>
@@ -101,19 +91,10 @@ Things that change dynamically:
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
-                            <label>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="courses-filter" value="Bike"> I have a bike<br>
-                     </label>
+                            <label ng-repeat="course in courses | orderBy: 'number'">
+                                <input type="checkbox" name="course{{course.id}}" value="{{course.id}}" ng-model="course.id">{{course.major}} {{course.number}}
+                            </label>
+     
                         </div>
                     </form>
                 </div>

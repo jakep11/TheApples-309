@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, request, url_for, jsonify, json
+from sqlalchemy import and_
 
 filters_api = Blueprint('filters_api', __name__)
 
@@ -30,18 +31,38 @@ def all_sections():
 def filtered_sections():
 
    #data = request.json
+
+   #temporary JSON for testing purposes
    data = {
       'terms': 'Spring',
-      'courses': 'CPE 309',
-      'instructors': ['Kearns', 'Keen']
+      'courses': ['CPE 309', 'ME 308', 'BUS 357'],
+      'instructors': ['Kearns', 'Keen'],
+      'startTimes': None,
+      'endTimes': None
    };
 
-   terms = data['terms']
-   courses = data['courses']
-   instructors = data['instructors']
-   #startTimes = data['startTimes']
-  # endTimes = data['endTimes']
+   # terms = data['terms']
+   # courses = data['courses']
+   # instructors = data['instructors']
+   # startTimes = data['startTimes']
+   # endTimes = data['endTimes']
 
-   #sections = Sections.query.all()
+   courseMajor = []
+   courseNum = []
+
+   for c in data['courses']:
+      course = c.split()
+      courseMajor.append(course[0])
+      courseNum.append(course[1])
+
+   courses = Courses.query.filter(and_(Courses.major.in_(courseMajor), Courses.number.in_(courseNum))).all()
+
+   #courses = Courses.query.filter_by(course)
+
+   #sections = Sections.query.filter_by(course_id=1)
    #return jsonify([i.serialize for i in sections])
-   return jsonify(terms=terms, courses=courses, instructors=instructors)
+
+   #return jsonify(terms=terms, courses=courses, instructors=instructors, startTimes=startTimes, endTimes=endTimes)
+   #return jsonify(courseMajor=courseMajor, courseNum=courseNum)
+
+   return jsonify([i.serialize for i in courses])
