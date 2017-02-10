@@ -127,18 +127,16 @@
                   <th>Work Units</th>
                   <th>Class Hours</th>
                </tr>
-               <tr>
-                  <td>
-                     <input type="radio" name="room" value="" checked>
-                  </td>
-                  <td>Software Engineering I</td>
-                  <td>CPE 308</td>
+               <tr ng-repeat="course in courses | orderBy: 'number'">
+                  <td><input type="radio" ng-model="$parent.id" value="{{course.id}}" ng-click="radioChanged(course)" /></td>
+                  <td>{{course.id}}</td>
+                  <td>{{course.major}} {{course.number}}</td>
                   <td>Lecture</td>
-                  <td>2</td>
-                  <td>3</td>
+                  <td>{{course.lecture_workload_units}}</td>
+                  <td>{{course.lecture_hours}}</td>
                   <td>Lab</td>
-                  <td>2</td>
-                  <td>3</td>
+                  <td>{{course.lab_workload_units}}</td>
+                  <td>{{course.lab_hours}}</td>
                </tr>
             </table>
          </div>
@@ -148,10 +146,10 @@
             <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
          </div>
          <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal">Edit</button>
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-disabled="!radioSelected">Edit</button>
          </div>
          <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12">Remove</button>
+            <button class="btn btn-default preference-btn col-xs-12" ng-disabled="!radioSelected" ng-click="deleteCourse()">Remove</button>
          </div>
       </div>
       <div id="add-modal" class="modal fade" role="dialog">
@@ -160,7 +158,7 @@
                <div class="modal-body">
                   <form>
                      <div class="modal-title">
-                        <h3>Add Section</h3>
+                        <h3>Add Course</h3>
                      </div>
                      <div class="row modal-row">
                         <div class="col-xs-3 col-xs-offset-3">
@@ -234,7 +232,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addCourse()">SAVE</button>
                            </div>
                         </div>
                      </div>

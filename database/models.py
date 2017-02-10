@@ -58,8 +58,8 @@ class Courses(db.Model):
       'lab_workload_units': self.lab_workload_units, 
       'lab_hours': self.lab_hours,
       #'course_sections': self.course_sections,
-      'constraints': self.constraints,
-      'final_schedules': self.final_schedules, 
+      #'constraints': self.constraints,
+      #'final_schedules': self.final_schedules, 
       }
 
 #-- Description: Stores the terms taught by the University
@@ -73,6 +73,14 @@ class Terms(db.Model):
    preferences = db.relationship("FacultyPreferences", backref="term")
    student_planning_data = db.relationship("StudentPlanningData", backref="term")
    published_schedules = db.relationship("PublishedSchedule", backref="term")
+
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id'  : self.id,
+      'name': self.name
+      }
 
 
 #-- Description: Stores all rooms with type and capacity

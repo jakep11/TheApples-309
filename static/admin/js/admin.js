@@ -92,7 +92,7 @@ $scope.deleteUser = function() {
       'Content-Type': "application/json"
     },
     data: {
-      'id': $scope.edit.id
+      'id': $scope.current.id
     }
   }).then(function successCallback(response) {
     console.log("Calling delete user");

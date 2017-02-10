@@ -8,13 +8,13 @@ from web_app import db
 @edit_api.route('/user', methods = ["POST"])
 def edit_user(): 
     data = request.json
-    id = data['id']
-    username = data['username'] 
+    id = data.get('id', None)
+    username = data.get('username', None) 
     password = data.get('password', None)
     print password
-    first_name = data['first_name']
-    last_name = data['last_name']
-    role = data['role'] 
+    first_name = data.get('first_name', None)
+    last_name = data.get('last_name', None)
+    role = data.get('role', None) 
 
     user = User.query.filter_by(id=id).first()
     if user is None:
@@ -39,10 +39,10 @@ def edit_user():
 @edit_api.route('/faculty', methods = ["POST"])
 def edit_faculty():
 	data = request.json
-	id = data['id']
-	first_name = data['first_name']
-	last_name = data['last_name']
-	allowed_work_units = data['allowed_work_units']
+	id = data.get('id', None)
+	first_name = data.get('first_name', None)
+	last_name = data.get('last_name', None)
+	allowed_work_units = data.get('allowed_work_units', None)
 
 	faculty = Faculty.query.filter_by(id=id).first()
 	if faculty is None:
@@ -62,13 +62,13 @@ def edit_faculty():
 @edit_api.route('/course', methods = ["POST"])
 def edit_course():
 	data = request.json
-	id = data['id']
-	number = data['number']
-	major = data['major']
-	lecture_workload_units = data['lecture_workload_units']
-	lecture_hours = data['lecture_hours']
-	lab_workload_units = data['lab_workload_units']
-	lab_hours = data['lab_hours']
+	id = data.get('id', None)
+	number = data.get('number', None)
+	major = data.get('major', None)
+	lecture_workload_units = data.get('lecture_workload_units', None)
+	lecture_hours = data.get('lecture_hours', None)
+	lab_workload_units = data.get('lab_workload_units', None)
+	lab_hours = data.get('lab_hours', None)
 
 	course = Courses.query.filter_by(id=id).first()
 	if course is None:
@@ -94,8 +94,8 @@ def edit_course():
 @edit_api.route('/term', methods = ["POST"])
 def edit_term():
 	data = request.json
-	id = data['id']
-	name = data['name']
+	id = data.get('id', None)
+	name = data.get('name', None)
 
 	term = Terms.query.filter_by(id=id).first()
 	if term is None:
@@ -111,9 +111,9 @@ def edit_term():
 @edit_api.route('/room', methods = ["POST"])
 def edit_room():
 	data = request.json
-	id = data['id']
-	type = data['type']
-	capacity = data['capacity']
+	id = data.get('id', None)
+	type = data.get('type', None)
+	capacity = data.get('capacity', None)
 
 	room = Rooms.query.filter_by(id=id).first()
 	if room is None:
@@ -131,16 +131,16 @@ def edit_room():
 @edit_api.route('/section', methods = ["POST"])
 def edit_section():
 	data = request.json
-	id = data['id']
-	course_id = data['course_id']
-	term_id = data['term_id']
-	faculty_id = data['faculty_id']
-	room_id = data['room_id']
-	number = data['number']
-	section_type = data['section_type']
-	time_start = data['time_start']
-	time_end = data['time_end']
-	days = data['days']
+	id = data.get('id', None)
+	course_id = data.get('course_id', None)
+	term_id = data.get('term_id', None)
+	faculty_id = data.get('faculty_id', None)
+	room_id = data.get('room_id', None)
+	number = data.get('number', None)
+	section_type = data.get('section_type', None)
+	time_start = data.get('time_start', None)
+	time_end = data.get('time_end', None)
+	days = data.get('days', None)
 
 	section = Sections.query.filter_by(id=id).first()
 	if section is None:
@@ -176,8 +176,8 @@ def edit_section():
 @edit_api.route('/equipment', methods = ["POST"])
 def edit_equipment():
 	data = request.json
-	id = data['id']
-	name = data['name']
+	id = data.get('id', None)
+	name = data.get('name', None)
 
 	equipment = Equipment.query.filter_by(id=id).first()
 	if equipment is None:
@@ -193,9 +193,9 @@ def edit_equipment():
 @edit_api.route('/roomEquipment', methods = ["POST"])
 def edit_room_equipment():
 	data = request.json
-	id = data['id']
-	room_id = data['room_id']
-	equipment_id = data['equipment_id']
+	id = data.get('id', None)
+	room_id = data.get('room_id', None)
+	equipment_id = data.get('equipment_id', None)
 
 	re = RoomEquipment.query.filter_by(id=id).first()
 	if re is None:
@@ -215,12 +215,12 @@ def edit_room_equipment():
 @edit_api.route('/scheduleFinal', methods = ["POST"])
 def edit_schedule_final():
 	data = request.json()
-	id = data['id']
-	term_id = data['term_id']
-	course_id = data['course_id']
-	number_sections = data['number_sections']
-	total_enrollment = data['total_enrollment']
-	waitlist = data['waitlist']
+	id = data.get('id', None)
+	term_id = data.get('term_id', None)
+	course_id = data.get('course_id', None)
+	number_sections = data.get('number_sections', None)
+	total_enrollment = data.get('total_enrollment', None)
+	waitlist = data.get('waitlist', None)
 
 	sf = ScheduleFinal.query.filter_by(id=id).first()
 	if sf is None:
@@ -247,13 +247,13 @@ def edit_schedule_final():
 @edit_api.route('/studentPlanningData', methods = ["POST"])
 def edit_student_planning_data():
 	data = request.json()
-	id = data['id']
-	term_id = data['term_id']
-	course_id = data['course_id']
-	number_sections = data['number_sections']
-	capacity = data['capacity']
-	seat_demand = data['seat_demand']
-	unmet_seat_demand = data['unmet_seat_demand']
+	id = data.get('id', None)
+	term_id = data.get('term_id', None)
+	course_id = data.get('course_id', None)
+	number_sections = data.get('number_sections', None)
+	capacity = data.get('capacity', None)
+	seat_demand = data.get('seat_demand', None)
+	unmet_seat_demand = data.get('unmet_seat_demand', None)
 
 	spd = StudentPlanningData.query.filter_by(id=id).first()
 	if spd is None:
@@ -281,9 +281,9 @@ def edit_student_planning_data():
 @edit_api.route('/scheduleInitial', methods = ["POST"])
 def edit_schedule_initial():
 	data = request.json()
-	id = data['id']
-	term_id = data['term_id']
-	section_id = data['section_id']
+	id = data.get('id', None)
+	term_id = data.get('term_id', None)
+	section_id = data.get('section_id', None)
 
 	si = ScheduleInitial.query.filter_by(id=id).first()
 	if si is None:
@@ -303,8 +303,8 @@ def edit_schedule_initial():
 @edit_api.route('/publishedSchedule', methods = ["POST"])
 def edit_published_schedule():
 	data = request.json()
-	id = data['id']
-	term_id = data['term_id']
+	id = data.get('id', None)
+	term_id = data.get('term_id', None)
 
 	ps = PublishedSchedule.query.filter_by(id=id).first()
 	if ps is None:
@@ -321,12 +321,12 @@ def edit_published_schedule():
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():
 	data = request.json()
-	id = data['id']
-	term_id = data['term_id']
-	day = data['day']
-	time_start = data['time_start']
-	time_end = data['time_end']
-	preference = data['preference']
+	id = data.get('id', None)
+	term_id = data.get('term_id', None)
+	day = data.get('day', None)
+	time_start = data.get('time_start', None)
+	time_end = data.get('time_end', None)
+	preference = data.get('preference', None)
 
 	fp = FacultyPreferences.query.filter_by(id=id).first()
 	if fp is None:
@@ -349,11 +349,11 @@ def edit_faculty_preference():
 @edit_api.route('/facultyConstraint', methods = ["POST"])
 def edit_faculty_constraint():
 	data = request.json()
-	id = data['id']
-	term_id = data['term_id']
-	faculty_id = data['faculty_id']
-	course_id = data['course_id']
-	constraint = data['constraint']
+	id = data.get('id', None)
+	term_id = data.get('term_id', None)
+	faculty_id = data.get('faculty_id', None)
+	course_id = data.get('course_id', None)
+	constraint = data.get('constraint', None)
 
 	fc = FacultyConstraint.query.filter_by(id=id).first()
 	if fc is None:
@@ -378,11 +378,11 @@ def edit_faculty_constraint():
 @edit_api.route('/comment', methods = ["POST"])
 def edit_comment():
 	data = request.json
-	id = data['id']
-	term_id = data['term_id']
-	username = data['username']
-	comment = data['comment']
-	time = data['time']
+	id = data.get('id', None)
+	term_id = data.get('term_id', None)
+	username = data.get('username', None)
+	comment = data.get('comment', None)
+	time = data.get('time', None)
 
 	comment = Comments.query.filter_by(id=id).first()
 	if comment is None:
@@ -403,11 +403,11 @@ def edit_comment():
 @edit_api.route('/notification', methods = ["POST"])
 def edit_notification():
 	data = request.json
-	id = data['id']
-	faculty_id = data['faculty_id']
-	message = data['message']
-	unread = data['unread']
-	time = data['time']
+	id = data.get('id', None)
+	faculty_id = data.get('faculty_id', None)
+	message = data.get('message', None)
+	unread = data.get('unread', None)
+	time = data.get('time', None)
 
 	notification = Notifications.query.filter_by(id=id).first()
 	if notification is None:
