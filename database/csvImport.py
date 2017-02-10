@@ -92,12 +92,8 @@ def importHistoricData():
       # This is where the bulk of the information that we care about is held
       if rowNumber > 10:
 
-         print row
-
          if (row[1] == "# of Sections" and row[0] != ''):
             courseNum = row[0]
-            print "course num is " + courseNum
-
 
             # If the course is not in the CSC/CPE Dept, figure out what dept its in. ex: DATA 301
             if len(courseNum) > 4:
@@ -172,15 +168,21 @@ def importHistoricData():
 
    return "all good"
 
-@csvImport_api.route("/importRoomData/<inputFile>", methods = ['GET', 'POST'])
-def importRoomData(inputFile):
-   with open(inputFile, 'rb') as csvfile:
-      reader = csv.reader(csvfile, delimiter=',')
-      for row in reader:
-         column = 0
-         for entry in row:
-            column += 1
+# This function parses through a CSV file containing room data, and adds the information to the database
+@csvImport_api.route("/importRoomData", methods = ['GET', 'POST'])
+def importRoomData():
 
+   inputFile = request.files['file']
+   rowNum = 0
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+
+   for row in reader:
+      column = 0
+      for entry in row:
+         column += 1
+
+         if rowNum != 0:
             # Type
             if column == 1:
                roomType = entry
@@ -193,9 +195,13 @@ def importRoomData(inputFile):
             elif column == 3:
                roomCapacity = entry
 
-         # Create a new student planning data row in the ScheduleFinal database table
-         room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
+               # Create a new student planning data row in the ScheduleFinal database table
+               room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
 
-         # Add new student planning data to database
-         db.session.add(room)
-         db.session.commit()
+               # Add new student planning data to database
+               db.session.add(room)
+               db.session.commit()
+
+      rowNum += 1
+
+   return "all good"
