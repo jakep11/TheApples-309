@@ -1,10 +1,22 @@
 var app = angular.module('TheApples');
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http) {
+    // arrays to hold the values for checked checkboxes used for filtering sections
+    $scope.checkedCourses = {};
+    $scope.checkedInstructors = {};
+    $scope.checkedStartTimes = {};
+    $scope.checkedEndTimes = {};
+
     $scope.backButtonClicked = function () {
         $location.path("/login");
     }
     $scope.applyFilters = function () {
+        // testing checked checkbox values
+        console.log($scope.checkedCourses);
+        console.log($scope.checkedInstructors);
+        console.log($scope.checkedStartTimes);
+        console.log($scope.checkedEndTimes);
+
         $http({
             method: 'POST',
             url: '/filter/sections',
