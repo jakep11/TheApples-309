@@ -1,55 +1,27 @@
 from flask import Blueprint, request, jsonify, json
 import sys
 
+# blueprint url prefix = "/filter"
 filters_api = Blueprint('filters_api', __name__)
 
 from models import *
 
-# grab all courses
-@filters_api.route('/allCourses', methods = ["GET"])
-def all_courses():
-   courses = Courses.query.all()
-   return jsonify([i.serialize for i in courses])
-
-
 # grab filtered courses
-@filters_api.route('/filteredCourses', methods = ["GET"])
+@filters_api.route('/courses', methods = ["GET"])
 def filtered_courses():
    courses = Courses.query.all()
    return jsonify([i.serialize for i in courses])
 
-
-# grab all sections
-@filters_api.route('/allSections', methods = ["GET"])
-def all_sections():
-   sections = Sections.query.all()
-   return jsonify([i.serialize for i in sections])
-
 # grab filtered sections
-@filters_api.route('/filteredSections', methods = ["POST"])
+@filters_api.route('/sections', methods = ["POST"])
 def filtered_sections():
    data = request.json
    id = data['id']
 
-   #temporary JSON for testing purposes
-   # data = {
-   #    'terms': 'Spring',
-   #    'course_ids': [1, 5, 100, 76],
-   #    'instructors': ['Kearns', 'Keen'],
-   #    'startTimes': None,
-   #    'endTimes': None
-   # };
 
-   # terms = data['terms']
-   # course_ids = data['course_ids']
-   # instructors = data['instructors']
-   # startTimes = data['startTimes']
-   # endTimes = data['endTimes']
+   sections = Sections.query.filter(Sections.course_id.in_(id))
 
-   # courses = Courses.query.filter(Courses.id.in_(id))
-   # sections = Sections.query.filter(Sections.course_id.in_(id))
-
-   sections = Sections.query.filter_by(course_id=67)
+   # sections = Sections.query.filter_by(course_id=67)
 
    print(jsonify([i.serialize for i in sections]))
    sys.stdout.flush()

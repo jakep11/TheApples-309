@@ -55,11 +55,8 @@ Things that change dynamically:
                         <div class="form-group">
                             <label for="termSelect">Term:</label>
                             <select class="form-control" id="termSelect">
-                                <option>Fall 2017</option>
-                                <option>Winter 2017</option>
-                                <option>Spring 2017</option>
-                                <option>Summer 2017</option>
-                             </select>
+                                <option ng-repeat="term in terms | orderBy: 'number'">{{term.name}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
 
@@ -217,7 +214,7 @@ Things that change dynamically:
                     </tr>
                     <tr ng-repeat="section in sections | orderBy: 'id'">
                         <th>{{section.course}} {{section.course_num}}</th>
-                        <th>{{section.id}}</th>
+                        <th>{{section.number}}</th>
                         <th>{{section.section_type}}</th>
                         <th>{{section.hours}}</th>
                         <th>{{section.room}}</th>

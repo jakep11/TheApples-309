@@ -7,12 +7,12 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     $scope.applyFilters = function () {
         $http({
             method: 'POST',
-            url: '/view/filteredSections',
+            url: '/filter/sections',
             headers: {
                 'Content-Type': "application/json"
             },
             data: {
-                'id': 67
+                'id': [67, 73]
             }
         }).then(function successCallback(response) {
             $scope.sections = response.data;
