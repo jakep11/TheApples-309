@@ -35,7 +35,7 @@ Things that change dynamically:
         </div>
         <div class="row filter-row">
             <div class="col-xs-2 no-gutter col-xs-offset-10">
-                <a class="btn btn-default view-switch" href="/view/filteredSections" role="button" ng-click="applyFilters()">APPLY FILTERS</a>
+                <a class="btn btn-default view-switch" role="button" ng-click="applyFilters()">APPLY FILTERS</a>
             </div>
         </div>
         <!-- Modal -->
@@ -75,7 +75,7 @@ Things that change dynamically:
         </div>
         <div class="row filter-row">
             <div class="col-xs-2 col-xs-offset-1">
-                <label>Terms1:</label>
+                <label>Terms:</label>
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
@@ -104,19 +104,12 @@ Things that change dynamically:
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
-                            <label>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                        <input type="checkbox" name="instructors-filter" value="Bike"> I have a bike<br>
-                     </label>
+                            <label ng-repeat="instructor in instructors | orderBy: 'last_name'">
+                                <input type="checkbox" name="instructor{{instructor.id}}" value="{{instructor.id}}" ng-model="instructor.id">{{instructor.last_name}}
+                            </label>
+                            <!--<label ng-repeat="section in sections | orderBy: 'number'">-->
+                                <!--<input type="checkbox" name="section{{section.id}}" value="{{section.id}}" ng-model="section.id">{{section.major}} {{section.number}}-->
+                            <!--</label>-->
                         </div>
                     </form>
                 </div>

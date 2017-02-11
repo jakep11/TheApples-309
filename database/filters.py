@@ -31,13 +31,13 @@ def filtered_sections():
    id = data['id']
 
    #temporary JSON for testing purposes
-   data = {
-      'terms': 'Spring',
-      'course_ids': [1, 5, 100, 76],
-      'instructors': ['Kearns', 'Keen'],
-      'startTimes': None,
-      'endTimes': None
-   };
+   # data = {
+   #    'terms': 'Spring',
+   #    'course_ids': [1, 5, 100, 76],
+   #    'instructors': ['Kearns', 'Keen'],
+   #    'startTimes': None,
+   #    'endTimes': None
+   # };
 
    # terms = data['terms']
    # course_ids = data['course_ids']
@@ -45,8 +45,6 @@ def filtered_sections():
    # startTimes = data['startTimes']
    # endTimes = data['endTimes']
 
-   # courses = Courses.query.filter(Courses.id.in_(data['course_ids']))
+   courses = Courses.query.filter(Courses.id.in_(id))
 
-
-   # return jsonify([i.serialize for i in courses])
-   return jsonify(id=id)
+   return jsonify([i.serialize for i in courses])

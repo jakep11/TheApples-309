@@ -7,19 +7,21 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     $scope.applyFilters = function () {
         $http({
             method: 'POST',
-            url: '/view/filteredSchedule',
+            url: '/view/filteredSections',
             headers: {
                 'Content-Type': "application/json"
             },
             data: {
-                'id': 100
+                'id': [100, 150]
             }
         }).then(function successCallback(response) {
+            $scope.sections = response.data;
             console.log("success");
         }, function errorCallback(response) {
             console.log("error");
         });
     }
+    $scope.applyFilters();
     console.log("work?");
     $scope.getCourses = function() {
         console.log("getting courses");
@@ -52,6 +54,21 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
        });
     }
     $scope.getTerms();
+    $scope.getInstructors = function() {
+      $http({
+          method: 'GET',
+          url: '/get/instructors',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      }).then(function successCallback(response) {
+        $scope.instructors = response.data;
+         console.log('success');
+       }, function errorCallback(response) {
+         console.log('error');
+       });
+    }
+    $scope.getInstructors();
 });
 
 app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location, $http) {

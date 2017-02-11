@@ -31,6 +31,14 @@ class Faculty(db.Model):
    constraints = db.relationship("FacultyConstraint", backref="faculty")
    notifications = db.relationship("Notifications", backref="faculty")
 
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id': self.id,
+      'first_name': self.first_name,
+      'last_name': self.last_name,
+      }
 
 #-- Description: Stores the components of each of the courses
 class Components(db.Model):
