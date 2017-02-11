@@ -14,3 +14,8 @@ def get_terms():
 def get_instructors():
 	instructors = Faculty.query.all()
 	return jsonify([i.serialize for i in instructors])
+
+@get_api.route('/sections', methods = ["GET"])
+def get_sections():
+	sections = Sections.query.all()
+	return jsonify([i.serialize for i in sections])

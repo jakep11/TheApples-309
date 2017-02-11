@@ -21,7 +21,6 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
             console.log("error");
         });
     }
-    $scope.applyFilters();
     console.log("work?");
     $scope.getCourses = function() {
         console.log("getting courses");
@@ -69,6 +68,21 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
        });
     }
     $scope.getInstructors();
+    $scope.getSections = function() {
+      $http({
+          method: 'GET',
+          url: '/get/sections',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      }).then(function successCallback(response) {
+        $scope.sections = response.data;
+         console.log('success');
+       }, function errorCallback(response) {
+         console.log('error');
+       });
+    }
+    $scope.getSections();
 });
 
 app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location, $http) {

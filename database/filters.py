@@ -26,7 +26,7 @@ def all_sections():
    return jsonify([i.serialize for i in sections])
 
 # grab filtered sections
-@filters_api.route('/filteredSections', methods = ["POST", "GET"])
+@filters_api.route('/filteredSections', methods = ["POST"])
 def filtered_sections():
    data = request.json
    id = data['id']
