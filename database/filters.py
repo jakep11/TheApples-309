@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify, json
-import sys
 
 # blueprint url prefix = "/filter"
 filters_api = Blueprint('filters_api', __name__)
@@ -16,14 +15,9 @@ def filtered_courses():
 @filters_api.route('/sections', methods = ["POST"])
 def filtered_sections():
    data = request.json
-   id = data['id']
+   ids = data['ids']
 
 
-   sections = Sections.query.filter(Sections.course_id.in_(id))
-
-   # sections = Sections.query.filter_by(course_id=67)
-
-   print(jsonify([i.serialize for i in sections]))
-   sys.stdout.flush()
+   sections = Sections.query.filter(Sections.course_id.in_(ids))
 
    return jsonify([i.serialize for i in sections])

@@ -17,6 +17,36 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         console.log($scope.checkedStartTimes);
         console.log($scope.checkedEndTimes);
 
+        // arrays to hold selected filter values
+        var ids = [];
+        var instructors = [];
+        var startTimes = [];
+        var endTimes = [];
+
+        // collect the selected course_ids and store in ids array
+        angular.forEach($scope.checkedCourses, function(value, key) {
+            this.push(key);
+        }, ids);
+        // collect the selected faculty_ids and store in instructors array
+        angular.forEach($scope.checkedInstructors, function(value, key) {
+            this.push(key);
+        }, instructors);
+        // collect the selected start time values and store in startTimes array
+        angular.forEach($scope.checkedStartTimes, function(value, key) {
+            this.push(key);
+        }, startTimes);
+        // collect the selected end time values and store in endTimes array
+        angular.forEach($scope.checkedEndTimes, function(value, key) {
+            this.push(key);
+        }, endTimes);
+
+        // testing selected values arrays
+        console.log(ids);
+        console.log(ids);
+        console.log(ids);
+        console.log(ids);
+
+        // POST filter data to filters.py and retrieve filtered courses
         $http({
             method: 'POST',
             url: '/filter/sections',
@@ -24,7 +54,10 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
                 'Content-Type': "application/json"
             },
             data: {
-                'id': [67, 73]
+                'ids': ids,
+                'instructors': instructors,
+                'startTimes': startTimes,
+                'endTimes': endTimes
             }
         }).then(function successCallback(response) {
             $scope.sections = response.data;
