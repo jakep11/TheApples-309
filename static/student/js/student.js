@@ -5,7 +5,20 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         $location.path("/login");
     }
     $scope.applyFilters = function () {
-        $location.path("/view/filteredSections");
+        $http({
+            method: 'POST',
+            url: '/view/filteredSchedule',
+            headers: {
+                'Content-Type': "application/json"
+            },
+            data: {
+                'id': 100
+            }
+        }).then(function successCallback(response) {
+            console.log("success");
+        }, function errorCallback(response) {
+            console.log("error");
+        });
     }
     console.log("work?");
     $scope.getCourses = function() {

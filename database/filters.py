@@ -27,10 +27,8 @@ def all_sections():
 # grab filtered sections
 @filters_api.route('/filteredSections', methods = ["POST", "GET"])
 def filtered_sections():
-   # data = request.json
-   # id = data['id']
-   # major = data['major']
-   # number = data['number']
+   data = request.json
+   id = data['id']
 
    #temporary JSON for testing purposes
    data = {
@@ -47,8 +45,8 @@ def filtered_sections():
    # startTimes = data['startTimes']
    # endTimes = data['endTimes']
 
-   courses = Courses.query.filter(Courses.id.in_(data['course_ids']))
+   # courses = Courses.query.filter(Courses.id.in_(data['course_ids']))
 
 
-   return jsonify([i.serialize for i in courses])
-   # return jsonify(id=id, major=major, number=number)
+   # return jsonify([i.serialize for i in courses])
+   return jsonify(id=id)
