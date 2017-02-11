@@ -26,7 +26,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         console.log("getting courses");
       $http({
           method: 'GET',
-          url: '/courses/allCourses',
+          url: '/get/allCourses',
           headers: {
             'Content-Type': 'application/json'
           }
@@ -71,7 +71,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     $scope.getSections = function() {
       $http({
           method: 'GET',
-          url: '/get/sections',
+          url: '/get/allSections',
           headers: {
             'Content-Type': 'application/json'
           }
@@ -90,7 +90,7 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
     $scope.getCourses = function() {
       $http({
           method: 'GET',
-          url: '/courses/allCourses',
+          url: '/get/allCourses',
           headers: {
             'Content-Type': 'application/json'
           }
