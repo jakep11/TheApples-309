@@ -215,125 +215,17 @@ Things that change dynamically:
                         <th>End Time</th>
                         <th>Capacity</th>
                     </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
-                    </tr>
-                    <tr>
-                        <th>CPE 225</th>
-                        <th>01</th>
-                        <th>Lec</th>
-                        <th>2</th>
-                        <th>14-255</th>
-                        <th>Wood</th>
-                        <th>MWF</th>
-                        <th>9:10AM</th>
-                        <th>10:00AM</th>
-                        <th>30</th>
+                    <tr ng-repeat="section in sections | orderBy: 'id'">
+                        <th>{{section.course}} {{section.course_num}}</th>
+                        <th>{{section.id}}</th>
+                        <th>{{section.section_type}}</th>
+                        <th>{{section.hours}}</th>
+                        <th>{{section.room}}</th>
+                        <th>{{section.faculty}}</th>
+                        <th>{{section.days}}</th>
+                        <th>{{section.time_start}}</th>
+                        <th>{{section.time_end}}</th>
+                        <th>{{section.capacity}}</th>
                     </tr>
                 </table>
             </div>

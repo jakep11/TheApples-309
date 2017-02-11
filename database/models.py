@@ -141,14 +141,16 @@ class Sections(db.Model):
       'id': self.id,
       'course': (Courses.query.filter_by(id=self.course_id).first()).major,
       'course_num': (Courses.query.filter_by(id=self.course_id).first()).number,
-      'term_id': self.term_id, #(Terms.query.filter_by(id=self.term_id).first()).name, #term name
-      'faculty': self.faculty_id, #(Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
-      'room': (Courses.query.filter_by(id=self.room_id).first()).number, #room number/id
+      'term_id': (Terms.query.filter_by(id=self.term_id).first()).name, #term name
+      'faculty': (Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
+      'room': (Rooms.query.filter_by(id=self.room_id).first()).number, #room number/id
       'number': self.number,
       'section_type': self.section_type,
       'time_start': self.time_start,
       'time_end': self.time_end,
+      'hours': (self.time_end - self.time_start) / 100,
       'days': self.days,
+      'capacity': (Rooms.query.filter_by(id=self.room_id).first()).capacity
       }
 
 #-- Description: Stores all equipment types that will be used in various rooms

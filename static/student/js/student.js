@@ -12,7 +12,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
                 'Content-Type': "application/json"
             },
             data: {
-                'id': [100, 150]
+                'id': 67
             }
         }).then(function successCallback(response) {
             $scope.sections = response.data;

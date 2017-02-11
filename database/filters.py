@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, json
+import sys
 
 filters_api = Blueprint('filters_api', __name__)
 
@@ -45,6 +46,12 @@ def filtered_sections():
    # startTimes = data['startTimes']
    # endTimes = data['endTimes']
 
-   courses = Courses.query.filter(Courses.id.in_(id))
+   # courses = Courses.query.filter(Courses.id.in_(id))
+   # sections = Sections.query.filter(Sections.course_id.in_(id))
 
-   return jsonify([i.serialize for i in courses])
+   sections = Sections.query.filter_by(course_id=67)
+
+   print(jsonify([i.serialize for i in sections]))
+   sys.stdout.flush()
+
+   return jsonify([i.serialize for i in sections])
