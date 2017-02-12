@@ -1,0 +1,40 @@
+Type,Number,Capacity
+Smart,111,30
+Smart,112,30
+Smart,113,30
+Smart,114,30
+Smart,115,30
+Smart,116,30
+Lab,117,30
+Lab,118,55
+Lab,119,55
+Lab,120,55
+Lab,121,55
+Lecture Hall,122,120
+Lecture Hall,123,120
+Lecture Hall,124,120
+Lecture Hall,126,120
+Lecture Room,127,25
+Lecture Room,128,25
+Lecture Room,129,25
+Lecture Room,130,25
+Lecture Room,131,25
+Group,132,16
+Group,133,16
+Group,134,16
+Group,135,16
+Group,136,16
+Office,137,4
+Office,138,4
+Office,139,4
+Office,140,4
+Auditorium,141,200
+Auditorium,142,200
+Group,143,80
+Group,144,80
+Group,145,80
+Smart,146,80
+Smart,147,80
+Lab,148,80
+Lab,149,80
+Lab,150,80

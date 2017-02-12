@@ -1,4 +1,5 @@
 from web_app import app, db
+import intToTime
 
 #-- Description: Stores information and role type for each user of the system
 class User(db.Model):                     
@@ -31,6 +32,20 @@ class Faculty(db.Model):
    constraints = db.relationship("FacultyConstraint", backref="faculty")
    notifications = db.relationship("Notifications", backref="faculty")
 
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id': self.id,
+      'first_name': self.first_name,
+      'last_name': self.last_name,
+      }
+
+#-- Description: Stores the components of each of the courses
+class Components(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(20))
+   #course = db.relationship("Courses", backref="component")
 
 #-- Description: Stores all courses taught by the University
 class Courses(db.Model):                  
@@ -38,10 +53,10 @@ class Courses(db.Model):
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   component_one = db.relationship("Components", backref="course")
+   component_one = db.Column(db.Integer, db.ForeignKey("components.id"))
    c1_workload_units = db.Column(db.String(5))
    c1_hours = db.Column(db.String(5))
-   component_two = db.relationship("Components", backref="course")
+   component_two = db.Column(db.Integer, db.ForeignKey("components.id"))
    c2_workload_units = db.Column(db.String(5))
    c2_hours = db.Column(db.String(5))
    course_sections = db.relationship("Sections", backref="course")
@@ -60,7 +75,7 @@ class Courses(db.Model):
       'component_one': self.component_one,
       'c1_workload_units ': self.c1_workload_units,
       'c1_hours': self.c1_hours,
-      'component_two': self.component_two,
+      'component_two': self.component_two, 
       'c2_workload_units': self.c2_workload_units,
       'c2_hours': self.c2_hours,
       #'course_sections': self.course_sections,
@@ -68,10 +83,8 @@ class Courses(db.Model):
       #'final_schedules': self.final_schedules,
       }
 
-#-- Description: Stores the components of each of the courses
-class Components(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(20))
+
+
 
 #-- Description: Stores the names of the files that have been imported into the system
 class Files(db.Model):
@@ -102,7 +115,7 @@ class Terms(db.Model):
 #-- Description: Stores all rooms with type and capacity
 class Rooms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
-   number = db.Column(db.Integer)
+   number = db.Column(db.String(32))
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")
@@ -129,14 +142,16 @@ class Sections(db.Model):
       'id': self.id,
       'course': (Courses.query.filter_by(id=self.course_id).first()).major,
       'course_num': (Courses.query.filter_by(id=self.course_id).first()).number,
-      'term_id': self.term_id, #(Terms.query.filter_by(id=self.term_id).first()).name, #term name
-      'faculty_id ': self.faculty_id, #(Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
-      'room_id': self.room_id, #room number/id
+      'term_id': (Terms.query.filter_by(id=self.term_id).first()).name, #term name
+      'faculty': (Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
+      'room': (Rooms.query.filter_by(id=self.room_id).first()).number, #room number/id
       'number': self.number,
       'section_type': self.section_type,
-      'time_start': self.time_start,
-      'time_end': self.time_end,
+      'time_start': intToTime.TwelveHourTime(self.time_start),
+      'time_end': intToTime.TwelveHourTime(self.time_end),
+      'hours': (self.time_end - self.time_start) / 100,
       'days': self.days,
+      'capacity': (Rooms.query.filter_by(id=self.room_id).first()).capacity
       }
 
 #-- Description: Stores all equipment types that will be used in various rooms

@@ -277,8 +277,8 @@ def importCourseData():
       course = models.Courses.query.filter_by(major=courseDept, number=courseNum).first()
       if course is None: # If the course doesn't already exist, add a new course to the table
          course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
-                                 c1_units=lectureUnits, c1_hours=numLectures,
-                                 c2_units=labUnits, c2_hours=numLabs)
+                                 c1_workload_units=lectureUnits, c1_hours=numLectures,
+                                 c2_workload_units=labUnits, c2_hours=numLabs)
          db.session.add(course)
 
    return "successfully uploaded course data"
@@ -295,3 +295,41 @@ def importCourseData():
 #    for row in reader:
 #
 #    return "successfully uploaded cohort data"
+
+@csvImport_api.route("/importFacultyData", methods = ['GET', 'POST'])
+def importFacultyData():
+
+   inputFile = request.files['file']
+   rowNum = 0
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+
+   for row in reader:
+      column = 0
+      for entry in row:
+         column += 1
+
+         if rowNum != 0:
+            # Firstname
+            if column == 1:
+               firstName = entry
+
+            # Lastname
+            elif column == 2:
+               lastName = entry
+
+            # Work units allowed
+            elif column == 3:
+               workUnits = entry
+
+               # Create a new instructor data row in the Faculty database table
+               instructor = models.Faculty(first_name=firstName, last_name=lastName,
+                                     allowed_work_units=workUnits)
+
+               # Add new instructor data to database
+               db.session.add(instructor)
+               db.session.commit()
+
+      rowNum += 1
+
+   return "successfully uploaded faculty data"

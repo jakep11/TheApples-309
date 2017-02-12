@@ -9,3 +9,18 @@ from web_app import db
 def get_terms():
 	terms = Terms.query.all()
 	return jsonify([i.serialize for i in terms])
+
+@get_api.route('/instructors', methods = ["GET"])
+def get_instructors():
+	instructors = Faculty.query.all()
+	return jsonify([i.serialize for i in instructors])
+
+@get_api.route('/allCourses', methods = ["GET"])
+def get_courses():
+	courses = Courses.query.all()
+	return jsonify([i.serialize for i in courses])
+
+@get_api.route('/allSections', methods = ["GET"])
+def get_sections():
+	sections = Sections.query.all()
+	return jsonify([i.serialize for i in sections])
