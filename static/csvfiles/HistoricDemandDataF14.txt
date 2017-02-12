@@ -1,0 +1,408 @@
+Computer Science Department Course Enrollments,,,,,
+,,,CSC,SE,CPE
+,,FTF,,,
+,,Total U,,,
+,,Total G,,,
+,Total Enrolled,2263,2344,2280,6887
+,Total Crs Sect.,66,65,68,199
+,,2014-2015,,,
+,,,,,
+Course,,Fall,Winter,Spring,14-15 AY
+100,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+101,# of Sections,3,10,7,20
+,Total Enrollment,82,349,234,665
+,Last Waitlist,26,50,38,
+,Utilization,91.11,116.33,111.43,110.83
+102,# of Sections,1,4,10,15
+,Total Enrollment,71,140,324,535
+,Last Waitlist,53,11,18,
+,Utilization,236.67,116.67,108.00,118.89
+103,# of Sections,8,3,2,13
+,Total Enrollment,277,91,62,430
+,Last Waitlist,35,1,13,
+,Utilization,115.42,101.11,103.33,110.26
+108,# of Sections,,,,
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+110,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+123,# of Sections,11,0,0,11
+,Total Enrollment,350,,,350
+,Last Waitlist,7,,,
+,Utilization,106.06,0.00,0.00,106.06
+141,# of Sections,2,3,3,8
+,Total Enrollment,65,166,156,387
+,Last Waitlist,6,68,13,
+,Utilization,108.33,184.44,173.33,161.25
+225,# of Sections,5,3,1,9
+,Total Enrollment,183,88,33,304
+,Last Waitlist,35,0,4,
+,Utilization,122.00,97.78,110.00,112.59
+231,# of Sections,4,3,5,12
+,Total Enrollment,129,96,167,392
+,Last Waitlist,35,39,16,
+,Utilization,107.50,106.67,111.33,108.89
+232,# of Sections,2,1,1,4
+,Total Enrollment,67,31,28,126
+,Last Waitlist,6,8,5,
+,Utilization,111.67,103.33,93.33,105.00
+234,# of Sections,0,2,2,4
+,Total Enrollment,,63,64,127
+,Last Waitlist,,21,2,
+,Utilization,0.00,105.00,106.67,105.83
+235,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+236,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+237,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+238,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+300,# of Sections,2,2,2,6
+,Total Enrollment,67,62,54,183
+,Last Waitlist,30,11,9,
+,Utilization,111.67,103.33,90.00,101.67
+301,# of Sections,0,0,0,0
+,Total Enrollment,,0,,0
+,Last Waitlist,,0,,
+,Utilization,0.00,53.33,0.00,26.67
+302,# of Sections,0,1,0,1
+,Total Enrollment,,16,,16
+,Last Waitlist,,0,,
+,Utilization,0.00,53.33,0.00,53.33
+303,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+305,# of Sections,1,1,0,2
+,Total Enrollment,31,30,,61
+,Last Waitlist,16,10,,
+,Utilization,103.33,100.00,0.00,101.67
+307,# of Sections,1,0,2,3
+,Total Enrollment,35,,71,106
+,Last Waitlist,31,,14,
+,Utilization,116.67,0.00,118.33,117.78
+308,# of Sections,1,2,0,3
+,Total Enrollment,36,67,,103
+,Last Waitlist,51,36,,
+,Utilization,120.00,111.67,0.00,114.44
+309,# of Sections,0,1,2,3
+,Total Enrollment,,36,61,97
+,Last Waitlist,,1,0,
+,Utilization,0.00,120.00,101.67,107.78
+310,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+315,# of Sections,3,3,4,10
+,Total Enrollment,103,107,114,324
+,Last Waitlist,12,24,23,
+,Utilization,114.44,118.89,95.00,108.00
+316,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+321,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+323,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+341,# of Sections,,,,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+342,# of Sections,,,,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+348,# of Sections,0,0,0,0
+,Total Enrollment,0,0,,0
+,Last Waitlist,0,0,,
+,Utilization,0.00,0.00,0.00,0.00
+349,# of Sections,2,1,1,4
+,Total Enrollment,127,66,71,264
+,Last Waitlist,35,16,,
+,Utilization,211.67,220.00,236.67,220.00
+350,# of Sections,3,,,3
+,Total Enrollment,83,,,83
+,Last Waitlist,6,,,
+,Utilization,92.22,0.00,0.00,92.22
+353,# of Sections,,,,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+357,# of Sections,3,6,4,13
+,Total Enrollment,90,205,132,427
+,Last Waitlist,4,34,15,
+,Utilization,100.00,113.89,110.00,109.49
+358,# of Sections,,,,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+365,# of Sections,0,2,0,2
+,Total Enrollment,,131,,131
+,Last Waitlist,,29,,
+,Utilization,0.00,218.33,0.00,218.33
+366,# of Sections,0,0,2,2
+,Total Enrollment,,,66,66
+,Last Waitlist,,,16,
+,Utilization,0.00,0.00,110.00,110.00
+369,# of Sections,,,,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+378,# of Sections,0,1,2,3
+,Total Enrollment,,22,61,83
+,Last Waitlist,,26,20,
+,Utilization,0.00,73.33,101.67,92.22
+402,# of Sections,2,0,0,2
+,Total Enrollment,38,,,38
+,Last Waitlist,0,,,
+,Utilization,63.33,0.00,0.00,63.33
+405,# of Sections,0,1,0,1
+,Total Enrollment,,32,,32
+,Last Waitlist,,0,,
+,Utilization,0.00,106.67,0.00,106.67
+406,# of Sections,0,0,1,1
+,Total Enrollment,,,31,31
+,Last Waitlist,,,0,
+,Utilization,0.00,0.00,103.33,103.33
+409,# of Sections,0,2,0,2
+,Total Enrollment,,68,,68
+,Last Waitlist,,7,,
+,Utilization,0.00,113.33,0.00,113.33
+416,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+419,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+430,# of Sections,2,1,2,5
+,Total Enrollment,79,37,65,181
+,Last Waitlist,10,22,10,
+,Utilization,131.67,123.33,108.33,120.67
+431,# of Sections,0,0,1,1
+,Total Enrollment,,,29,29
+,Last Waitlist,,,3,
+,Utilization,0.00,0.00,96.67,96.67
+435,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+436,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+445,# of Sections,2,2,2,6
+,Total Enrollment,58,47,62,167
+,Last Waitlist,10,0,0,
+,Utilization,96.67,78.33,103.33,92.78
+448,# of Sections,1,0,0,1
+,Total Enrollment,20,,,20
+,Last Waitlist,5,,,
+,Utilization,66.67,0.00,0.00,66.67
+450,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+453,# of Sections,1,2,5,8
+,Total Enrollment,32,70,146,248
+,Last Waitlist,36,37,30,
+,Utilization,106.67,116.67,97.33,103.33
+454,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Utilization,0.00,0.00,0.00,0.00
+458,# of Section,1,1,2,4
+,Total Enrollment,81,30,53,164
+,Last Waitlist,0,32,35,67
+,Utilization,270.00,100.00,88.33,136.67
+464,# of Sections,1,1,1,3
+,Total Enrollment,27,87,82,196
+,Last Waitlist,18,20,29,67
+,Utilization,90.00,290.00,273.33,217.78
+465,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+466,#of Sections,,,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+468,# of Sections,0,,,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+469,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+471,# of Sections,2,2,0,4
+,Total Enrollment,71,74,,145
+,Last Waitlist,42,29,,
+,Utilization,118.33,123.33,0.00,120.83
+473,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+474,# of Sections,0,1,0,1
+,Total Enrollment,,35,,35
+,Last Waitlist,,3,,
+,Utilization,0.00,116.67,0.00,116.67
+476,# of Sections,0,0,1,1
+,Total Enrollment,,,52,52
+,Last Waitlist,,,3,
+,Utilization,0.00,0.00,173.33,173.33
+478,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+480,# of Sections,1,1,0,2
+,Total Enrollment,31,34,,65
+,Last Waitlist,38,33,,
+,Utilization,103.33,113.33,0.00,108.33
+481,# of Sections,1,0,0,1
+,Total Enrollment,29,,,29
+,Last Waitlist,0,,,
+,Utilization,96.67,0.00,0.00,96.67
+482,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+484,# of Sections,0,1,1,2
+,Total Enrollment,,35,30,65
+,Last Waitlist,,8,13,
+,Utilization,0.00,116.67,100.00,108.33
+485,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+486,# of Sections,1,0,0,1
+,Total Enrollment,30,,,30
+,Last Waitlist,0,,,
+,Utilization,100.00,0.00,0.00,100.00
+490,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+508,# of Sections,0,0,1,1
+,Total Enrollment,0,,22,22
+,Last Waitlist,,,0,
+,Utilization,0.00,0.00,73.33,73.33
+509,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+515,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+520,# of Sections,0,0,1,1
+,Total Enrollment,,,20,20
+,Last Waitlist,,,0,
+,Utilization,0.00,0.00,66.67,66.67
+521,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+530,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+540,# of Sections,0,1,0,1
+,Total Enrollment,,20,,20
+,Last Waitlist,,0,,
+,Utilization,0.00,66.67,0.00,66.67
+550,# of Sections,0,0,1,1
+,Total Enrollment,,,28,28
+,Last Waitlist,,,2,
+,Utilization,0.00,0.00,93.33,93.33
+556,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+560,# of Sections,1,0,0,1
+,Total Enrollment,21,,,21
+,Last Waitlist,1,,,
+,Utilization,70.00,0.00,0.00,70.00
+564,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+566,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+569,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+570,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+572,# of Sections,0,0,1,1
+,Total Enrollment,,,23,23
+,Last Waitlist,,,0,
+,Utilization,0.00,0.00,76.67,76.67
+580,# of Sections,0,0,0,0
+,Total Enrollment,0,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+581,# of Sections,0,0,0,0
+,Total Enrollment,,,,0
+,Last Waitlist,,,,
+,Utilization,0.00,0.00,0.00,0.00
+582,# of Sections,1,0,0,1
+,Total Enrollment,21,,,21
+,Last Waitlist,3,,,
+,Utilization,70.00,0.00,0.00,70.00
+585,# of Sections,0,0,0,0
+,Total Enrollment,0,,,0
+,Last Waitlist,0,,,
+,Utilization,0.00,0.00,0.00,0.00
+590,# of Sections,1,1,0,3
+,Total Enrollment,11,5,,16
+,Last Waitlist,1,0,,
+,Utilization,36.67,16.67,0.00,17.78
+,,,,,
+,,,,,
+,,,,,
+SUPERVISORY SECTIONS,,,,,
+,,,,,
+491,,,,,
+,# of Sections,,,,
+,Total Enrollment,,,,
+492,,,,,
+,# of Sections,,,,
+,Total Enrollment,,,,
+493,,,,,
+,# of Sections,,,,
+,Total Enrollment,,,,
+494,,,,,
+,# of Sections,,,,
+,Total Enrollment,,,,
+495,,,,,
+,# of Sections,,,,
+,Total Enrollment,,,,
+599,,,,,
+,# of Sections,,,,
+,Total Enrollment,,,,

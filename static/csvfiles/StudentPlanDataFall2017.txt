@@ -1,0 +1,130 @@
+Term,Course College,Course Department,Course ID,Subject Code,Catalog Nbr,Course Title,Component,Requirement Designation,Crosslisted As,Seat Demand,Sections Offered,Enrollment Capacity,Unmet Seat Demand,% Unmet Seat Demand
+Fall Quarter 2017,College of Engineering,Computer Engineering,2888,CPE,431,Programming Languages II,LEC,-,Crosslisted as CPE/CSC 431.,21,0,0,21,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,9662,CPE,428,Computer Vision,LEC,-,Crosslisted as CPE/EE 428.,14,0,0,14,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,10276,CPE,419,Applied Parallel Computing,LEC,-,-,13,0,0,13,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,9359,CPE,416,Autonomous Mobile Robotics,LEC,-,-,10,0,0,10,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,3750,CPE,336,Microprocessor System Design,LEC,-,Crosslisted as CPE/EE 336.,9,0,0,9,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,3718,CPE,328,Discrete Time Signals and Systems,LEC,-,Crosslisted as CPE/EE 328.,5,0,0,5,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,3649,CPE,432,Digital Control Systems,LEC,-,Crosslisted as CPE/EE 432.,5,0,0,5,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2801,CPE,465,Advanced Computer Networks,LEC,-,-,4,0,0,4,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2599,CPE,450,Capstone II,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,3607,CPE,472,Digital Control Systems Laboratory,LAB,-,Crosslisted as CPE/EE 472.,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,8716,CPE,368,Signals and Systems Laboratory,LAB,-,Crosslisted as CPE/EE 368.,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,3745,CPE,441,Computer-Aided Design of VLSI Devices,LEC,-,Crosslisted as CPE 441/EE 431.,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2579,CPE,469,Distributed Systems,LEC,-,Crosslisted as CSC/CPE 469.,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,9663,CPE,485,Autonomous Robot Navigation,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,5376,CPE,488,Microelectronics and Electronics Packaging,LEC,-,Crosslisted as CPE 488/IME 458/MATE 458.,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2821,CPE,569,Distributed Computing,LEC,-,Crosslisted as CPE/CSC 569.,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2572,CPE,108,Accelerated Introduction to Computer Science,LEC,-,Crosslisted as CPE/CSC 108.,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,10799,CPE,422,Network and Web Security,LEC,-,Crosslisted as CPE/CSC 422.,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2890,CPE,454,Implementation of Operating Systems,LEC,-,Crosslisted as CPE/CSC 454.,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2604,CPE,470,Selected Advanced Topics,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2897,CPE,476,Real-Time 3D Computer Graphics Software,LEC,-,Crosslisted as CPE/CSC 476.,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Engineering,2889,CPE,453,Introduction to Operating Systems,LEC,-,Crosslisted as CPE/CSC 453.,123,3,72,51,41.46341463
+Fall Quarter 2017,College of Engineering,Computer Engineering,9420,CPE,350,Capstone I,LEC,-,-,122,3,72,50,40.98360656
+Fall Quarter 2017,College of Engineering,Computer Engineering,9860,CPE,123,Introduction to Computing,LEC,-,Crosslisted as CPE/CSC 123.,14,10,10,4,28.57142857
+Fall Quarter 2017,College of Engineering,Computer Engineering,2870,CPE,464,Introduction to Computer Networks,LEC,-,-,72,2,55,17,23.61111111
+Fall Quarter 2017,College of Engineering,Computer Engineering,2588,CPE,100,Computer Engineering Orientation,LEC,-,-,1,1,150,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2833,CPE,101,Fundamentals of Computer Science,LEC,-,Crosslisted as CPE/CSC 101.,37,3,94,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,9211,CPE,133,Digital Design,LEC,-,Crosslisted as CPE/EE 133.,57,5,160,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2573,CPE,200,Special Problems for Undergraduates,IND,-,-,1,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2859,CPE,202,Data Structures,LEC,-,Crosslisted as CPE/CSC 202.,4,10,333,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2841,CPE,203,Project-Based Object-Oriented Programming and Design,LEC,-,Crosslisted as CPE/CSC 203.,21,2,60,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,9909,CPE,233,Computer Design and Assembly Language Programming,LEC,-,Crosslisted as CPE/EE 233.,54,4,128,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2849,CPE,315,Computer Architecture,LEC,-,-,112,4,125,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,9006,CPE,321,Introduction to Computer Security,LEC,-,Crosslisted as CPE/CSC 321.,14,2,54,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2594,CPE,329,Programmable Logic and Microprocessor-Based Systems Design,LEC,-,Crosslisted as CPE/EE 329.,45,2,64,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2590,CPE,357,Systems Programming,LEC,-,Crosslisted as CPE/CSC 357.,83,3,90,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2578,CPE,400,Special Problems for Undergraduates,IND,-,-,2,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,3732,CPE,439,Introduction to Real-Time Operating Systems,LEC,-,Crosslisted as CPE/EE 439.,17,1,32,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2600,CPE,458,Current Topics in Computer Systems,LEC,-,Crosslisted as CPE/CSC 458.,2,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2601,CPE,461,Senior Project I,LAB,-,-,16,1,18,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2602,CPE,462,Senior Project II,LAB,-,-,16,1,20,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2891,CPE,471,Introduction to Computer Graphics,LEC,-,Crosslisted as CPE/CSC 471.,25,2,60,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2610,CPE,493,Cooperative Education Experience,IND,COOP,-,0,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2580,CPE,494,Cooperative Education Experience,IND,COOP,-,0,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Engineering,2582,CPE,495,Cooperative Education Experience,IND,COOP,-,0,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2788,CSC,225,Introduction to Computer Organization,LEC,-,-,128,0,0,128,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2795,CSC,300,Professional Responsibilities,LEC,-,-,100,0,0,100,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2862,CSC,349,Design and  Analysis of Algorithms,LEC,-,-,64,0,0,64,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10669,CSC,371,Game Design,LEC,-,-,61,0,0,61,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2593,CSC,307,Introduction to Software Engineering,LEC,-,-,39,0,0,39,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2893,CSC,491,Senior Project I,IND,-,-,39,0,0,39,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2882,CSC,308,Software Engineering I,LEC,-,-,30,0,0,30,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2887,CSC,430,Programming Languages I,LEC,-,-,30,0,0,30,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10667,CSC,323,Cryptography Engineering,LEC,-,-,29,0,0,29,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2833,CSC,101,Fundamentals of Computer Science,LEC,-,Crosslisted as CPE/CSC 101.,28,0,0,28,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2590,CSC,357,Systems Programming,LEC,-,Crosslisted as CPE/CSC 357.,28,0,0,28,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2878,CSC,480,Artificial Intelligence,LEC,-,-,25,0,0,25,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2889,CSC,453,Introduction to Operating Systems,LEC,-,Crosslisted as CPE/CSC 453.,24,0,0,24,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2894,CSC,492,Senior Project II,IND,-,-,20,0,0,20,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2592,CSC,305,Individual Software Design and Development,LEC,-,-,18,0,0,18,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2799,CSC,369,Introduction to Distributed Computing,LEC,-,-,18,0,0,18,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9006,CSC,321,Introduction to Computer Security,LEC,-,Crosslisted as CPE/CSC 321.,17,0,0,17,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10277,CSC,436,Mobile Application Development,LEC,-,-,14,0,0,14,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9860,CSC,123,Introduction to Computing,LEC,-,Crosslisted as CPE/CSC 123.,11,0,0,11,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2861,CSC,365,Introduction to Database Systems,LEC,-,-,10,0,0,10,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2888,CSC,431,Programming Languages II,LEC,-,Crosslisted as CPE/CSC 431.,10,0,0,10,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9498,CSC,466,Knowledge Discovery from Data,LEC,-,-,10,0,0,10,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,8695,CSC,402,Software Requirements Engineering,LEC,-,-,9,0,0,9,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2841,CSC,203,Project-Based Object-Oriented Programming and Design,LEC,-,Crosslisted as CPE/CSC 203.,5,0,0,5,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2786,CSC,234,C and Unix,LEC,-,-,5,0,0,5,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2883,CSC,309,Software Engineering II,LEC,-,-,5,0,0,5,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2905,CSC,580,Artificial Intelligence,LEC,-,-,5,0,0,5,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2778,CSC,302,Computers and Society,LEC,GEF,-,4,0,0,4,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2001,CSC,448,Bioinformatics Algorithms,LEC,-,-,4,0,0,4,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2608,CSC,484,User-Centered Interface Design and Development,LEC,-,-,4,0,0,4,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2901,CSC,560,Database Systems,SEM,-,-,4,0,0,4,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10274,CSC,344,Music Programming,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10275,CSC,378,Interactive Entertainment Engineering,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10671,CSC,424,Software Security,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10672,CSC,429,Current Topics in Computer Security,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2779,CSC,435,Introduction to Object Oriented Design Using Graphical User Interfaces,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2886,CSC,468,Database Management Systems Implementation,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2891,CSC,471,Introduction to Computer Graphics,LEC,-,Crosslisted as CPE/CSC 471.,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2897,CSC,476,Real-Time 3D Computer Graphics Software,LEC,-,Crosslisted as CPE/CSC 476.,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10674,CSC,477,Scientific and Information Visualization,LEC,-,-,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2821,CSC,569,Distributed Computing,LEC,-,Crosslisted as CPE/CSC 569.,3,0,0,3,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9794,CSC,171,Introduction to Interactive Entertainment,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2859,CSC,202,Data Structures,LEC,-,Crosslisted as CPE/CSC 202.,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10273,CSC,301,Personal Software Process,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10666,CSC,320,Practical Computer Security for Everyone,LEC,GEF,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2798,CSC,366,"Database Modeling, Design and Implementation",LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9009,CSC,405,Software Construction,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9504,CSC,437,Dynamic Web Development,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9007,CSC,473,Advanced Rendering Techniques,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2806,CSC,474,Computer Animation,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2811,CSC,486,Human-Computer Interaction Theory and Design,LEC,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2903,CSC,515,Computer Architecture,SEM,-,Crosslisted as CPE/CSC 515.,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2902,CSC,550,Operating Systems,SEM,-,-,2,0,0,2,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2789,CSC,235,Fundamentals of Computer Science for Scientists and Engineers I,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2797,CSC,303,Teaching Computer Science,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10665,CSC,311,Computational Art,LEC,GEF,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2596,CSC,409,Current Topics in Software Engineering,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2890,CSC,454,Implementation of Operating Systems,LEC,-,Crosslisted as CPE/CSC 454.,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2600,CSC,458,Current Topics in Computer Systems,LEC,-,Crosslisted as CPE/CSC 458.,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2579,CSC,469,Distributed Systems,LEC,-,Crosslisted as CSC/CPE 469.,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2879,CSC,481,Knowledge Based Systems,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2607,CSC,483,Current Topics in Human-Computer Interaction,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2814,CSC,508,Software Engineering I,SEM,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9499,CSC,521,Computer Security,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2914,CSC,570,Current Topics in Computer Science,SEM,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9360,CSC,572,Computer Graphics,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10278,CSC,582,Introduction to Natural Language Processing,LEC,-,-,1,0,0,1,100
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,10681,CSC,348,Discrete Structures,LEC,-,-,111,1,35,76,68.46846847
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2885,CSC,445,Theory of Computation I,LEC,-,-,101,2,60,41,40.59405941
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2836,CSC,200,Special Problems for Undergraduates,IND,-,-,0,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,3958,CSC,231,Programming for Engineering Students,ACT,-,-,140,5,155,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2831,CSC,232,Computer Programming for Scientists and Engineers,LEC,-,-,27,1,30,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2868,CSC,400,Special Problems,IND,-,-,1,2,65,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2898,CSC,493,Cooperative Education Experience,IND,COOP,-,0,1,35,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2810,CSC,494,Cooperative Education Experience,IND,COOP,-,0,1,1,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2812,CSC,495,Cooperative Education Experience,IND,COOP,-,0,1,25,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2899,CSC,500,Directed Study,IND,-,-,1,2,60,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2915,CSC,590,Thesis Seminar,SEM,-,-,5,1,11,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2916,CSC,593,Cooperative Education Experience,IND,COOP,-,0,1,20,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2823,CSC,594,Cooperative Education Experience,IND,COOP,-,0,1,20,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2826,CSC,595,Cooperative Education Experience,IND,COOP,-,0,1,20,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9785,CSC,596,Thesis I,IND,-,-,5,1,35,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,9786,CSC,597,Thesis II,IND,-,-,2,1,10,0,0
+Fall Quarter 2017,College of Engineering,Computer Sci and Software Eng,2917,CSC,599,Thesis III,IND,-,-,0,1,35,0,0
