@@ -1,8 +1,9 @@
 var app = angular.module('TheApples');
 
-app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http) {
+// service will be used to help transfer between table and calendar view
+app.service("sharedData", function() {
     // lists of time integer values and their corresponding 12 hour time
-    $scope.startTimes = {
+    this.startTimes = {
         700: "7:00AM",
         730: "7:30AM",
         800: "8:00AM",
@@ -34,7 +35,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         2100: "9:00PM",
     };
 
-    $scope.endTimes = {
+    this.endTimes = {
         800: "8:00AM",
         830: "8:30AM",
         900: "9:00AM",
@@ -65,6 +66,12 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         2130: "9:30PM",
         2200: "10:00PM"
     };
+});
+
+app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {
+    // grab list of times from sharedData and populate UI
+    $scope.startTimes = sharedData.startTimes;
+    $scope.endTimes = sharedData.endTimes;
 
     // arrays to hold the values for checked checkboxes used for filtering sections
     $scope.checkedCourses = {};
@@ -72,9 +79,6 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     $scope.checkedStartTimes = {};
     $scope.checkedEndTimes = {};
 
-    $scope.backButtonClicked = function () {
-        $location.path("/login");
-    }
     $scope.applyFilters = function () {
         // testing checked checkbox values
         console.log($scope.checkedCourses);
@@ -85,31 +89,39 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         // arrays to hold selected filter values
         var ids = [];
         var instructors = [];
-        var startTimes = [];
-        var endTimes = [];
+        var time_start = [];
+        var time_end = [];
 
         // collect the selected course_ids and store in ids array
         angular.forEach($scope.checkedCourses, function(value, key) {
-            this.push(key);
+            if (value === true) {
+                this.push(key);
+            }
         }, ids);
         // collect the selected faculty_ids and store in instructors array
         angular.forEach($scope.checkedInstructors, function(value, key) {
-            this.push(key);
+            if (value === true) {
+                this.push(key);
+            }
         }, instructors);
         // collect the selected start time values and store in startTimes array
         angular.forEach($scope.checkedStartTimes, function(value, key) {
-            this.push(key);
-        }, startTimes);
+            if (value === true) {
+                this.push(key);
+            }
+        }, time_start);
         // collect the selected end time values and store in endTimes array
         angular.forEach($scope.checkedEndTimes, function(value, key) {
-            this.push(key);
-        }, endTimes);
+            if (value === true) {
+                this.push(key);
+            }
+        }, time_end);
 
         // testing selected values arrays
-        console.log(ids);
-        console.log(instructors);
-        console.log(startTimes);
-        console.log(endTimes);
+        console.log(ids.length);
+        console.log(instructors.length);
+        console.log(time_start.length);
+        console.log(time_end.length);
 
         // POST filter data to filters.py and retrieve filtered courses
         $http({
@@ -121,8 +133,8 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
             data: {
                 'ids': ids,
                 'instructors': instructors,
-                'startTimes': startTimes,
-                'endTimes': endTimes
+                'time_start': time_start,
+                'time_end': time_end
             }
         }).then(function successCallback(response) {
             $scope.sections = response.data;
@@ -131,7 +143,9 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
             console.log("error");
         });
     }
+
     console.log("work?");
+
     $scope.getCourses = function() {
         console.log("getting courses");
       $http({
@@ -148,6 +162,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
        });
     }
     $scope.getCourses();
+
     $scope.getTerms = function() {
       $http({
           method: 'GET',
@@ -163,6 +178,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
        });
     }
     $scope.getTerms();
+
     $scope.getInstructors = function() {
       $http({
           method: 'GET',
@@ -178,6 +194,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
        });
     }
     $scope.getInstructors();
+
     $scope.getSections = function() {
       $http({
           method: 'GET',
@@ -193,6 +210,11 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
        });
     }
     $scope.getSections();
+
+    // return to login page when back button is clicked
+    $scope.backButtonClicked = function () {
+        $location.path("/login");
+    }
 });
 
 app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location, $http) {
