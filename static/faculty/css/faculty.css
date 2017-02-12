@@ -50,7 +50,7 @@
 }
 
 .cal-listing {
-    margin-top: 20px;
+    margin-top: 8px;
     height: auto;
     border: 0px;
 }
@@ -143,6 +143,11 @@
 .text-center {
     text-align: center;
     margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.text-center-condensed {
+    text-align: center;
     margin-bottom: 20px;
 }
 
