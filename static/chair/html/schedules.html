@@ -14,15 +14,62 @@
          </tr>
          <tr>
             <td>
-               <input type="radio" name="faculty-entry" value="tkearns">
+               <input type="radio" name="faculty-entry" value="tkearns" checked>
             </td>
             <td>Fall</td>
             <td>2014</td>
             <td>12-30-13</td>
             <td>Published</td>
          </tr>
-
       </table>
+      <div class="row">
+         <div class="col-xs-2 col-xs-offset-1">
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">ADD NEW SCHEDULE</button>
+         </div>
+         <div class="col-xs-3">
+            <button class="btn btn-default preference-btn col-xs-12">NEW SCHEDULE FROM PREVIOUS</button>
+         </div>
+         <div class="col-xs-2">
+            <button class="btn btn-default preference-btn col-xs-12">EDIT</button>
+         </div>
+         <div class="col-xs-2">
+            <button class="btn btn-default preference-btn col-xs-12">REMOVE</button>
+         </div>
+      </div>
+      <div id="add-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-title">
+                  <h3>Add Schedule</h3>
+               </div>
+               <div class="modal-body">
+                  <form>
+                     <div class="row form-group">
+                        <div class="col-xs-6">
+                           <label>Quarter</label>
+                        </div>
+                        <div class="col-xs-6">
+                           <select class="form-control">
+                              <option>FALL</option>
+                              <option>WINTER</option>
+                              <option>SPRING</option>
+                              <option>SUMMER</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row form-group">
+                        <div class="col-xs-6">
+                           <label>Year</label>
+                        </div>
+                        <div class="col-xs-6">
+                           <input type="number" class="form-control">
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
    </div>
 
 </body>
