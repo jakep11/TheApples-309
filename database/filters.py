@@ -18,13 +18,19 @@ def filtered_courses():
 @filters_api.route('/sections', methods = ["POST"])
 def filtered_sections():
    data = request.json
+   terms = data['terms']
    ids = data['ids']
    instructors = data['instructors']
    startTimes = data['time_start']
    endTimes = data['time_end']
 
+   # list of filters for the query
    filters = []
 
+   # add term to filter
+   filters.append(Sections.term_id.in_(terms))
+
+   # add any checked filters
    if ids:
       filters.append(Sections.course_id.in_(ids))
    if instructors:
@@ -36,10 +42,12 @@ def filtered_sections():
 
    #sections = None
 
-   if not filters:
-      sections = Sections.query.all()
-   else:
-      sections = Sections.query.filter(and_(*filters)).all()
+   # if not filters:
+   #    sections = Sections.query.all()
+   # else:
+   #    sections = Sections.query.filter(and_(*filters)).all()
+
+   sections = Sections.query.filter(and_(*filters)).all()
 
    print(len(filters))
    sys.stdout.flush()

@@ -77,7 +77,7 @@ Things that change dynamically:
                     <form>
                         <div class="checkbox">
                             <label ng-repeat="term in terms | orderBy: 'number'">
-                                <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="term.id">{{term.name}}
+                                <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
                             </label>
                         </div>
                     </form>
@@ -153,7 +153,7 @@ Things that change dynamically:
                         <th>End Time</th>
                         <th>Capacity</th>
                     </tr>
-                    <tr ng-repeat="section in sections | orderBy: 'id'">
+                    <tr ng-repeat="section in sections | orderBy: ['course_num', 'number']">
                         <th>{{section.course}} {{section.course_num}}</th>
                         <th>{{section.number}}</th>
                         <th>{{section.section_type}}</th>

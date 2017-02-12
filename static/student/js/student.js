@@ -74,6 +74,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     $scope.endTimes = sharedData.endTimes;
 
     // arrays to hold the values for checked checkboxes used for filtering sections
+    $scope.checkedTerms = {};
     $scope.checkedCourses = {};
     $scope.checkedInstructors = {};
     $scope.checkedStartTimes = {};
@@ -81,17 +82,25 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
 
     $scope.applyFilters = function () {
         // testing checked checkbox values
+        console.log($scope.checkedTerms);
         console.log($scope.checkedCourses);
         console.log($scope.checkedInstructors);
         console.log($scope.checkedStartTimes);
         console.log($scope.checkedEndTimes);
 
         // arrays to hold selected filter values
+        var terms = []
         var ids = [];
         var instructors = [];
         var time_start = [];
         var time_end = [];
 
+        // collect the selected course_ids and store in ids array
+        angular.forEach($scope.checkedTerms, function(value, key) {
+            if (value === true) {
+                this.push(key);
+            }
+        }, terms);
         // collect the selected course_ids and store in ids array
         angular.forEach($scope.checkedCourses, function(value, key) {
             if (value === true) {
@@ -118,6 +127,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         }, time_end);
 
         // testing selected values arrays
+        console.log(terms.length)
         console.log(ids.length);
         console.log(instructors.length);
         console.log(time_start.length);
@@ -131,6 +141,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
                 'Content-Type': "application/json"
             },
             data: {
+                'terms': terms,
                 'ids': ids,
                 'instructors': instructors,
                 'time_start': time_start,
