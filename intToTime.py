@@ -6,11 +6,11 @@ TEN_AM = 1000
 # function to convert between integer time value used for database and 12 hour time used in the UI
 def TwelveHourTime(number):
    time = ""
-   timePeriod = " AM"
+   timePeriod = "AM"
 
    # check if time is AM or PM
    if number >= NOON:
-      timePeriod = " PM"
+      timePeriod = "PM"
 
       # convert from 24 hour to 12 hour time
       if number >= ONE_PM:
