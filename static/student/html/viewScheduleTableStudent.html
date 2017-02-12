@@ -55,7 +55,7 @@ Things that change dynamically:
                         <div class="form-group">
                             <label for="termSelect">Term:</label>
                             <select class="form-control" id="termSelect">
-                                <option ng-repeat="term in terms | orderBy: 'number'">{{term.name}}</option>
+                                <option ng-repeat="term in terms | orderBy: '-id'">{{term.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -76,7 +76,7 @@ Things that change dynamically:
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
-                            <label ng-repeat="term in terms | orderBy: 'number'">
+                            <label ng-repeat="term in terms | orderBy: '-id'">
                                 <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
                             </label>
                         </div>
