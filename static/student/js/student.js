@@ -206,6 +206,9 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     }
     $scope.getInstructors();
 
+    //
+    // change this to get all sections for ONLY the current term
+    //
     $scope.getSections = function() {
       $http({
           method: 'GET',

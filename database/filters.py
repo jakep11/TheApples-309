@@ -40,13 +40,6 @@ def filtered_sections():
    if endTimes:
       filters.append(Sections.time_end.in_(endTimes))
 
-   #sections = None
-
-   # if not filters:
-   #    sections = Sections.query.all()
-   # else:
-   #    sections = Sections.query.filter(and_(*filters)).all()
-
    sections = Sections.query.filter(and_(*filters)).all()
 
    print(len(filters))
