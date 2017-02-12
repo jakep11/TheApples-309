@@ -1,4 +1,5 @@
 from web_app import app, db
+import intToTime
 
 #-- Description: Stores information and role type for each user of the system
 class User(db.Model):                     
@@ -146,8 +147,8 @@ class Sections(db.Model):
       'room': (Rooms.query.filter_by(id=self.room_id).first()).number, #room number/id
       'number': self.number,
       'section_type': self.section_type,
-      'time_start': self.time_start,
-      'time_end': self.time_end,
+      'time_start': intToTime.TwelveHourTime(self.time_start),
+      'time_end': intToTime.TwelveHourTime(self.time_end),
       'hours': (self.time_end - self.time_start) / 100,
       'days': self.days,
       'capacity': (Rooms.query.filter_by(id=self.room_id).first()).capacity
