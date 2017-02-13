@@ -66,6 +66,9 @@ app.service("sharedData", function() {
         2130: "9:30PM",
         2200: "10:00PM"
     };
+
+    var lastTerm = null;
+    var lastTermId = null;
 });
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {
@@ -195,6 +198,10 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
             var lastTermId = $scope.terms[lastTerm].id;
             $scope.checkedTerms[lastTermId] = true;
 
+            // add to shared data
+            sharedData.lastTerm = lastTerm;
+            sharedData.lastTermId = lastTermId;
+
             // add the default selected term to be displayed
             $scope.showSelectedTerms();
 
@@ -209,16 +216,21 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     $scope.showSelectedTerms = function() {
         var showTerms = [];
 
+        // check if a term is checked and should be displayed
         angular.forEach($scope.terms, function(term) {
             var termId = term.id;
 
-            // check if a term is checked and should be displayed
             angular.forEach($scope.checkedTerms, function(value, key) {
                 if (key === termId && value === true) {
                     this.push(term);
                 }
             }, showTerms);
         });
+
+        // if no terms are selected, display sections for the current (default) term
+        if (showTerms.length === 0) {
+            showTerms.push($scope.terms[sharedData.lastTerm]);
+        }
 
         $scope.showTerms = showTerms;
     }
