@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, json
-from sqlalchemy import and_
+from sqlalchemy import and_, desc
 import sys
 
 
@@ -21,11 +21,16 @@ def filtered_sections():
    terms = data['terms']
    ids = data['ids']
    instructors = data['instructors']
-   startTimes = data['time_start']
-   endTimes = data['time_end']
+   startTimes = data['timeStart']
+   endTimes = data['timeEnd']
 
    # list of filters for the query
    filters = []
+   queries = []
+
+   # if no terms are selected, select the current (default) term
+   if not terms:
+      terms.append(Terms.query.order_by(desc(Terms.id)).first().id)
 
    # add term to filter
    filters.append(Sections.term_id.in_(terms))

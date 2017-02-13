@@ -7,8 +7,12 @@ thead {
     background-color: #CBE8BA;
 }
 
-th {
-    text-align: center;
+.admin-table>th {
+    text-align: center !important;
+}
+
+.admin-table-2>td {
+    text-align: center !important;
 }
 
 .view-switch {
