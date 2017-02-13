@@ -49,12 +49,12 @@ $scope.createUser = function() {
       else if ($scope.username == "chair" && $scope.password == "123") {
          $rootScope.role = "chair";
          $cookies.put('role', 'chair');
-         $location.path("/chairHome")
+         $location.path("/chairHome");
       }
       else if ($scope.username == "admin" && $scope.password == "123") {
          $rootScope.role = "admin";
          $cookies.put('role', 'admin');
-         $location.path("/accountManager")
+         $location.path("/accountManager");
       }
       else {
          

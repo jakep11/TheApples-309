@@ -24,3 +24,11 @@ def get_courses():
 def get_sections():
 	sections = Sections.query.all()
 	return jsonify([i.serialize for i in sections])
+
+@get_api.route('/filterCourses', methods = ["POST"])
+def get_filtered_courses():
+	data = request.json
+	number = data['number']
+
+	courses = Courses.query.filter(Courses.number.like(number + '%')).all()
+	return jsonify([i.serialize for i in courses])

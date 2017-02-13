@@ -8,124 +8,40 @@
             <label for="termSelect">Select day:</label>
         </div>
         <div class="col-xs-1 no-padding">
-            <select class="form-control selector" id="termSelect">
-                                <option>Monday</option>
+            <select class="form-control selector" id="termSelect" ng-model="dayChoice" ng-change="dayChanged()">
+                                <option ng-selected="true">Monday</option>
                                 <option>Tuesday</option>
                                 <option>Wednesday</option>
                                 <option>Thursday</option>
                                 <option>Friday</option>
-                             </select>
+            </select>
         </div>
     </div>
     <div class="row table-row">
-        <!------------LEFT TABLE------------->
+        <!------------LEFT TABLE--------------> 
         <div class="col-xs-5 col-xs-offset-1 table-row pref-table-1">
             <table class="table table-striped">
                 <tr class="success">
                     <th style="text-align: left">Class</th>
                     <th style="text-align: left">Teaching Ability</th>
                 </tr>
-                <tr>
-                    <td>CPE 308 Software Engineering I</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
+                <tr ng-repeat="course in courses | orderBy: 'number'">
+                    <td>{{course.major}} {{course.number}} {{course.course_name}}</td>
+                    <td><select class="form-control selector" id="termSelect" ng-model="preference">
+                        <option>Most wanted</option>
+                        <option>Able to teach</option>
+                        <option ng-selected="true">Cannot teach</option>
+                        </select>
+                    </td>
                 </tr>
-                <tr>
-                    <td>CPE 309 Software Engineering II</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 300 Professional Responsibilities</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 308 Software Engineering I</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 309 Software Engineering II</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 300 Professional Responsibilities</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 308 Software Engineering I</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 309 Software Engineering II</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 300 Professional Responsibilities</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 308 Software Engineering I</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 309 Software Engineering II</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
-                <tr>
-                    <td>CPE 300 Professional Responsibilities</td>
-                    <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-                </tr>
+
+
+    
             </table>
 
 
         </div>
-        <!------------RIGHT TABLE------------->
+        <!------------RIGHT TABLE-------------->
         <div class="col-xs-5 col-xs-offset-1 table-row pref-table-2">
             <table class="table table-striped">
                 <tr class="success">
@@ -589,14 +505,16 @@
         </div>
     </div>
     <div class="row">
+      <form ng-submit="plusButtonClicked()">
         <div class="col-xs-5 col-xs-offset-1 form-group-c table-row" style="padding-right: 40px;">
-            <input class="form-control" style="padding-right: 0px;" id="search-courses" placeholder="Search a course">
+            <input class="form-control" type="text" style="padding-right: 0px;" id="search-courses" placeholder="Search a course" ng-model="number">
         </div>
         <div class="col-xs-1 form-inline" style="text-align: left; margin-top: -18px; padding-left: 0px; margin-left: -35px;">
-            <button name="plus-btn" href="#/" ng-click="plusButtonClicked()" class="plus-btn" style="padding-left: 0px;">
+            <button class="plus-btn" type="submit" style="padding-left: 0px;">
                   <img class="plusBtn" src="static/images/plusbtn.png" />
             </button>
         </div>
+      </form>
     </div>
     <div class="row bottom-row">
         <div class="row text-center" style="display:inline;">
@@ -609,7 +527,7 @@
                     <input type="text" class="form-control work-input" id="min-workload" placeholder="0.00">
                 </div>
             </div>
-            <div class="col-xs-3" style="padding-left: 30px;">
+            <div class="col-xs-3" style="padding-right: 0px;padding-left: 0px;">
                 <div class="form-group-b form-inline">
                     <label for="max-workload">Max:</label>
                     <input type="text" class="form-control work-input" id="max-workload" placeholder="0.00">
