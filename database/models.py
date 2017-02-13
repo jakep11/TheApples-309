@@ -39,6 +39,7 @@ class Faculty(db.Model):
       'id': self.id,
       'first_name': self.first_name,
       'last_name': self.last_name,
+      'allowed_work_units' : self.allowed_work_units
       }
 
 #-- Description: Stores the components of each of the courses
