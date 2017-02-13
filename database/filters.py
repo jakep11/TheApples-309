@@ -21,8 +21,8 @@ def filtered_sections():
    terms = data['terms']
    ids = data['ids']
    instructors = data['instructors']
-   startTimes = data['time_start']
-   endTimes = data['time_end']
+   startTimes = data['timeStart']
+   endTimes = data['timeEnd']
 
    # list of filters for the query
    filters = []
