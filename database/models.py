@@ -41,24 +41,13 @@ class Faculty(db.Model):
       'last_name': self.last_name,
       }
 
-#-- Description: Stores the components of each of the courses
-class Components(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(20))
-   #course = db.relationship("Courses", backref="component")
-
 #-- Description: Stores all courses taught by the University
 class Courses(db.Model):                  
    id = db.Column(db.Integer, primary_key=True)
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   component_one = db.Column(db.Integer, db.ForeignKey("components.id"))
-   c1_workload_units = db.Column(db.String(5))
-   c1_hours = db.Column(db.String(5))
-   component_two = db.Column(db.Integer, db.ForeignKey("components.id"))
-   c2_workload_units = db.Column(db.String(5))
-   c2_hours = db.Column(db.String(5))
+   components = db.relationship("Components", backref="course")
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
@@ -71,19 +60,12 @@ class Courses(db.Model):
       'id'         : self.id,
       'number': self.number,
       'major': self.major,
-      'course_name': self.course_name,
-      'component_one': self.component_one,
-      'c1_workload_units ': self.c1_workload_units,
-      'c1_hours': self.c1_hours,
-      'component_two': self.component_two, 
-      'c2_workload_units': self.c2_workload_units,
-      'c2_hours': self.c2_hours,
+      'course_name': self.course_name
+      #'components': self.components,
       #'course_sections': self.course_sections,
       #'constraints': self.constraints,
       #'final_schedules': self.final_schedules,
       }
-
-
 
 
 #-- Description: Stores the names of the files that have been imported into the system
@@ -231,7 +213,10 @@ class Notifications(db.Model):
    unread = db.Column(db.SmallInteger)
    time = db.Column(db.Time)
 
-
-
-
-
+# -- Description: Stores the components of each of the courses
+class Components(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(20))
+   course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+   workload_units = db.Column(db.String(5))
+   hours = db.Column(db.String(5))

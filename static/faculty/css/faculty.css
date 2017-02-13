@@ -49,9 +49,21 @@
     margin-bottom: 0px;
 }
 
-.fac-pref-table {
+.fac-calendar-table td {
     border-top: none !important;
     border-bottom: none !important;
+    border-left: .5px solid #dddddd !important;
+    border-right: .5px solid #dddddd !important;
+    text-align: center;
+}
+
+.fac-calendar-table th {
+    border-left: .5px solid #dddddd !important;
+    border-right: .5px solid #dddddd !important;
+    border-top: .5px solid #dddddd !important;
+    border-bottom: .5px solid #dddddd !important;
+    text-align: center;
+    width: 250px;
 }
 
 .cal-listing {
@@ -121,6 +133,12 @@
     margin-left: 50px;
 }
 
+.pref-table-1 th,
+td {
+    border-left: 0px;
+    border-right: 0px;
+}
+
 .pref-table-2 {
     height: 400px;
     overflow: auto;
@@ -130,8 +148,8 @@
 
 .pref-table-2 th,
 td {
-    border-left: .5px solid #dddddd;
-    border-right: .5px solid #dddddd;
+    border-left: none;
+    border-right: none;
 }
 
 .modal-title {
