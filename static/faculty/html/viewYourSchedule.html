@@ -1,12 +1,12 @@
 <div class="container-fluid no-gutter">
     <div class="row form-inline text-center-condensed">
-        <select class="form-control" id="quarterSelect">
+        <select class="form-control term-selector" id="quarterSelect">
                 <option>Fall</option>
                 <option>Winter</option>
                 <option>Spring</option>
                 <option>Summer</option>
             </select>
-        <select class="form-control" id="quarterSelect">
+        <select class="form-control term-selector" id="quarterSelect">
                 <option>2017</option>
                 <option>2018</option>
                 <option>2019</option>
@@ -54,15 +54,15 @@
     <!--    calendar display-->
     <!--   Tables   -->
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 cal-listing">
-            <table class="table table-striped table-bordered">
-                <tr class="active">
-                    <th style="width: 100px;"> </th>
-                    <th style="width: 250px; text-align: center;">Mon</th>
-                    <th style="width: 250px; text-align: center;">Tue</th>
-                    <th style="width: 250px; text-align: center;">Wed</th>
-                    <th style="width: 250px; text-align: center;">Thu</th>
-                    <th style="width: 250px; text-align: center;">Fri</th>
+        <div class="col-xs-10 col-xs-offset-1">
+            <table class="table table-striped pref-table-2">
+                <tr class="active" style="border-top: .5px solid #dddddd; border-bottom: .5px solid #dddddd;">
+                    <th style="text-align:center; width: 100px;"> </th>
+                    <th style="text-align:center; width: 250px;">Mon</th>
+                    <th style="text-align:center; width: 250px;">Tue</th>
+                    <th style="text-align:center; width: 250px;">Wed</th>
+                    <th style="text-align:center; width: 250px;">Thu</th>
+                    <th style="text-align:center; width: 250px;">Fri</th>
                 </tr>
                 <tr>
                     <td>7:00 AM</td>
@@ -91,7 +91,7 @@
                 <tr>
                     <td>8:30 AM</td>
                     <td>---</td>
-                    <td>---</td>
+                    <td class="success">CPE 101-03</td>
                     <td>---</td>
                     <td>---</td>
                     <td>---</td>
@@ -99,7 +99,7 @@
                 <tr>
                     <td>9:00 AM</td>
                     <td>---</td>
-                    <td>---</td>
+                    <td class="success">14-225</td>
                     <td>---</td>
                     <td>---</td>
                     <td>---</td>
@@ -107,7 +107,7 @@
                 <tr>
                     <td>9:30 AM</td>
                     <td>---</td>
-                    <td>---</td>
+                    <td class="success">Lecture</td>
                     <td>---</td>
                     <td>---</td>
                     <td>---</td>
@@ -149,7 +149,9 @@
                     <td>---</td>
                     <td>---</td>
                     <td>---</td>
-                    <td>---</td>
+                    <td class="success">
+                        <p id="reportBug"><a data-toggle="modal" data-target="#myModal">+ View All</a></p>
+                    </td>
                     <td>---</td>
                 </tr>
                 <tr>
@@ -304,7 +306,7 @@
                     <td>---</td>
                     <td>---</td>
                 </tr>
-                <tr>
+                <tr style="border-bottom: .5px solid #dddddd;">
                     <td>10:00 PM</td>
                     <td>---</td>
                     <td>---</td>

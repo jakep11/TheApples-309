@@ -61,6 +61,7 @@
 .cal-listing {
     margin-top: 20px;
     height: auto;
+    text-align: center;
 }
 
 
@@ -83,7 +84,7 @@
     margin-top: -3px;
 }
 
-sfsdf textarea {
+.textarea {
     min-height: 110px;
 }
 
