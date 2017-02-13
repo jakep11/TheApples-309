@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, json
-from sqlalchemy import and_
+from sqlalchemy import and_, desc
 import sys
 
 
@@ -18,13 +18,24 @@ def filtered_courses():
 @filters_api.route('/sections', methods = ["POST"])
 def filtered_sections():
    data = request.json
+   terms = data['terms']
    ids = data['ids']
    instructors = data['instructors']
-   startTimes = data['time_start']
-   endTimes = data['time_end']
+   startTimes = data['timeStart']
+   endTimes = data['timeEnd']
 
+   # list of filters for the query
    filters = []
+   queries = []
 
+   # if no terms are selected, select the current (default) term
+   if not terms:
+      terms.append(Terms.query.order_by(desc(Terms.id)).first().id)
+
+   # add term to filter
+   filters.append(Sections.term_id.in_(terms))
+
+   # add any checked filters
    if ids:
       filters.append(Sections.course_id.in_(ids))
    if instructors:
@@ -34,12 +45,7 @@ def filtered_sections():
    if endTimes:
       filters.append(Sections.time_end.in_(endTimes))
 
-   #sections = None
-
-   if not filters:
-      sections = Sections.query.all()
-   else:
-      sections = Sections.query.filter(and_(*filters)).all()
+   sections = Sections.query.filter(and_(*filters)).all()
 
    print(len(filters))
    sys.stdout.flush()

@@ -55,7 +55,7 @@ Things that change dynamically:
                         <div class="form-group">
                             <label for="termSelect">Term:</label>
                             <select class="form-control" id="termSelect">
-                                <option ng-repeat="term in terms | orderBy: 'number'">{{term.name}}</option>
+                                <option ng-repeat="term in terms | orderBy: '-id'">{{term.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -76,8 +76,8 @@ Things that change dynamically:
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
-                            <label ng-repeat="term in terms | orderBy: 'number'">
-                                <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="term.id">{{term.name}}
+                            <label ng-repeat="term in terms | orderBy: '-id'">
+                                <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
                             </label>
                         </div>
                     </form>
@@ -133,39 +133,41 @@ Things that change dynamically:
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <h3>Spring Quarter</h3>
+        <div ng-repeat="term in showTerms | orderBy: '-id'">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>{{term.name}}</h3>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 listing">
-                <table class="table table-striped">
-                    <tr class="success">
-                        <th>Course</th>
-                        <th>Section</th>
-                        <th>Type</th>
-                        <th>Hours</th>
-                        <th>Room</th>
-                        <th>Instructor</th>
-                        <th>Days</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Capacity</th>
-                    </tr>
-                    <tr ng-repeat="section in sections | orderBy: 'id'">
-                        <th>{{section.course}} {{section.course_num}}</th>
-                        <th>{{section.number}}</th>
-                        <th>{{section.section_type}}</th>
-                        <th>{{section.hours}}</th>
-                        <th>{{section.room}}</th>
-                        <th>{{section.faculty}}</th>
-                        <th>{{section.days}}</th>
-                        <th>{{section.time_start}}</th>
-                        <th>{{section.time_end}}</th>
-                        <th>{{section.capacity}}</th>
-                    </tr>
-                </table>
+            <div class="row">
+                <div class="col-xs-12 listing">
+                    <table class="table table-striped">
+                        <tr class="success">
+                            <th>Course</th>
+                            <th>Section</th>
+                            <th>Type</th>
+                            <th>Hours</th>
+                            <th>Room</th>
+                            <th>Instructor</th>
+                            <th>Days</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Capacity</th>
+                        </tr>
+                        <tr ng-repeat="section in sections | orderBy: ['course_num', 'number']">
+                            <th>{{section.course}} {{section.course_num}}</th>
+                            <th>{{section.number}}</th>
+                            <th>{{section.section_type}}</th>
+                            <th>{{section.hours}}</th>
+                            <th>{{section.room}}</th>
+                            <th>{{section.faculty}}</th>
+                            <th>{{section.days}}</th>
+                            <th>{{section.time_start}}</th>
+                            <th>{{section.time_end}}</th>
+                            <th>{{section.capacity}}</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

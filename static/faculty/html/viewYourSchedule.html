@@ -1,0 +1,320 @@
+<div class="container-fluid no-gutter">
+    <div class="row form-inline text-center-condensed">
+        <select class="form-control term-selector" id="quarterSelect">
+                <option>Fall</option>
+                <option>Winter</option>
+                <option>Spring</option>
+                <option>Summer</option>
+            </select>
+        <select class="form-control term-selector" id="quarterSelect">
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+            </select>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body" style="text-align: center">
+                    <h3 class="modal-title">Feedback</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="userID">User ID:</label>
+                        <input class="form-control" id="userID">
+                    </div>
+                    <div class="form-group">
+                        <label for="termSelect">Term:</label>
+                        <select class="form-control" id="termSelect">
+                                <option>Fall 2017</option>
+                                <option>Winter 2017</option>
+                                <option>Spring 2017</option>
+                                <option>Summer 2017</option>
+                             </select>
+                    </div>
+                    <div class="form-group">
+
+                        <textarea class="form-control noresize" id="encCss" placeholder="Enter feedback here"></textarea>
+                    </div>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">CANCEL</button>
+                    <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--    calendar display-->
+    <!--   Tables   -->
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <table class="table table-striped pref-table-2">
+                <tr class="active" style="border-top: .5px solid #dddddd; border-bottom: .5px solid #dddddd;">
+                    <th style="text-align:center; width: 100px;"> </th>
+                    <th style="text-align:center; width: 250px;">Mon</th>
+                    <th style="text-align:center; width: 250px;">Tue</th>
+                    <th style="text-align:center; width: 250px;">Wed</th>
+                    <th style="text-align:center; width: 250px;">Thu</th>
+                    <th style="text-align:center; width: 250px;">Fri</th>
+                </tr>
+                <tr>
+                    <td>7:00 AM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>7:30 AM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>8:00 AM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>8:30 AM</td>
+                    <td>---</td>
+                    <td class="success">CPE 101-03</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>9:00 AM</td>
+                    <td>---</td>
+                    <td class="success">14-225</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>9:30 AM</td>
+                    <td>---</td>
+                    <td class="success">Lecture</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>10:00 AM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>10:30 AM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>11:00 AM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>11:30 AM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>12:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td class="success">
+                        <p id="reportBug"><a data-toggle="modal" data-target="#myModal">+ View All</a></p>
+                    </td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>12:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>1:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>1:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>2:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>2:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>3:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>3:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>4:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>4:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>5:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>5:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>6:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>6:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>7:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>7:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>8:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>8:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>9:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>9:30 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+                <tr style="border-bottom: .5px solid #dddddd;">
+                    <td>10:00 PM</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -49,15 +49,16 @@
     margin-bottom: 0px;
 }
 
-.cal-listing {
-    margin-top: 20px;
-    height: auto;
-    border: 0px;
+.fac-pref-table {
+    border-top: none !important;
+    border-bottom: none !important;
 }
 
-.table th,
-.table td {
-    border-top: none !important;
+.cal-listing {
+    margin-top: 8px;
+    height: auto;
+    text-align: center;
+    border-top: none;
 }
 
 .info-table {
@@ -69,10 +70,6 @@
 
 .label-row {
     font-weight: bold !important;
-}
-
-.termSelect {
-    width: 150px;
 }
 
 .dropdown-row {
@@ -87,7 +84,6 @@
     height: 200px;
     overflow: auto;
     padding: 0px !important;
-    border: 1px solid #A7A7A7;
 }
 
 .no-padding {
@@ -106,15 +102,11 @@
 }
 
 .pref-table-2>th {
-    text-align: center;
+    text-align: center !important;
 }
 
 .pref-table-2>td {
-    text-align: center;
-}
-
-.selector {
-    width: 120px;
+    text-align: center !important;
 }
 
 .checkbox {
@@ -122,7 +114,7 @@
 }
 
 .pref-table-1 {
-    height: 500px !important;
+    height: 400px !important;
     overflow: auto;
     padding: 0px !important;
     text-align: left;
@@ -130,10 +122,16 @@
 }
 
 .pref-table-2 {
-    height: 500px;
+    height: 400px;
     overflow: auto;
     padding: 0px !important;
-    text-align: center;
+    text-align: center !important;
+}
+
+.pref-table-2 th,
+td {
+    border-left: .5px solid #dddddd;
+    border-right: .5px solid #dddddd;
 }
 
 .modal-title {
@@ -143,6 +141,11 @@
 .text-center {
     text-align: center;
     margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.text-center-condensed {
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -205,4 +208,15 @@
 .plusBtn {
     width: 27px;
     height: 27px;
+}
+
+.select-label {
+    font-size: 120%;
+    font-weight: 200;
+    margin: 5px;
+}
+
+.term-selector {
+    width: 100px !important;
+    font-size: 120%;
 }

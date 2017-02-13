@@ -216,10 +216,11 @@ def importCourseData():
 
       print row
       column = 0
-      lectureUnits = 0
-      labUnits = 0
-      numLabs = 0
-      numLectures = 0
+      # lectureUnits = 0
+      # labUnits = 0
+      # numLabs = 0
+      # numLectures = 0
+      comps = 0
 
       for entry in row:
          column += 1
@@ -243,43 +244,77 @@ def importCourseData():
             # Units
             if attribute == "unit":
 
-               if "lect" in prev:
-                  lectureUnits = value
-
-               # elif "activity" in prev:
-               #   print "act"
-
-               # elif "supv" in prev:
-               #   print "sup"
-
-               elif "lab" in prev:
-                  labUnits = value
+               if comps == 1:
+                  c1_units = value
+                  c1 = component
+               else:
+                  c2_units = value
+                  c2 = component
 
             # Activity
-            #elif attribute == "activity":
-            #   print ""
+            elif attribute == "activity":
+               comps += 1
+               c1_hours = value
+
+            # add activity component if it does not currently exist
+            component = models.Components.query.filter_by(name="Activity").first()
+            if component is None:
+               component = models.Components(name="Activity")
+               db.session.add(component)
 
             # Supervisory
-            #elif attribute == "supv":
-            #   print ""
+            elif attribute == "supv":
+               comps += 1
+               c1_hours = value
+
+            # add supervisory component if it does not currently exist
+            component = models.Components.query.filter_by(name="Supervisory").first()
+            if component is None:
+               component = models.Components(name="Supervisory")
+               db.session.add(component)
 
             # Lecture
             elif attribute == "lect":
-               numLectures = value
+               comps += 1
+               if comps == 1:
+                  c1_hours = value
+               else:
+                  c2_hours = value
+
+               # add lecture component if it does not currently exist
+               component = models.Components.query.filter_by(name="Lecture").first()
+               if component is None:
+                  component = models.Components(name="Lecture")
+                  db.session.add(component)
 
             # Lab
             elif attribute == "lab":
-               numLabs = value
+               comps += 1
+               if comps == 1:
+                  c1_hours = value
+               else:
+                  c2_hours = value
 
-            prev = attribute
+               # add lab component if it does not currently exist
+               component = models.Components.query.filter_by(name="Lab").first()
+               if component is None:
+                  component = models.Components(name="Lab")
+                  db.session.add(component)
 
+      print "adding course"
       # Add the new course to the database if it is not currently in there
-      course = models.Courses.query.filter_by(major=courseDept, number=courseNum).first()
+      course = models.Courses.query.filter_by(major=courseDept, number=courseNum,
+                                              course_name=courseName).first()
       if course is None: # If the course doesn't already exist, add a new course to the table
-         course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
-                                 c1_workload_units=lectureUnits, c1_hours=numLectures,
-                                 c2_workload_units=labUnits, c2_hours=numLabs)
+         if comps == 1:
+            course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
+                                    component_one=c1, c1_workload_units=c1_units, c1_hours=c1_hours)
+         else:
+            course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
+                                    component_one= c1, c1_workload_units=c1_units, c1_hours=c1_hours,
+                                    component_two=c2, c2_workload_units=c2_units, c2_hours=c2_hours)
          db.session.add(course)
+      db.session.commit()
 
    return "successfully uploaded course data"
 
