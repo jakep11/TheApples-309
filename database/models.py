@@ -124,7 +124,7 @@ class Sections(db.Model):
       'id': self.id,
       'course': (Courses.query.filter_by(id=self.course_id).first()).major,
       'course_num': (Courses.query.filter_by(id=self.course_id).first()).number,
-      'term_id': (Terms.query.filter_by(id=self.term_id).first()).name, #term name
+      'term_id': self.term_id,
       'faculty': (Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
       'room': (Rooms.query.filter_by(id=self.room_id).first()).number, #room number/id
       'number': self.number,
