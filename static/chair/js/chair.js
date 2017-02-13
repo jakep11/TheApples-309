@@ -20,7 +20,7 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
     $scope.getCourses = function() {
       $http({
           method: 'GET',
-          url: '/courses/allCourses',
+          url: '/get/allCourses',
           headers: {
             'Content-Type': 'application/json'
           }
@@ -173,7 +173,8 @@ app.service('fileUpload', ['$http', function ($http) {
 }]);
 
 
-app.controller('importData', ['$scope', 'fileUpload', function($scope, fileUpload){
+app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function($scope, $rootScope, fileUpload){
+    $rootScope.bcrumb1 = 'Import Data';
     $scope.uploadFile = function(){
         var file = $scope.myFile;
 

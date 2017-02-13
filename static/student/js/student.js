@@ -72,6 +72,7 @@ app.service("sharedData", function() {
 });
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {
+    $rootScope.bcrumb1 = "Published Schedules";
     // grab list of times from sharedData and populate UI
     $scope.startTimes = sharedData.startTimes;
     $scope.endTimes = sharedData.endTimes;
@@ -277,7 +278,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
 });
 
 app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location, $http) {
-
+    $rootScope.bcrumb1 = "Published Schedules";
     $scope.getCourses = function() {
       $http({
           method: 'GET',

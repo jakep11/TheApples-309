@@ -94,8 +94,10 @@ $scope.createUser = function() {
                $location.path("/viewScheduleTableStudent")
             }
             $rootScope.user = data.first_name + " " + data.last_name;
+            $rootScope.user_id = data.id;
             $cookies.put('role', $rootScope.role);
             $cookies.put('user', $rootScope.user);
+            $cookies.put('user_id', $rootScope.user_id);
 
 
 

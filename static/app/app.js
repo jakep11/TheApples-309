@@ -8,6 +8,7 @@ var app = angular.module('TheApples', ['ngRoute',  'ui.bootstrap', 'ngCookies'])
 app.run(function($rootScope, $cookies) {
   $rootScope.role = $cookies.get('role');
   $rootScope.user = $cookies.get('user');
+  $rootScope.user_id = $cookies.get('user_id');
   //Resetting the breadcrumbs when view changes
   $rootScope.$on("$locationChangeStart", function(event, next, current) { 
         $rootScope.bcrumb1Link = null;
@@ -77,16 +78,16 @@ app.config(['$routeProvider', function($routeProvider) {
        controller: "preferences",
        //css: "static/faculty/css/faculty.css"
     })
-    .when('/viewScheduleCalendar', {
-       templateUrl: 'static/faculty/html/viewScheduleCalendar.html',
-       controller: "viewScheduleCalendar",
-       //css: "static/faculty/css/faculty.css"
-    })
-    .when('/viewScheduleTable', {
-       templateUrl: 'static/faculty/html/viewScheduleTable.html',
-       controller: "viewScheduleTable",
-       //css: "static/faculty/css/faculty.css"
-    })
+    // .when('/viewScheduleCalendar', {
+    //    templateUrl: 'static/faculty/html/viewScheduleCalendar.html',
+    //    controller: "viewScheduleCalendar",
+    //    //css: "static/faculty/css/faculty.css"
+    // })
+    // .when('/viewScheduleTable', {
+    //    templateUrl: 'static/faculty/html/viewScheduleTable.html',
+    //    controller: "viewScheduleTable",
+    //    //css: "static/faculty/css/faculty.css"
+    // })
     .when('/viewYourSchedule', {
        templateUrl: 'static/faculty/html/viewYourSchedule.html',
        controller: "viewYourSchedule",
