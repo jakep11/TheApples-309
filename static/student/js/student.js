@@ -67,7 +67,7 @@ app.service("sharedData", function() {
         2200: "10:00PM"
     };
 
-    var lastTerm = null;
+    var lastTermIndex = null;
     var lastTermId = null;
 });
 
@@ -136,6 +136,10 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
             }
         }, timeEnd);
 
+        if (terms.length === 0) {
+            terms.push($scope.terms[sharedData.lastTermIndex].id);
+        }
+
         // testing selected values arrays
         console.log(terms.length)
         console.log(ids.length);
@@ -195,13 +199,8 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
             $scope.terms = response.data;
 
             // default select the current (newest/most recent) term
-            var lastTerm = $scope.terms.length - 1;
-            var lastTermId = $scope.terms[lastTerm].id;
-            $scope.checkedTerms[lastTermId] = true;
-
-            // add to shared data
-            sharedData.lastTerm = lastTerm;
-            sharedData.lastTermId = lastTermId;
+            $scope.findLastTermIndex();
+            $scope.checkedTerms[sharedData.lastTermId] = true;
 
             // add the default selected term to be displayed
             $scope.showSelectedTerms();
@@ -212,6 +211,28 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         });
     }
     $scope.getTerms();
+
+    $scope.findLastTermIndex = function() {
+        var lastIndex;
+
+        var year = -1;
+        var quarterId = -1;
+
+        angular.forEach($scope.terms, function(obj, index) {
+            console.log(obj);
+            if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
+                lastIndex = index;
+                year = obj.year;
+                quarterId = obj.quarterId;
+            }
+        });
+
+        // add these values to shared data to use between functions/controllers
+        sharedData.lastTermId = $scope.terms[lastIndex].id;
+        sharedData.lastTermIndex = lastIndex;
+
+        return lastIndex;
+    }
 
     // dynamically display term title and term's sections when checked and filters applied
     $scope.showSelectedTerms = function() {
@@ -230,7 +251,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
 
         // if no terms are selected, display sections for the current (default) term
         if (showTerms.length === 0) {
-            showTerms.push($scope.terms[sharedData.lastTerm]);
+            showTerms.push($scope.terms[sharedData.lastTermIndex]);
         }
 
         $scope.showTerms = showTerms;

@@ -87,10 +87,24 @@ class Terms(db.Model):
 
    @property
    def serialize(self):
+
+      # set quarterId and year for sorting purposes. quarterId: fall = 0, winter = 1, spring = 2
+      term = self.name.split()
+      quarter = term[0]
+      year = int(term[2])
+      quarterId = 0
+
+      if quarter == "Winter":
+         quarterId = 1
+      elif quarter == "Spring":
+         quarterId = 2
+
       #"""Return object data in easily serializeable format"""
       return {
       'id'  : self.id,
-      'name': self.name
+      'name': self.name,
+      'quarterId': quarterId,
+      'year': year
       }
 
 
