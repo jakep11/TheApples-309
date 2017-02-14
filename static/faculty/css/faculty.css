@@ -50,27 +50,20 @@
 }
 
 .fac-calendar-table td {
-    border-top: none !important;
-    border-bottom: none !important;
-    border-left: .5px solid #dddddd !important;
-    border-right: .5px solid #dddddd !important;
+    padding-top: 10px;
     text-align: center;
+    height: 40px;
 }
 
 .fac-calendar-table th {
-    border-left: .5px solid #dddddd !important;
-    border-right: .5px solid #dddddd !important;
-    border-top: .5px solid #dddddd !important;
-    border-bottom: .5px solid #dddddd !important;
     text-align: center;
     width: 250px;
 }
 
 .cal-listing {
     margin-top: 8px;
-    height: auto;
     text-align: center;
-    border-top: none;
+    padding: 0px;
 }
 
 .info-table {
@@ -122,7 +115,7 @@
 }
 
 .checkbox {
-    text-align: left;
+    text-align: center;
 }
 
 .pref-table-1 {
@@ -237,4 +230,9 @@ td {
 .term-selector {
     width: 100px !important;
     font-size: 120%;
+}
+
+.details-table th,
+td {
+    border: none;
 }

@@ -62,8 +62,8 @@
 
 .room-types-editor th,
 td {
-    border-top: none !important;
-    border-bottom: none !important;
+    border-top: none;
+    border-bottom: none;
 }
 
 .rooms-table {

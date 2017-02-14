@@ -1,7 +1,7 @@
 var app = angular.module('TheApples');
 
 // service will be used to help transfer between table and calendar view
-app.service("sharedData", function() {
+app.service("sharedData", function () {
     // lists of time integer values and their corresponding 12 hour time
     this.startTimes = {
         700: "7:00AM",
@@ -106,31 +106,31 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         var timeEnd = [];
 
         // collect the selected course_ids and store in ids array
-        angular.forEach($scope.checkedTerms, function(value, key) {
+        angular.forEach($scope.checkedTerms, function (value, key) {
             if (value === true) {
                 this.push(key);
             }
         }, terms);
         // collect the selected course_ids and store in ids array
-        angular.forEach($scope.checkedCourses, function(value, key) {
+        angular.forEach($scope.checkedCourses, function (value, key) {
             if (value === true) {
                 this.push(key);
             }
         }, ids);
         // collect the selected faculty_ids and store in instructors array
-        angular.forEach($scope.checkedInstructors, function(value, key) {
+        angular.forEach($scope.checkedInstructors, function (value, key) {
             if (value === true) {
                 this.push(key);
             }
         }, instructors);
         // collect the selected start time values and store in startTimes array
-        angular.forEach($scope.checkedStartTimes, function(value, key) {
+        angular.forEach($scope.checkedStartTimes, function (value, key) {
             if (value === true) {
                 this.push(key);
             }
         }, timeStart);
         // collect the selected end time values and store in endTimes array
-        angular.forEach($scope.checkedEndTimes, function(value, key) {
+        angular.forEach($scope.checkedEndTimes, function (value, key) {
             if (value === true) {
                 this.push(key);
             }
@@ -169,26 +169,26 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         });
     }
 
-    console.log("work?");   // remove debugging for final version
+    console.log("work?"); // remove debugging for final version
 
-    $scope.getCourses = function() {
+    $scope.getCourses = function () {
         console.log("getting courses");
-      $http({
-          method: 'GET',
-          url: '/get/allCourses',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-      }).then(function successCallback(response) {
-        $scope.courses = response.data;
-         console.log('success');
-       }, function errorCallback(response) {
-         console.log('error');
-       });
+        $http({
+            method: 'GET',
+            url: '/get/allCourses',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
     }
     $scope.getCourses();
 
-    $scope.getTerms = function() {
+    $scope.getTerms = function () {
         $http({
             method: 'GET',
             url: '/get/terms',
@@ -212,13 +212,13 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     }
     $scope.getTerms();
 
-    $scope.findLastTermIndex = function() {
+    $scope.findLastTermIndex = function () {
         var lastIndex;
 
         var year = -1;
         var quarterId = -1;
 
-        angular.forEach($scope.terms, function(obj, index) {
+        angular.forEach($scope.terms, function (obj, index) {
             console.log(obj);
             if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
                 lastIndex = index;
@@ -235,14 +235,14 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     }
 
     // dynamically display term title and term's sections when checked and filters applied
-    $scope.showSelectedTerms = function() {
+    $scope.showSelectedTerms = function () {
         var showTerms = [];
 
         // check if a term is checked and should be displayed
-        angular.forEach($scope.terms, function(term) {
+        angular.forEach($scope.terms, function (term) {
             var termId = term.id;
 
-            angular.forEach($scope.checkedTerms, function(value, key) {
+            angular.forEach($scope.checkedTerms, function (value, key) {
                 if (key === termId && value === true) {
                     this.push(term);
                 }
@@ -257,38 +257,38 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         $scope.showTerms = showTerms;
     }
 
-    $scope.getInstructors = function() {
-      $http({
-          method: 'GET',
-          url: '/get/instructors',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-      }).then(function successCallback(response) {
-        $scope.instructors = response.data;
-         console.log('success');
-       }, function errorCallback(response) {
-         console.log('error');
-       });
+    $scope.getInstructors = function () {
+        $http({
+            method: 'GET',
+            url: '/get/instructors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.instructors = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
     }
     $scope.getInstructors();
 
     //
     // change this to get all sections for ONLY the current term
     //
-    $scope.getSections = function() {
-      $http({
-          method: 'GET',
-          url: '/get/allSections',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-      }).then(function successCallback(response) {
-        $scope.sections = response.data;
-         console.log('success');
-       }, function errorCallback(response) {
-         console.log('error');
-       });
+    $scope.getSections = function () {
+        $http({
+            method: 'GET',
+            url: '/get/allSections',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.sections = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
     }
     $scope.getSections();
 
@@ -300,34 +300,34 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
 
 app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $location, $http) {
     $rootScope.bcrumb1 = "Published Schedules";
-    $scope.getCourses = function() {
-      $http({
-          method: 'GET',
-          url: '/get/allCourses',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-      }).then(function successCallback(response) {
-        $scope.courses = response.data;
-         console.log('success');
-       }, function errorCallback(response) {
-         console.log('error');
-       });
+    $scope.getCourses = function () {
+        $http({
+            method: 'GET',
+            url: '/get/allCourses',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
     }
     $scope.getCourses();
-    $scope.getTerms = function() {
-      $http({
-          method: 'GET',
-          url: '/get/terms',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-      }).then(function successCallback(response) {
-        $scope.terms = response.data;
-         console.log('success');
-       }, function errorCallback(response) {
-         console.log('error');
-       });
+    $scope.getTerms = function () {
+        $http({
+            method: 'GET',
+            url: '/get/terms',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.terms = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
     }
     $scope.getTerms();
     $scope.backButtonClicked = function () {
@@ -417,4 +417,11 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
 
         return '';
     }
+
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            placement: 'bottom',
+            content: 'CPE 101-01 / Lecture / Room 14-256 CPE 103-03 / Lecture / Room 14-301'
+        });
+    });
 });
