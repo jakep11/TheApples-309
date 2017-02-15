@@ -214,7 +214,6 @@ def importCourseData():
 
    for row in reader:
 
-      print row
       column = 0
 
       comps = 0
@@ -232,18 +231,22 @@ def importCourseData():
          elif column == 2:
             courseName = entry
 
-            print "adding course"
-            print "course number is " + courseNum
-            print "course dept is " + courseDept
-            print "course name is " + courseName
             # Add the new course to the database if it is not currently in there
             course = models.Courses.query.filter_by(number=courseNum, major=courseDept,
                                                     course_name=courseName).first()
             if course is None:  # If the course doesn't already exist, add a new course to the table
-               course = models.Courses(number=courseNum, major=courseDept, course_name=courseName)
-               db.session.add(course)
 
-            print "made it here"
+               # Check again if a course containing the course num and dept is in the db
+               course = models.Courses.query.filter_by(number=courseNum, major=courseDept).first()
+
+               if course is None:
+                  course = models.Courses(number=courseNum, major=courseDept, course_name=courseName)
+                  db.session.add(course)
+
+               else: # The course is in the db, but is missing a course name
+                  course.course_name = courseName
+                  db.session.add(course)
+
          # Subject Code
          elif column > 2:
             temp = entry.rsplit(' ', 1)
@@ -258,7 +261,6 @@ def importCourseData():
                else:
                   units = value
 
-               print "made it to adding a component"
                # add component if it does not currently exist
                component = models.Components.query.filter_by(name=compName, course=course,
                                                              workload_units=units, hours=hours).first()
