@@ -29,7 +29,7 @@ Things that change dynamically:
                     <div class="btn btn-default view-switch  table-view-btn">TABLE VIEW</div>
                 </div>
             </div>
-            <div class="col-xs-2 no-gutter col-xs-offset-2 ">
+            <div ng-show="role == 'student'" class="col-xs-2 no-gutter col-xs-offset-2 ">
                 <button id="post-btn" type="button" class="btn btn-default view-switch" data-toggle="modal" data-target="#myModal">POST FEEDBACK</button>
             </div>
         </div>
@@ -91,7 +91,7 @@ Things that change dynamically:
                             <label ng-repeat="course in courses | orderBy: 'number'">
                                 <input type="checkbox" name="course{{course.id}}" value="{{course.id}}" ng-model="checkedCourses[course.id]">{{course.major}} {{course.number}}
                             </label>
-     
+
                         </div>
                     </form>
                 </div>

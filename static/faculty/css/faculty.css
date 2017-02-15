@@ -188,7 +188,7 @@ td {
 }
 
 .bottom-row {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .form-group-b {
@@ -204,9 +204,10 @@ td {
 }
 
 .save-btn {
-    margin: 2px;
-    width: 100px;
-    margin-bottom: 4px;
+    width: 150px;
+    margin-bottom: 10px;
+    margin-top: -70px;
+    margin-left: 40px;
 }
 
 .plus-btn {
@@ -228,11 +229,18 @@ td {
 }
 
 .term-selector {
-    width: 100px !important;
     font-size: 120%;
 }
 
 .details-table th,
 td {
     border: none;
+}
+
+.selector {
+    width: 150px !important;
+}
+
+.range-inputs {
+    margin-left: 65px;
 }
