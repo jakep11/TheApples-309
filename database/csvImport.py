@@ -269,8 +269,6 @@ def importCourseData():
                                                 workload_units=units, hours=hours)
                   db.session.add(component)
 
-               print "component added"
-
             # Activity
             elif attribute == "activity":
                compName = "Activity"
@@ -306,7 +304,7 @@ def importCourseData():
    return "successfully uploaded course data"
 
 
-# # This function parses through a CSV file containing course data, and adds the information to the database
+# # This function parses through a CSV file containing student cohort data, and adds the information to the database
 # @csvImport_api.route("/importCohortData", methods=['GET', 'POST'])
 # def importCohortData():
 #
@@ -318,6 +316,7 @@ def importCourseData():
 #
 #    return "successfully uploaded cohort data"
 
+# This function parses through a CSV file containing faculty data
 @csvImport_api.route("/importFacultyData", methods = ['GET', 'POST'])
 def importFacultyData():
 
