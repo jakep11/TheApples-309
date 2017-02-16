@@ -143,16 +143,16 @@ Things that change dynamically:
                 <div class="col-xs-12 listing">
                     <table class="table table-striped">
                         <tr class="success">
-<th>Course</th>
-<th>Section</th>
-<th>Type</th>
-<th>Hours</th>
-<th>Room</th>
-<th>Instructor</th>
-<th>Days</th>
-<th>Start Time</th>
-<th>End Time</th>
-<th>Capacity</th>
+                            <th>Course</th>
+                            <th>Section</th>
+                            <th>Type</th>
+                            <th>Hours</th>
+                            <th>Room</th>
+                            <th>Instructor</th>
+                            <th>Days</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Capacity</th>
                         </tr>
                         <tr ng-repeat="section in sections | orderBy: ['course_num', 'number']" ng-if="section.term_id == term.id">
                             <th>{{section.course}} {{section.course_num}}</th>
