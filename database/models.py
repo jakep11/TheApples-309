@@ -1,4 +1,5 @@
 from web_app import app, db
+from datetime import datetime
 import timeCalculations
 
 #-- Description: Stores information and role type for each user of the system
@@ -14,11 +15,11 @@ class User(db.Model):
    def serialize(self):
       #"""Return object data in easily serializeable format"""
       return {
-      'id'         : self.id,
-      'first_name': self.first_name,
-      'last_name': self.last_name,
-      'username': self.username,
-      'role': self.role
+         'id'         : self.id,
+         'first_name': self.first_name,
+         'last_name': self.last_name,
+         'username': self.username,
+         'role': self.role,
       }
 
 #-- Description: Stores all faculty available to work 
@@ -207,6 +208,17 @@ class FacultyPreferences(db.Model):
    time_start = db.Column(db.Time)
    time_end = db.Column(db.Time)
    preference = db.Column(db.String(15))
+   
+   @property
+   def serialize(self):
+      return {
+         'faculty_id': self.faculty_id,
+         'day': self.day,
+         'time_start': self.time_start.isoformat(),
+         'time_end': self.time_end.isoformat(),
+         'preference': self.preference
+      }
+         
 
 #-- Description: Stores what classes a faculty is allowed to teach
 class FacultyConstraint(db.Model):

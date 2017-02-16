@@ -24,3 +24,8 @@ def get_courses():
 def get_sections():
 	sections = Sections.query.all()
 	return jsonify([i.serialize for i in sections])
+
+@get_api.route('/preferences', methods = ["GET"])
+def get_preferences():
+    preferences = FacultyPreferences.query.all()
+    return jsonify([i.serialize for i in preferences])
