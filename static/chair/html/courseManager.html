@@ -118,8 +118,7 @@
                 <table class="table table-striped">
                     <tr class="success">
                         <th></th>
-                        <th>Name</th>
-                        <th>Number</th>
+                        <th>Class</th>
                         <th>Component 1</th>
                         <th>Work Units</th>
                         <th>Class Hours</th>
@@ -130,14 +129,13 @@
                     </tr>
                     <tr ng-repeat="course in courses | orderBy: 'number'">
                         <td><input type="radio" ng-model="$parent.id" value="{{course.id}}" ng-click="radioChanged(course)" /></td>
-                        <td>{{course.id}}</td>
                         <td>{{course.major}} {{course.number}}</td>
-                        <td>Lecture</td>
-                        <td>{{course.lecture_workload_units}}</td>
-                        <td>{{course.lecture_hours}}</td>
-                        <td>Lab</td>
-                        <td>{{course.lab_workload_units}}</td>
-                        <td>{{course.lab_hours}}</td>
+                        <td>{{course.component_one}}</td>
+                        <td>{{course.c1_workload_units}}</td>
+                        <td>{{course.c1_hours}}</td>
+                        <td>{{course.component_two}}</td>
+                        <td>{{course.c2_workload_units}}</td>
+                        <td>{{course.c2_hours}}</td>
                         <td>
                             <button class="btn btn-default preference-btn" data-toggle="#info-modal" data-type="modal">VIEW</button>
                         </td>

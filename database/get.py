@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template, flash, redirect, request, url_for, jsonify, json
-
+from flask import make_response, Blueprint, render_template, flash, redirect, request, url_for, jsonify, json, Response
 get_api = Blueprint('get_api', __name__)
 
 from models import *
@@ -18,7 +17,41 @@ def get_instructors():
 @get_api.route('/allCourses', methods = ["GET"])
 def get_courses():
 	courses = Courses.query.all()
-	return jsonify([i.serialize for i in courses])
+
+	data = []
+	for course in courses:
+		c1 = None
+		c2 = None
+		c1_hours = None
+		c1_workload_units = None
+		c2_hours = None
+		c2_workload_units = None
+
+		if len(course.components) > 0 :
+			c1 = course.components[0].name
+			c1_workload_units = course.components[0].workload_units 
+			c1_hours = course.components[0].hours
+		if len(course.components) > 1 :
+			c2 = course.components[1].name
+			c2_workload_units = course.components[1].workload_units 
+			c2_hours = course.components[1].hours
+
+		temp = {
+			'id': course.id,
+			'number': course.number, 
+			'major': course.major,
+			'course_name': course.course_name,
+			'component_one': c1,
+			'c1_workload_units': c1_workload_units,
+			'c1_hours': c1_hours,
+			'component_two': c2,
+			'c2_workload_units': c2_workload_units,
+			'c2_hours': c2_hours,
+		}
+		data.append(temp)
+
+	return jsonify(data)
+
 
 @get_api.route('/allSections', methods = ["GET"])
 def get_sections():
