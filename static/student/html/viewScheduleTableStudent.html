@@ -143,18 +143,48 @@ Things that change dynamically:
                 <div class="col-xs-12 listing">
                     <table class="table table-striped">
                         <tr class="success">
-                            <th>Course</th>
-                            <th>Section</th>
-                            <th>Type</th>
-                            <th>Hours</th>
-                            <th>Room</th>
-                            <th>Instructor</th>
-                            <th>Days</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Capacity</th>
+                            <th>
+        <div ng-click="sortBy('course_num')">Course
+        <span class="sortorder" ng-show="sortType === 'course_num'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('number')">Section
+        <span class="sortorder" ng-show="sortType === 'number'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('section_type')">Type
+        <span class="sortorder" ng-show="sortType === 'section_type'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('hours')">Hours
+        <span class="sortorder" ng-show="sortType === 'hours'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('room')">Room
+        <span class="sortorder" ng-show="sortType === 'room'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('faculty')">Instructor
+        <span class="sortorder" ng-show="sortType === 'faculty'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('days')">Days
+        <span class="sortorder" ng-show="sortType === 'days'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('time_start')">Start Time
+        <span class="sortorder" ng-show="sortType === 'time_start'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('time_end')">End Time
+        <span class="sortorder" ng-show="sortType === 'time_end'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
+                            <th>
+        <div ng-click="sortBy('capacity')">Capacity
+        <span class="sortorder" ng-show="sortType === 'capacity'" ng-class="{reverse: reverse}"></span>
+                                </div></th>
                         </tr>
-                        <tr ng-repeat="section in sections | orderBy: ['course_num', 'number']" ng-if="section.term_id == term.id">
+                        <tr ng-repeat="section in sections | orderBy: sortType:reverse" ng-if="section.term_id == term.id">
                             <th>{{section.course}} {{section.course_num}}</th>
                             <th>{{section.number}}</th>
                             <th>{{section.section_type}}</th>

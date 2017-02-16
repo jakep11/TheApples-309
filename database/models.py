@@ -1,4 +1,5 @@
 from web_app import app, db
+from datetime import datetime
 import timeCalculations
 from sqlalchemy.orm import backref
 
@@ -15,11 +16,11 @@ class User(db.Model):
    def serialize(self):
       #"""Return object data in easily serializeable format"""
       return {
-      'id'         : self.id,
-      'first_name': self.first_name,
-      'last_name': self.last_name,
-      'username': self.username,
-      'role': self.role
+         'id'         : self.id,
+         'first_name': self.first_name,
+         'last_name': self.last_name,
+         'username': self.username,
+         'role': self.role,
       }
 
 #-- Description: Stores all faculty available to work 
@@ -40,6 +41,7 @@ class Faculty(db.Model):
       'id': self.id,
       'first_name': self.first_name,
       'last_name': self.last_name,
+      'allowed_work_units' : self.allowed_work_units
       }
 
 #-- Description: Stores all courses taught by the University
@@ -203,6 +205,17 @@ class FacultyPreferences(db.Model):
    time_start = db.Column(db.Time)
    time_end = db.Column(db.Time)
    preference = db.Column(db.String(15))
+   
+   @property
+   def serialize(self):
+      return {
+         'faculty_id': self.faculty_id,
+         'day': self.day,
+         'time_start': self.time_start.isoformat(),
+         'time_end': self.time_end.isoformat(),
+         'preference': self.preference
+      }
+         
 
 #-- Description: Stores what classes a faculty is allowed to teach
 class FacultyConstraint(db.Model):
@@ -245,3 +258,19 @@ class Components(db.Model):
       'workload_units': self.workload_units,
       'hours': self.hours
       }
+
+# -- Description: Stores the names of the imported CSV files
+class ImportedFiles(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(40))
+
+# -- Description: Stores the student cohort data
+class CohortData(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+   major = db.Column(db.String(12))
+   freshman = db.Column(db.Integer)
+   sophmores = db.Column(db.Integer)
+   juniors = db.Column(db.Integer)
+   seniors = db.Column(db.Integer)
+

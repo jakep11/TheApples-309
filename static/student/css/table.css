@@ -95,3 +95,10 @@ textarea {
     font-weight: 600;
     border: 2px solid #aaaaaa;
 }
+
+.sortorder:after {
+  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder.reverse:after {
+  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}

@@ -214,12 +214,8 @@ def importCourseData():
 
    for row in reader:
 
-      print row
       column = 0
-      # lectureUnits = 0
-      # labUnits = 0
-      # numLabs = 0
-      # numLectures = 0
+
       comps = 0
 
       for entry in row:
@@ -235,6 +231,22 @@ def importCourseData():
          elif column == 2:
             courseName = entry
 
+            # Add the new course to the database if it is not currently in there
+            course = models.Courses.query.filter_by(number=courseNum, major=courseDept,
+                                                    course_name=courseName).first()
+            if course is None:  # If the course doesn't already exist, add a new course to the table
+
+               # Check again if a course containing the course num and dept is in the db
+               course = models.Courses.query.filter_by(number=courseNum, major=courseDept).first()
+
+               if course is None:
+                  course = models.Courses(number=courseNum, major=courseDept, course_name=courseName)
+                  db.session.add(course)
+
+               else: # The course is in the db, but is missing a course name
+                  course.course_name = courseName
+                  db.session.add(course)
+
          # Subject Code
          elif column > 2:
             temp = entry.rsplit(' ', 1)
@@ -245,81 +257,54 @@ def importCourseData():
             if attribute == "unit":
 
                if comps == 1:
-                  c1_units = value
-                  c1 = component
+                  units = value
                else:
-                  c2_units = value
-                  c2 = component
+                  units = value
+
+               # add component if it does not currently exist
+               component = models.Components.query.filter_by(name=compName, course=course,
+                                                             workload_units=units, hours=hours).first()
+               if component is None:
+                  component = models.Components(name=compName, course=course,
+                                                workload_units=units, hours=hours)
+                  db.session.add(component)
 
             # Activity
             elif attribute == "activity":
+               compName = "Activity"
                comps += 1
-               c1_hours = value
-
-            # add activity component if it does not currently exist
-            component = models.Components.query.filter_by(name="Activity").first()
-            if component is None:
-               component = models.Components(name="Activity")
-               db.session.add(component)
+               hours = value
 
             # Supervisory
             elif attribute == "supv":
+               compName = "Supervisory"
                comps += 1
-               c1_hours = value
-
-            # add supervisory component if it does not currently exist
-            component = models.Components.query.filter_by(name="Supervisory").first()
-            if component is None:
-               component = models.Components(name="Supervisory")
-               db.session.add(component)
+               hours = value
 
             # Lecture
             elif attribute == "lect":
+               compName = "Lecture"
                comps += 1
                if comps == 1:
-                  c1_hours = value
+                  hours = value
                else:
-                  c2_hours = value
-
-               # add lecture component if it does not currently exist
-               component = models.Components.query.filter_by(name="Lecture").first()
-               if component is None:
-                  component = models.Components(name="Lecture")
-                  db.session.add(component)
+                  hours = value
 
             # Lab
             elif attribute == "lab":
+               compName = "Lab"
                comps += 1
                if comps == 1:
-                  c1_hours = value
+                  hours = value
                else:
-                  c2_hours = value
+                  hours = value
 
-               # add lab component if it does not currently exist
-               component = models.Components.query.filter_by(name="Lab").first()
-               if component is None:
-                  component = models.Components(name="Lab")
-                  db.session.add(component)
-
-      print "adding course"
-      # Add the new course to the database if it is not currently in there
-      course = models.Courses.query.filter_by(major=courseDept, number=courseNum,
-                                              course_name=courseName).first()
-      if course is None: # If the course doesn't already exist, add a new course to the table
-         if comps == 1:
-            course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
-                                    component_one=c1, c1_workload_units=c1_units, c1_hours=c1_hours)
-         else:
-            course = models.Courses(major=courseDept, number=courseNum, course_name=courseName,
-                                    component_one= c1, c1_workload_units=c1_units, c1_hours=c1_hours,
-                                    component_two=c2, c2_workload_units=c2_units, c2_hours=c2_hours)
-         db.session.add(course)
       db.session.commit()
 
    return "successfully uploaded course data"
 
 
-# # This function parses through a CSV file containing course data, and adds the information to the database
+# # This function parses through a CSV file containing student cohort data, and adds the information to the database
 # @csvImport_api.route("/importCohortData", methods=['GET', 'POST'])
 # def importCohortData():
 #
@@ -331,6 +316,7 @@ def importCourseData():
 #
 #    return "successfully uploaded cohort data"
 
+# This function parses through a CSV file containing faculty data
 @csvImport_api.route("/importFacultyData", methods = ['GET', 'POST'])
 def importFacultyData():
 
