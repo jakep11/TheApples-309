@@ -29,3 +29,11 @@ def get_sections():
 def get_preferences():
     preferences = FacultyPreferences.query.all()
     return jsonify([i.serialize for i in preferences])
+
+@get_api.route('/filterCourses', methods = ["POST"])
+def get_filtered_courses():
+	data = request.json
+	number = data['number']
+
+	courses = Courses.query.filter(Courses.number.like(number + '%')).all()
+	return jsonify([i.serialize for i in courses])

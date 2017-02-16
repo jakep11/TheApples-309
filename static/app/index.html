@@ -1,72 +1,74 @@
 <!doctype html>
 <html ng-app="TheApples">
+
 <head>
- <title>The Apples App</title>
- <meta charset="utf-8">
- <!-- Bootstrap imports -->
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 
- <!-- Angular imports -->
+    <title>The Apples App</title>
+    <meta charset="utf-8">
+    <!-- Bootstrap imports -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
- <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.js"></script>
- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-cookies.js"></script>
- 
- <!-- Google Fonts -->
- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
- 
- <!-- Angular setup page -->
- <script src="static/app/app.js"></script>
+    <!-- Angular imports -->
 
- <!-- Other angular pages -->
- <script src="static/faculty/js/faculty.js"></script>
- <script src="static/chair/js/chair.js"></script>
- <script src="static/student/js/student.js"></script> 
- <script src="static/login/js/login.js"></script>
- <script src="static/admin/js/admin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-cookies.js"></script>
 
- <!-- CSS files for every page -->
- <link rel="stylesheet" href="static/app/main.css">
- <link rel="stylesheet" href="static/login/css/login.css">
- <link rel="stylesheet" href="static/admin/css/admin.css">
- <link rel="stylesheet" href="static/student/css/student.css">
- <link rel="stylesheet" href="static/student/css/table.css">
- <link rel="stylesheet" href="static/faculty/css/faculty.css">
- <link rel="stylesheet" href="static/chair/css/chair.css">
- <link rel="stylesheet" href="static/chair/css/managers.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+
+    <!-- Angular setup page -->
+    <script src="static/app/app.js"></script>
+
+    <!-- Other angular pages -->
+    <script src="static/faculty/js/faculty.js"></script>
+    <script src="static/chair/js/chair.js"></script>
+    <script src="static/student/js/student.js"></script>
+    <script src="static/login/js/login.js"></script>
+    <script src="static/admin/js/admin.js"></script>
+
+    <!-- CSS files for every page -->
+    <link rel="stylesheet" href="static/app/main.css">
+    <link rel="stylesheet" href="static/login/css/login.css">
+    <link rel="stylesheet" href="static/admin/css/admin.css">
+    <link rel="stylesheet" href="static/student/css/student.css">
+    <link rel="stylesheet" href="static/student/css/table.css">
+    <link rel="stylesheet" href="static/faculty/css/faculty.css">
+    <link rel="stylesheet" href="static/chair/css/chair.css">
+    <link rel="stylesheet" href="static/chair/css/managers.css">
 
 
 
- <!-- popup window imports -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- popup window imports -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
- 
+
 </head>
+
 <body>
- <nav ng-hide="role == null || role == 'student' || role == 'admin'" class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- <div class="navbar-header">
+    <nav ng-hide="role == null || role == 'student' || role == 'admin'" class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- <div class="navbar-header">
       <a class="navbar-brand" ng-href="/">Home</a>
       <a  class="navbar-brand" href="{{role == 'chair' ? '#link1' : '#link2'}}">Link</a>
     </div> -->
-    <ul class="nav navbar-nav">
-      <li><a ng-href="{{role == 'chair' ? '#chairHome' : '#facultyHome'}}">Home</a></li>
-      <li ng-show="bcrumb1 != null"><a>/</a></li>
-      <li ng-show="bcrumb1 != null && bcrumb2 == null" class="last-nav-item"><a>{{bcrumb1}}</a></li>
-      <li ng-show="bcrumb2 != null"><a ng-href="{{bcrumb1Link}}">{{bcrumb1}}</a></li>
-      <li ng-show="bcrumb2 != null"><a>/</a></li>
-      <li ng-show="bcrumb2 != null" class="last-nav-item" style="color: grey !important"><a>{{bcrumb2}}</a></li>
+            <ul class="nav navbar-nav">
+                <li><a ng-href="{{role == 'chair' ? '#chairHome' : '#facultyHome'}}">Home</a></li>
+                <li ng-show="bcrumb1 != null"><a>/</a></li>
+                <li ng-show="bcrumb1 != null && bcrumb2 == null" class="last-nav-item"><a>{{bcrumb1}}</a></li>
+                <li ng-show="bcrumb2 != null"><a ng-href="{{bcrumb1Link}}">{{bcrumb1}}</a></li>
+                <li ng-show="bcrumb2 != null"><a>/</a></li>
+                <li ng-show="bcrumb2 != null" class="last-nav-item" style="color: grey !important"><a>{{bcrumb2}}</a></li>
 
-    </ul>
-    
-  </div>
-</nav>
- 
- 
- <div ng-view></div>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <div ng-view></div>
 </body>
 
 </html>

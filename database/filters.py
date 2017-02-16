@@ -1,7 +1,5 @@
-from flask import Blueprint, request, jsonify, json
+from flask import Blueprint, request, jsonify
 from sqlalchemy import and_, desc
-import sys
-
 
 # blueprint url prefix = "/filter"
 filters_api = Blueprint('filters_api', __name__)
@@ -26,11 +24,11 @@ def filtered_sections():
 
    # list of filters for the query
    filters = []
-   queries = []
 
+   # ~~~~~ SAVING FOR REFERENCE ~~~~~ DELETE FOR FINAL VERSION ~~~~~
    # if no terms are selected, select the current (default) term
-   if not terms:
-      terms.append(Terms.query.order_by(desc(Terms.id)).first().id)
+   # if not terms:
+   #    terms.append(Terms.query.order_by(desc(Terms.id)).first().id)
 
    # add term to filter
    filters.append(Sections.term_id.in_(terms))
@@ -46,8 +44,5 @@ def filtered_sections():
       filters.append(Sections.time_end.in_(endTimes))
 
    sections = Sections.query.filter(and_(*filters)).all()
-
-   print(len(filters))
-   sys.stdout.flush()
 
    return jsonify([i.serialize for i in sections])

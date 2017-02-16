@@ -50,27 +50,20 @@
 }
 
 .fac-calendar-table td {
-    border-top: none !important;
-    border-bottom: none !important;
-    border-left: .5px solid #dddddd !important;
-    border-right: .5px solid #dddddd !important;
+    padding-top: 10px;
     text-align: center;
+    height: 40px;
 }
 
 .fac-calendar-table th {
-    border-left: .5px solid #dddddd !important;
-    border-right: .5px solid #dddddd !important;
-    border-top: .5px solid #dddddd !important;
-    border-bottom: .5px solid #dddddd !important;
     text-align: center;
     width: 250px;
 }
 
 .cal-listing {
     margin-top: 8px;
-    height: auto;
     text-align: center;
-    border-top: none;
+    padding: 0px;
 }
 
 .info-table {
@@ -122,7 +115,7 @@
 }
 
 .checkbox {
-    text-align: center;
+    text-align: left;
 }
 
 .pref-table-1 {
@@ -195,7 +188,7 @@ td {
 }
 
 .bottom-row {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .form-group-b {
@@ -211,9 +204,10 @@ td {
 }
 
 .save-btn {
-    margin: 2px;
-    width: 100px;
-    margin-bottom: 4px;
+    width: 150px;
+    margin-bottom: 10px;
+    margin-top: -70px;
+    margin-left: 40px;
 }
 
 .plus-btn {
@@ -235,6 +229,18 @@ td {
 }
 
 .term-selector {
-    width: 100px !important;
     font-size: 120%;
+}
+
+.details-table th,
+td {
+    border: none;
+}
+
+.selector {
+    width: 150px !important;
+}
+
+.range-inputs {
+    margin-left: 65px;
 }
