@@ -20,7 +20,7 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
    $scope.getCourses = function () {
       $http({
          method: 'GET',
-         url: '/courses/allCourses',
+         url: 'get/allCourses',
          headers: {
             'Content-Type': 'application/json'
          }

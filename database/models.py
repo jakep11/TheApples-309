@@ -247,3 +247,18 @@ class Components(db.Model):
    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
    workload_units = db.Column(db.String(5))
    hours = db.Column(db.String(5))
+
+# -- Description: Stores the names of the imported CSV files
+class ImportedFiles(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(40))
+
+# -- Description: Stores the student cohort data
+class CohortData(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+   major = db.Column(db.String(12))
+   freshman = db.Column(db.Integer)
+   sophmores = db.Column(db.Integer)
+   juniors = db.Column(db.Integer)
+   seniors = db.Column(db.Integer)
