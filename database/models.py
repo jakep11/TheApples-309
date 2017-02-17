@@ -255,6 +255,7 @@ class Components(db.Model):
       return {
       'id': self.id,
       'name': self.name,
+      'course_id': self.course_id,
       'workload_units': self.workload_units,
       'hours': self.hours
       }

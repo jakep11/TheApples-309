@@ -19,6 +19,11 @@ def get_courses():
 	courses = Courses.query.all()
 	return jsonify([i.serialize for i in courses])
 
+@get_api.route('/allComponents', methods = ["GET"])
+def get_components():
+	components = Components.query.all()
+	return jsonify([i.serialize for i in components])
+
 @get_api.route('/allCoursesAndComponents', methods = ["GET"])
 def get_courses_with_components():
 	courses = Courses.query.all()
