@@ -64,7 +64,7 @@ class Courses(db.Model):
       'number': self.number,
       'major': self.major,
       'course_name': self.course_name,
-      'components': self.components
+      #'components': self.components
       #'course_sections': self.course_sections,
       #'constraints': self.constraints,
       #'final_schedules': self.final_schedules,
