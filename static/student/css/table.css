@@ -106,44 +106,34 @@ textarea {
     content: '\25bc'; // BLACK DOWN-POINTING TRIANGLE
 }
 
-.sticky-table table {
+
+/*
+table {
     width: 100%;
 }
 
-/*
-.sticky-table thead,
-tbody,
-tr,
-td,
-th {
-    display: block;
-}
-*/
-
-.sticky-table tr:after {
+tr:after {
     content: ' ';
-    display: block;
     visibility: hidden;
     clear: both;
 }
 
-.sticky-table thead th {
-    height: 40px;
+thead th {
+    height: 30px;
     text-align: left;
 }
+*/
 
-.sticky-table tbody {
-    height: 150px;
+.table-body {
+    height: 20px;
     overflow-y: auto;
 }
 
-.sticky-table thead {
-    /* fallback */
-    padding-right: 5px;
-    background-color: #d8f4c9;
-}
-.sticky-table tbody td,
+
+/*
+tbody td,
 thead th {
-    width: 10%;
+    width: 19.2%;
     float: left;
 }
+*/
