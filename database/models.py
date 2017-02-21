@@ -50,7 +50,7 @@ class Courses(db.Model):
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   components = db.relationship("Components", backref=backref("course", uselist="false"))
+   components = db.relationship("Components", backref="course")
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
