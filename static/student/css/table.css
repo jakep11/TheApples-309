@@ -110,6 +110,7 @@ textarea {
     width: 100%;
 }
 
+/*
 .sticky-table thead,
 tbody,
 tr,
@@ -117,6 +118,7 @@ td,
 th {
     display: block;
 }
+*/
 
 .sticky-table tr:after {
     content: ' ';
@@ -140,7 +142,6 @@ th {
     padding-right: 5px;
     background-color: #d8f4c9;
 }
-
 .sticky-table tbody td,
 thead th {
     width: 10%;
