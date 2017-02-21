@@ -210,9 +210,9 @@ class FacultyPreferences(db.Model):
       return {
          'faculty_id': self.faculty_id,
          'day': self.day,
-         'time_start': self.time_start.isoformat(),
-         'time_end': self.time_end.isoformat(),
-         'preference': self.preference
+         'time_start': self.time_start.isoformat()[:-3],  #[:-3] Removes the seconds from time
+         'time_end': self.time_end.isoformat()[:-3],  #[:-3] Removes the seconds from time
+         'choice': self.preference
       }
          
 
