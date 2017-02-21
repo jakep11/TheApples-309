@@ -216,6 +216,13 @@ class FacultyPreferences(db.Model):
          'choice': self.preference
       }
          
+#-- Description: Stores faculty course preferences for what classes they would like to teach
+   class FacultyCoursePreferences(db.Model):
+      id = db.Column(db.Integer, primary_key=True)
+      faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
+      term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
+      course_name = db.Column(db.String(100), db.ForeignKey("courses.course_name"))
+      preference = db.Column(db.String(1)) # M - Most wanted, A - able to teach, C - cannot teach
 
 #-- Description: Stores what classes a faculty is allowed to teach
 class FacultyConstraint(db.Model):
