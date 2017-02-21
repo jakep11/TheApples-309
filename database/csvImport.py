@@ -238,7 +238,6 @@ def importCourseData():
    for row in reader:
 
       column = 0
-
       comps = 0
 
       for entry in row:
@@ -256,7 +255,8 @@ def importCourseData():
 
             # Add the new course to the database if it is not currently in there
             course = models.Courses.query.filter_by(number=courseNum, major=courseDept,
-                                                    course_name=courseName).first()
+                                                 course_name=courseName).first()
+
             if course is None:  # If the course doesn't already exist, add a new course to the table
 
                # Check again if a course containing the course num and dept is in the db
@@ -266,9 +266,11 @@ def importCourseData():
                   course = models.Courses(number=courseNum, major=courseDept, course_name=courseName)
                   db.session.add(course)
 
-               else: # The course is in the db, but is missing a course name
+               else:  # The course is in the db, but is missing a course name
                   course.course_name = courseName
                   db.session.add(course)
+
+               db.session.commit()
 
          # Subject Code
          elif column > 2:
@@ -291,6 +293,17 @@ def importCourseData():
                   component = models.Components(name=compName, course=course,
                                                 workload_units=units, hours=hours)
                   db.session.add(component)
+                  db.session.commit()
+
+               # add the component type to the component type table if it does not exist
+               componentType = models.ComponentTypes.query.filter_by(name=compName).first()
+
+               if componentType is None:
+                  componentType = models.ComponentTypes(name=compName)
+                  db.session.add(componentType)
+                  db.session.commit()
+
+               print "made it past components"
 
             # Activity
             elif attribute == "activity":
@@ -322,7 +335,7 @@ def importCourseData():
                else:
                   hours = value
 
-      db.session.commit()
+         db.session.commit()
 
    # upon success, add file name to database
    newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
