@@ -73,6 +73,15 @@ app.service("sharedData", function () {
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {
     $rootScope.bcrumb1 = "Published Schedules";
+    
+    $scope.sortType = 'course_num';
+    $scope.reverse = true;
+
+    $scope.sortBy = function(sortType) {
+      $scope.reverse = ($scope.sortType === sortType) ? !$scope.reverse : false;
+      $scope.sortType = sortType;
+    };
+    
 
     // grab list of times from sharedData and populate UI
     $scope.startTimes = sharedData.startTimes;

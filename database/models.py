@@ -1,6 +1,7 @@
 from web_app import app, db
 from datetime import datetime
 import timeCalculations
+from sqlalchemy.orm import backref
 
 #-- Description: Stores information and role type for each user of the system
 class User(db.Model):                     
@@ -49,7 +50,7 @@ class Courses(db.Model):
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   components = db.relationship("Components", backref="course")
+   components = db.relationship("Components", backref=backref("course", uselist="false"))
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
@@ -62,8 +63,8 @@ class Courses(db.Model):
       'id'         : self.id,
       'number': self.number,
       'major': self.major,
-      'course_name': self.course_name
-      #'components': self.components,
+      'course_name': self.course_name,
+      #'components': self.components
       #'course_sections': self.course_sections,
       #'constraints': self.constraints,
       #'final_schedules': self.final_schedules,
@@ -247,3 +248,34 @@ class Components(db.Model):
    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
    workload_units = db.Column(db.String(5))
    hours = db.Column(db.String(5))
+
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id': self.id,
+      'name': self.name,
+      'workload_units': self.workload_units,
+      'hours': self.hours
+      }
+
+# -- Description: Stores the names of the imported CSV files
+class ImportedFiles(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(40))
+
+# -- Description: Stores the student cohort data
+class CohortData(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+   major = db.Column(db.String(12))
+   freshman = db.Column(db.Integer)
+   sophmores = db.Column(db.Integer)
+   juniors = db.Column(db.Integer)
+   seniors = db.Column(db.Integer)
+
+# -- Description: Stores the component types
+class ComponentTypes(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(20))
+
