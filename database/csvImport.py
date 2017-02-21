@@ -3,10 +3,9 @@
 # The functions in this file enable the department scheduler to import a CSV file containing resource information
 # from the application.
 
-from flask import Blueprint, render_template, flash, redirect, request, url_for, jsonify, json
+from flask import Blueprint, request
 import csv, models
 import io
-from models import *
 from web_app import db
 
 csvImport_api = Blueprint('csvImport_api', __name__)
@@ -69,6 +68,13 @@ def importStudentData():
             # Add new student planning data to database
             db.session.add(studentData)
             db.session.commit()
+
+   # upon success, add file name to database
+   newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
+   if newfile is None:
+      newfile = models.ImportedFiles(name=inputFile.filename)
+      db.session.add(newfile)
+      db.session.commit()
 
    return "successfully uploaded student planning data"
 
@@ -164,6 +170,13 @@ def importHistoricData():
             db.session.add(springData)
             db.session.commit()
 
+   # upon success, add file name to database
+   newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
+   if newfile is None:
+      newfile = models.ImportedFiles(name=inputFile.filename)
+      db.session.add(newfile)
+      db.session.commit()
+
    return "successfully uploaded final schedule data"
 
 # This function parses through a CSV file containing room data, and adds the information to the database
@@ -194,13 +207,23 @@ def importRoomData():
                roomCapacity = entry
 
                # Create a new student planning data row in the ScheduleFinal database table
-               room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
+               room = models.Rooms.query.filter_by(type=roomType, number=roomNum,
+                                                   capacity=roomCapacity).first()
+               if room is None:
+                  room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
 
-               # Add new student planning data to database
-               db.session.add(room)
-               db.session.commit()
+                  # Add new student planning data to database
+                  db.session.add(room)
+                  db.session.commit()
 
       rowNum += 1
+
+   # upon success, add file name to database
+   newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
+   if newfile is None:
+      newfile = models.ImportedFiles(name=inputFile.filename)
+      db.session.add(newfile)
+      db.session.commit()
 
    return "successfully uploaded room data"
 
@@ -215,7 +238,6 @@ def importCourseData():
    for row in reader:
 
       column = 0
-
       comps = 0
 
       for entry in row:
@@ -233,7 +255,8 @@ def importCourseData():
 
             # Add the new course to the database if it is not currently in there
             course = models.Courses.query.filter_by(number=courseNum, major=courseDept,
-                                                    course_name=courseName).first()
+                                                 course_name=courseName).first()
+
             if course is None:  # If the course doesn't already exist, add a new course to the table
 
                # Check again if a course containing the course num and dept is in the db
@@ -243,9 +266,11 @@ def importCourseData():
                   course = models.Courses(number=courseNum, major=courseDept, course_name=courseName)
                   db.session.add(course)
 
-               else: # The course is in the db, but is missing a course name
+               else:  # The course is in the db, but is missing a course name
                   course.course_name = courseName
                   db.session.add(course)
+
+               db.session.commit()
 
          # Subject Code
          elif column > 2:
@@ -268,6 +293,17 @@ def importCourseData():
                   component = models.Components(name=compName, course=course,
                                                 workload_units=units, hours=hours)
                   db.session.add(component)
+                  db.session.commit()
+
+               # add the component type to the component type table if it does not exist
+               componentType = models.ComponentTypes.query.filter_by(name=compName).first()
+
+               if componentType is None:
+                  componentType = models.ComponentTypes(name=compName)
+                  db.session.add(componentType)
+                  db.session.commit()
+
+               print "made it past components"
 
             # Activity
             elif attribute == "activity":
@@ -299,6 +335,13 @@ def importCourseData():
                else:
                   hours = value
 
+         db.session.commit()
+
+   # upon success, add file name to database
+   newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
+   if newfile is None:
+      newfile = models.ImportedFiles(name=inputFile.filename)
+      db.session.add(newfile)
       db.session.commit()
 
    return "successfully uploaded course data"
@@ -313,6 +356,15 @@ def importCourseData():
 #    reader = csv.reader(stream)
 #
 #    for row in reader:
+#
+#
+#    # upon success, add file name to database
+#    newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
+#    if newfile is None:
+#       newfile = models.ImportedFiles(name=inputFile.filename)
+#       db.session.add(newfile)
+#       db.session.commit()
+#
 #
 #    return "successfully uploaded cohort data"
 
@@ -344,13 +396,23 @@ def importFacultyData():
                workUnits = entry
 
                # Create a new instructor data row in the Faculty database table
-               instructor = models.Faculty(first_name=firstName, last_name=lastName,
-                                     allowed_work_units=workUnits)
+               instructor = models.Faculty.query.filter_by(first_name=firstName, last_name=lastName,
+                                                           allowed_work_units=workUnits).first()
+               if instructor is None:
+                  instructor = models.Faculty(first_name=firstName, last_name=lastName,
+                                        allowed_work_units=workUnits)
 
-               # Add new instructor data to database
-               db.session.add(instructor)
-               db.session.commit()
+                  # Add new instructor data to database
+                  db.session.add(instructor)
+                  db.session.commit()
 
       rowNum += 1
+
+   # upon success, add file name to database
+   newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
+   if newfile is None:
+      newfile = models.ImportedFiles(name=inputFile.filename)
+      db.session.add(newfile)
+      db.session.commit()
 
    return "successfully uploaded faculty data"

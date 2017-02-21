@@ -275,3 +275,8 @@ class CohortData(db.Model):
    juniors = db.Column(db.Integer)
    seniors = db.Column(db.Integer)
 
+# -- Description: Stores the component types
+class ComponentTypes(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(20))
+
