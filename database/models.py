@@ -50,7 +50,7 @@ class Courses(db.Model):
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   components = db.relationship("Components", backref=backref("course", uselist="false"))
+   components = db.relationship("Components", backref="course")
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
@@ -211,9 +211,9 @@ class FacultyPreferences(db.Model):
       return {
          'faculty_id': self.faculty_id,
          'day': self.day,
-         'time_start': self.time_start.isoformat(),
-         'time_end': self.time_end.isoformat(),
-         'preference': self.preference
+         'time_start': self.time_start.isoformat()[:-3],  #[:-3] Removes the seconds from time
+         'time_end': self.time_end.isoformat()[:-3],  #[:-3] Removes the seconds from time
+         'choice': self.preference
       }
          
 
