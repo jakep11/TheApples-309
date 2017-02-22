@@ -31,6 +31,7 @@ class Faculty(db.Model):
    allowed_work_units = db.Column(db.Integer)
    faculty_sections = db.relationship("Sections", backref="faculty")
    preferences = db.relationship("FacultyPreferences", backref="faculty")
+   course_preferences = db.relationship("FacultyCoursePreferences", backref="faculty")
    constraints = db.relationship("FacultyConstraint", backref="faculty")
    notifications = db.relationship("Notifications", backref="faculty")
 
@@ -55,6 +56,7 @@ class Courses(db.Model):
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
    student_planning_data = db.relationship("StudentPlanningData", backref="course")
+   course_preferences = db.relationship("FacultyCoursePreferences", backref="course")
 
    @property
    def serialize(self):
@@ -85,6 +87,7 @@ class Terms(db.Model):
    comments = db.relationship("Comments", backref="term")
    final_schedules = db.relationship("ScheduleFinal", backref="term")
    preferences = db.relationship("FacultyPreferences", backref="term")
+   course_preferences = db.relationship("FacultyCoursePreferences", backref="term")
    student_planning_data = db.relationship("StudentPlanningData", backref="term")
    published_schedules = db.relationship("PublishedSchedule", backref="term")
 
@@ -132,6 +135,7 @@ class Sections(db.Model):
    time_start = db.Column(db.Integer)
    time_end = db.Column(db.Integer)
    days = db.Column(db.String(3))               # 'MWF' or "TR"
+   schedule_id = db.Column(db.Integer, db.ForeignKey("schedule.id"))
 
    # want course name, faculty name, room number,
    @property
@@ -183,16 +187,12 @@ class StudentPlanningData(db.Model):
    seat_demand = db.Column(db.Integer)
    unmet_seat_demand = db.Column(db.Integer)
 
-#-- Description: Stores all of the sections that are planned in a specific term
-class ScheduleInitial(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   term = db.Column(db.Integer)
-   section = db.Column(db.Integer)
-
-#-- Description: Stores which tentative schedules have been 'published'
-class PublishedSchedule(db.Model):
+#-- Description: Stores all of the sections that are scheduled in a specific term
+class Schedule(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
+   sections = db.relationship("Sections", backref="schedule")
+   published = db.Column(db.Boolean)
 
 #-- Description: Stores faculty preferences for what days and times they would like to teach in a specific term 
 class FacultyPreferences(db.Model):
@@ -214,13 +214,21 @@ class FacultyPreferences(db.Model):
          'choice': self.preference
       }
          
-#-- Description: Stores faculty course preferences for what classes they would like to teach
+# #-- Description: Stores faculty course preferences for what classes they would like to teach
 class FacultyCoursePreferences(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    course_name = db.Column(db.String(100), db.ForeignKey("courses.course_name"))
    preference = db.Column(db.String(1)) # M - Most wanted, A - able to teach, C - cannot teach
+   
+   @property
+   def serialize(self):
+      return {
+         'faculty_id': self.faculty_id,
+         'course_name': self.course_name,
+         'preference': self.preference
+      }
 
 #-- Description: Stores what classes a faculty is allowed to teach
 class FacultyConstraint(db.Model):

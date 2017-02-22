@@ -4,442 +4,442 @@
 -->
 
 <body>
-    <div class="container-fluid">
-        <div class="row title">
-            <h1>Course Manager</h1>
-        </div>
-        <div class="col-xs-4 col-xs-offset-4 component-types-editor">
-            <table class="table table-striped">
-                <tr class="success">
-                    <th style="width: 100px;">Select</th>
-                    <th>Component Types</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="lecture" checked>
-                    </td>
-                    <td>Lecture</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="lab">
-                    </td>
-                    <td>Lab</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="supervisory">
-                    </td>
-                    <td>Supervisory</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="group">
-                    </td>
-                    <td>Group</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-xs-4 col-xs-offset-4">
-            <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-add-modal">Add</button>
-            </div>
-            <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-edit-modal">Edit</button>
-            </div>
-            <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12">Remove</button>
-            </div>
-        </div>
-        <div id="types-add-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <div class="modal-title">
-                                <h3>Add Component Type</h3>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Name:</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="type-name">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-offset-3">
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns">SAVE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="types-edit-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <div class="modal-title">
-                                <h3>Edit Component Type</h3>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Name:</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="type-name">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-offset-3">
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns">SAVE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 rooms-table">
-                <table class="table table-striped">
-                    <tr class="success">
-                        <th></th>
-                        <th>Class</th>
-                        <th>Component 1</th>
-                        <th>Work Units</th>
-                        <th>Class Hours</th>
-                        <th>Component 2</th>
-                        <th>Work Units</th>
-                        <th>Class Hours</th>
-                        <th>Suitable Resources</th>
-                    </tr>
-                    <tr ng-repeat="course in courses | orderBy: 'number'">
-                        <td><input type="radio" ng-model="$parent.id" value="{{course.id}}" ng-click="radioChanged(course)" /></td>
-                        <td>{{course.major}} {{course.number}}</td>
-                        <td>{{course.component_one}}</td>
-                        <td>{{course.c1_workload_units}}</td>
-                        <td>{{course.c1_hours}}</td>
-                        <td>{{course.component_two}}</td>
-                        <td>{{course.c2_workload_units}}</td>
-                        <td>{{course.c2_hours}}</td>
-                        <td>
-                            <button class="btn btn-default preference-btn" data-toggle="#info-modal" data-type="modal">VIEW</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div id="info-modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content info-modal">
-                        <div class="modal-body">
-                            <div class="row modal-title">
-                                <h3>Course Info</h3>
-                            </div>
-
-                            <div class="row label-row" style="text-align: left">
-                                <div class="col-xs-4 col-xs-offset-1" style="font-weight: bold">
-                                    <label>Faculty able to teach:</label>
-                                </div>
-                                <div class="col-xs-4 col-xs-offset-2">
-                                    <label>Suitable lab rooms:</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!------------LEFT TABLE------------->
-                                <div class="col-xs-4 col-xs-offset-1" style="text-align: left">
-                                    <div class="table-dim">
-                                        <table class="table info-table">
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bellardo, J</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!------------RIGHT TABLE------------->
-                                <div class="col-xs-4 col-xs-offset-2">
-                                    <div class="table-dim">
-                                        <table class="table info-table">
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body" style="text-align: center">
-                                <button class="btn btn-default close-btn" data-dismiss="modal">CLOSE</button>
-                            </div>
+   <div class="container-fluid">
+      <div class="row title">
+         <h1>Course Manager</h1>
+      </div>
+      <div class="col-xs-4 col-xs-offset-4 component-types-editor">
+         <table class="table table-striped">
+            <tr class="success">
+               <th style="width: 100px;">Select</th>
+               <th>Component Types</th>
+            </tr>
+            <tr>
+               <td>
+                  <input type="radio" name="component-type" value="lecture" checked>
+               </td>
+               <td>Lecture</td>
+            </tr>
+            <tr>
+               <td>
+                  <input type="radio" name="component-type" value="lab">
+               </td>
+               <td>Lab</td>
+            </tr>
+            <tr>
+               <td>
+                  <input type="radio" name="component-type" value="supervisory">
+               </td>
+               <td>Supervisory</td>
+            </tr>
+            <tr>
+               <td>
+                  <input type="radio" name="component-type" value="group">
+               </td>
+               <td>Group</td>
+            </tr>
+         </table>
+      </div>
+      <div class="col-xs-4 col-xs-offset-4">
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-add-modal">Add</button>
+         </div>
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-edit-modal">Edit</button>
+         </div>
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12">Remove</button>
+         </div>
+      </div>
+      <div id="types-add-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Add Component Type</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Name:</label>
                         </div>
-                    </div>
-                </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="type-name">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
             </div>
-        </div>
-        <div class="col-xs-4 col-xs-offset-4">
-            <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
+         </div>
+      </div>
+      <div id="types-edit-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Edit Component Type</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Name:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="type-name">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
             </div>
-            <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-disabled="!radioSelected">Edit</button>
-            </div>
-            <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" ng-disabled="!radioSelected" ng-click="deleteCourse()">Remove</button>
-            </div>
-        </div>
-        <div id="add-modal" class="modal fade" role="dialog">
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 rooms-table">
+            <table class="table table-striped">
+               <tr class="success">
+                  <th></th>
+                  <th>Class</th>
+                  <th>Component 1</th>
+                  <th>Work Units</th>
+                  <th>Class Hours</th>
+                  <th>Component 2</th>
+                  <th>Work Units</th>
+                  <th>Class Hours</th>
+                  <th>Suitable Resources</th>
+               </tr>
+               <tr ng-repeat="course in courses | orderBy: 'number'">
+                  <td><input type="radio" ng-model="$parent.id" value="{{course.id}}" ng-click="radioChanged(course)" /></td>
+                  <td>{{course.major}} {{course.number}}</td>
+                  <td>{{course.component_one}}</td>
+                  <td>{{course.c1_workload_units}}</td>
+                  <td>{{course.c1_hours}}</td>
+                  <td>{{course.component_two}}</td>
+                  <td>{{course.c2_workload_units}}</td>
+                  <td>{{course.c2_hours}}</td>
+                  <td>
+                     <button class="btn btn-default preference-btn" data-toggle="#info-modal" data-type="modal">VIEW</button>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <div id="info-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <div class="modal-title">
-                                <h3>Add Course</h3>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Course Name:</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Course Number:</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Component 1</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
-                              <option>Lecture</option>
-                              <option>Lab</option>
-                              <option>Supervisory</option>
-                              <option>Group</option>
-                           </select>
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Work Units</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units1">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Class Hours</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours1">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Component 2</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
-                              <option>Lecture</option>
-                              <option>Lab</option>
-                              <option>Supervisory</option>
-                              <option>Group</option>
-                           </select>
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Work Units</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units2">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Class Hours</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours2">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-offset-3">
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" ng-click="addCourse()">SAVE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+               <div class="modal-content info-modal">
+                  <div class="modal-body">
+                     <div class="row modal-title">
+                        <h3>Course Info</h3>
+                     </div>
+
+                     <div class="row label-row" style="text-align: left">
+                        <div class="col-xs-4 col-xs-offset-1" style="font-weight: bold">
+                           <label>Faculty able to teach:</label>
+                        </div>
+                        <div class="col-xs-4 col-xs-offset-2">
+                           <label>Suitable lab rooms:</label>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <!------------LEFT TABLE------------->
+                        <div class="col-xs-4 col-xs-offset-1" style="text-align: left">
+                           <div class="table-dim">
+                              <table class="table info-table">
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Bellardo, J</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </div>
+                        <!------------RIGHT TABLE------------->
+                        <div class="col-xs-4 col-xs-offset-2">
+                           <div class="table-dim">
+                              <table class="table info-table">
+                                 <tr>
+                                    <td>14-301</td>
+                                 </tr>
+                                 <tr>
+                                    <td>14-303</td>
+                                 </tr>
+                                 <tr>
+                                    <td>14-301</td>
+                                 </tr>
+                                 <tr>
+                                    <td>14-303</td>
+                                 </tr>
+                                 <tr>
+                                    <td>14-301</td>
+                                 </tr>
+                                 <tr>
+                                    <td>14-303</td>
+                                 </tr>
+                                 <tr>
+                                    <td>14-301</td>
+                                 </tr>
+                                 <tr>
+                                    <td>14-303</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="modal-body" style="text-align: center">
+                        <button class="btn btn-default close-btn" data-dismiss="modal">CLOSE</button>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-        <div id="edit-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <div class="modal-title">
-                                <h3>Edit Course</h3>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Course Name:</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Course Number:</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Component 1</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
+         </div>
+      </div>
+      <div class="col-xs-4 col-xs-offset-4 bottom-buffer">
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
+         </div>
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-disabled="!radioSelected">Edit</button>
+         </div>
+         <div class="col-xs-4">
+            <button class="btn btn-default preference-btn col-xs-12" ng-disabled="!radioSelected" ng-click="deleteCourse()">Remove</button>
+         </div>
+      </div>
+      <div id="add-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Add Course</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Course Name:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="course-number">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Course Number:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="course-number">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Component 1</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <select class="form-control" name="component1">
                               <option>Lecture</option>
                               <option>Lab</option>
                               <option>Supervisory</option>
                               <option>Group</option>
                            </select>
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Work Units</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units1">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Class Hours</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours1">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Component 2</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Work Units</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="work-units1">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Class Hours</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="class-hours1">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Component 2</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <select class="form-control" name="component1">
                               <option>Lecture</option>
                               <option>Lab</option>
                               <option>Supervisory</option>
                               <option>Group</option>
                            </select>
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Work Units</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units2">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Class Hours</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours2">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-offset-3">
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" ng-click="addCourse()">SAVE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Work Units</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="work-units2">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Class Hours</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="class-hours2">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addCourse()">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+      <div id="edit-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="modal-title">
+                        <h3>Edit Course</h3>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Course Name:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="course-number">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Course Number:</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="course-number">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Component 1</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <select class="form-control" name="component1">
+                              <option>Lecture</option>
+                              <option>Lab</option>
+                              <option>Supervisory</option>
+                              <option>Group</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Work Units</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="work-units1">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Class Hours</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="class-hours1">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Component 2</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <select class="form-control" name="component1">
+                              <option>Lecture</option>
+                              <option>Lab</option>
+                              <option>Supervisory</option>
+                              <option>Group</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Work Units</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="work-units2">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-3 col-xs-offset-3">
+                           <label>Class Hours</label>
+                        </div>
+                        <div class="col-xs-4">
+                           <input class="form-control" type="text" name="class-hours2">
+                        </div>
+                     </div>
+                     <div class="row modal-row">
+                        <div class="col-xs-offset-3">
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
+                           </div>
+                           <div class="col-xs-4">
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addCourse()">SAVE</button>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </body>
