@@ -135,6 +135,7 @@ class Sections(db.Model):
    time_start = db.Column(db.Integer)
    time_end = db.Column(db.Integer)
    days = db.Column(db.String(3))               # 'MWF' or "TR"
+   schedule_id = db.Column(db.Integer, db.ForeignKey("schedule.id"))
 
    # want course name, faculty name, room number,
    @property
@@ -187,15 +188,11 @@ class StudentPlanningData(db.Model):
    unmet_seat_demand = db.Column(db.Integer)
 
 #-- Description: Stores all of the sections that are scheduled in a specific term
-class ScheduleInitial(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   term = db.Column(db.Integer)
-   section = db.Column(db.Integer)
-
-#-- Description: Stores which tentative schedules have been 'published'
-class PublishedSchedule(db.Model):
+class Schedule(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
+   sections = db.relationship("Sections", backref="schedule")
+   published = db.Column(db.Boolean)
 
 #-- Description: Stores faculty preferences for what days and times they would like to teach in a specific term 
 class FacultyPreferences(db.Model):
