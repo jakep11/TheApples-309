@@ -186,7 +186,7 @@ class StudentPlanningData(db.Model):
    seat_demand = db.Column(db.Integer)
    unmet_seat_demand = db.Column(db.Integer)
 
-#-- Description: Stores all of the sections that are planned in a specific term
+#-- Description: Stores all of the sections that are scheduled in a specific term
 class ScheduleInitial(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    term = db.Column(db.Integer)

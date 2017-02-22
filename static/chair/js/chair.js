@@ -251,6 +251,7 @@ app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function ($s
       }
 
       fileUpload.uploadFileToUrl(file, uploadUrl);
+      console.log("done uploading file");
    };
 }]);
 
