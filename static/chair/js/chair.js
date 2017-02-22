@@ -50,6 +50,64 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
    }
    $scope.getComponents();
 
+   $scope.getComponentTypes = function () {
+      $http({
+         method: 'GET',
+         url: 'get/componentTypes',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }).then(function successCallback(response) {
+         $scope.componentTypes = response.data;
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.getComponentTypes();
+
+   $scope.addComponentType = function () {
+      $http({
+         method: 'POST',
+         url: 'create/componentType',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            name: $scope.addComponent
+         }
+      }).then(function successCallback(response) {
+         console.log("Component added");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.removeComponentType = function () {
+      $http({
+         method: 'POST',
+         url: 'delete/componentType',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            id: $scope.selectedComponentType
+         }
+      }).then(function successCallback(response) {
+         console.log("Component deleted");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   $scope.compTypeRadioSelected = false;
+  $scope.compTypeRadioChanged = function(id) {
+    $scope.selectedComponentType = id;
+    $scope.compTypeRadioSelected = true;
+
+  }
+
+
 //Combining courses and components list into one..
 function combineCoursesComponents() {
 
@@ -95,17 +153,23 @@ $scope.radioChanged = function (course) {
       'id': course.id,
       'number': course.number,
       'major': course.major,
-      'lecture_workload_units': course.lecture_workload_units,
-      'lecture_hours': course.lecture_hours,
-      'lab_workload_units': course.lab_workload_units,
-      'lab_hours': course.lab_hours
+      'course_name': course.course_name,
+      'component_one': course.component_one,
+      'c1_workload_units': course.c1_workload_units,
+      'c1_hours': course.c1_hours,
+      'component_two': course.component_two,
+      'c2_workload_units': course.c2_workload_units,
+      'c2_hours': course.c2_hours
    }
    $scope.radioSelected = true;
+   console.log("current set");
 
 }
 $scope.openEdit = function () {
    $scope.edit = $scope.current;
+   console.log($scope.current);
 }
+
 
 $scope.addCourse = function () {
    $http({
@@ -115,12 +179,15 @@ $scope.addCourse = function () {
          'Content-Type': 'application/json'
       },
       data: {
-         'major': $scope.new.major,
-         'number': $scope.new.number,
-         'lecture_workload_units': $scope.new.lecture_workload_units,
-         'lecture_hours': $scope.new.lecture_hours,
-         'lab_workload_units': $scope.new.lab_workload_units,
-         'lab_hours': $scope.new.lab_hours
+         'major': $scope.add.major,
+         'number': $scope.add.number,
+         'course_name': $scope.add.course_name,
+         'component_one': $scope.add.c1,
+         'c1_workload_units': $scope.add.c1_workload_units,
+         'c1_hours': $scope.add.c1_hours,
+         'component_two': $scope.add.c2,
+         'c2_workload_units': $scope.add.c2_workload_units,
+         'c2_hours': $scope.add.c2_hours
       }
    }).then(function successCallback(response) {
       $window.location.reload();
@@ -132,7 +199,7 @@ $scope.addCourse = function () {
 $scope.editCourse = function () {
    $http({
       method: 'POST',
-      url: '/edit/user',
+      url: '/edit/course',
       headers: {
          'Content-Type': 'application/json'
       },
@@ -140,10 +207,13 @@ $scope.editCourse = function () {
          'id': $scope.edit.id,
          'major': $scope.edit.major,
          'number': $scope.edit.number,
-         'lecture_workload_units': $scope.edit.lecture_workload_units,
-         'lecture_hours': $scope.edit.lecture_hours,
-         'lab_workload_units': $scope.edit.lab_workload_units,
-         'lab_hours': $scope.edit.lab_hours
+         'course_name': $scope.edit.course_name,
+         'component_one': $scope.edit.component_one,
+         'c1_workload_units': $scope.edit.c1_workload_units,
+         'c1_hours': $scope.edit.c1_hours,
+         'component_two': $scope.edit.component_two,
+         'c2_workload_units': $scope.edit.c2_workload_units,
+         'c2_hours': $scope.edit.c2_hours
       }
    }).then(function successCallback(response) {
       console.log('Calling edit course');

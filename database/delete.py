@@ -195,3 +195,15 @@ def delete_notification():
     db.session.delete(notification)
     db.session.commit()
     return  "Notification %s removed from database" % (notification.message)
+
+@delete_api.route('/componentType', methods = ["POST"])
+def delete_component_type():
+    data = request.json
+    id = data['id']
+
+    componentType = ComponentTypes.query.filter_by(id=id).first()
+    if componentType is None:
+        return 'ERROR COMPONENT TYPE NOT FOUND'
+    db.session.delete(componentType)
+    db.session.commit()
+    return  "Component Type %s removed from database" % (componentType.name)

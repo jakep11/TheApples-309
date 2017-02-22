@@ -39,18 +39,33 @@ def new_course():
     data = request.json
     number = data['number']
     major = data['major']
-    lecture_workload_units = data['lecture_workload_units']
-    lecture_hours = data['lecture_hours']
-    lab_workload_units = data['lab_workload_units']
-    lab_hours = data['lab_hours']
+    course_name = data['course_name']
 
-    course = Courses(data=data, number=number, major=major,
-                    lecture_workload_units=lecture_workload_units,
-                    lecture_hours=lecture_hours,
-                    lab_workload_units=lab_workload_units, lab_hours=lab_hours)
+    component_one = data['component_one']
+    c1_workload_units = data['c1_workload_units']
+    c1_hours = data['c1_hours']
+    component_two = data['component_two']
+    c2_workload_units = data['c2_workload_units']
+    c2_hours = data['c2_hours']
+
+    course = Courses(number=number, major=major, course_name=course_name)
     db.session.add(course)
     db.session.commit()
-    return  "Course %s %d added to database" % (major, number)
+    course = Courses.query.filter(Courses.number==number, 
+        Courses.major==major, Courses.course_name==course_name).first()
+
+    c1 = Components(course=course, name=component_one, 
+        workload_units=c1_workload_units, hours=c1_hours)
+    c2 = Components(course=course, name=component_two, 
+        workload_units=c2_workload_units, hours=c2_hours)
+                    # component_one=component_one, component_two=component_two,
+                    # c1_workload_units=c1_workload_units,
+                    # c1_hours=c1_hours,
+                    # c2_workload_units=c2_workload_units, c2_hours=c2_hours)
+    db.session.add(c1)
+    db.session.add(c2)
+    db.session.commit()
+    return  "Course"
 
 @create_api.route('/term', methods = ["POST"])
 def new_term():
@@ -281,10 +296,18 @@ def new_notification():
     if faculty is None:
         return "ERROR FACULTY NOT FOUND"
 
-    n = notification(faculty=faculty, message=message,
+    n = Notification(faculty=faculty, message=message,
                         unread=unread, time=time)
     db.session.add(n)
     db.session.commit()
     return "Notification added to database"
 
+@create_api.route('/componentType', methods = ['POST'])
+def new_component_type():
+    data = request.json
+    name = data['name']
 
+    n = ComponentTypes(name=name)
+    db.session.add(n)
+    db.session.commit()
+    return "Component Type added to database"

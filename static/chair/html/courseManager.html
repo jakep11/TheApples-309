@@ -14,30 +14,12 @@
                     <th style="width: 100px;">Select</th>
                     <th>Component Types</th>
                 </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="lecture" checked>
-                    </td>
-                    <td>Lecture</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="lab">
-                    </td>
-                    <td>Lab</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="supervisory">
-                    </td>
-                    <td>Supervisory</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="component-type" value="group">
-                    </td>
-                    <td>Group</td>
-                </tr>
+                <tr ng-repeat="comp in componentTypes">
+                        <td><input type="radio" ng-model="$parent.compid" value="{{comp.id}}" ng-click="compTypeRadioChanged(comp.id)"/></td>
+                        <td>{{comp.name}}</td>
+                        
+                    </tr>
+                
             </table>
         </div>
         <div class="col-xs-4 col-xs-offset-4">
@@ -45,10 +27,7 @@
                 <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-add-modal">Add</button>
             </div>
             <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-edit-modal">Edit</button>
-            </div>
-            <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12">Remove</button>
+                <button class="btn btn-default preference-btn col-xs-12" ng-click="removeComponentType()" ng-disabled="!compTypeRadioSelected">Remove</button>
             </div>
         </div>
         <div id="types-add-modal" class="modal fade" role="dialog">
@@ -64,7 +43,7 @@
                                     <label>Name:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="type-name">
+                                    <input class="form-control" type="text" name="type-name" ng-model="addComponent">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -73,38 +52,7 @@
                                         <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                                     </div>
                                     <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns">SAVE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="types-edit-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <div class="modal-title">
-                                <h3>Edit Component Type</h3>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-3 col-xs-offset-3">
-                                    <label>Name:</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="type-name">
-                                </div>
-                            </div>
-                            <div class="row modal-row">
-                                <div class="col-xs-offset-3">
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                                        <button class="btn btn-default preference-btn add-btns" ng-click="addComponentType()">SAVE</button>
                                     </div>
                                 </div>
                             </div>
@@ -119,6 +67,7 @@
                     <tr class="success">
                         <th></th>
                         <th>Class</th>
+                        <th>Name</th>
                         <th>Component 1</th>
                         <th>Work Units</th>
                         <th>Class Hours</th>
@@ -130,6 +79,7 @@
                     <tr ng-repeat="course in courses | orderBy: 'number'">
                         <td><input type="radio" ng-model="$parent.id" value="{{course.id}}" ng-click="radioChanged(course)" /></td>
                         <td>{{course.major}} {{course.number}}</td>
+                        <td>{{course.course_name}}</td>
                         <td>{{course.component_one}}</td>
                         <td>{{course.c1_workload_units}}</td>
                         <td>{{course.c1_hours}}</td>
@@ -159,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <!------------LEFT TABLE------------->
+                                <!-- ---------- LEFT TABLE ----------- -->
                                 <div class="col-xs-4 col-xs-offset-1" style="text-align: left">
                                     <div class="table-dim">
                                         <table class="table info-table">
@@ -196,7 +146,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <!------------RIGHT TABLE------------->
+                                <!-- ----------RIGHT TABLE----------- -->
                                 <div class="col-xs-4 col-xs-offset-2">
                                     <div class="table-dim">
                                         <table class="table info-table">
@@ -241,7 +191,7 @@
                 <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
             </div>
             <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-disabled="!radioSelected">Edit</button>
+                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-disabled="!radioSelected" ng-click="openEdit()">Edit</button>
             </div>
             <div class="col-xs-4">
                 <button class="btn btn-default preference-btn col-xs-12" ng-disabled="!radioSelected" ng-click="deleteCourse()">Remove</button>
@@ -260,7 +210,15 @@
                                     <label>Course Name:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
+                                    <input class="form-control" type="text" name="course-number" ng-model="add.course_name">
+                                </div>
+                            </div>
+                            <div class="row modal-row">
+                                <div class="col-xs-3 col-xs-offset-3">
+                                    <label>Course Major:</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" type="text" name="course-number" ng-model="add.major">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -268,7 +226,7 @@
                                     <label>Course Number:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
+                                    <input class="form-control" type="text" name="course-number" ng-model="add.number">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -276,12 +234,9 @@
                                     <label>Component 1</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
-                              <option>Lecture</option>
-                              <option>Lab</option>
-                              <option>Supervisory</option>
-                              <option>Group</option>
-                           </select>
+                                    <select class="form-control" name="component1" ng-model="add.c1">
+                                        <option ng-repeat="comp in componentTypes" value="{{comp.name}}">{{comp.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -289,7 +244,7 @@
                                     <label>Work Units</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units1">
+                                    <input class="form-control" type="text" name="work-units1" ng-model="add.c1_workload_units">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -297,7 +252,7 @@
                                     <label>Class Hours</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours1">
+                                    <input class="form-control" type="text" name="class-hours1" ng-model="add.c1_hours">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -305,12 +260,9 @@
                                     <label>Component 2</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
-                              <option>Lecture</option>
-                              <option>Lab</option>
-                              <option>Supervisory</option>
-                              <option>Group</option>
-                           </select>
+                                    <select class="form-control" name="component2" ng-model="add.c2">
+                                        <option ng-repeat="comp in componentTypes" value="{{comp.name}}">{{comp.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -318,7 +270,7 @@
                                     <label>Work Units</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units2">
+                                    <input class="form-control" type="text" name="work-units2" ng-model="add.c2_workload_units">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -326,7 +278,7 @@
                                     <label>Class Hours</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours2">
+                                    <input class="form-control" type="text" name="class-hours2" ng-model="add.c2_hours">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -357,7 +309,15 @@
                                     <label>Course Name:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
+                                    <input class="form-control" type="text" name="course-number" ng-model="edit.course_name">
+                                </div>
+                            </div>
+                            <div class="row modal-row">
+                                <div class="col-xs-3 col-xs-offset-3">
+                                    <label>Course Major:</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" type="text" name="course-number" ng-model="edit.major">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -365,7 +325,7 @@
                                     <label>Course Number:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="course-number">
+                                    <input class="form-control" type="text" name="course-number" ng-model="edit.number">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -373,12 +333,9 @@
                                     <label>Component 1</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
-                              <option>Lecture</option>
-                              <option>Lab</option>
-                              <option>Supervisory</option>
-                              <option>Group</option>
-                           </select>
+                                    <select class="form-control" name="component1" ng-model="edit.component_one">
+                                        <option ng-repeat="comp in componentTypes" value="{{comp.name}}">{{comp.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -386,7 +343,7 @@
                                     <label>Work Units</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units1">
+                                    <input class="form-control" type="text" name="work-units1" ng-model="edit.c1_workload_units">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -394,7 +351,7 @@
                                     <label>Class Hours</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours1">
+                                    <input class="form-control" type="text" name="class-hours1" ng-model="edit.c1_hours">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -402,12 +359,9 @@
                                     <label>Component 2</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <select class="form-control" name="component1">
-                              <option>Lecture</option>
-                              <option>Lab</option>
-                              <option>Supervisory</option>
-                              <option>Group</option>
-                           </select>
+                                    <select class="form-control" name="component1" ng-model="edit.component_two">
+                                        <option ng-repeat="comp in componentTypes" value="{{comp.name}}">{{comp.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -415,7 +369,7 @@
                                     <label>Work Units</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="work-units2">
+                                    <input class="form-control" type="text" name="work-units2" ng-model="edit.c2_workload_units">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -423,7 +377,7 @@
                                     <label>Class Hours</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" name="class-hours2">
+                                    <input class="form-control" type="text" name="class-hours2" ng-model="edit.c2_hours">
                                 </div>
                             </div>
                             <div class="row modal-row">
@@ -432,7 +386,7 @@
                                         <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                                     </div>
                                     <div class="col-xs-4">
-                                        <button class="btn btn-default preference-btn add-btns" ng-click="addCourse()">SAVE</button>
+                                        <button class="btn btn-default preference-btn add-btns" ng-click="editCourse()">SAVE</button>
                                     </div>
                                 </div>
                             </div>
