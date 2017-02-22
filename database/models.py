@@ -20,7 +20,7 @@ class User(db.Model):
          'first_name': self.first_name,
          'last_name': self.last_name,
          'username': self.username,
-         'role': self.role,
+         'role': self.role
       }
 
 #-- Description: Stores all faculty available to work 

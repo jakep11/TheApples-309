@@ -98,6 +98,7 @@ def new_section():
     time_start = data['time_start']
     time_end = data['time_end']
     days = data['days']
+    schedule_id = data['schedule.id']
 
     course = Courses.query.filter_by(id=course_id).first()
     if course is None:
@@ -108,13 +109,16 @@ def new_section():
     faculty = Faculty.query.filter_by(id=faculty_id).first()
     if faculty is None:
         return "ERROR FACULTY NOT FOUND"
-    room = ROOMS.query.faculty_by(id=room_id).first()
+    room = Rooms.query.filter_by(id=room_id).first()
     if room is None:
         return "ERROR ROOM NOT FOUND"
+    schedule = Schedule.query.filter_by(id=schedule.id).first()
+    if schedule is None:
+        return "ERROR SCHEDULE NOT FOUND"
 
     section = Sections(course=course, term=term, faculty=faculty,
                         room=room, number=number, section_type=section_type,
-                        time_start=time_start, time_end=time_end, days=days)
+                        time_start=time_start, time_end=time_end, days=days, schedule=schedule)
     db.session.add(section)
     db.session.commit()
     return "Section %d of course %s %d added to database" % (number, course.name, course.number)
