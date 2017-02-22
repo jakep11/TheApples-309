@@ -217,7 +217,7 @@ class FacultyPreferences(db.Model):
          'choice': self.preference
       }
          
-#-- Description: Stores faculty course preferences for what classes they would like to teach
+# #-- Description: Stores faculty course preferences for what classes they would like to teach
 class FacultyCoursePreferences(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))

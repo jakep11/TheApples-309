@@ -246,6 +246,8 @@ app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function ($s
          var uploadUrl = "/importCohortData";
       } else if (filename.includes("Course")) {
          var uploadUrl = "/importCourseData";
+      } else if (filename.includes("Equipment")) {
+         var uploadUrl = "/importEquipData";
       }
 
       fileUpload.uploadFileToUrl(file, uploadUrl);
