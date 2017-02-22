@@ -433,27 +433,16 @@ def importEquipData():
          column += 1
 
          if rowNum != 0:
-            # Firstname
+            # Name of equipment
             if column == 1:
-               firstName = entry
+               name = entry
 
-            # Lastname
-            elif column == 2:
-               lastName = entry
-
-            # Work units allowed
-            elif column == 3:
-               workUnits = entry
-
-               # Create a new instructor data row in the Faculty database table
-               instructor = models.Faculty.query.filter_by(first_name=firstName, last_name=lastName,
-                                                           allowed_work_units=workUnits).first()
-               if instructor is None:
-                  instructor = models.Faculty(first_name=firstName, last_name=lastName,
-                                        allowed_work_units=workUnits)
-
-                  # Add new instructor data to database
-                  db.session.add(instructor)
+               # Create a new equipment entry in the Equipment database table
+               equip = models.Equipment.query.filter_by(name=name).first()
+               if equip is None:
+                  equip = models.Equipment(name=name)
+                  # Add new equipment type to database
+                  db.session.add(equip)
                   db.session.commit()
 
       rowNum += 1
@@ -465,4 +454,4 @@ def importEquipData():
       db.session.add(newfile)
       db.session.commit()
 
-   return "successfully uploaded faculty data"
+   return "successfully uploaded equipment data"
