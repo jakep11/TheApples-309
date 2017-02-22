@@ -224,6 +224,14 @@ class FacultyCoursePreferences(db.Model):
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    course_name = db.Column(db.String(100), db.ForeignKey("courses.course_name"))
    preference = db.Column(db.String(1)) # M - Most wanted, A - able to teach, C - cannot teach
+   
+   @property
+   def serialize(self):
+      return {
+         'faculty_id': self.faculty_id,
+         'course_name': self.course_name,
+         'preference': self.preference
+      }
 
 #-- Description: Stores what classes a faculty is allowed to teach
 class FacultyConstraint(db.Model):
