@@ -64,9 +64,9 @@
                 <label>Terms:</label>
                 <div class="col-xs-12 filter-selectors">
                     <form>
-                        <div class="checkbox">
-                            <label ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">
-                                <input type="radio" name="term" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
+                        <div class="checkbox" style="padding: 0px;">
+                            <label style="padding: 0px;" ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">
+                                <input   style="margin: 5px;" type="radio" name="term" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
                             </label>
                         </div>
                     </form>
@@ -127,7 +127,7 @@
     <!--    calendar display-->
     <!--   Tables   -->
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 cal-listing">
+        <div class="col-xs-8 cal-listing">
             <table class="table table-striped fac-calendar-table table-bordered">
                 <tr class="active">
                     <th style="width: 130px;"> </th>
@@ -163,10 +163,9 @@
                 </tr>
                 <tr>
                     <td>8:30AM</td>
+
                     <td> </td>
-                    <td class="success">
-                        <a type="text/javascript" data-toggle="popover">See Details</a>
-                    </td>
+                    <td> </td>
                     <td> </td>
                     <td> </td>
                     <td> </td>
@@ -174,9 +173,7 @@
                 <tr>
                     <td>9:00AM</td>
                     <td> </td>
-                    <td class="success">
-                        <a type="text/javascript" data-toggle="popover">See Details</a>
-                    </td>
+                    <td> </td>
                     <td> </td>
                     <td> </td>
                     <td> </td>
@@ -184,9 +181,7 @@
                 <tr>
                     <td>9:30AM</td>
                     <td> </td>
-                    <td class="success">
-                        <a type="text/javascript" data-toggle="popover">See Details</a>
-                    </td>
+                    <td> </td>
                     <td> </td>
                     <td> </td>
                     <td> </td>
@@ -244,9 +239,7 @@
                     <td> </td>
                     <td> </td>
                     <td> </td>
-                    <td class="success">
-                        <a type="text/javascript" data-toggle="popover">See Details</a>
-                    </td>
+                    <td> </td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -254,9 +247,7 @@
                     <td> </td>
                     <td> </td>
                     <td> </td>
-                    <td class="success">
-                        <a type="text/javascript" data-toggle="popover">See Details</a>
-                    </td>
+                    <td> </td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -399,22 +390,22 @@
             </table>
         </div>
 
-        <!-- SIDE PANEL CLASS DETAILS
-<div class="col-xs-3 col-xs-offset-1 details-pane text-center">
-    <h3>8:30AM - 9:00AM Details</h3>
-    <table style=" margin-top: 20px;" class="table details-table">
-        <tr>
-            <td>CPE 101-01</td>
-            <td>14-255</td>
-            <td>Lecture</td>
-        </tr>
-        <tr>
-            <td>CPE 101-02</td>
-            <td>14-256</td>
-            <td>Lab</td>
-        </tr>
-    </table>
-</div>
--->
+        <!-- SIDE PANEL CLASS DETAILS-->
+        <div class="col-xs-3 col-xs-offset-1 details-pane text-center">
+            <h3>8:30AM - 9:00AM Details</h3>
+            <table style=" margin-top: 20px;" class="table details-table">
+                <tr>
+                    <td>CPE 101-01</td>
+                    <td>14-255</td>
+                    <td>Lecture</td>
+                </tr>
+                <tr>
+                    <td>CPE 101-02</td>
+                    <td>14-256</td>
+                    <td>Lab</td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 </div>
