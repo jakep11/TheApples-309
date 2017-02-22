@@ -271,7 +271,7 @@ app.controller('facultyManager', function ($scope, $rootScope, $http) {
 
 })
 
-app.controller('facultyPreferences', function ($scope, $rootScope, $http) {
+app.controller('facultyPreferences', function ($scope, $rootScope, $http, $routeParams) {
    $rootScope.bcrumb1 = 'Faculty Manager';
    $rootScope.bcrumb1Link = '#facultyManager';
    $rootScope.bcrumb2 = 'Faculty Preferences';
@@ -297,6 +297,13 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http) {
 
    // Calling the function
    $scope.getPreferences();
+
+   $scope.faculty_id = $routeParams.faculty_id;
+   $scope.day = 'M'; // Starting day value is Monday
+
+   $scope.formGroupID = 1;
+   
+
 })
 
 app.controller('generateSchedule', function ($scope, $rootScope) {
@@ -365,9 +372,12 @@ app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function ($s
          var uploadUrl = "/importCohortData";
       } else if (filename.includes("Course")) {
          var uploadUrl = "/importCourseData";
+      } else if (filename.includes("Equipment")) {
+         var uploadUrl = "/importEquipData";
       }
 
       fileUpload.uploadFileToUrl(file, uploadUrl);
+      console.log("done uploading file");
    };
 }]);
 

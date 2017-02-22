@@ -416,3 +416,42 @@ def importFacultyData():
       db.session.commit()
 
    return "successfully uploaded faculty data"
+
+
+# This function parses through a CSV file containing equipment data and adds it to the database
+@csvImport_api.route("/importEquipData", methods = ['GET', 'POST'])
+def importEquipData():
+
+   inputFile = request.files['file']
+   rowNum = 0
+   stream = io.StringIO(inputFile.stream.read().decode("UTF8"), newline=None)
+   reader = csv.reader(stream)
+
+   for row in reader:
+      column = 0
+      for entry in row:
+         column += 1
+
+         if rowNum != 0:
+            # Name of equipment
+            if column == 1:
+               name = entry
+
+               # Create a new equipment entry in the Equipment database table
+               equip = models.Equipment.query.filter_by(name=name).first()
+               if equip is None:
+                  equip = models.Equipment(name=name)
+                  # Add new equipment type to database
+                  db.session.add(equip)
+                  db.session.commit()
+
+      rowNum += 1
+
+   # upon success, add file name to database
+   newfile = models.ImportedFiles.query.filter_by(name=inputFile.filename).first()
+   if newfile is None:
+      newfile = models.ImportedFiles(name=inputFile.filename)
+      db.session.add(newfile)
+      db.session.commit()
+
+   return "successfully uploaded equipment data"

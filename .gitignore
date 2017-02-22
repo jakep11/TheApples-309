@@ -1,3 +1,4 @@
 *.DS_Store
 *.pyc
 .idea
+db_backup_faculty_preferences.sql 

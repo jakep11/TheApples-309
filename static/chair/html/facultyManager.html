@@ -37,134 +37,15 @@ Things that change dynamically:
                   <td>{{instructor.allowed_work_units}}</td>
                   <td>None</td>
                   <td>
-                     <button class="btn btn-default preference-btn" data-toggle="modal" data-target="#preference-modal">PREFERENCES</button>
+                     <a href="#/facultyPreferences?faculty_id={{instructor.id}}" class="btn btn-default preference-btn">PREFERENCES</a>
                   </td>
 
                </tr>
             </table>
-            <div id="preference-modal" class="modal fade" role="dialog">
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <div class=" modal-body ">
-                        <div class="row modal-title ">
-                           <h3>Courses</h3>
-                        </div>
-                        <div class="preference-table ">
-                           <table class="table table-striped modal-tables">
-                              <tr class="success ">
-                                 <th>Class</th>
-                                 <th>Preference</th>
-                              </tr>
-                              <tr>
-                                 <td>CPE 308</td>
-                                 <td>Preferred</td>
-                              </tr>
-                              <tr>
-                                 <td>CPE 309</td>
-                                 <td>Preferred</td>
-                              </tr>
-                              <tr>
-                                 <td>CPE 101</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>CPE 102</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>CPE 141</td>
-                                 <td>Not available</td>
-                              </tr>
-                           </table>
-                        </div>
-                        <div class="row modal-title ">
-                           <h3>Times</h3>
-                        </div>
-                        <div class="preference-table ">
-                           <!-- Preference must be generated dynamically -->
-                           <table class="table table-striped modal-tables">
-                              <tr class="success ">
-                                 <th>Time</th>
-                                 <th>Preference</th>
-                              </tr>
-                              <tr>
-                                 <td>7AM-8AM</td>
-                                 <td>Unavailable</td>
-                              </tr>
-                              <tr>
-                                 <td>8AM-9AM</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>9AM-10AM</td>
-                                 <td>Desirable</td>
-                              </tr>
-                              <tr>
-                                 <td>10AM-11AM</td>
-                                 <td>Desirable</td>
-                              </tr>
-                              <tr>
-                                 <td>11AM-12PM</td>
-                                 <td>Desirable</td>
-                              </tr>
-                              <tr>
-                                 <td>12PM-1PM</td>
-                                 <td>Desirable</td>
-                              </tr>
-                              <tr>
-                                 <td>1PM-2PM</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>2PM-3PM</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>3PM-4PM</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>4PM-5PM</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>5PM-6PM</td>
-                                 <td>Available</td>
-                              </tr>
-                              <tr>
-                                 <td>6PM-7PM</td>
-                                 <td>Unavailable</td>
-                              </tr>
-                              <tr>
-                                 <td>7PM-8PM</td>
-                                 <td>Unavailable</td>
-                              </tr>
-                              <tr>
-                                 <td>8PM-9PM</td>
-                                 <td>Unavailable</td>
-                              </tr>
-                              <tr>
-                                 <td>9PM-10PM</td>
-                                 <td>Unavailable</td>
-                              </tr>
-                           </table>
-                        </div>
-                        <div class="row modal-row ">
-                           <div class="col-xs-4 col-xs-offset-2 ">
-                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CLOSE</button>
-                           </div>
-                           <div class="col-xs-4 ">
-                              <a class="btn btn-default preference-btn add-btns" href="#/facultyPreferences" role="button">EDIT</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
          </div>
       </form>
       <!--   Add, edit, and remove buttons   -->
-      <div class="row ">
+      <div class="row bottom-buffer">
          <div class="col-xs-2 col-xs-offset-3 ">
             <button class="btn btn-default preference-btn col-xs-12 " data-toggle="modal" data-target="#add-modal ">Add</button>
          </div>

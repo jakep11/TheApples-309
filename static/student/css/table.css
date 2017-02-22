@@ -51,10 +51,12 @@
     padding: 5px;
 }
 
+
+/*
 .listing {
     height: 200px;
     overflow: auto;
-}
+}*/
 
 
 /* Get rid of gutters created by Bootstrap */
@@ -97,8 +99,41 @@ textarea {
 }
 
 .sortorder:after {
-  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+    content: '\25b2'; // BLACK UP-POINTING TRIANGLE
 }
+
 .sortorder.reverse:after {
-  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+    content: '\25bc'; // BLACK DOWN-POINTING TRIANGLE
 }
+
+
+/*
+table {
+    width: 100%;
+}
+
+tr:after {
+    content: ' ';
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 30px;
+    text-align: left;
+}
+*/
+
+.table-body {
+    height: 20px;
+    overflow-y: auto;
+}
+
+
+/*
+tbody td,
+thead th {
+    width: 19.2%;
+    float: left;
+}
+*/
