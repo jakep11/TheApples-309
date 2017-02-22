@@ -31,6 +31,7 @@ class Faculty(db.Model):
    allowed_work_units = db.Column(db.Integer)
    faculty_sections = db.relationship("Sections", backref="faculty")
    preferences = db.relationship("FacultyPreferences", backref="faculty")
+   course_preferences = db.relationship("FacultyCoursePreferences", backref="faculty")
    constraints = db.relationship("FacultyConstraint", backref="faculty")
    notifications = db.relationship("Notifications", backref="faculty")
 
@@ -55,6 +56,7 @@ class Courses(db.Model):
    constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
    student_planning_data = db.relationship("StudentPlanningData", backref="course")
+   course_preferences = db.relationship("FacultyCoursePreferences", backref="course")
 
    @property
    def serialize(self):
@@ -85,6 +87,7 @@ class Terms(db.Model):
    comments = db.relationship("Comments", backref="term")
    final_schedules = db.relationship("ScheduleFinal", backref="term")
    preferences = db.relationship("FacultyPreferences", backref="term")
+   course_preferences = db.relationship("FacultyCoursePreferences", backref="term")
    student_planning_data = db.relationship("StudentPlanningData", backref="term")
    published_schedules = db.relationship("PublishedSchedule", backref="term")
 
