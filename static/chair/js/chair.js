@@ -378,7 +378,7 @@ app.service('fileUpload', ['$http', function ($http) {
    }
 }]);
 
-app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function ($scope, $rootScope, fileUpload) {
+app.controller('importData', ['$scope', '$rootScope', 'fileUpload', '$http', function ($scope, $rootScope, fileUpload, $http) {
    $rootScope.bcrumb1 = 'Import Data';
    $scope.uploadFile = function () {
       var file = $scope.myFile;
@@ -407,6 +407,22 @@ app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function ($s
       fileUpload.uploadFileToUrl(file, uploadUrl);
       console.log("done uploading file");
    };
+
+   $scope.getFileNames = function() {
+      $http({
+         method: 'GET',
+         url: '/get/fileNames',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         $scope.fileNames = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+   $scope.getFileNames();
+
 }]);
 
 

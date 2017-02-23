@@ -72,12 +72,7 @@ class Courses(db.Model):
       #'final_schedules': self.final_schedules,
       }
 
-
-#-- Description: Stores the names of the files that have been imported into the system
-class Files(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(32))
-
+      
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
@@ -288,6 +283,14 @@ class Components(db.Model):
 class ImportedFiles(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(40))
+
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id'         : self.id,
+      'name': self.name,
+      }
 
 # -- Description: Stores the student cohort data
 class CohortData(db.Model):
