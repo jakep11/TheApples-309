@@ -198,6 +198,15 @@ def importRoomData():
             if column == 1:
                roomType = entry
 
+               # Checks to see if roomtype is in DB. If not, add it
+               rt = models.RoomTypes.query.filter_by(name=roomType).first()
+
+               if rt is None:
+                  rt = models.RoomTypes(name=roomType)
+                  # Add the new room type to the database
+                  db.session.add(rt)
+                  db.session.commit()
+
             # Number
             elif column == 2:
                roomNum = entry

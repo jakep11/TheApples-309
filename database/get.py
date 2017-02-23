@@ -29,6 +29,11 @@ def get_component_types():
 	componentTypes = ComponentTypes.query.all()
 	return jsonify([i.serialize for i in componentTypes])
 
+@get_api.route('/roomTypes', methods = ["GET"])
+def get_room_types():
+	roomTypes = RoomTypes.query.all()
+	return jsonify([i.serialize for i in roomTypes])
+
 @get_api.route('/allCoursesAndComponents', methods = ["GET"])
 def get_courses_with_components():
 	courses = Courses.query.all()
