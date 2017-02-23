@@ -65,8 +65,13 @@ def get_sections():
 
 @get_api.route('/preferences', methods = ["GET"])
 def get_preferences():
-    preferences = FacultyPreferences.query.all()
-    return jsonify([i.serialize for i in preferences])
+   preferences = FacultyPreferences.query.all()
+   return jsonify([i.serialize for i in preferences])
+
+@get_api.route('/course_preferences', methods = ["GET"])
+def get_course_preferences():
+   course_preferences = FacultyCoursePreferences.query.all()
+   return jsonify([i.serialize for i in course_preferences])
 
 @get_api.route('/filterCourses', methods = ["POST"])
 def get_filtered_courses():
@@ -75,3 +80,8 @@ def get_filtered_courses():
 
 	courses = Courses.query.filter(Courses.number.like(number + '%')).all()
 	return jsonify([i.serialize for i in courses])
+
+@get_api.route('/rooms', methods = ["GET"])
+def get_rooms():
+   rooms = Rooms.query.all()
+   return jsonify([i.serialize for i in rooms])

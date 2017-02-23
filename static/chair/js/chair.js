@@ -169,14 +169,38 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
       });
    }
 
-   // Calling the function
+   // Calling getPreference function
    $scope.getPreferences();
+
+
+   //   // Getting course_preferences from the API and storing it into the coursePreferences var
+   //   $scope.coursePreferences;
+   //   $scope.getCoursePreferences = function() {
+   //      $http({
+   //         method: 'GET',
+   //         url: '/get/coursePreferences',
+   //         headers: {
+   //            'Content-Type': "application/json"
+   //         }
+   //      }).then(function successCallback(response) {
+   //         console.log("success");
+   //         console.log(response.data);
+   //         $scope.getCoursePreferences = response.data;
+   //      }, function errorCallback(response) {
+   //         console.log("error");
+   //      });
+   //   }
+   //   
+   //   // Calling getCoursePreference function
+   //   $scope.getCoursePreferences();
+
+
 
    $scope.faculty_id = $routeParams.faculty_id;
    $scope.day = 'M'; // Starting day value is Monday
 
    $scope.formGroupID = 1;
-   
+
 
 })
 
@@ -259,8 +283,29 @@ app.controller('notifications', function ($scope, $rootScope) {
    $rootScope.bcrumb1 = 'Notifications';
 })
 
-app.controller('roomManager', function ($scope, $rootScope) {
+app.controller('roomManager', function ($scope, $rootScope, $http) {
    $rootScope.bcrumb1 = 'Room Manager';
+
+   // Getting instructors from the API and storing it into the instructors var
+   $scope.rooms = [];
+   $scope.getRooms = function () {
+      $http({
+         method: 'GET',
+         url: '/get/rooms',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         console.log("success");
+         console.log(response.data);
+         $scope.rooms = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+
+   // Calling the function
+   $scope.getRooms();
 
 })
 
