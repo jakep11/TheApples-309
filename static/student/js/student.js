@@ -356,11 +356,6 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
         console.log($scope.checkedStartTimes);
         console.log($scope.checkedEndTimes);
 
-        //
-        // maybe move somewhere else; temporary position
-        //
-        $scope.showSelectedTerms();
-
         // arrays to hold selected filter values
         var terms = []
         var ids = [];
@@ -460,10 +455,7 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
 
             // default select the current (newest/most recent) term
             $scope.findLastTermIndex();
-            $scope.checkedTerms[sharedData.lastTermId] = true;
-
-            // add the default selected term to be displayed
-            $scope.showSelectedTerms();
+            $scope.checkedTerms = sharedData.lastTermId;
 
             console.log('success');
         }, function errorCallback(response) {
@@ -492,29 +484,6 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
         sharedData.lastTermIndex = lastIndex;
 
         return lastIndex;
-    }
-
-    // dynamically display term title and term's sections when checked and filters applied
-    $scope.showSelectedTerms = function () {
-        var showTerms = [];
-
-        // check if a term is checked and should be displayed
-        angular.forEach($scope.terms, function (term) {
-            var termId = term.id;
-
-            angular.forEach($scope.checkedTerms, function (value, key) {
-                if (key === termId && value === true) {
-                    this.push(term);
-                }
-            }, showTerms);
-        });
-
-        // if no terms are selected, display sections for the current (default) term
-        if (showTerms.length === 0) {
-            showTerms.push($scope.terms[sharedData.lastTermIndex]);
-        }
-
-        $scope.showTerms = showTerms;
     }
 
     $scope.getInstructors = function () {

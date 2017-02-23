@@ -66,7 +66,7 @@
                     <form>
                         <div class="checkbox" style="padding: 0px;">
                             <label style="padding: 0px;" ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">
-                                <input   style="margin: 5px;" type="radio" name="term" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
+                                <input   style="margin: 5px;" type="radio" name="term" value="{{term.id}}" ng-model="$parent.checkedTerms">{{term.name}}
                             </label>
                         </div>
                     </form>
