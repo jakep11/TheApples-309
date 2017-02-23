@@ -72,10 +72,6 @@ class Courses(db.Model):
       #'final_schedules': self.final_schedules,
       }
 
-<<<<<<< HEAD
-=======
-      
->>>>>>> b0d11ce6842e255474a27a449d35e6a61889a380
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)

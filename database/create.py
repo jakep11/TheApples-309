@@ -321,9 +321,6 @@ def new_component_type():
     n = ComponentTypes(name=name)
     db.session.add(n)
     db.session.commit()
-<<<<<<< HEAD
-    return "Component Type added to database"
-=======
     return "Component Type added to database"
 
 @create_api.route('/roomType', methods = ['POST'])
@@ -335,4 +332,3 @@ def new_room_type():
     db.session.add(n)
     db.session.commit()
     return "Room Type added to database"
->>>>>>> b0d11ce6842e255474a27a449d35e6a61889a380
