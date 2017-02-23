@@ -33,6 +33,8 @@ app.service("sharedData", function () {
         2000: "8:00PM",
         2030: "8:30PM",
         2100: "9:00PM",
+        2130: "9:30PM",
+        2200: "10:00PM"
     };
 
     this.endTimes = {
@@ -73,15 +75,15 @@ app.service("sharedData", function () {
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {
     $rootScope.bcrumb1 = "Published Schedules";
-    
+
     $scope.sortType = 'course_num';
     $scope.reverse = true;
 
-    $scope.sortBy = function(sortType) {
-      $scope.reverse = ($scope.sortType === sortType) ? !$scope.reverse : false;
-      $scope.sortType = sortType;
+    $scope.sortBy = function (sortType) {
+        $scope.reverse = ($scope.sortType === sortType) ? !$scope.reverse : false;
+        $scope.sortType = sortType;
     };
-    
+
 
     // grab list of times from sharedData and populate UI
     $scope.startTimes = sharedData.startTimes;
@@ -595,11 +597,4 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
 
         return '';
     }
-
-    $(document).ready(function () {
-        $('[data-toggle="popover"]').popover({
-            placement: 'bottom',
-            content: 'CPE 101-01 / Lecture / Room 14-256 CPE 103-03 / Lecture / Room 14-301'
-        });
-    });
 });

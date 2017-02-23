@@ -24,7 +24,7 @@
         </div>
         <div class="row filter-row">
             <div class="col-xs-2 no-gutter col-xs-offset-10">
-                <a class="btn btn-default view-switch" href="#" role="button">APPLY FILTERS</a>
+                <a class="btn btn-default view-switch" role="button" ng-click="applyFilters()">APPLY FILTERS</a>
             </div>
         </div>
         <!-- Modal -->
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="row filter-row">
-            <div class="col-xs-2 col-xs-offset-1">
+            <div class="col-xs-2 col-xs-offset-3">
                 <label>Terms:</label>
                 <div class="col-xs-12 filter-selectors">
                     <form>
@@ -97,6 +97,7 @@
                 </div>
             </div>
             <div class="col-xs-2">
+                <!--
                 <label>Start Times:</label>
                 <div class="col-xs-12 filter-selectors">
                     <form>
@@ -120,292 +121,59 @@
                     </form>
                 </div>
             </div>
+-->
+            </div>
+        </div>
+
+
+        <!--    calendar display-->
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>{{term.name}}</h3>
+            </div>
+        </div>
+        <!--   Tables   -->
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-1 cal-listing">
+                <table class="table table-striped fac-calendar-table table-bordered">
+                    <tr class="active">
+                        <th style="width: 130px;"> </th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                    </tr>
+                    <tbody class="table-body">
+
+                        <tr ng-repeat="startTimes in startTimes">
+                            <td>{{startTimes}}</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SIDE PANEL CLASS DETAILS-->
+            <div class=" col-xs-3 col-xs-offset-1 details-pane text-center ">
+                <h3>Details Pane</h3>
+                <table style=" margin-top: 20px; " class="table details-table ">
+                    <tr>
+                        <td>CPE 101-01</td>
+                        <td>14-255</td>
+                        <td>Lecture</td>
+                    </tr>
+                    <tr>
+                        <td>CPE 101-02</td>
+                        <td>14-256</td>
+                        <td>Lab</td>
+                    </tr>
+                </table>
+            </div>
+
         </div>
     </div>
-
-
-    <!--    calendar display-->
-    <!--   Tables   -->
-    <div class="row">
-        <div class="col-xs-8 cal-listing">
-            <table class="table table-striped fac-calendar-table table-bordered">
-                <tr class="active">
-                    <th style="width: 130px;"> </th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                </tr>
-                <tr>
-                    <td>7:00AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>7:30AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>8:00AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>8:30AM</td>
-
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>9:00AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>9:30AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>10:00AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>10:30AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>11:00AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>11:30AM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>12:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>12:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>1:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>1:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>2:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>2:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>3:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>3:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>4:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>4:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>5:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>5:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>6:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>6:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>7:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>7:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>8:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>8:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>9:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td>9:30PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr style="border-bottom: .5px solid #dddddd;">
-                    <td>10:00PM</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-
-            </table>
-        </div>
-
-        <!-- SIDE PANEL CLASS DETAILS-->
-        <div class="col-xs-3 col-xs-offset-1 details-pane text-center">
-            <h3>8:30AM - 9:00AM Details</h3>
-            <table style=" margin-top: 20px;" class="table details-table">
-                <tr>
-                    <td>CPE 101-01</td>
-                    <td>14-255</td>
-                    <td>Lecture</td>
-                </tr>
-                <tr>
-                    <td>CPE 101-02</td>
-                    <td>14-256</td>
-                    <td>Lab</td>
-                </tr>
-            </table>
-        </div>
-
-    </div>
-</div>
