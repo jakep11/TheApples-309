@@ -276,17 +276,17 @@ def new_faculty_constraint():
 
 @create_api.route('/comment', methods = ['POST'])
 def new_comment():
-    data = request.json()
+    data = request.json
     term_id = data['term_id']
     username = data['username']
     comment = data['comment']
     time = data['time']
 
-    term = Terms.query.filter_by(id=term.id).first()
+    term = Terms.query.filter_by(id=term_id).first()
     if term is None:
         return "ERROR TERM NOT FOUND"
 
-    comment = Comment(term=term, username=username,
+    comment = Comments(term=term, username=username,
                         comment=comment, time=time)
     db.session.add(comment)
     db.session.commit()
@@ -304,7 +304,7 @@ def new_notification():
     if faculty is None:
         return "ERROR FACULTY NOT FOUND"
 
-    n = Notification(faculty=faculty, message=message,
+    n = Notifications(faculty=faculty, message=message,
                         unread=unread, time=time)
     db.session.add(n)
     db.session.commit()

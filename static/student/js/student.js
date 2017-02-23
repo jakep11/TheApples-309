@@ -304,6 +304,29 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     }
     $scope.getSections();
 
+    // post feedback to the Comments table when Post Feedback is clicked
+    $scope.postFeedback = function () {
+       console.log("Posting feedback!");
+       $http({
+          method: 'POST',
+          url: '/create/comment',
+          headers: {
+                'Content-Type': 'application/json'
+          },
+          data: {
+                'term_id': $scope.term_id,
+                'username': $scope.username,
+                'comment': $scope.comment,
+                'time': new Date().toLocaleString()
+          }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+
     // return to login page when back button is clicked
     $scope.backButtonClicked = function () {
         $location.path("/login");
@@ -535,6 +558,29 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
         minDate: new Date(),
         startingDay: 1
     };
+
+    // post feedback to the Comments table when Post Feedback is clicked
+    $scope.postFeedback = function () {
+       console.log("Posting feedback!");
+       $http({
+          method: 'POST',
+          url: '/create/comment',
+          headers: {
+                'Content-Type': 'application/json'
+          },
+          data: {
+                'term_id': $scope.term_id,
+                'username': $scope.username,
+                'comment': $scope.comment,
+                'time': new Date().toLocaleString()
+          }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
 
     // Disable weekend selection
     function disabled(data) {

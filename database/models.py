@@ -72,12 +72,6 @@ class Courses(db.Model):
       #'final_schedules': self.final_schedules,
       }
 
-
-#-- Description: Stores the names of the files that have been imported into the system
-class Files(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(32))
-
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
@@ -254,7 +248,7 @@ class Comments(db.Model):
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    username = db.Column(db.String(32))
    comment = db.Column(db.Text)
-   time = db.Column(db.Time)
+   time = db.Column(db.String(30))
 
 #-- Description: Stores notifications for the scheduler about changing preferences & new comments
 class Notifications(db.Model):
@@ -262,7 +256,7 @@ class Notifications(db.Model):
    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
    message = db.Column(db.Text)
    unread = db.Column(db.SmallInteger)
-   time = db.Column(db.Time)
+   time = db.Column(db.String(30))
 
 # -- Description: Stores the components of each of the courses
 class Components(db.Model):
