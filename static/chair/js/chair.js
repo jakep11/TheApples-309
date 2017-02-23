@@ -434,6 +434,142 @@ app.controller('roomManager', function ($scope, $rootScope, $http) {
    // Calling the function
    $scope.getRooms();
 
+   $scope.getRoomTypes = function () {
+      $http({
+         method: 'GET',
+         url: 'get/roomTypes',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }).then(function successCallback(response) {
+         $scope.roomTypes = response.data;
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.getRoomTypes();
+
+   $scope.addRoomType = function () {
+      $http({
+         method: 'POST',
+         url: 'create/roomType',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            name: $scope.addRoomType
+         }
+      }).then(function successCallback(response) {
+         console.log("Room added");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.removeRoomType = function () {
+      $http({
+         method: 'POST',
+         url: 'delete/roomType',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            id: $scope.selectedRoomType
+         }
+      }).then(function successCallback(response) {
+         console.log("Room deleted");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   $scope.roomTypeRadioSelected = false;
+  $scope.roomTypeRadioChanged = function(id) {
+    $scope.selectedRoomType = id;
+    $scope.roomTypeRadioSelected = true;
+
+  }
+
+$scope.radioSelected = false;
+
+$scope.radioChanged = function (room) {
+   $scope.current = {
+      'id': room.id,
+      'number': room.number,
+      'capacity': room.capacity,
+      'type': room.type
+      
+   }
+   $scope.radioSelected = true;
+   console.log("current set");
+
+}
+$scope.openEdit = function () {
+   $scope.edit = $scope.current;
+   console.log($scope.current);
+}
+
+
+$scope.addRoom = function () {
+   $http({
+      method: 'POST',
+      url: '/create/room',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'number': $scope.add.number,
+         'capacity': $scope.add.capacity,
+         'type': $scope.add.type
+      }
+   }).then(function successCallback(response) {
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.editRoom = function () {
+   $http({
+      method: 'POST',
+      url: '/edit/room',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.edit.id,
+         'number': $scope.edit.number,
+         'capacity': $scope.edit.capacity,
+         'type': $scope.edit.type
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling edit Room');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.deleteRoom = function () {
+   console.log("trying to delete room");
+   $http({
+      method: 'POST',
+      url: '/delete/room',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.current.id
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling delete room');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
 })
 
 app.controller('schedules', function ($scope, $rootScope) {
