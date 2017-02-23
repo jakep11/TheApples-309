@@ -1,17 +1,8 @@
 <div class="container-fluid no-gutter">
     <div class="row form-inline text-center">
         <select class="form-control term-selector" id="quarterSelect">
-                <option>Fall</option>
-                <option>Winter</option>
-                <option>Spring</option>
-                <option>Summer</option>
-            </select>
-        <select class="form-control term-selector" id="quarterSelect">
-                <option>2017</option>
-                <option>2018</option>
-                <option>2019</option>
-                <option>2020</option>
-            </select>
+            <option ng-repeat="term in terms" name="term{{term.id}}" value="{{term.id}}" ng-model="checkedTerms[term.id]" ng-click="applyFilters()">{{term.name}}                            </option>
+        </select>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -65,14 +56,13 @@
                     <th>Fri</th>
                 </tr>
                 <tbody class="table-body">
-
-                    <tr ng-repeat="startTimes in startTimes">
+                    <tr ng-repeat="startTimes in startTimes" ng-if="section.faculty == faculty.id && section.term_id == term.id">
                         <td>{{startTimes}}</td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
+                        <td>{{MWFsections}}</td>
+                        <td>{{TRsections}}</td>
+                        <td>{{MWFsections}}</td>
+                        <td>{{TRsections}}</td>
+                        <td>{{MWFsections}}</td>
                     </tr>
                 </tbody>
             </table>
