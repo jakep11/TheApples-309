@@ -90,7 +90,7 @@ class Terms(db.Model):
    preferences = db.relationship("FacultyPreferences", backref="term")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="term")
    student_planning_data = db.relationship("StudentPlanningData", backref="term")
-   published_schedules = db.relationship("PublishedSchedule", backref="term")
+   
 
    @property
    def serialize(self):
