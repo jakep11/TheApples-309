@@ -31,14 +31,8 @@
                             <tr class="success">
                                 <th style="text-align: center;">Name</th>
                             </tr>
-                            <tr>
-                                <td>Student_Plan_Data_F17.csv</td>
-                            </tr>
-                            <tr>
-                                <td>Student_Plan_Data_F17.csv</td>
-                            </tr>
-                            <tr>
-                                <td>Student_Plan_Data_F17.csv</td>
+                            <tr ng-repeat="file in fileNames">
+                                <td>{{file.name}}</td>
                             </tr>
                         </table>
                     </div>

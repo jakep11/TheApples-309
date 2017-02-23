@@ -304,6 +304,29 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
     }
     $scope.getSections();
 
+    // post feedback to the Comments table when Post Feedback is clicked
+    $scope.postFeedback = function () {
+       console.log("Posting feedback!");
+       $http({
+          method: 'POST',
+          url: '/create/comment',
+          headers: {
+                'Content-Type': 'application/json'
+          },
+          data: {
+                'term_id': $scope.term_id,
+                'username': $scope.username,
+                'comment': $scope.comment,
+                'time': new Date().toLocaleString()
+          }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+
     // return to login page when back button is clicked
     $scope.backButtonClicked = function () {
         $location.path("/login");
@@ -332,11 +355,6 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
         console.log($scope.checkedInstructors);
         console.log($scope.checkedStartTimes);
         console.log($scope.checkedEndTimes);
-
-        //
-        // maybe move somewhere else; temporary position
-        //
-        $scope.showSelectedTerms();
 
         // arrays to hold selected filter values
         var terms = []
@@ -437,10 +455,7 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
 
             // default select the current (newest/most recent) term
             $scope.findLastTermIndex();
-            $scope.checkedTerms[sharedData.lastTermId] = true;
-
-            // add the default selected term to be displayed
-            $scope.showSelectedTerms();
+            $scope.checkedTerms = sharedData.lastTermId;
 
             console.log('success');
         }, function errorCallback(response) {
@@ -469,29 +484,6 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
         sharedData.lastTermIndex = lastIndex;
 
         return lastIndex;
-    }
-
-    // dynamically display term title and term's sections when checked and filters applied
-    $scope.showSelectedTerms = function () {
-        var showTerms = [];
-
-        // check if a term is checked and should be displayed
-        angular.forEach($scope.terms, function (term) {
-            var termId = term.id;
-
-            angular.forEach($scope.checkedTerms, function (value, key) {
-                if (key === termId && value === true) {
-                    this.push(term);
-                }
-            }, showTerms);
-        });
-
-        // if no terms are selected, display sections for the current (default) term
-        if (showTerms.length === 0) {
-            showTerms.push($scope.terms[sharedData.lastTermIndex]);
-        }
-
-        $scope.showTerms = showTerms;
     }
 
     $scope.getInstructors = function () {
@@ -535,6 +527,29 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
         minDate: new Date(),
         startingDay: 1
     };
+
+    // post feedback to the Comments table when Post Feedback is clicked
+    $scope.postFeedback = function () {
+       console.log("Posting feedback!");
+       $http({
+          method: 'POST',
+          url: '/create/comment',
+          headers: {
+                'Content-Type': 'application/json'
+          },
+          data: {
+                'term_id': $scope.term_id,
+                'username': $scope.username,
+                'comment': $scope.comment,
+                'time': new Date().toLocaleString()
+          }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
 
     // Disable weekend selection
     function disabled(data) {

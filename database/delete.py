@@ -52,7 +52,7 @@ def delete_term():
     db.session.commit()
     return  "Term %s removed from database" % (term.name)
 
-@delete_api.route('/rooms', methods = ["POST"])
+@delete_api.route('/room', methods = ["POST"])
 def delete_room():
     data = request.json
     id = data['id']
@@ -207,3 +207,15 @@ def delete_component_type():
     db.session.delete(componentType)
     db.session.commit()
     return  "Component Type %s removed from database" % (componentType.name)
+
+@delete_api.route('/roomType', methods = ["POST"])
+def delete_room_type():
+    data = request.json
+    id = data['id']
+
+    roomType = RoomTypes.query.filter_by(id=id).first()
+    if roomType is None:
+        return 'ERROR ROOM TYPE NOT FOUND'
+    db.session.delete(roomType)
+    db.session.commit()
+    return  "Room Type %s removed from database" % (roomType.name)

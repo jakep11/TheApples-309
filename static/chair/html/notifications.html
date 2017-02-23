@@ -10,14 +10,14 @@
                 <th>Date</th>
                 <th>Feedback</th>
             </tr>
-            <tr class="warning">
+            <tr ng-repeat="comment in comments">
                 <td>
-                    <input type="radio" name="message" value="message1" checked>
+                    <input type="radio" ng-model="$parent.random" value="{{comment.id}}" ng-click="radioChanged(comment)">
                 </td>
-                <td>jcleam</td>
-                <td>12-31-13</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipiscing elit. In vestibulum nisl a porta dictum</td>
-            </tr>
+                <td>{{comment.username}}</td>
+                <td>{{comment.time}}</td>
+                <td>{{comment.comment}}</td>
+               </tr>
         </table>
         <div class="col-xs-6 col-xs-offset-4">
             <div class="col-xs-4">

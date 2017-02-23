@@ -29,6 +29,16 @@ def get_component_types():
 	componentTypes = ComponentTypes.query.all()
 	return jsonify([i.serialize for i in componentTypes])
 
+@get_api.route('/roomTypes', methods = ["GET"])
+def get_room_types():
+	roomTypes = RoomTypes.query.all()
+	return jsonify([i.serialize for i in roomTypes])
+
+@get_api.route('/fileNames', methods = ["GET"])
+def get_file_names():
+	fileNames = ImportedFiles.query.all()
+	return jsonify([i.serialize for i in fileNames])
+
 @get_api.route('/allCoursesAndComponents', methods = ["GET"])
 def get_courses_with_components():
 	courses = Courses.query.all()
@@ -75,8 +85,13 @@ def get_sections():
 
 @get_api.route('/preferences', methods = ["GET"])
 def get_preferences():
-    preferences = FacultyPreferences.query.all()
-    return jsonify([i.serialize for i in preferences])
+   preferences = FacultyPreferences.query.all()
+   return jsonify([i.serialize for i in preferences])
+
+@get_api.route('/coursePreferences', methods = ["GET"])
+def get_course_preferences():
+   course_preferences = FacultyCoursePreferences.query.all()
+   return jsonify([i.serialize for i in course_preferences])
 
 @get_api.route('/filterCourses', methods = ["POST"])
 def get_filtered_courses():
@@ -85,3 +100,13 @@ def get_filtered_courses():
 
 	courses = Courses.query.filter(Courses.number.like(number + '%')).all()
 	return jsonify([i.serialize for i in courses])
+
+@get_api.route('/rooms', methods = ["GET"])
+def get_rooms():
+   rooms = Rooms.query.all()
+   return jsonify([i.serialize for i in rooms])
+
+@get_api.route('/comments', methods = ["GET"])
+def get_comments():
+   comments = Comments.query.all()
+   return jsonify([i.serialize for i in comments])

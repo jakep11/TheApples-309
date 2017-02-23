@@ -72,12 +72,6 @@ class Courses(db.Model):
       #'final_schedules': self.final_schedules,
       }
 
-
-#-- Description: Stores the names of the files that have been imported into the system
-class Files(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(32))
-
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
@@ -122,6 +116,17 @@ class Rooms(db.Model):
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")
    room_equipment = db.relationship("RoomEquipment", backref="room")
+   
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+         'id': self.id,
+         'number': self.number,
+         'capacity': self.capacity,
+         'type': self.type,
+         'room_equipment': self.room_equipment
+      }
 
 #-- Description: Stores all sections that have occurred and are planned on the schedule
 class Sections(db.Model):
@@ -226,7 +231,7 @@ class FacultyCoursePreferences(db.Model):
    def serialize(self):
       return {
          'faculty_id': self.faculty_id,
-         'course_name': self.course_name,
+         'course_name': (Courses.query.filter_by(id=self.course_id).first()).course_name, #course_name
          'preference': self.preference
       }
 
@@ -244,7 +249,18 @@ class Comments(db.Model):
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    username = db.Column(db.String(32))
    comment = db.Column(db.Text)
-   time = db.Column(db.Time)
+   time = db.Column(db.String(30))
+
+   @property
+   def serialize(self):
+      # """Return object data in easily serializeable format"""
+      return {
+         'id': self.id,
+         'term_id': self.term_id,
+         'username': self.username,
+         'comment': self.comment,
+         'time': self.time
+      }
 
 #-- Description: Stores notifications for the scheduler about changing preferences & new comments
 class Notifications(db.Model):
@@ -252,7 +268,7 @@ class Notifications(db.Model):
    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
    message = db.Column(db.Text)
    unread = db.Column(db.SmallInteger)
-   time = db.Column(db.Time)
+   time = db.Column(db.String(30))
 
 # -- Description: Stores the components of each of the courses
 class Components(db.Model):
@@ -278,6 +294,14 @@ class ImportedFiles(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(40))
 
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id': self.id,
+      'name': self.name
+      }
+
 # -- Description: Stores the student cohort data
 class CohortData(db.Model):
    id = db.Column(db.Integer, primary_key=True)
@@ -298,5 +322,18 @@ class ComponentTypes(db.Model):
       #"""Return object data in easily serializeable format"""
       return {
       'id': self.id,
-      'name': self.name,
+      'name': self.name
+      }
+
+# -- Description: Stores the room types
+class RoomTypes(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(20))
+
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id': self.id,
+      'name': self.name
       }
