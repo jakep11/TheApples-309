@@ -157,6 +157,7 @@ def edit_section():
    time_start = data.get('time_start', None)
    time_end = data.get('time_end', None)
    days = data.get('days', None)
+   schedule_id = data.get('schedule_id', None)
 
    section = Sections.query.filter_by(id=id).first()
    if section is None:
@@ -172,7 +173,7 @@ def edit_section():
       section.faculty = faculty
    if room_id is not None:
       room = Rooms.query.filter_by(id=room_id).first()
-      seciton.room = room
+      section.room = room
    if number is not None:
       section.number = number
    if section_type is not None:
@@ -183,6 +184,10 @@ def edit_section():
       section.time_end = time_end
    if days is not None:
       section.days = days
+   if schedule_id is not None:
+      schedule = Schedule.query.filter_by(id=schedule_id).first()
+      section.schedule = schedule
+
 
    db.session.add(section)
    db.session.commit()
@@ -294,45 +299,43 @@ def edit_student_planning_data():
    spd = StudentPlanningData.query.filter_by(id=id).first()
    return "Schedule Planning Data with id %d updated" % (id)
 
-@edit_api.route('/scheduleInitial', methods = ["POST"])
-def edit_schedule_initial():
+@edit_api.route('/schedule', methods = ["POST"])
+def edit_schedule():
    data = request.json()
    id = data.get('id', None)
    term_id = data.get('term_id', None)
-   section_id = data.get('section_id', None)
+   published = data.get('published', None)
 
-   si = ScheduleInitial.query.filter_by(id=id).first()
-   if si is None:
-      return "ERROR SCHEDULE INITIAL NOT FOUND"
+   s = Schedule.query.filter_by(id=id).first()
+   if s is None:
+      return "ERROR SCHEDULE NOT FOUND"
    if term_id is not None:
       term = Terms.query.filter_by(id=term_id).first()
-      si.term = term
-   if section_id is not None:
-      section = Sections.query.filter_by(id=course_id).first()
-      si.section = section
+      s.term = term
+   if published is not None:
+      s.published = published
 
-   db.session.add(si)
+   db.session.add(s)
    db.session.commit()
-   si = ScheduleInitial.query.filter_by(id=id).first()
-   return "Schedule Initial with id %d updated" % (id)
+   return "Schedule with id %d updated" % (id)
 
-@edit_api.route('/publishedSchedule', methods = ["POST"])
-def edit_published_schedule():
-   data = request.json()
-   id = data.get('id', None)
-   term_id = data.get('term_id', None)
-
-   ps = PublishedSchedule.query.filter_by(id=id).first()
-   if ps is None:
-      return "ERROR PUBLISHED SCHEDULE NOT FOUND"
-   if term_id is not None:
-      term = Terms.query.filter_by(id=term_id).first()
-      ps.term = term
-
-   db.session.add(ps)
-   db.session.commit()
-   ps = PublishedSchedule.query.filter_by(id=id).first()
-   return "Published Schedule with id %d updated" % (id)
+# @edit_api.route('/publishedSchedule', methods = ["POST"])
+# def edit_published_schedule():
+#    data = request.json()
+#    id = data.get('id', None)
+#    term_id = data.get('term_id', None)
+#
+#    ps = PublishedSchedule.query.filter_by(id=id).first()
+#    if ps is None:
+#       return "ERROR PUBLISHED SCHEDULE NOT FOUND"
+#    if term_id is not None:
+#       term = Terms.query.filter_by(id=term_id).first()
+#       ps.term = term
+#
+#    db.session.add(ps)
+#    db.session.commit()
+#    ps = PublishedSchedule.query.filter_by(id=id).first()
+#    return "Published Schedule with id %d updated" % (id)
 
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():

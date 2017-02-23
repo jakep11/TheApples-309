@@ -124,29 +124,29 @@ def delete_student_planning_data():
     db.session.commit()
     return "Student Planning Data removed form database"
 
-@delete_api.route('/scheduleInitial', methods = ["POST"])
-def delete_schedule_initial():
+@delete_api.route('/schedule', methods = ["POST"])
+def delete_schedule():
     data = request.json
     id = data['id']
 
-    si = ScheduleInitial.query.filter_by(id=id).first()
-    if si is None:
+    s = Schedule.query.filter_by(id=id).first()
+    if s is None:
         return 'ERROR SCHEDULE INITIAL NOT FOUND'
-    db.session.delete(si)
+    db.session.delete(s)
     db.session.commit()
-    return  "Schedule Initial %s removed from database" % (si.term)
+    return  "Schedule %s removed from database" % (s.term)
 
-@delete_api.route('/publishedSchedule', methods = ["POST"])
-def delete_published_schedule():
-    data = request.json
-    id = data['id']
-
-    ps = PublishedSchedule.query.filter_by(id=id).first()
-    if ps is None:
-        return 'ERROR PUBLISHED SCHEDULE NOT FOUND'
-    db.session.delete(ps)
-    db.session.commit()
-    return  "Published Schedule %s removed from database" % (ps.term)
+# @delete_api.route('/publishedSchedule', methods = ["POST"])
+# def delete_published_schedule():
+#     data = request.json
+#     id = data['id']
+#
+#     ps = PublishedSchedule.query.filter_by(id=id).first()
+#     if ps is None:
+#         return 'ERROR PUBLISHED SCHEDULE NOT FOUND'
+#     db.session.delete(ps)
+#     db.session.commit()
+#     return  "Published Schedule %s removed from database" % (ps.term)
 
 @delete_api.route('/facultyPreference', methods = ["POST"])
 def delete_faculty_preference():
