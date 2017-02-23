@@ -51,7 +51,6 @@ class Courses(db.Model):
    number = db.Column(db.Integer)
    major = db.Column(db.String(12))
    course_name = db.Column(db.String(100))
-   components = db.relationship("Components", backref="course") 
    components = db.relationship("Components", backref="course")
    course_sections = db.relationship("Sections", backref="course")
    constraints = db.relationship("FacultyConstraint", backref="course")
@@ -66,7 +65,7 @@ class Courses(db.Model):
       'id'         : self.id,
       'number': self.number,
       'major': self.major,
-      'course_name': self.course_name,
+      'course_name': self.course_name
       #'components': self.components
       #'course_sections': self.course_sections,
       #'constraints': self.constraints,
@@ -90,7 +89,7 @@ class Terms(db.Model):
    preferences = db.relationship("FacultyPreferences", backref="term")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="term")
    student_planning_data = db.relationship("StudentPlanningData", backref="term")
-   published_schedules = db.relationship("PublishedSchedule", backref="term")
+   schedules = db.relationship("Schedule", backref="term")
 
    @property
    def serialize(self):
@@ -220,7 +219,7 @@ class FacultyCoursePreferences(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
-   course_name = db.Column(db.String(100), db.ForeignKey("courses.course_name"))
+   course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
    preference = db.Column(db.String(1)) # M - Most wanted, A - able to teach, C - cannot teach
    
    @property
