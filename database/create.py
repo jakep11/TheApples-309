@@ -29,7 +29,7 @@ def new_faculty():
     allowed_work_units = data['allowed_word_units']
 
     faculty = Faculty(first_name=first_name, last_name=last_name,
-                        allowed_word_units=allowed_word_units)
+                        allowed_word_units=allowed_work_units)
     db.session.add(faculty)
     db.session.commit()
     return  "Faculty %s %s added to database" (first_name, last_name)
@@ -112,7 +112,7 @@ def new_section():
     room = Rooms.query.filter_by(id=room_id).first()
     if room is None:
         return "ERROR ROOM NOT FOUND"
-    schedule = Schedule.query.filter_by(id=schedule.id).first()
+    schedule = Schedule.query.filter_by(id=schedule_id).first()
     if schedule is None:
         return "ERROR SCHEDULE NOT FOUND"
 
@@ -197,30 +197,34 @@ def new_student_planning_data():
     db.session.commit()
     return "StudentPlanningData added to database"
 
-@create_api.route('/scheduleInitial', methods = ['POST'])
-def new_schedule_inital():
-    data = request.json
-    term = data['term']
-    section = data['section']
-
-    scheduleInitial = ScheduleInitial(term=term, section=section)
-    db.session.add(scheduleInitial)
-    db.session.commit()
-    return "ScheduleInitial: term %s, section %s" % (term, section)
-
-@create_api.route('publishedSchedule', methods = ['POST'])
-def new_published_schedule():
+@create_api.route('/schedule', methods = ['POST'])
+def new_schedule():
     data = request.json
     term_id = data['term_id']
+    published = data['published']
 
-    if term_id is None:
+    term = Terms.query.filter_by(id=term_id).first
+    if term is None:
         return "ERROR TERM NOT FOUND"
 
-    term = Terms.query.filter_by(id=term_id).first()
-    publishedSchedule = PublishedSchedule(term=term)
-    db.session.add(publishedSchedule)
+    schedule = Schedule(term_id=term, published=published)
+    db.session.add(schedule)
     db.session.commit()
-    return "PublishedSchedule: term %s" % (term)
+    return "Schedule: term %s" % (term)
+
+# @create_api.route('publishedSchedule', methods = ['POST'])
+# def new_published_schedule():
+#     data = request.json
+#     term_id = data['term_id']
+#
+#     if term_id is None:
+#         return "ERROR TERM NOT FOUND"
+#
+#     term = Terms.query.filter_by(id=term_id).first()
+#     publishedSchedule = PublishedSchedule(term=term)
+#     db.session.add(publishedSchedule)
+#     db.session.commit()
+#     return "PublishedSchedule: term %s" % (term)
 
 @create_api.route('/facultyPreferences', methods = ['POST'])
 def new_faculty_preferences():
