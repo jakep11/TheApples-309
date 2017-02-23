@@ -122,6 +122,16 @@ class Rooms(db.Model):
    capacity = db.Column(db.Integer)
    room_sections = db.relationship("Sections", backref="room")
    room_equipment = db.relationship("RoomEquipment", backref="room")
+   
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+         'number': self.number,
+         'capacity': self.capacity,
+         'type': self.type,
+         'room_equipment': self.room_equipment
+      }
 
 #-- Description: Stores all sections that have occurred and are planned on the schedule
 class Sections(db.Model):
