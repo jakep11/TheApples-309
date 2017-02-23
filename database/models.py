@@ -251,6 +251,17 @@ class Comments(db.Model):
    comment = db.Column(db.Text)
    time = db.Column(db.String(30))
 
+   @property
+   def serialize(self):
+      # """Return object data in easily serializeable format"""
+      return {
+         'id': self.id,
+         'term_id': self.term_id,
+         'username': self.username,
+         'comment': self.comment,
+         'time': self.time
+      }
+
 #-- Description: Stores notifications for the scheduler about changing preferences & new comments
 class Notifications(db.Model):
    id = db.Column(db.Integer, primary_key=True)
@@ -287,8 +298,8 @@ class ImportedFiles(db.Model):
    def serialize(self):
       #"""Return object data in easily serializeable format"""
       return {
-      'id'         : self.id,
-      'name': self.name,
+      'id': self.id,
+      'name': self.name
       }
 
 # -- Description: Stores the student cohort data

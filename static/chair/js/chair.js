@@ -426,8 +426,30 @@ app.controller('importData', ['$scope', '$rootScope', 'fileUpload', '$http', fun
 }]);
 
 
-app.controller('notifications', function ($scope, $rootScope) {
+app.controller('notifications', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Notifications';
+
+   // Getting notifications from the API and storing it into the notifications var
+   $scope.comments = [];
+   $scope.getNotifications = function () {
+      $http({
+         method: 'GET',
+         url: '/get/comments',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         console.log("success");
+         console.log(response.data);
+         $scope.comments = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+
+   // Calling the getComments function
+   $scope.getNotifications();
+
 })
 
 app.controller('roomManager', function ($scope, $rootScope, $http, $window) {

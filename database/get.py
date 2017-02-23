@@ -105,3 +105,8 @@ def get_filtered_courses():
 def get_rooms():
    rooms = Rooms.query.all()
    return jsonify([i.serialize for i in rooms])
+
+@get_api.route('/comments', methods = ["GET"])
+def get_comments():
+   comments = Comments.query.all()
+   return jsonify([i.serialize for i in comments])
