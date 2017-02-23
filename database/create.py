@@ -82,9 +82,12 @@ def new_room():
     data = request.json
     type = data['type']
     capacity = data['capacity']
+    number = data['number']
 
-    room = Rooms(type=type, capacity=capacity)
-    return "%s room with capacity %d added to database" % (type, capacity)
+    room = Rooms(type=type, capacity=capacity, number=number)
+    db.session.add(room)
+    db.session.commit()
+    return " room with capacity added to database" 
 
 @create_api.route('/section', methods = ["POST"])
 def new_section():
@@ -318,4 +321,18 @@ def new_component_type():
     n = ComponentTypes(name=name)
     db.session.add(n)
     db.session.commit()
+<<<<<<< HEAD
     return "Component Type added to database"
+=======
+    return "Component Type added to database"
+
+@create_api.route('/roomType', methods = ['POST'])
+def new_room_type():
+    data = request.json
+    name = data['name']
+
+    n = RoomTypes(name=name)
+    db.session.add(n)
+    db.session.commit()
+    return "Room Type added to database"
+>>>>>>> b0d11ce6842e255474a27a449d35e6a61889a380

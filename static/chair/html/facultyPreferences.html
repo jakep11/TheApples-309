@@ -24,101 +24,15 @@
                <th style="text-align: left">Class</th>
                <th style="text-align: left">Teaching Ability</th>
             </tr>
-            <tr>
-               <td>CPE 308 Software Engineering I</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 309 Software Engineering II</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 300 Professional Responsibilities</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 308 Software Engineering I</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 309 Software Engineering II</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 300 Professional Responsibilities</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 308 Software Engineering I</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 309 Software Engineering II</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 300 Professional Responsibilities</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 308 Software Engineering I</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 309 Software Engineering II</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
-            </tr>
-            <tr>
-               <td>CPE 300 Professional Responsibilities</td>
-               <td><select class="form-control selector" id="termSelect">
-                                <option>Most wanted</option>
-                                <option>Able to teach</option>
-                                <option>Cannot teach</option>
-                             </select></td>
+            <tr ng-repeat="coursePreference in coursePreferences">
+               <td ng-if="coursePreference.faculty_id == faculty_id">{{coursePreference.course_name}}</td>
+               <td ng-if="coursePreference.faculty_id == faculty_id">
+                  <select class="form-control selector" id="termSelect" ng-model="pref">
+                     <option ng-selected="coursePreference.preference == 'M'">Most wanted</option>
+                     <option ng-selected="coursePreference.preference == 'A'">Able to teach</option>
+                     <option ng-selected="coursePreference.preference == 'C'">Cannot teach</option>
+                  </select>
+               </td>
             </tr>
          </table>
 

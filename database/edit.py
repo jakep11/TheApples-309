@@ -130,6 +130,7 @@ def edit_room():
    id = data.get('id', None)
    type = data.get('type', None)
    capacity = data.get('capacity', None)
+   number = data.get('room', None)
 
    room = Rooms.query.filter_by(id=id).first()
    if room is None:
@@ -138,6 +139,8 @@ def edit_room():
       room.type = type
    if capacity is not None:
       room.capacity = capacity
+   if number is not None:
+      room.number = number
 
    db.session.add(room)
    db.session.commit()

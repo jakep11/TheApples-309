@@ -34,6 +34,11 @@ def get_room_types():
 	roomTypes = RoomTypes.query.all()
 	return jsonify([i.serialize for i in roomTypes])
 
+@get_api.route('/fileNames', methods = ["GET"])
+def get_file_names():
+	fileNames = ImportedFiles.query.all()
+	return jsonify([i.serialize for i in fileNames])
+
 @get_api.route('/allCoursesAndComponents', methods = ["GET"])
 def get_courses_with_components():
 	courses = Courses.query.all()
@@ -83,7 +88,7 @@ def get_preferences():
    preferences = FacultyPreferences.query.all()
    return jsonify([i.serialize for i in preferences])
 
-@get_api.route('/course_preferences', methods = ["GET"])
+@get_api.route('/coursePreferences', methods = ["GET"])
 def get_course_preferences():
    course_preferences = FacultyCoursePreferences.query.all()
    return jsonify([i.serialize for i in course_preferences])

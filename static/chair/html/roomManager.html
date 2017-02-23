@@ -8,49 +8,28 @@
       <div class="row title">
          <h1>Room Manager</h1>
       </div>
-      <div class="col-xs-4 col-xs-offset-4 room-types-editor">
-         <table class="table table-striped">
-            <tr class="success">
-               <th style="width: 100px;">Select</th>
-               <th>Room Types</th>
-            </tr>
-            <tr>
-               <td>
-                  <input type="radio" name="room-type" value="lecture" checked>
-               </td>
-               <td>Lecture</td>
-            </tr>
-            <tr>
-               <td>
-                  <input type="radio" name="room-type" value="lab">
-               </td>
-               <td>Lab</td>
-            </tr>
-            <tr>
-               <td>
-                  <input type="radio" name="room-type" value="fexible">
-               </td>
-               <td>Flexible</td>
-            </tr>
-            <tr>
-               <td>
-                  <input type="radio" name="room-type" value="group">
-               </td>
-               <td>Group</td>
-            </tr>
-         </table>
-      </div>
-      <div class="col-xs-4 col-xs-offset-4">
-         <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-add-modal">Add</button>
-         </div>
-         <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-edit-modal">Edit</button>
-         </div>
-         <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12">Remove</button>
-         </div>
-      </div>
+      <div class="col-xs-4 col-xs-offset-4 component-types-editor">
+            <table class="table table-striped">
+                <tr class="success">
+                    <th style="width: 100px;">Select</th>
+                    <th>Room Types</th>
+                </tr>
+                <tr ng-repeat="room in roomTypes">
+                        <td><input type="radio" ng-model="$parent.roomid" value="{{room.id}}" ng-click="roomTypeRadioChanged(room.id)"/></td>
+                        <td>{{room.name}}</td>
+                        
+                    </tr>
+                
+            </table>
+        </div>
+        <div class="col-xs-4 col-xs-offset-4">
+            <div class="col-xs-4">
+                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#types-add-modal">Add</button>
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default preference-btn col-xs-12" ng-click="removeRoomType()" ng-disabled="!roomTypeRadioSelected">Remove</button>
+            </div>
+        </div>
       <div id="types-add-modal" class="modal fade" role="dialog">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -64,7 +43,7 @@
                            <label>Name:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="type-name">
+                           <input class="form-control" type="text" name="type-name" ng-model="newRoomType">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -73,38 +52,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
-                           </div>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div id="types-edit-modal" class="modal fade" role="dialog">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <form>
-                     <div class="modal-title">
-                        <h3>Edit Room Type</h3>
-                     </div>
-                     <div class="row modal-row">
-                        <div class="col-xs-3 col-xs-offset-3">
-                           <label>Name:</label>
-                        </div>
-                        <div class="col-xs-4">
-                           <input class="form-control" type="text" name="type-name">
-                        </div>
-                     </div>
-                     <div class="row modal-row">
-                        <div class="col-xs-offset-3">
-                           <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
-                           </div>
-                           <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addRoomType()">SAVE</button>
                            </div>
                         </div>
                      </div>
@@ -126,7 +74,7 @@
                </tr>
                <tr ng-repeat="room in rooms">
                   <td>
-                     <input type="radio" name="{{room.number}}" value="" checked>
+                     <input type="radio" ng-model="$parent.random" value="{{room.id}}" ng-click="radioChanged(room)">
                   </td>
                   <td>{{room.number}}</td>
                   <td>{{room.capacity}}</td>
@@ -138,16 +86,16 @@
          </div>
       </div>
       <div class="col-xs-4 col-xs-offset-4 bottom-buffer">
-         <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
-         </div>
-         <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal">Edit</button>
-         </div>
-         <div class="col-xs-4">
-            <button class="btn btn-default preference-btn col-xs-12">Remove</button>
-         </div>
-      </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#add-modal">Add</button>
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-disabled="!radioSelected" ng-click="openEdit()">Edit</button>
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default preference-btn col-xs-12" ng-disabled="!radioSelected" ng-click="deleteRoom()">Remove</button>
+            </div>
+        </div>
       <div id="add-modal" class="modal fade" role="dialog">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -161,7 +109,7 @@
                            <label>Room number:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="room-number">
+                           <input class="form-control" type="text" name="room-number" ng-model="add.number">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -169,7 +117,7 @@
                            <label>Capacity</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="capacity">
+                           <input class="form-control" type="text" name="capacity" ng-model="add.capacity">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -177,7 +125,9 @@
                            <label>Course Type:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="course-type">
+                           <select class="form-control" name="component1" ng-model="add.type">
+                              <option ng-repeat="room in roomTypes" value="{{room.name}}">{{room.name}}</option>
+                           </select>
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -202,7 +152,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addRoom()">SAVE</button>
                            </div>
                         </div>
                      </div>
@@ -224,7 +174,7 @@
                            <label>Room number:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="room-number">
+                           <input class="form-control" type="text" name="room-number" ng-model="edit.number">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -232,7 +182,7 @@
                            <label>Capacity</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="capacity">
+                           <input class="form-control" type="text" name="capacity" ng-model="edit.capacity">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -240,7 +190,9 @@
                            <label>Course Type:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="course-type">
+                           <select class="form-control" name="component1" ng-model="edit.type">
+                              <option ng-repeat="room in roomTypes" value="{{room.name}}">{{room.name}}</option>
+                           </select>
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -265,7 +217,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="editRoom()">SAVE</button>
                            </div>
                         </div>
                      </div>

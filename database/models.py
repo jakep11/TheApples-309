@@ -72,6 +72,10 @@ class Courses(db.Model):
       #'final_schedules': self.final_schedules,
       }
 
+<<<<<<< HEAD
+=======
+      
+>>>>>>> b0d11ce6842e255474a27a449d35e6a61889a380
 #-- Description: Stores the terms taught by the University
 class Terms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
@@ -121,6 +125,7 @@ class Rooms(db.Model):
    def serialize(self):
       #"""Return object data in easily serializeable format"""
       return {
+         'id': self.id,
          'number': self.number,
          'capacity': self.capacity,
          'type': self.type,
@@ -230,7 +235,7 @@ class FacultyCoursePreferences(db.Model):
    def serialize(self):
       return {
          'faculty_id': self.faculty_id,
-         'course_name': self.course_name,
+         'course_name': (Courses.query.filter_by(id=self.course_id).first()).course_name, #course_name
          'preference': self.preference
       }
 
@@ -281,6 +286,14 @@ class Components(db.Model):
 class ImportedFiles(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(40))
+
+   @property
+   def serialize(self):
+      #"""Return object data in easily serializeable format"""
+      return {
+      'id'         : self.id,
+      'name': self.name,
+      }
 
 # -- Description: Stores the student cohort data
 class CohortData(db.Model):
