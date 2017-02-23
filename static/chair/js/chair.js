@@ -410,7 +410,7 @@ app.controller('notifications', function ($scope, $rootScope) {
    $rootScope.bcrumb1 = 'Notifications';
 })
 
-app.controller('roomManager', function ($scope, $rootScope, $http) {
+app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Room Manager';
 
    // Getting instructors from the API and storing it into the instructors var
@@ -457,7 +457,7 @@ app.controller('roomManager', function ($scope, $rootScope, $http) {
             'Content-Type': 'application/json'
          },
          data: {
-            name: $scope.addRoomType
+            name: $scope.newRoomType
          }
       }).then(function successCallback(response) {
          console.log("Room added");
@@ -494,6 +494,7 @@ app.controller('roomManager', function ($scope, $rootScope, $http) {
 $scope.radioSelected = false;
 
 $scope.radioChanged = function (room) {
+   console.log(room);
    $scope.current = {
       'id': room.id,
       'number': room.number,

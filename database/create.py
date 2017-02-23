@@ -85,7 +85,9 @@ def new_room():
     number = data['number']
 
     room = Rooms(type=type, capacity=capacity, number=number)
-    return "%s room with capacity %d added to database" % (type, capacity)
+    db.session.add(room)
+    db.session.commit()
+    return " room with capacity added to database" 
 
 @create_api.route('/section', methods = ["POST"])
 def new_section():

@@ -127,6 +127,7 @@ class Rooms(db.Model):
    def serialize(self):
       #"""Return object data in easily serializeable format"""
       return {
+         'id': self.id,
          'number': self.number,
          'capacity': self.capacity,
          'type': self.type,

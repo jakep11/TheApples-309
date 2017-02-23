@@ -43,7 +43,7 @@
                            <label>Name:</label>
                         </div>
                         <div class="col-xs-4">
-                           <input class="form-control" type="text" name="type-name" ng-model="addRoomType">
+                           <input class="form-control" type="text" name="type-name" ng-model="newRoomType">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -74,7 +74,7 @@
                </tr>
                <tr ng-repeat="room in rooms">
                   <td>
-                     <input type="radio" ng-model="$parent.id" name="{{room.number}}" value="{{room.id}}">
+                     <input type="radio" ng-model="$parent.random" value="{{room.id}}" ng-click="radioChanged(room)">
                   </td>
                   <td>{{room.number}}</td>
                   <td>{{room.capacity}}</td>
