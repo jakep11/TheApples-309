@@ -78,7 +78,7 @@ def get_preferences():
    preferences = FacultyPreferences.query.all()
    return jsonify([i.serialize for i in preferences])
 
-@get_api.route('/course_preferences', methods = ["GET"])
+@get_api.route('/coursePreferences', methods = ["GET"])
 def get_course_preferences():
    course_preferences = FacultyCoursePreferences.query.all()
    return jsonify([i.serialize for i in course_preferences])
