@@ -101,146 +101,150 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
    }
 
    $scope.compTypeRadioSelected = false;
-  $scope.compTypeRadioChanged = function(id) {
-    $scope.selectedComponentType = id;
-    $scope.compTypeRadioSelected = true;
+   $scope.compTypeRadioChanged = function (id) {
+      $scope.selectedComponentType = id;
+      $scope.compTypeRadioSelected = true;
 
-  }
+   }
 
 
-//Combining courses and components list into one..
-function combineCoursesComponents() {
+   //Combining courses and components list into one..
+   function combineCoursesComponents() {
 
-   var arrayList = [];
-   var courses = $scope.courses;
-   var comps = $scope.components;
-   for (var i in courses) {
-     var obj = {id: courses[i].id, number: courses[i].number, major: courses[i].major, course_name: courses[i].course_name };
+      var arrayList = [];
+      var courses = $scope.courses;
+      var comps = $scope.components;
+      for (var i in courses) {
+         var obj = {
+            id: courses[i].id,
+            number: courses[i].number,
+            major: courses[i].major,
+            course_name: courses[i].course_name
+         };
 
-     for (var j in comps) {
-       if (courses[i].id == comps[j].course_id) {
-         if (obj.component_one != null) {
-            obj.component_two = comps[j].name;
-            obj.c2_workload_units = comps[j].workload_units;
-            obj.c2_hours = comps[j].hours;
+         for (var j in comps) {
+            if (courses[i].id == comps[j].course_id) {
+               if (obj.component_one != null) {
+                  obj.component_two = comps[j].name;
+                  obj.c2_workload_units = comps[j].workload_units;
+                  obj.c2_hours = comps[j].hours;
+               } else {
+                  obj.component_one = comps[j].name;
+                  obj.c1_workload_units = comps[j].workload_units;
+                  obj.c1_hours = comps[j].hours;
+               }
+
+            }
          }
-         else {
-            obj.component_one = comps[j].name;
-            obj.c1_workload_units = comps[j].workload_units;
-            obj.c1_hours = comps[j].hours;
+         obj.c1_workload_units = obj.c1_workload_units || null;
+         obj.c1_hours = obj.c1_hours || null;
+         obj.c2_workload_units = obj.c2_workload_units || null;
+         obj.c2_hours = obj.c2_hours || null;
+         obj.component_one = obj.component_one || null;
+         obj.component_two = obj.component_two || null;
+         arrayList.push(obj);
+
+      }
+      console.log(arrayList);
+      $scope.courses = arrayList;
+   }
+
+
+   $scope.radioSelected = false;
+
+   $scope.radioChanged = function (course) {
+      $scope.current = {
+         'id': course.id,
+         'number': course.number,
+         'major': course.major,
+         'course_name': course.course_name,
+         'component_one': course.component_one,
+         'c1_workload_units': course.c1_workload_units,
+         'c1_hours': course.c1_hours,
+         'component_two': course.component_two,
+         'c2_workload_units': course.c2_workload_units,
+         'c2_hours': course.c2_hours
+      }
+      $scope.radioSelected = true;
+      console.log("current set");
+
+   }
+   $scope.openEdit = function () {
+      $scope.edit = $scope.current;
+      console.log($scope.current);
+   }
+
+
+   $scope.addCourse = function () {
+      $http({
+         method: 'POST',
+         url: '/create/course',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'major': $scope.add.major,
+            'number': $scope.add.number,
+            'course_name': $scope.add.course_name,
+            'component_one': $scope.add.c1,
+            'c1_workload_units': $scope.add.c1_workload_units,
+            'c1_hours': $scope.add.c1_hours,
+            'component_two': $scope.add.c2,
+            'c2_workload_units': $scope.add.c2_workload_units,
+            'c2_hours': $scope.add.c2_hours
          }
-
-      }
+      }).then(function successCallback(response) {
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
    }
-   obj.c1_workload_units = obj.c1_workload_units || null;
-   obj.c1_hours = obj.c1_hours || null;
-   obj.c2_workload_units = obj.c2_workload_units || null;
-   obj.c2_hours = obj.c2_hours || null;
-   obj.component_one = obj.component_one || null;
-   obj.component_two = obj.component_two || null;
-   arrayList.push(obj);
 
+   $scope.editCourse = function () {
+      $http({
+         method: 'POST',
+         url: '/edit/course',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'id': $scope.edit.id,
+            'major': $scope.edit.major,
+            'number': $scope.edit.number,
+            'course_name': $scope.edit.course_name,
+            'component_one': $scope.edit.component_one,
+            'c1_workload_units': $scope.edit.c1_workload_units,
+            'c1_hours': $scope.edit.c1_hours,
+            'component_two': $scope.edit.component_two,
+            'c2_workload_units': $scope.edit.c2_workload_units,
+            'c2_hours': $scope.edit.c2_hours
+         }
+      }).then(function successCallback(response) {
+         console.log('Calling edit course');
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
    }
-   console.log(arrayList);
-   $scope.courses = arrayList;
-}
 
-
-$scope.radioSelected = false;
-
-$scope.radioChanged = function (course) {
-   $scope.current = {
-      'id': course.id,
-      'number': course.number,
-      'major': course.major,
-      'course_name': course.course_name,
-      'component_one': course.component_one,
-      'c1_workload_units': course.c1_workload_units,
-      'c1_hours': course.c1_hours,
-      'component_two': course.component_two,
-      'c2_workload_units': course.c2_workload_units,
-      'c2_hours': course.c2_hours
+   $scope.deleteCourse = function () {
+      console.log("trying to delete course");
+      $http({
+         method: 'POST',
+         url: '/delete/course',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'id': $scope.current.id
+         }
+      }).then(function successCallback(response) {
+         console.log('Calling delete course');
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
    }
-   $scope.radioSelected = true;
-   console.log("current set");
-
-}
-$scope.openEdit = function () {
-   $scope.edit = $scope.current;
-   console.log($scope.current);
-}
-
-
-$scope.addCourse = function () {
-   $http({
-      method: 'POST',
-      url: '/create/course',
-      headers: {
-         'Content-Type': 'application/json'
-      },
-      data: {
-         'major': $scope.add.major,
-         'number': $scope.add.number,
-         'course_name': $scope.add.course_name,
-         'component_one': $scope.add.c1,
-         'c1_workload_units': $scope.add.c1_workload_units,
-         'c1_hours': $scope.add.c1_hours,
-         'component_two': $scope.add.c2,
-         'c2_workload_units': $scope.add.c2_workload_units,
-         'c2_hours': $scope.add.c2_hours
-      }
-   }).then(function successCallback(response) {
-      $window.location.reload();
-   }, function errorCallback(response) {
-      console.log('error');
-   });
-}
-
-$scope.editCourse = function () {
-   $http({
-      method: 'POST',
-      url: '/edit/course',
-      headers: {
-         'Content-Type': 'application/json'
-      },
-      data: {
-         'id': $scope.edit.id,
-         'major': $scope.edit.major,
-         'number': $scope.edit.number,
-         'course_name': $scope.edit.course_name,
-         'component_one': $scope.edit.component_one,
-         'c1_workload_units': $scope.edit.c1_workload_units,
-         'c1_hours': $scope.edit.c1_hours,
-         'component_two': $scope.edit.component_two,
-         'c2_workload_units': $scope.edit.c2_workload_units,
-         'c2_hours': $scope.edit.c2_hours
-      }
-   }).then(function successCallback(response) {
-      console.log('Calling edit course');
-      $window.location.reload();
-   }, function errorCallback(response) {
-      console.log('error');
-   });
-}
-
-$scope.deleteCourse = function () {
-   console.log("trying to delete course");
-   $http({
-      method: 'POST',
-      url: '/delete/course',
-      headers: {
-         'Content-Type': 'application/json'
-      },
-      data: {
-         'id': $scope.current.id
-      }
-   }).then(function successCallback(response) {
-      console.log('Calling delete course');
-      $window.location.reload();
-   }, function errorCallback(response) {
-      console.log('error');
-   });
-}
 
 })
 
@@ -299,26 +303,26 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
    $scope.getPreferences();
 
 
-   //   // Getting course_preferences from the API and storing it into the coursePreferences var
-   //   $scope.coursePreferences;
-   //   $scope.getCoursePreferences = function() {
-   //      $http({
-   //         method: 'GET',
-   //         url: '/get/coursePreferences',
-   //         headers: {
-   //            'Content-Type': "application/json"
-   //         }
-   //      }).then(function successCallback(response) {
-   //         console.log("success");
-   //         console.log(response.data);
-   //         $scope.getCoursePreferences = response.data;
-   //      }, function errorCallback(response) {
-   //         console.log("error");
-   //      });
-   //   }
-   //   
-   //   // Calling getCoursePreference function
-   //   $scope.getCoursePreferences();
+   // Getting course_preferences from the API and storing it into the coursePreferences var
+   $scope.coursePreferences;
+   $scope.getCoursePreferences = function () {
+      $http({
+         method: 'GET',
+         url: '/get/coursePreferences',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         console.log("success");
+         console.log(response.data);
+         $scope.coursePreferences = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+
+   // Calling getCoursePreference function
+   $scope.getCoursePreferences();
 
 
 
