@@ -178,11 +178,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         console.log($scope.checkedStartTimes);
         console.log($scope.checkedEndTimes);
 
-        //
-        // maybe move somewhere else; temporary position
-        //
-        $scope.showSelectedTerms();
-
         // arrays to hold selected filter values
         var terms = []
         var ids = [];
@@ -190,24 +185,17 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         var timeStart = [];
         var timeEnd = [];
 
-        // collect the selected course_ids and store in ids array
-        angular.forEach($scope.checkedTerms, function (value, key) {
-            if (value === true) {
-                this.push(key);
-            }
-        }, terms);
+        // collect the selected course_id and store in ids array
+        terms.push($scope.checkedTerms.id);
         // collect the selected course_ids and store in ids array
         angular.forEach($scope.checkedCourses, function (value, key) {
             if (value === true) {
                 this.push(key);
             }
         }, ids);
-        // collect the selected faculty_ids and store in instructors array
-        angular.forEach($scope.checkedInstructors, function (value, key) {
-            if (value === true) {
-                this.push(key);
-            }
-        }, instructors);
+        //~~~~~~~~~ THIS NEEDS TO BE FIXED TO MATCH FACULTY ID AND NOT USER ID ~~~~~~~~~
+        // collect the current faculty_id and store in instructors array
+        instructors.push($rootScope.user_id);
         // collect the selected start time values and store in startTimes array
         angular.forEach($scope.checkedStartTimes, function (value, key) {
             if (value === true) {
@@ -220,10 +208,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                 this.push(key);
             }
         }, timeEnd);
-
-        if (terms.length === 0) {
-            terms.push($scope.terms[sharedData.lastTermIndex].id);
-        }
 
         // testing selected values arrays
         console.log(terms.length)
@@ -242,7 +226,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
             data: {
                 'terms': terms,
                 'ids': ids,
-                'instructors': $rootScope.user_id,
+                'instructors': instructors,
                 'timeStart': timeStart,
                 'timeEnd': timeEnd
             }
@@ -283,12 +267,10 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         }).then(function successCallback(response) {
             $scope.terms = response.data;
 
+            // ~~~~~~ NEED ANOTHER WAY TO GET DEFAULT TERM ~~~~~~~~~~~~
             // default select the current (newest/most recent) term
-            $scope.findLastTermIndex();
-            $scope.checkedTerms[sharedData.lastTermId] = true;
-
-            // add the default selected term to be displayed
-            $scope.showSelectedTerms();
+//            $scope.findLastTermIndex();
+//            $scope.checkedTerms[sharedData.lastTermId] = true;
 
             console.log('success');
         }, function errorCallback(response) {
@@ -319,29 +301,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         return lastIndex;
     }
 
-    // dynamically display term title and term's sections when checked and filters applied
-    $scope.showSelectedTerms = function () {
-        var showTerms = [];
-
-        // check if a term is checked and should be displayed
-        angular.forEach($scope.terms, function (term) {
-            var termId = term.id;
-
-            angular.forEach($scope.checkedTerms, function (value, key) {
-                if (key === termId && value === true) {
-                    this.push(term);
-                }
-            }, showTerms);
-        });
-
-        // if no terms are selected, display sections for the current (default) term
-        if (showTerms.length === 0) {
-            showTerms.push($scope.terms[sharedData.lastTermIndex]);
-        }
-
-        $scope.showTerms = showTerms;
-    }
-
     $scope.getInstructors = function () {
         $http({
             method: 'GET',
@@ -358,24 +317,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     }
     $scope.getInstructors();
 
-    //
-    // change this to get all sections for ONLY the current term
-    //
-    $scope.getSections = function () {
-        $http({
-            method: 'GET',
-            url: '/get/allSections',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function successCallback(response) {
-            $scope.sections = response.data;
-            console.log('success');
-        }, function errorCallback(response) {
-            console.log('error');
-        });
-    }
-    $scope.getSections();
     //
     //    // return to login page when back button is clicked
     //    $scope.backButtonClicked = function () {

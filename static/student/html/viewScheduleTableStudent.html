@@ -77,7 +77,7 @@ Things that change dynamically:
                     <form>
                         <div class="checkbox">
                             <label ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">
-                                <input type="select" name="term{{term.id}}" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
+                                <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
                             </label>
                         </div>
                     </form>

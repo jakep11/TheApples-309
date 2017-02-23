@@ -117,7 +117,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
         var timeStart = [];
         var timeEnd = [];
 
-        // collect the selected course_ids and store in ids array
+        // collect the selected term_ids and store in ids array
         angular.forEach($scope.checkedTerms, function (value, key) {
             if (value === true) {
                 this.push(key);
@@ -363,7 +363,7 @@ app.controller("viewScheduleCalendarStudent", function ($scope, $rootScope, $loc
         var timeStart = [];
         var timeEnd = [];
 
-        // collect the selected course_ids and store in ids array
+        // collect the selected term_ids and store in ids array
         angular.forEach($scope.checkedTerms, function (value, key) {
             if (value === true) {
                 this.push(key);
