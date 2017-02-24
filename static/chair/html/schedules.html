@@ -8,18 +8,16 @@
             <th></th>
             <th>Quarter</th>
             <th>Year</th>
-            <th>Last Edited</th>
-            <th>Status</th>
+            <th>Published</th>
 
          </tr>
-         <tr>
+         <tr ng-repeat="schedule in schedules">
             <td>
                <input type="radio" name="faculty-entry" value="tkearns" checked>
             </td>
-            <td>Fall</td>
-            <td>2014</td>
-            <td>12-30-13</td>
-            <td>Published</td>
+            <td><a href="#/generateSchedule?term={{schedule.term_id}}">{{schedule.quarter}}</a></td>
+            <td>{{schedule.year}}</td>
+            <td>{{schedule.published}}</td>
          </tr>
       </table>
       <div class="row">

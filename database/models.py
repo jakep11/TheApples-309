@@ -34,7 +34,6 @@ class Faculty(db.Model):
    preferences = db.relationship("FacultyPreferences", backref="faculty")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="faculty")
    constraints = db.relationship("FacultyConstraint", backref="faculty")
-   notifications = db.relationship("Notifications", backref="faculty")
 
    @property
    def serialize(self):
@@ -200,6 +199,15 @@ class Schedule(db.Model):
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    sections = db.relationship("Sections", backref="schedule")
    published = db.Column(db.Boolean)
+   
+   @property
+   def serialize(self):
+      return {
+         'quarter': (Terms.query.filter_by(id=self.term_id).first()).name[:-5], # getting assigned quarter
+         'year': (Terms.query.filter_by(id=self.term_id).first()).name[-4:], # getting assigned year
+         'published': self.published, # whether the schedule is published or not
+         'term_id': self.term_id # see which specific term_id the schedule is part of
+      }
 
 #-- Description: Stores faculty preferences for what days and times they would like to teach in a specific term 
 class FacultyPreferences(db.Model):
@@ -252,6 +260,7 @@ class Comments(db.Model):
    username = db.Column(db.String(32))
    comment = db.Column(db.Text)
    time = db.Column(db.String(30))
+   unread = db.Column(db.Boolean, default=False)
 
    @property
    def serialize(self):
@@ -264,13 +273,13 @@ class Comments(db.Model):
          'time': self.time
       }
 
-#-- Description: Stores notifications for the scheduler about changing preferences & new comments
-class Notifications(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
-   message = db.Column(db.Text)
-   unread = db.Column(db.SmallInteger)
-   time = db.Column(db.String(30))
+# #-- Description: Stores notifications for the scheduler about changing preferences & new comments
+# class Notifications(db.Model):
+#    id = db.Column(db.Integer, primary_key=True)
+#    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
+#    message = db.Column(db.Text)
+#    unread = db.Column(db.SmallInteger)
+#    time = db.Column(db.String(30))
 
 # -- Description: Stores the components of each of the courses
 class Components(db.Model):

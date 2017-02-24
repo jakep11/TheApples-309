@@ -3,6 +3,7 @@ get_api = Blueprint('get_api', __name__)
 
 from models import *
 from web_app import db
+import sys
 
 @get_api.route('/terms', methods = ["GET"])
 def get_terms():
@@ -106,7 +107,26 @@ def get_rooms():
    rooms = Rooms.query.all()
    return jsonify([i.serialize for i in rooms])
 
+@get_api.route('/schedules', methods = ["GET"])
+def get_schedules():
+   schedules = Schedule.query.all()
+   return jsonify([i.serialize for i in schedules])
+
 @get_api.route('/comments', methods = ["GET"])
 def get_comments():
    comments = Comments.query.all()
    return jsonify([i.serialize for i in comments])
+
+#given a user_id, find the faculty member associated with it
+@get_api.route('/facultyFromUser', methods = ["POST"])
+def get_facultyFromUser():
+   data = request.json
+   userID = data['userID']
+
+   print("userID:", userID)
+   sys.stdout.flush()
+
+   user = User.query.filter_by(id=userID).first()
+   faculty = Faculty.query.filter_by(first_name = user.first_name, last_name = user.last_name).first()
+
+   return jsonify([i.serialize for i in faculty])
