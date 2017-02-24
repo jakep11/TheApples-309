@@ -100,3 +100,8 @@ def get_filtered_courses():
 def get_rooms():
    rooms = Rooms.query.all()
    return jsonify([i.serialize for i in rooms])
+
+@get_api.route('/schedules', methods = ["GET"])
+def get_schedules():
+   schedules = Schedule.query.all()
+   return jsonify([i.serialize for i in schedules])

@@ -440,8 +440,28 @@ app.controller('roomManager', function ($scope, $rootScope, $http) {
 
 })
 
-app.controller('schedules', function ($scope, $rootScope) {
+app.controller('schedules', function ($scope, $rootScope, $http) {
    $rootScope.bcrumb1 = 'Schedules';
+
+   $scope.schedules = [];
+   $scope.getSchedules = function () {
+      $http({
+         method: 'GET',
+         url: '/get/schedules',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         console.log("success");
+         console.log(response.data);
+         $scope.schedules = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+
+   // Calling the function
+   $scope.getSchedules();
 
 })
 
