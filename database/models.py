@@ -33,7 +33,6 @@ class Faculty(db.Model):
    preferences = db.relationship("FacultyPreferences", backref="faculty")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="faculty")
    constraints = db.relationship("FacultyConstraint", backref="faculty")
-   notifications = db.relationship("Notifications", backref="faculty")
 
    @property
    def serialize(self):
@@ -250,6 +249,7 @@ class Comments(db.Model):
    username = db.Column(db.String(32))
    comment = db.Column(db.Text)
    time = db.Column(db.String(30))
+   unread = db.Column(db.Boolean, default=False)
 
    @property
    def serialize(self):
@@ -262,13 +262,13 @@ class Comments(db.Model):
          'time': self.time
       }
 
-#-- Description: Stores notifications for the scheduler about changing preferences & new comments
-class Notifications(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
-   message = db.Column(db.Text)
-   unread = db.Column(db.SmallInteger)
-   time = db.Column(db.String(30))
+# #-- Description: Stores notifications for the scheduler about changing preferences & new comments
+# class Notifications(db.Model):
+#    id = db.Column(db.Integer, primary_key=True)
+#    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
+#    message = db.Column(db.Text)
+#    unread = db.Column(db.SmallInteger)
+#    time = db.Column(db.String(30))
 
 # -- Description: Stores the components of each of the courses
 class Components(db.Model):
