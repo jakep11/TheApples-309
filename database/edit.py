@@ -56,8 +56,7 @@ def edit_faculty():
 
    db.session.add(faculty)
    db.session.commit()
-   faculty = Faculty.query.filter_by(id=id).first()
-   return "Faculty %s updated" % (facutly.first_name)
+   return "Faculty updated" 
 
 @edit_api.route('/course', methods = ["POST"])
 def edit_course():

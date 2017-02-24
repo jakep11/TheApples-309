@@ -26,13 +26,13 @@ def new_faculty():
     data = request.json
     first_name = data['first_name']
     last_name = data['last_name']
-    allowed_work_units = data['allowed_word_units']
+    allowed_work_units = data['allowed_work_units']
 
     faculty = Faculty(first_name=first_name, last_name=last_name,
-                        allowed_word_units=allowed_work_units)
+                        allowed_work_units=allowed_work_units)
     db.session.add(faculty)
     db.session.commit()
-    return  "Faculty %s %s added to database" (first_name, last_name)
+    return  "Faculty added to database" 
 
 @create_api.route('/course', methods = ["POST"])
 def new_course():
