@@ -2,7 +2,7 @@
    <div class="container-fluid">
       <!--   Page Title   -->
       <div class="row title">
-         <h1>Faculty manager</h1>
+         <h1>Faculty Manager</h1>
       </div>
       <form>
          <!--   Tables   -->
@@ -12,6 +12,7 @@
                   <th>Select</th>
                   <th>First Name</th>
                   <th>Last Name</th>
+                  <th>Min Workload</th>
                   <th>Max Workload</th>
                   <th>Notes</th>
                   <th>Preferences</th>
@@ -24,7 +25,8 @@
                   </td>
                   <td>{{instructor.first_name}}</td>
                   <td>{{instructor.last_name}}</td>
-                  <td>{{instructor.allowed_work_units}}</td>
+                  <td>{{instructor.min_work_units}}</td>
+                  <td>{{instructor.max_work_units}}
                   <td>None</td>
                   <td>
                      <a href="#/facultyPreferences?faculty_id={{instructor.id}}" class="btn btn-default preference-btn">PREFERENCES</a>
@@ -53,8 +55,8 @@
                               <input type="text " class="form-control " name="firstname " ng-model="add.first_name">
                            </div>
                            <div class="col-xs-6 add-text ">
-                              Max Workload:
-                              <input type="text " class="form-control " name="max-workload " ng-model="add.allowed_work_units">
+                              Min Workload:
+                              <input type="text " class="form-control " ng-model="add.min_work_units">
                            </div>
                         </div>
                         <div class="row modal-row ">
@@ -62,6 +64,12 @@
                               Last name:
                               <input type="text " class="form-control " name="lastname " ng-model="add.last_name">
                            </div>
+                           <div class="col-xs-6 add-text ">
+                              Max Workload:
+                              <input type="text " class="form-control "  ng-model="add.max_work_units">
+                           </div>
+                        </div>
+                        <div class="row modal-row ">
                            <div class="col-xs-6 add-text ">
                               Notes:
                               <textarea type="text " class="form-control " name="notes " placeholder="None "></textarea>
@@ -99,15 +107,21 @@
                               <input type="text " class="form-control " name="firstname " ng-model="edit.first_name">
                            </div>
                            <div class="col-xs-6 add-text ">
-                              Max Workload:
-                              <input type="text " class="form-control " name="max-workload " ng-model="edit.allowed_work_units">
+                              Min Workload:
+                              <input type="text " class="form-control " name="max-workload " ng-model="edit.min_work_units">
                            </div>
                         </div>
                         <div class="row modal-row ">
                            <div class="col-xs-6 add-text ">
                               Last name:
-                              <input type="text " class="form-control " name="lastname " ng-model="edit.last_name">
+                              <input type="text " class="form-control " ng-model="edit.last_name">
                            </div>
+                           <div class="col-xs-6 add-text ">
+                              Max Workload:
+                              <input type="text " class="form-control "  ng-model="edit.max_work_units">
+                           </div>
+                        </div>
+                        <div class="row modal-row ">
                            <div class="col-xs-6 add-text ">
                               Notes:
                               <textarea type="text " class="form-control " name="notes " placeholder="None "></textarea>

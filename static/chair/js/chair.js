@@ -281,7 +281,8 @@ $scope.radioChanged = function (faculty) {
       'id': faculty.id,
       'first_name': faculty.first_name,
       'last_name': faculty.last_name,
-      'allowed_work_units': faculty.allowed_work_units
+      'min_work_units': faculty.min_work_units,
+      'max_work_units': faculty.max_work_units
       
    }
    $scope.radioSelected = true;
@@ -304,7 +305,8 @@ $scope.addFaculty = function () {
       data: {
          'first_name': $scope.add.first_name,
          'last_name': $scope.add.last_name,
-         'allowed_work_units': $scope.add.allowed_work_units
+         'max_work_units': $scope.add.max_work_units,
+         'min_work_units': $scope.add.min_work_units
       }
    }).then(function successCallback(response) {
       $window.location.reload();
@@ -324,7 +326,8 @@ $scope.editFaculty = function () {
          'id': $scope.edit.id,
          'first_name': $scope.edit.first_name,
          'last_name': $scope.edit.last_name,
-         'allowed_work_units': $scope.edit.allowed_work_units
+         'max_work_units': $scope.edit.max_work_units,
+         'min_work_units': $scope.edit.min_work_units
       }
    }).then(function successCallback(response) {
       console.log('Calling edit Faculty');

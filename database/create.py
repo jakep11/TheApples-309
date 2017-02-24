@@ -26,10 +26,11 @@ def new_faculty():
     data = request.json
     first_name = data['first_name']
     last_name = data['last_name']
-    allowed_work_units = data['allowed_work_units']
+    max_work_units = data['max_work_units']
+    min_work_units = data['min_work_units']
 
     faculty = Faculty(first_name=first_name, last_name=last_name,
-                        allowed_work_units=allowed_work_units)
+                        max_work_units=max_work_units, min_work_units=min_work_units)
     db.session.add(faculty)
     db.session.commit()
     return  "Faculty added to database" 

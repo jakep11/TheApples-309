@@ -28,7 +28,8 @@ class Faculty(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    first_name = db.Column(db.String(32))
    last_name = db.Column(db.String(32))
-   allowed_work_units = db.Column(db.Integer)
+   max_work_units = db.Column(db.Integer)
+   min_work_units = db.Column(db.Integer)
    faculty_sections = db.relationship("Sections", backref="faculty")
    preferences = db.relationship("FacultyPreferences", backref="faculty")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="faculty")
@@ -42,7 +43,8 @@ class Faculty(db.Model):
       'id': self.id,
       'first_name': self.first_name,
       'last_name': self.last_name,
-      'allowed_work_units' : self.allowed_work_units
+      'min_work_units': self.min_work_units,
+      'max_work_units': self.max_work_units
       }
 
 #-- Description: Stores all courses taught by the University
