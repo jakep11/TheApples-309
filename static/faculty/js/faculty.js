@@ -317,6 +317,25 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     }
     $scope.getInstructors();
 
+    $scope.getFacultyFromUser = function () {
+        $http({
+            method: 'POST',
+            url: '/get/facultyFromUser',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                'userID': $rootScope.user_id
+            }
+        }).then(function successCallback(response) {
+            $scope.faculty = response.data;
+            console.log("success");
+        }, function errorCallback(response) {
+            console.log("error");
+        });
+    }
+    $scope.getFacultyFromUser();
+
     //
     //    // return to login page when back button is clicked
     //    $scope.backButtonClicked = function () {
