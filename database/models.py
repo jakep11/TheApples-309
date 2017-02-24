@@ -197,6 +197,15 @@ class Schedule(db.Model):
    term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
    sections = db.relationship("Sections", backref="schedule")
    published = db.Column(db.Boolean)
+   
+   @property
+   def serialize(self):
+      return {
+         'quarter': (Terms.query.filter_by(id=self.term_id).first()).name[:-5], # getting assigned quarter
+         'year': (Terms.query.filter_by(id=self.term_id).first()).name[-4:], # getting assigned year
+         'published': self.published, # whether the schedule is published or not
+         'term_id': self.term_id # see which specific term_id the schedule is part of
+      }
 
 #-- Description: Stores faculty preferences for what days and times they would like to teach in a specific term 
 class FacultyPreferences(db.Model):
