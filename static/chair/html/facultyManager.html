@@ -1,12 +1,3 @@
-<!--
-Things that change dynamically:
-   - Every faculty entry in the table and the attributes for that faculty
-   In the preference popup:
-      - Class and its preference
-      - The preference for each time slot (time slots are predetermined)
-
--->
-
 <body>
    <div class="container-fluid">
       <!--   Page Title   -->
@@ -26,11 +17,10 @@ Things that change dynamically:
                   <th>Preferences</th>
                </tr>
 
-               <!-- Trying to dynamically add faculty members -->
+               <!-- Dynamically add faculty members -->
                <tr ng-repeat="instructor in instructors">
                   <td>
-                     <!--         Value had to change depending on the entry username           -->
-                     <input type="radio" name="faculty-entry" value="instructor-id-{{instructor.id}}">
+                     <input type="radio" ng-model="$parent.random" value="instructor-id-{{instructor.id}}" ng-click="radioChanged(instructor)">
                   </td>
                   <td>{{instructor.first_name}}</td>
                   <td>{{instructor.last_name}}</td>
@@ -59,28 +49,18 @@ Things that change dynamically:
                         </div>
                         <div class="row modal-row ">
                            <div class="col-xs-6 add-text ">
-                              Username:
-                              <input type="text " class="form-control " name="username ">
-                           </div>
-                           <div class="col-xs-6 add-text ">
-                              Min Workload:
-                              <input type="text " class="form-control " name="min-workload ">
-                           </div>
-                        </div>
-                        <div class="row modal-row ">
-                           <div class="col-xs-6 add-text ">
                               First name:
-                              <input type="text " class="form-control " name="firstname ">
+                              <input type="text " class="form-control " name="firstname " ng-model="add.first_name">
                            </div>
                            <div class="col-xs-6 add-text ">
                               Max Workload:
-                              <input type="text " class="form-control " name="max-workload ">
+                              <input type="text " class="form-control " name="max-workload " ng-model="add.allowed_work_units">
                            </div>
                         </div>
                         <div class="row modal-row ">
                            <div class="col-xs-6 add-text ">
                               Last name:
-                              <input type="text " class="form-control " name="lastname ">
+                              <input type="text " class="form-control " name="lastname " ng-model="add.last_name">
                            </div>
                            <div class="col-xs-6 add-text ">
                               Notes:
@@ -93,7 +73,7 @@ Things that change dynamically:
                                  <button class="btn btn-default preference-btn add-btns " data-dismiss="modal">CANCEL</button>
                               </div>
                               <div class="col-xs-4 ">
-                                 <button class="btn btn-default preference-btn add-btns ">SAVE</button>
+                                 <button class="btn btn-default preference-btn add-btns " ng-click="addFaculty()">SAVE</button>
                               </div>
                            </div>
                         </div>
@@ -103,7 +83,7 @@ Things that change dynamically:
             </div>
          </div>
          <div class="col-xs-2 ">
-            <button class="btn btn-default preference-btn col-xs-12 " data-toggle="modal" data-target="#edit-modal ">Edit</button>
+            <button class="btn btn-default preference-btn col-xs-12 " data-toggle="modal" data-target="#edit-modal " ng-disabled="!radioSelected" ng-click="openEdit()">Edit</button>
          </div>
          <div id="edit-modal" class="modal fade" role="dialog ">
             <div class="modal-dialog ">
@@ -115,28 +95,18 @@ Things that change dynamically:
                         </div>
                         <div class="row modal-row ">
                            <div class="col-xs-6 add-text ">
-                              Username:
-                              <input type="text " class="form-control " name="username ">
-                           </div>
-                           <div class="col-xs-6 add-text ">
-                              Min Workload:
-                              <input type="text " class="form-control " name="min-workload ">
-                           </div>
-                        </div>
-                        <div class="row modal-row ">
-                           <div class="col-xs-6 add-text ">
                               First name:
-                              <input type="text " class="form-control " name="firstname ">
+                              <input type="text " class="form-control " name="firstname " ng-model="edit.first_name">
                            </div>
                            <div class="col-xs-6 add-text ">
                               Max Workload:
-                              <input type="text " class="form-control " name="max-workload ">
+                              <input type="text " class="form-control " name="max-workload " ng-model="edit.allowed_work_units">
                            </div>
                         </div>
                         <div class="row modal-row ">
                            <div class="col-xs-6 add-text ">
                               Last name:
-                              <input type="text " class="form-control " name="lastname ">
+                              <input type="text " class="form-control " name="lastname " ng-model="edit.last_name">
                            </div>
                            <div class="col-xs-6 add-text ">
                               Notes:
@@ -149,7 +119,7 @@ Things that change dynamically:
                                  <button class="btn btn-default preference-btn add-btns " data-dismiss="modal">CANCEL</button>
                               </div>
                               <div class="col-xs-4 ">
-                                 <button class="btn btn-default preference-btn add-btns ">SAVE</button>
+                                 <button class="btn btn-default preference-btn add-btns " ng-click="editFaculty()">SAVE</button>
                               </div>
                            </div>
                         </div>
@@ -159,7 +129,7 @@ Things that change dynamically:
             </div>
          </div>
          <div class="col-xs-2 ">
-            <button class="btn btn-default preference-btn col-xs-12 ">Remove</button>
+            <button class="btn btn-default preference-btn col-xs-12 " ng-disabled="!radioSelected" ng-click="deleteFaculty()">Remove</button>
          </div>
       </div>
    </div>

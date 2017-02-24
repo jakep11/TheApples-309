@@ -248,7 +248,7 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
 
 })
 
-app.controller('facultyManager', function ($scope, $rootScope, $http) {
+app.controller('facultyManager', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Faculty Manager';
    console.log('faculty manager page');
 
@@ -272,6 +272,87 @@ app.controller('facultyManager', function ($scope, $rootScope, $http) {
 
    // Calling the function
    $scope.getInstructors();
+
+   $scope.radioSelected = false;
+
+$scope.radioChanged = function (faculty) {
+   console.log(faculty);
+   $scope.current = {
+      'id': faculty.id,
+      'first_name': faculty.first_name,
+      'last_name': faculty.last_name,
+      'allowed_work_units': faculty.allowed_work_units
+      
+   }
+   $scope.radioSelected = true;
+   console.log("current set");
+
+}
+$scope.openEdit = function () {
+   $scope.edit = $scope.current;
+   console.log($scope.current);
+}
+
+
+$scope.addFaculty = function () {
+   $http({
+      method: 'POST',
+      url: '/create/faculty',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'first_name': $scope.add.first_name,
+         'last_name': $scope.add.last_name,
+         'allowed_work_units': $scope.add.allowed_work_units
+      }
+   }).then(function successCallback(response) {
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.editFaculty = function () {
+   $http({
+      method: 'POST',
+      url: '/edit/faculty',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.edit.id,
+         'first_name': $scope.edit.first_name,
+         'last_name': $scope.edit.last_name,
+         'allowed_work_units': $scope.edit.allowed_work_units
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling edit Faculty');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.deleteFaculty = function () {
+   console.log("trying to delete faculty");
+   $http({
+      method: 'POST',
+      url: '/delete/faculty',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.current.id
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling delete faculty');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
 
 })
 
@@ -378,7 +459,7 @@ app.service('fileUpload', ['$http', function ($http) {
    }
 }]);
 
-app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function ($scope, $rootScope, fileUpload) {
+app.controller('importData', ['$scope', '$rootScope', 'fileUpload', '$http', function ($scope, $rootScope, fileUpload, $http) {
    $rootScope.bcrumb1 = 'Import Data';
    $scope.uploadFile = function () {
       var file = $scope.myFile;
@@ -407,14 +488,52 @@ app.controller('importData', ['$scope', '$rootScope', 'fileUpload', function ($s
       fileUpload.uploadFileToUrl(file, uploadUrl);
       console.log("done uploading file");
    };
+
+   $scope.getFileNames = function() {
+      $http({
+         method: 'GET',
+         url: '/get/fileNames',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         $scope.fileNames = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+   $scope.getFileNames();
+
 }]);
 
 
-app.controller('notifications', function ($scope, $rootScope) {
+app.controller('notifications', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Notifications';
+
+   // Getting notifications from the API and storing it into the notifications var
+   $scope.comments = [];
+   $scope.getNotifications = function () {
+      $http({
+         method: 'GET',
+         url: '/get/comments',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         console.log("success");
+         console.log(response.data);
+         $scope.comments = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+
+   // Calling the getComments function
+   $scope.getNotifications();
+
 })
 
-app.controller('roomManager', function ($scope, $rootScope, $http) {
+app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Room Manager';
 
    // Getting instructors from the API and storing it into the instructors var
@@ -437,6 +556,143 @@ app.controller('roomManager', function ($scope, $rootScope, $http) {
 
    // Calling the function
    $scope.getRooms();
+
+   $scope.getRoomTypes = function () {
+      $http({
+         method: 'GET',
+         url: 'get/roomTypes',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }).then(function successCallback(response) {
+         $scope.roomTypes = response.data;
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.getRoomTypes();
+
+   $scope.addRoomType = function () {
+      $http({
+         method: 'POST',
+         url: 'create/roomType',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            name: $scope.newRoomType
+         }
+      }).then(function successCallback(response) {
+         console.log("Room added");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.removeRoomType = function () {
+      $http({
+         method: 'POST',
+         url: 'delete/roomType',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            id: $scope.selectedRoomType
+         }
+      }).then(function successCallback(response) {
+         console.log("Room deleted");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   $scope.roomTypeRadioSelected = false;
+  $scope.roomTypeRadioChanged = function(id) {
+    $scope.selectedRoomType = id;
+    $scope.roomTypeRadioSelected = true;
+
+  }
+
+$scope.radioSelected = false;
+
+$scope.radioChanged = function (room) {
+   console.log(room);
+   $scope.current = {
+      'id': room.id,
+      'number': room.number,
+      'capacity': room.capacity,
+      'type': room.type
+      
+   }
+   $scope.radioSelected = true;
+   console.log("current set");
+
+}
+$scope.openEdit = function () {
+   $scope.edit = $scope.current;
+   console.log($scope.current);
+}
+
+
+$scope.addRoom = function () {
+   $http({
+      method: 'POST',
+      url: '/create/room',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'number': $scope.add.number,
+         'capacity': $scope.add.capacity,
+         'type': $scope.add.type
+      }
+   }).then(function successCallback(response) {
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.editRoom = function () {
+   $http({
+      method: 'POST',
+      url: '/edit/room',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.edit.id,
+         'number': $scope.edit.number,
+         'capacity': $scope.edit.capacity,
+         'type': $scope.edit.type
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling edit Room');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.deleteRoom = function () {
+   console.log("trying to delete room");
+   $http({
+      method: 'POST',
+      url: '/delete/room',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.current.id
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling delete room');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
 
 })
 

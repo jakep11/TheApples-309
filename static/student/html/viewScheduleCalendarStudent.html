@@ -39,22 +39,22 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="userID">User ID:</label>
-                            <input class="form-control" id="userID">
+                            <input class="form-control" id="userID" ng-model="username">
                         </div>
                         <div class="form-group">
                             <label for="termSelects">Term:</label>
-                            <select class="form-control" id="termSelects">
-                                <option ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">{{term.name}}</option>
+                            <select class="form-control" id="termSelects" ng-model="term_id">
+                                <option ng-repeat="term in terms | orderBy: ['-year', '-quarterId']" value="{{term.id}}">{{term.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
 
-                            <textarea class="form-control noresize" id="encCss" placeholder="Enter feedback here"></textarea>
+                            <textarea class="form-control noresize" id="encCss" placeholder="Enter feedback here" ng-model="comment"></textarea>
                         </div>
                     </div>
                     <div class="modal-body" style="text-align: center">
                         <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">CANCEL</button>
-                        <button type="button" class="btn btn-default preference-btn" data-dismiss="modal">SUBMIT</button>
+                        <button type="button" class="btn btn-default preference-btn" data-dismiss="modal" ng-click="postFeedback()">SUBMIT</button>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     <form>
                         <div class="checkbox" style="padding: 0px;">
                             <label style="padding: 0px;" ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">
-                                <input   style="margin: 5px;" type="radio" name="term" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
+                                <input   style="margin: 5px;" type="radio" name="term" value="{{term.id}}" ng-model="$parent.checkedTerms">{{term.name}}
                             </label>
                         </div>
                     </form>

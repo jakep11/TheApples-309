@@ -26,13 +26,13 @@ def new_faculty():
     data = request.json
     first_name = data['first_name']
     last_name = data['last_name']
-    allowed_work_units = data['allowed_word_units']
+    allowed_work_units = data['allowed_work_units']
 
     faculty = Faculty(first_name=first_name, last_name=last_name,
-                        allowed_word_units=allowed_work_units)
+                        allowed_work_units=allowed_work_units)
     db.session.add(faculty)
     db.session.commit()
-    return  "Faculty %s %s added to database" (first_name, last_name)
+    return  "Faculty added to database" 
 
 @create_api.route('/course', methods = ["POST"])
 def new_course():
@@ -82,9 +82,12 @@ def new_room():
     data = request.json
     type = data['type']
     capacity = data['capacity']
+    number = data['number']
 
-    room = Rooms(type=type, capacity=capacity)
-    return "%s room with capacity %d added to database" % (type, capacity)
+    room = Rooms(type=type, capacity=capacity, number=number)
+    db.session.add(room)
+    db.session.commit()
+    return " room with capacity added to database" 
 
 @create_api.route('/section', methods = ["POST"])
 def new_section():
@@ -276,17 +279,17 @@ def new_faculty_constraint():
 
 @create_api.route('/comment', methods = ['POST'])
 def new_comment():
-    data = request.json()
+    data = request.json
     term_id = data['term_id']
     username = data['username']
     comment = data['comment']
     time = data['time']
 
-    term = Terms.query.filter_by(id=term.id).first()
+    term = Terms.query.filter_by(id=term_id).first()
     if term is None:
         return "ERROR TERM NOT FOUND"
 
-    comment = Comment(term=term, username=username,
+    comment = Comments(term=term, username=username,
                         comment=comment, time=time)
     db.session.add(comment)
     db.session.commit()
@@ -304,7 +307,7 @@ def new_notification():
     if faculty is None:
         return "ERROR FACULTY NOT FOUND"
 
-    n = Notification(faculty=faculty, message=message,
+    n = Notifications(faculty=faculty, message=message,
                         unread=unread, time=time)
     db.session.add(n)
     db.session.commit()
@@ -319,3 +322,13 @@ def new_component_type():
     db.session.add(n)
     db.session.commit()
     return "Component Type added to database"
+
+@create_api.route('/roomType', methods = ['POST'])
+def new_room_type():
+    data = request.json
+    name = data['name']
+
+    n = RoomTypes(name=name)
+    db.session.add(n)
+    db.session.commit()
+    return "Room Type added to database"

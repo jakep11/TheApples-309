@@ -142,10 +142,184 @@ app.controller("viewScheduleTable", function ($scope, $rootScope) {
     $rootScope.bcrumb1 = "Published Schedules";
 })
 
-app.controller("viewYourSchedule", function ($scope, $rootScope, sharedData) {
-    $rootScope.bcrumb1 = "Your Schedule"
+app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $http, sharedData) {
+    // arrays to hold sections by day
+    $scope.MWFsections = [];
+    $scope.TRsections = [];
+
+    $rootScope.bcrumb1 = "Your Schedule";
 
     $scope.startTimes = sharedData.startTimes;
 
 
-})
+    $scope.sortBy = function (sortType) {
+        $scope.reverse = ($scope.sortType === sortType) ? !$scope.reverse : false;
+        $scope.sortType = sortType;
+    };
+
+
+    // grab list of times from sharedData and populate UI
+    $scope.startTimes = sharedData.startTimes;
+    $scope.endTimes = sharedData.endTimes;
+
+    // arrays to hold the values for checked checkboxes used for filtering sections
+    $scope.checkedTerms = [];
+    $scope.checkedCourses = [];
+    $scope.checkedInstructors = [];
+    $scope.checkedStartTimes = [];
+    $scope.checkedEndTimes = [];
+
+    $scope.applyFilters = function () {
+        // testing checked checkbox values
+        console.log($scope.terms);
+        console.log($scope.checkedTerms);
+        console.log($scope.checkedCourses);
+        console.log($scope.checkedInstructors);
+        console.log($scope.checkedStartTimes);
+        console.log($scope.checkedEndTimes);
+
+        // arrays to hold selected filter values
+        var terms = []
+        var ids = [];
+        var instructors = [];
+        var timeStart = [];
+        var timeEnd = [];
+
+        // collect the selected course_id and store in ids array
+        terms.push($scope.checkedTerms.id);
+        // collect the selected course_ids and store in ids array
+        angular.forEach($scope.checkedCourses, function (value, key) {
+            if (value === true) {
+                this.push(key);
+            }
+        }, ids);
+        //~~~~~~~~~ THIS NEEDS TO BE FIXED TO MATCH FACULTY ID AND NOT USER ID ~~~~~~~~~
+        // collect the current faculty_id and store in instructors array
+        instructors.push($rootScope.user_id);
+        // collect the selected start time values and store in startTimes array
+        angular.forEach($scope.checkedStartTimes, function (value, key) {
+            if (value === true) {
+                this.push(key);
+            }
+        }, timeStart);
+        // collect the selected end time values and store in endTimes array
+        angular.forEach($scope.checkedEndTimes, function (value, key) {
+            if (value === true) {
+                this.push(key);
+            }
+        }, timeEnd);
+
+        // testing selected values arrays
+        console.log(terms.length)
+        console.log(ids.length);
+        console.log(instructors.length);
+        console.log(timeStart.length);
+        console.log(timeEnd.length);
+
+        // POST filter data to filters.py and retrieve filtered courses
+        $http({
+            method: 'POST',
+            url: '/filter/sections',
+            headers: {
+                'Content-Type': "application/json"
+            },
+            data: {
+                'terms': terms,
+                'ids': ids,
+                'instructors': instructors,
+                'timeStart': timeStart,
+                'timeEnd': timeEnd
+            }
+        }).then(function successCallback(response) {
+            $scope.sections = response.data;
+            console.log("success");
+        }, function errorCallback(response) {
+            console.log("error");
+        });
+    }
+
+    console.log("work?"); // remove debugging for final version
+
+    $scope.getCourses = function () {
+        console.log("getting courses");
+        $http({
+            method: 'GET',
+            url: '/get/allCourses',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getCourses();
+
+    $scope.getTerms = function () {
+        $http({
+            method: 'GET',
+            url: '/get/terms',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.terms = response.data;
+
+            // ~~~~~~ NEED ANOTHER WAY TO GET DEFAULT TERM ~~~~~~~~~~~~
+            // default select the current (newest/most recent) term
+//            $scope.findLastTermIndex();
+//            $scope.checkedTerms[sharedData.lastTermId] = true;
+
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getTerms();
+
+    $scope.findLastTermIndex = function () {
+        var lastIndex;
+
+        var year = -1;
+        var quarterId = -1;
+
+        angular.forEach($scope.terms, function (obj, index) {
+            console.log(obj);
+            if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
+                lastIndex = index;
+                year = obj.year;
+                quarterId = obj.quarterId;
+            }
+        });
+
+        // add these values to shared data to use between functions/controllers
+        sharedData.lastTermId = $scope.terms[lastIndex].id;
+        sharedData.lastTermIndex = lastIndex;
+
+        return lastIndex;
+    }
+
+    $scope.getInstructors = function () {
+        $http({
+            method: 'GET',
+            url: '/get/instructors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.instructors = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getInstructors();
+
+    //
+    //    // return to login page when back button is clicked
+    //    $scope.backButtonClicked = function () {
+    //        $location.path("/login");
+    //    }
+});
