@@ -248,7 +248,7 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
 
 })
 
-app.controller('facultyManager', function ($scope, $rootScope, $http) {
+app.controller('facultyManager', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Faculty Manager';
    console.log('faculty manager page');
 
@@ -272,6 +272,90 @@ app.controller('facultyManager', function ($scope, $rootScope, $http) {
 
    // Calling the function
    $scope.getInstructors();
+
+   $scope.radioSelected = false;
+
+$scope.radioChanged = function (faculty) {
+   console.log(faculty);
+   $scope.current = {
+      'id': faculty.id,
+      'first_name': faculty.first_name,
+      'last_name': faculty.last_name,
+      'min_work_units': faculty.min_work_units,
+      'max_work_units': faculty.max_work_units
+      
+   }
+   $scope.radioSelected = true;
+   console.log("current set");
+
+}
+$scope.openEdit = function () {
+   $scope.edit = $scope.current;
+   console.log($scope.current);
+}
+
+
+$scope.addFaculty = function () {
+   $http({
+      method: 'POST',
+      url: '/create/faculty',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'first_name': $scope.add.first_name,
+         'last_name': $scope.add.last_name,
+         'max_work_units': $scope.add.max_work_units,
+         'min_work_units': $scope.add.min_work_units
+      }
+   }).then(function successCallback(response) {
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.editFaculty = function () {
+   $http({
+      method: 'POST',
+      url: '/edit/faculty',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.edit.id,
+         'first_name': $scope.edit.first_name,
+         'last_name': $scope.edit.last_name,
+         'max_work_units': $scope.edit.max_work_units,
+         'min_work_units': $scope.edit.min_work_units
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling edit Faculty');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.deleteFaculty = function () {
+   console.log("trying to delete faculty");
+   $http({
+      method: 'POST',
+      url: '/delete/faculty',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.current.id
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling delete faculty');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
 
 })
 
@@ -323,6 +407,57 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
 
    // Calling getCoursePreference function
    $scope.getCoursePreferences();
+
+   // Filtering displayed courses, updating the coursePreferences var
+   $scope.plusButtonClicked = function () {
+      $http({
+         method: 'POST',
+         url: '/get/filterCourses',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'filter': $scope.filter,
+            'faculty_id': $scope.faculty_id
+         }
+      }).then(function successCallback(response) {
+      	console.log($scope.filter);
+         $scope.coursePreferences = response.data;
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   //Saving any changes before the day is changed.
+   $scope.changeDay = function () {
+
+         console.log($scope.time_pref);
+
+   }
+
+   $scope.saveChanges = function() {
+      $http({
+         method: 'POST',
+         url: '/edit/saveChanges',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'min_units': $scope.min_units,
+            'max_units': $scope.max_units,
+            'id': $scope.faculty_id
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   $scope.changePref = function() {
+      console.log(this.pref)   
+   }
 
 
 
@@ -615,8 +750,28 @@ $scope.deleteRoom = function () {
 
 })
 
-app.controller('schedules', function ($scope, $rootScope) {
+app.controller('schedules', function ($scope, $rootScope, $http) {
    $rootScope.bcrumb1 = 'Schedules';
+
+   $scope.schedules = [];
+   $scope.getSchedules = function () {
+      $http({
+         method: 'GET',
+         url: '/get/schedules',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         console.log("success");
+         console.log(response.data);
+         $scope.schedules = response.data;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+
+   // Calling the function
+   $scope.getSchedules();
 
 })
 

@@ -42,7 +42,8 @@ def edit_faculty():
    id = data.get('id', None)
    first_name = data.get('first_name', None)
    last_name = data.get('last_name', None)
-   allowed_work_units = data.get('allowed_work_units', None)
+   min_work_units = data.get('min_work_units', None)
+   max_work_units = data.get('max_work_units', None)
 
    faculty = Faculty.query.filter_by(id=id).first()
    if faculty is None:
@@ -51,13 +52,14 @@ def edit_faculty():
       faculty.first_name = first_name
    if last_name is not None:
       faculty.last_name = last_name
-   if allowed_work_units is not None:
-      faculty.allowed_work_units = allowed_work_units
+   if max_work_units is not None:
+      faculty.max_work_units = max_work_units
+   if min_work_units is not None:
+      faculty.min_work_units = min_work_units
 
    db.session.add(faculty)
    db.session.commit()
-   faculty = Faculty.query.filter_by(id=id).first()
-   return "Faculty %s updated" % (facutly.first_name)
+   return "Faculty updated" 
 
 @edit_api.route('/course', methods = ["POST"])
 def edit_course():
@@ -448,6 +450,26 @@ def edit_notification():
    db.session.commit()
    notification = Notifications.query.filter_by(id=id).first()
    return "Notification with id %d updated" % (id)
+
+@edit_api.route('/saveChanges', methods = ["POST"])
+def save_changes():
+   data = request.json
+   id = data.get('id', None)
+   min_units = data.get('min_units', None)
+   max_units = data.get('max_units', None)
+
+   faculty = Faculty.query.filter_by(id=id).first()
+   if faculty is None:
+      return "ERROR FACULTY NOT FOUND"
+   if min_units is not None:
+      faculty.min_work_units = min_units
+   if max_units is not None:
+      faculty.max_work_units = max_units
+
+   db.session.add(faculty)
+   db.session.commit()
+   faculty = Faculty.query.filter_by(id=id).first()
+   return "Faculty with id %d updated" % (int(id))
 
 
 
