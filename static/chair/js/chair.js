@@ -429,13 +429,14 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
       });
    }
 
-   //Saving any changes before the day is changed.
-   $scope.changeDay = function () {
+   // Saving any changes before the day is changed.
+   $scope.changeTime = function () {
 
-         console.log($scope.time_pref);
+         console.log(this.time_pref);
 
    }
 
+   // Saving changes when 'save' is clicked. Only thing updated is faculty work units
    $scope.saveChanges = function() {
       $http({
          method: 'POST',
@@ -455,8 +456,23 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
       });
    }
 
+   // When a course preference is changed, update it in the database.
    $scope.changePref = function() {
-      console.log(this.pref)   
+      $http({
+         method: 'POST',
+         url: '/edit/facultyCoursePreference',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'pref': this.pref,
+            'cp_id': this.coursePreference.id
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      }); 
    }
 
 
