@@ -164,19 +164,16 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
 
     // arrays to hold the values for checked checkboxes used for filtering sections
     $scope.checkedTerms = [];
-    $scope.checkedCourses = [];
-    $scope.checkedInstructors = [];
-    $scope.checkedStartTimes = [];
-    $scope.checkedEndTimes = [];
+    //    $scope.checkedCourses = [];
+    //    $scope.checkedInstructors = [];
+    //    $scope.checkedStartTimes = [];
+    //    $scope.checkedEndTimes = [];
 
     $scope.applyFilters = function () {
         // testing checked checkbox values
         console.log($scope.terms);
-        console.log($scope.checkedTerms);
-        console.log($scope.checkedCourses);
-        console.log($scope.checkedInstructors);
-        console.log($scope.checkedStartTimes);
-        console.log($scope.checkedEndTimes);
+        console.log($scope.MWFsections);
+        console.log($scope.TRsections);
 
         // arrays to hold selected filter values
         var terms = []
@@ -187,21 +184,20 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
 
         // collect the selected course_id and store in ids array
         terms.push($scope.checkedTerms.id);
+        timeStart.push(sharedData.startTimes);
+        timeEnd.push(sharedData.endTimes);
+
         // collect the selected course_ids and store in ids array
         angular.forEach($scope.checkedCourses, function (value, key) {
             if (value === true) {
                 this.push(key);
             }
         }, ids);
-        //~~~~~~~~~ THIS NEEDS TO BE FIXED TO MATCH FACULTY ID AND NOT USER ID ~~~~~~~~~
-        // collect the current faculty_id and store in instructors array
-        instructors.push($rootScope.user_id);
+        //~~~~~~~~~ THIS NEEDS TO BE FIXED TO MATCH FACULTY ID AND NOT USER ID ~~~~~~~~~        // collect the current faculty_id and store in instructors array
+        instructors.push($rootScope.faculty_id);
         // collect the selected start time values and store in startTimes array
-        angular.forEach($scope.checkedStartTimes, function (value, key) {
-            if (value === true) {
-                this.push(key);
-            }
-        }, timeStart);
+        angular.forEach($scope.checkedStartTimes);
+
         // collect the selected end time values and store in endTimes array
         angular.forEach($scope.checkedEndTimes, function (value, key) {
             if (value === true) {
@@ -210,11 +206,11 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         }, timeEnd);
 
         // testing selected values arrays
-        console.log(terms.length)
-        console.log(ids.length);
-        console.log(instructors.length);
-        console.log(timeStart.length);
-        console.log(timeEnd.length);
+        console.log("#terms: " + terms.length);
+        console.log("#ids: " + ids.length);
+        console.log("#instructors: " + instructors.length);
+        console.log("#startimes: " + timeStart.length);
+        console.log("#endtimes: " + timeEnd.length);
 
         // POST filter data to filters.py and retrieve filtered courses
         $http({
@@ -267,10 +263,10 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         }).then(function successCallback(response) {
             $scope.terms = response.data;
 
-            // ~~~~~~ NEED ANOTHER WAY TO GET DEFAULT TERM ~~~~~~~~~~~~
-            // default select the current (newest/most recent) term
-//            $scope.findLastTermIndex();
-//            $scope.checkedTerms[sharedData.lastTermId] = true;
+            //                         ~~~~~~ NEED ANOTHER WAY TO GET DEFAULT TERM ~~~~~~~~~~~~
+            //                         default select the current (newest/most recent) term
+            //                                    $scope.findLastTermIndex();
+            //                                    $scope.checkedTerms[sharedData.lastTermId] = true;
 
             console.log('success');
         }, function errorCallback(response) {
@@ -285,7 +281,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         var year = -1;
         var quarterId = -1;
 
-        angular.forEach($scope.terms, function (obj, index) {
+        angular.forEach($scope.ids, function (obj, index) {
             console.log(obj);
             if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
                 lastIndex = index;
@@ -314,12 +310,15 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         }, function errorCallback(response) {
             console.log('error');
         });
+
+        angular.forEach($scope.instructors, function (obj, index) {
+            console.log(obj);
+            if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
+                lastIndex = index;
+                year = obj.year;
+                quarterId = obj.quarterId;
+            }
+        });
     }
     $scope.getInstructors();
-
-    //
-    //    // return to login page when back button is clicked
-    //    $scope.backButtonClicked = function () {
-    //        $location.path("/login");
-    //    }
 });

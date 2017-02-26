@@ -69,3 +69,13 @@
         </div>
     </div>
 </div>
+
+<!--ALL COURSES-->
+<div class="row form-inline text-center">
+    <label ng-repeat="course in courses | orderBy: 'number'" name="course{{course.id}}" value="{{course.id}}" ng-model="checkedCourses[course.id]">{{course.major}} {{course.number}} /</label>
+</div>
+
+<div class="row form-inline text-center">
+    <label ng-repeat="instructor in instructors | orderBy: 'last_name'" name="instructor{{instructor.id}}" value="{{instructor.id}}" ng-model="checkedInstructors[instructor.id]">{{instructor.last_name}} /
+                            </label>
+</div>
