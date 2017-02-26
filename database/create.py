@@ -204,17 +204,21 @@ def new_student_planning_data():
 @create_api.route('/schedule', methods = ['POST'])
 def new_schedule():
     data = request.json
-    term_id = data['term_id']
-    published = data['published']
+    term_name = data['name']
+    #term_id = data['term_id']
+    #published = data['published']
 
-    term = Terms.query.filter_by(id=term_id).first
+    term = Terms.query.filter_by(name=term_name).first()
     if term is None:
-        return "ERROR TERM NOT FOUND"
+        newTerm = Terms(name=term_name)
+        db.session.add(newTerm)
+        db.session.commit()
+        term = Terms.query.filter_by(name=term_name).first()
 
-    schedule = Schedule(term_id=term, published=published)
+    schedule = Schedule(term=term, published=False)
     db.session.add(schedule)
     db.session.commit()
-    return "Schedule: term %s" % (term)
+    return "Schedule added" 
 
 # @create_api.route('publishedSchedule', methods = ['POST'])
 # def new_published_schedule():

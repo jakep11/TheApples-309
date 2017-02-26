@@ -240,7 +240,7 @@ def edit_room_equipment():
 
 @edit_api.route('/scheduleFinal', methods = ["POST"])
 def edit_schedule_final():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    course_id = data.get('course_id', None)
@@ -272,7 +272,7 @@ def edit_schedule_final():
 
 @edit_api.route('/studentPlanningData', methods = ["POST"])
 def edit_student_planning_data():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    course_id = data.get('course_id', None)
@@ -306,17 +306,26 @@ def edit_student_planning_data():
 
 @edit_api.route('/schedule', methods = ["POST"])
 def edit_schedule():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
-   term_id = data.get('term_id', None)
+   term_name = data.get('name', None)
    published = data.get('published', None)
 
    s = Schedule.query.filter_by(id=id).first()
    if s is None:
       return "ERROR SCHEDULE NOT FOUND"
-   if term_id is not None:
-      term = Terms.query.filter_by(id=term_id).first()
+   if term_name is not None:
+      term = Terms.query.filter_by(name=term_name).first()
+      if term is None:
+         newTerm = Terms(name=term_name)
+         db.session.add(newTerm)
+         db.session.commit()
+         term = Terms.query.filter_by(name=term_name).first()
+
+
+
       s.term = term
+
    if published is not None:
       s.published = published
 
@@ -344,7 +353,7 @@ def edit_schedule():
 
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    day = data.get('day', None)
