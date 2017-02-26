@@ -435,7 +435,7 @@ def edit_comment():
 
    db.session.add(cmt)
    db.session.commit()
-   return "Comment with id %d updated" % (id)
+   return "Comment updated"
 
 @edit_api.route('/saveChanges', methods = ["POST"])
 def save_changes():

@@ -317,7 +317,9 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
                 'term_id': $scope.term_id,
                 'username': $scope.username,
                 'comment': $scope.comment,
-                'time': new Date().toLocaleString()
+                'time': new Date().toLocaleString(),
+                'unread': "true",
+                'type': "Feedback"
           }
         }).then(function successCallback(response) {
             $scope.courses = response.data;

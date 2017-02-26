@@ -601,6 +601,18 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
    // Calling the getComments function
    $scope.getNotifications();
 
+  $scope.readMore = function() {
+      var selectedComment = this.selectedComment;
+
+      // Find the existing comment
+      for (var i in $scope.comments) {
+         if ($scope.comments[i].id == selectedComment) {
+            console.log("The selected comment has been found");
+            $scope.popUpMessage = $scope.comments[i].comment;
+         }
+      }
+
+  }
 
    $scope.markAsRead = function() {
       $http({
@@ -610,7 +622,8 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
             'Content-Type': 'application/json'
          },
          data: {
-            'unread': "TRUE"
+            'id': this.selectedComment,
+            'unread': "false"
          }
       }).then(function successCallback(response) {
          console.log('success');

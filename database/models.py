@@ -261,7 +261,7 @@ class Comments(db.Model):
    username = db.Column(db.String(32))
    comment = db.Column(db.Text)
    time = db.Column(db.String(30))
-   unread = db.Column(db.Boolean, default=False)
+   unread = db.Column(db.Boolean, default=True)
    type = db.Column(db.String(20))
 
    @property
