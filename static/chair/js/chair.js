@@ -408,6 +408,57 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
    // Calling getCoursePreference function
    $scope.getCoursePreferences();
 
+   // Filtering displayed courses, updating the coursePreferences var
+   $scope.plusButtonClicked = function () {
+      $http({
+         method: 'POST',
+         url: '/get/filterCourses',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'filter': $scope.filter,
+            'faculty_id': $scope.faculty_id
+         }
+      }).then(function successCallback(response) {
+      	console.log($scope.filter);
+         $scope.coursePreferences = response.data;
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   //Saving any changes before the day is changed.
+   $scope.changeDay = function () {
+
+         console.log($scope.time_pref);
+
+   }
+
+   $scope.saveChanges = function() {
+      $http({
+         method: 'POST',
+         url: '/edit/saveChanges',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'min_units': $scope.min_units,
+            'max_units': $scope.max_units,
+            'id': $scope.faculty_id
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   $scope.changePref = function() {
+      console.log(this.pref)   
+   }
+
 
 
    $scope.faculty_id = $routeParams.faculty_id;

@@ -451,6 +451,26 @@ def edit_notification():
    notification = Notifications.query.filter_by(id=id).first()
    return "Notification with id %d updated" % (id)
 
+@edit_api.route('/saveChanges', methods = ["POST"])
+def save_changes():
+   data = request.json
+   id = data.get('id', None)
+   min_units = data.get('min_units', None)
+   max_units = data.get('max_units', None)
+
+   faculty = Faculty.query.filter_by(id=id).first()
+   if faculty is None:
+      return "ERROR FACULTY NOT FOUND"
+   if min_units is not None:
+      faculty.min_work_units = min_units
+   if max_units is not None:
+      faculty.max_work_units = max_units
+
+   db.session.add(faculty)
+   db.session.commit()
+   faculty = Faculty.query.filter_by(id=id).first()
+   return "Faculty with id %d updated" % (int(id))
+
 
 
 

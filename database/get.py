@@ -1,4 +1,5 @@
 from flask import make_response, Blueprint, render_template, flash, redirect, request, url_for, jsonify, json, Response
+from sqlalchemy import func
 get_api = Blueprint('get_api', __name__)
 
 from models import *
@@ -97,9 +98,10 @@ def get_course_preferences():
 @get_api.route('/filterCourses', methods = ["POST"])
 def get_filtered_courses():
 	data = request.json
-	number = data['number']
+	course = data['filter']
+	id = int(data['faculty_id'])
 
-	courses = Courses.query.filter(Courses.number.like(number + '%')).all()
+	courses = FacultyCoursePreferences.query.filter(Courses.course_name.contains(course)).all()
 	return jsonify([i.serialize for i in courses])
 
 @get_api.route('/rooms', methods = ["GET"])
