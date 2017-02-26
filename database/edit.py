@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, json
 import bcrypt
+from sqlalchemy import and_
 edit_api = Blueprint('edit_api', __name__)
 
 from models import *
@@ -240,7 +241,7 @@ def edit_room_equipment():
 
 @edit_api.route('/scheduleFinal', methods = ["POST"])
 def edit_schedule_final():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    course_id = data.get('course_id', None)
@@ -272,7 +273,7 @@ def edit_schedule_final():
 
 @edit_api.route('/studentPlanningData', methods = ["POST"])
 def edit_student_planning_data():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    course_id = data.get('course_id', None)
@@ -306,7 +307,7 @@ def edit_student_planning_data():
 
 @edit_api.route('/schedule', methods = ["POST"])
 def edit_schedule():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    published = data.get('published', None)
@@ -344,7 +345,7 @@ def edit_schedule():
 
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    day = data.get('day', None)
@@ -372,7 +373,7 @@ def edit_faculty_preference():
 
 @edit_api.route('/facultyConstraint', methods = ["POST"])
 def edit_faculty_constraint():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    faculty_id = data.get('faculty_id', None)
@@ -398,6 +399,24 @@ def edit_faculty_constraint():
    db.session.commit()
    fc = FacultyConstraint.query.filter_by(id=id).first()
    return "Faculty Constraint with id %d updated" % (id)
+
+@edit_api.route('/facultyCoursePreference', methods = ["POST"])
+def edit_faculty_course_preference():
+   data = request.json
+   cp_id = data.get('cp_id', None)
+   pref = data.get('pref', None)
+   print "id %d" % (int(cp_id))
+
+   fcp = FacultyCoursePreferences.query.filter_by(id=cp_id).first()
+   if fcp is None:
+      return "ERROR FCP NOT FOUND"
+   fcp.preference = pref
+
+
+   db.session.add(fcp)
+   db.session.commit()
+   fcp = FacultyCoursePreferences.query.filter_by(id=cp_id).first()
+   return "Faculty Course Preference with id %d updated" % (cp_id)
 
 @edit_api.route('/comment', methods = ["POST"])
 def edit_comment():

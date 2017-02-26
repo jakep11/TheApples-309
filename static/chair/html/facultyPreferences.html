@@ -28,9 +28,9 @@
                <td ng-if="coursePreference.faculty_id == faculty_id">{{coursePreference.course_name}}</td>
                <td ng-if="coursePreference.faculty_id == faculty_id">
                   <select class="form-control selector" id="termSelect" ng-model="pref", ng-change="changePref()">
-                     <option ng-selected="coursePreference.preference == 'M'" value="Most wanted">Most wanted</option>
-                     <option ng-selected="coursePreference.preference == 'A'" value="Able to teach">Able to teach</option>
-                     <option ng-selected="coursePreference.preference == 'C'" value="Cannot teach">Cannot teach</option>
+                     <option ng-selected="coursePreference.preference == 'M'" value="M">Most wanted</option>
+                     <option ng-selected="coursePreference.preference == 'A'" value="A">Able to teach</option>
+                     <option ng-selected="coursePreference.preference == 'C'" value="C">Cannot teach</option>
                   </select>
                </td>
             </tr>
