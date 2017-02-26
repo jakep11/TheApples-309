@@ -131,4 +131,7 @@ def get_facultyFromUser():
    user = User.query.filter_by(id=userID).first()
    faculty = Faculty.query.filter_by(first_name = user.first_name, last_name = user.last_name).first()
 
-   return jsonify([i.serialize for i in faculty])
+   print("faculty:", faculty.id)
+   sys.stdout.flush()
+
+   return jsonify(id=faculty.id, first_name=faculty.first_name, last_name=faculty.last_name)

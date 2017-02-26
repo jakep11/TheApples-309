@@ -289,34 +289,18 @@ def new_comment():
     username = data['username']
     comment = data['comment']
     time = data['time']
+    unread = data['unread']
+    type = data['type']
 
     term = Terms.query.filter_by(id=term_id).first()
     if term is None:
         return "ERROR TERM NOT FOUND"
 
     comment = Comments(term=term, username=username,
-                        comment=comment, time=time)
+                        comment=comment, time=time, unread=unread, type=type)
     db.session.add(comment)
     db.session.commit()
     return "Comment added to database"
-
-@create_api.route('/notification', methods = ['POST'])
-def new_notification():
-    data = request.json
-    faculty_id = data['faculty_id']
-    message = data['message']
-    unread = data['unread']
-    time = data['time']
-
-    faculty = Faculty.query.filter_by(id=faculty_id).first()
-    if faculty is None:
-        return "ERROR FACULTY NOT FOUND"
-
-    n = Notifications(faculty=faculty, message=message,
-                        unread=unread, time=time)
-    db.session.add(n)
-    db.session.commit()
-    return "Notification added to database"
 
 @create_api.route('/componentType', methods = ['POST'])
 def new_component_type():

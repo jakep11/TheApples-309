@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, json
 import bcrypt
+from sqlalchemy import and_
 edit_api = Blueprint('edit_api', __name__)
 
 from models import *
@@ -333,28 +334,11 @@ def edit_schedule():
    db.session.commit()
    return "Schedule with id %d updated" % (id)
 
-# @edit_api.route('/publishedSchedule', methods = ["POST"])
-# def edit_published_schedule():
-#    data = request.json()
-#    id = data.get('id', None)
-#    term_id = data.get('term_id', None)
-#
-#    ps = PublishedSchedule.query.filter_by(id=id).first()
-#    if ps is None:
-#       return "ERROR PUBLISHED SCHEDULE NOT FOUND"
-#    if term_id is not None:
-#       term = Terms.query.filter_by(id=term_id).first()
-#       ps.term = term
-#
-#    db.session.add(ps)
-#    db.session.commit()
-#    ps = PublishedSchedule.query.filter_by(id=id).first()
-#    return "Published Schedule with id %d updated" % (id)
-
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():
    data = request.json
    id = data.get('id', None)
+   faculty_id = data.get('faculty_id', None)
    term_id = data.get('term_id', None)
    day = data.get('day', None)
    time_start = data.get('time_start', None)
@@ -364,24 +348,28 @@ def edit_faculty_preference():
    fp = FacultyPreferences.query.filter_by(id=id).first()
    if fp is None:
       return "ERROR FACULTY PREFERENCE NOT FOUND"
+   if faculty_id is not None:
+      faculty = Faculty.query.filter_by(id=faculty_id).first()
+      fp.faculty_id = faculty
    if term_id is not None:
       term = Terms.query.filter_by(id=term_id).first()
-      fp.term = term
+      fp.term_id = term
    if day is not None:
       fp.day = day
    if time_start is not None:
       fp.time_start = time_start
    if time_end is not None:
       fp.time_end = time_end
+   if preference is not None:
+      fp.preference = preference
 
    db.session.add(fp)
    db.session.commit()
-   fp = FacultyPreferences.query.filter_by(id=id).first()
    return "Faculty Preference with id %d updated" % (id)
 
 @edit_api.route('/facultyConstraint', methods = ["POST"])
 def edit_faculty_constraint():
-   data = request.json()
+   data = request.json
    id = data.get('id', None)
    term_id = data.get('term_id', None)
    faculty_id = data.get('faculty_id', None)
@@ -408,6 +396,24 @@ def edit_faculty_constraint():
    fc = FacultyConstraint.query.filter_by(id=id).first()
    return "Faculty Constraint with id %d updated" % (id)
 
+@edit_api.route('/facultyCoursePreference', methods = ["POST"])
+def edit_faculty_course_preference():
+   data = request.json
+   cp_id = data.get('cp_id', None)
+   pref = data.get('pref', None)
+   print "id %d" % (int(cp_id))
+
+   fcp = FacultyCoursePreferences.query.filter_by(id=cp_id).first()
+   if fcp is None:
+      return "ERROR FCP NOT FOUND"
+   fcp.preference = pref
+
+
+   db.session.add(fcp)
+   db.session.commit()
+   fcp = FacultyCoursePreferences.query.filter_by(id=cp_id).first()
+   return "Faculty Course Preference with id %d updated" % (cp_id)
+
 @edit_api.route('/comment', methods = ["POST"])
 def edit_comment():
    data = request.json
@@ -416,49 +422,29 @@ def edit_comment():
    username = data.get('username', None)
    comment = data.get('comment', None)
    time = data.get('time', None)
+   unread = data.get('unread', None)
+   type = data.get('type', None)
 
-   comment = Comments.query.filter_by(id=id).first()
-   if comment is None:
+   cmt = Comments.query.filter_by(id=id).first()
+   if cmt is None:
       return "ERROR COMMENT NOT FOUND"
    if term_id is not None:
       term = Terms.query.filter_by(id=term_id).first()
-      comment.term - term
+      cmt.term = term
    if username is not None:
-      comment.username = username
+      cmt.username = username
+   if comment is not None:
+      cmt.comment = comment
    if time is not None:
-      comment.time = time
-
-   db.session.add(comment)
-   db.session.commit()
-   comment = Comments.query.filter_by(id=id).first()
-   return "Comment with id %d updated" % (id)
-
-@edit_api.route('/notification', methods = ["POST"])
-def edit_notification():
-   data = request.json
-   id = data.get('id', None)
-   faculty_id = data.get('faculty_id', None)
-   message = data.get('message', None)
-   unread = data.get('unread', None)
-   time = data.get('time', None)
-
-   notification = Notifications.query.filter_by(id=id).first()
-   if notification is None:
-      return "ERROR COMMENT NOT FOUND"
-   if faculty_id is not None:
-      faculty = Faculty.query.filter_by(id=faculty_id).first()
-      notification.faculty = faculty
-   if message is not None:
-      notification.message = message
+      cmt.time = time
    if unread is not None:
-      notification.unread = unread
-   if time is not None:
-      notification.time = time
+      cmt.unread = unread
+   if type is not None:
+      cmt.type = type
 
-   db.session.add(notification)
+   db.session.add(cmt)
    db.session.commit()
-   notification = Notifications.query.filter_by(id=id).first()
-   return "Notification with id %d updated" % (id)
+   return "Comment with id %d updated" % (id)
 
 @edit_api.route('/saveChanges', methods = ["POST"])
 def save_changes():
@@ -479,7 +465,3 @@ def save_changes():
    db.session.commit()
    faculty = Faculty.query.filter_by(id=id).first()
    return "Faculty with id %d updated" % (int(id))
-
-
-
-
