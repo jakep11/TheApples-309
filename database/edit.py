@@ -309,15 +309,24 @@ def edit_student_planning_data():
 def edit_schedule():
    data = request.json
    id = data.get('id', None)
-   term_id = data.get('term_id', None)
+   term_name = data.get('name', None)
    published = data.get('published', None)
 
    s = Schedule.query.filter_by(id=id).first()
    if s is None:
       return "ERROR SCHEDULE NOT FOUND"
-   if term_id is not None:
-      term = Terms.query.filter_by(id=term_id).first()
+   if term_name is not None:
+      term = Terms.query.filter_by(name=term_name).first()
+      if term is None:
+         newTerm = Terms(name=term_name)
+         db.session.add(newTerm)
+         db.session.commit()
+         term = Terms.query.filter_by(name=term_name).first()
+
+
+
       s.term = term
+
    if published is not None:
       s.published = published
 

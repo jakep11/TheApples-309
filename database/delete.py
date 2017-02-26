@@ -134,7 +134,7 @@ def delete_schedule():
         return 'ERROR SCHEDULE INITIAL NOT FOUND'
     db.session.delete(s)
     db.session.commit()
-    return  "Schedule %s removed from database" % (s.term)
+    return  "Schedule removed from database" 
 
 # @delete_api.route('/publishedSchedule', methods = ["POST"])
 # def delete_published_schedule():

@@ -203,6 +203,7 @@ class Schedule(db.Model):
    @property
    def serialize(self):
       return {
+         'id': self.id,
          'quarter': (Terms.query.filter_by(id=self.term_id).first()).name[:-5], # getting assigned quarter
          'year': (Terms.query.filter_by(id=self.term_id).first()).name[-4:], # getting assigned year
          'published': self.published, # whether the schedule is published or not

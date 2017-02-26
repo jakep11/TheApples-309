@@ -71,6 +71,8 @@ app.service("sharedData", function () {
 
     var lastTermIndex = null;
     var lastTermId = null;
+
+    var faculty = null;
 });
 
 app.controller("facultyHome", function ($scope, $rootScope, $location, $cookies) {
@@ -193,9 +195,8 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                 this.push(key);
             }
         }, ids);
-        //~~~~~~~~~ THIS NEEDS TO BE FIXED TO MATCH FACULTY ID AND NOT USER ID ~~~~~~~~~
         // collect the current faculty_id and store in instructors array
-        instructors.push($rootScope.user_id);
+        instructors.push(sharedData.faculty.id);
         // collect the selected start time values and store in startTimes array
         angular.forEach($scope.checkedStartTimes, function (value, key) {
             if (value === true) {
@@ -328,7 +329,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                 'userID': $rootScope.user_id
             }
         }).then(function successCallback(response) {
-            $scope.faculty = response.data;
+            sharedData.faculty = response.data;
             console.log("success");
         }, function errorCallback(response) {
             console.log("error");

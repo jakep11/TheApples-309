@@ -1,8 +1,6 @@
 <div class="container-fluid no-gutter">
     <div class="row form-inline text-center">
-        <select class="form-control term-selector" id="quarterSelect" ng-options="term.name for term in terms" ng-model="checkedTerms" ng-change="applyFilters()">
-            <!--<option ng-repeat="term in terms" name="term{{term.id}}" value="{{term.id}}">{{term.name}}</option>-->
-        </select>
+        <select class="form-control term-selector" id="quarterSelect" ng-options="term.name for term in terms" ng-model="checkedTerms" ng-change="applyFilters()"></select>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
