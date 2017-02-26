@@ -585,6 +585,24 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
    // Calling the getComments function
    $scope.getNotifications();
 
+
+   $scope.markAsRead = function() {
+      $http({
+         method: 'POST',
+         url: '/edit/comment',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'unread': "TRUE"
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
 })
 
 app.controller('roomManager', function ($scope, $rootScope, $http, $window) {

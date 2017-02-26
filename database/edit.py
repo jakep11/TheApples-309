@@ -407,49 +407,29 @@ def edit_comment():
    username = data.get('username', None)
    comment = data.get('comment', None)
    time = data.get('time', None)
+   unread = data.get('unread', None)
+   type = data.get('type', None)
 
-   comment = Comments.query.filter_by(id=id).first()
-   if comment is None:
+   cmt = Comments.query.filter_by(id=id).first()
+   if cmt is None:
       return "ERROR COMMENT NOT FOUND"
    if term_id is not None:
       term = Terms.query.filter_by(id=term_id).first()
-      comment.term - term
+      cmt.term = term
    if username is not None:
-      comment.username = username
+      cmt.username = username
+   if comment is not None:
+      cmt.comment = comment
    if time is not None:
-      comment.time = time
-
-   db.session.add(comment)
-   db.session.commit()
-   comment = Comments.query.filter_by(id=id).first()
-   return "Comment with id %d updated" % (id)
-
-@edit_api.route('/notification', methods = ["POST"])
-def edit_notification():
-   data = request.json
-   id = data.get('id', None)
-   faculty_id = data.get('faculty_id', None)
-   message = data.get('message', None)
-   unread = data.get('unread', None)
-   time = data.get('time', None)
-
-   notification = Notifications.query.filter_by(id=id).first()
-   if notification is None:
-      return "ERROR COMMENT NOT FOUND"
-   if faculty_id is not None:
-      faculty = Faculty.query.filter_by(id=faculty_id).first()
-      notification.faculty = faculty
-   if message is not None:
-      notification.message = message
+      cmt.time = time
    if unread is not None:
-      notification.unread = unread
-   if time is not None:
-      notification.time = time
+      cmt.unread = unread
+   if type is not None:
+      cmt.type = type
 
-   db.session.add(notification)
+   db.session.add(cmt)
    db.session.commit()
-   notification = Notifications.query.filter_by(id=id).first()
-   return "Notification with id %d updated" % (id)
+   return "Comment with id %d updated" % (id)
 
 @edit_api.route('/saveChanges', methods = ["POST"])
 def save_changes():
@@ -470,7 +450,3 @@ def save_changes():
    db.session.commit()
    faculty = Faculty.query.filter_by(id=id).first()
    return "Faculty with id %d updated" % (int(id))
-
-
-
-
