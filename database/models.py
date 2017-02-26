@@ -261,6 +261,7 @@ class Comments(db.Model):
    comment = db.Column(db.Text)
    time = db.Column(db.String(30))
    unread = db.Column(db.Boolean, default=False)
+   type = db.Column(db.String(20))
 
    @property
    def serialize(self):
@@ -270,7 +271,9 @@ class Comments(db.Model):
          'term_id': self.term_id,
          'username': self.username,
          'comment': self.comment,
-         'time': self.time
+         'time': self.time,
+         'unread': self.unread,
+         'type': self.type
       }
 
 # #-- Description: Stores notifications for the scheduler about changing preferences & new comments
