@@ -325,28 +325,11 @@ def edit_schedule():
    db.session.commit()
    return "Schedule with id %d updated" % (id)
 
-# @edit_api.route('/publishedSchedule', methods = ["POST"])
-# def edit_published_schedule():
-#    data = request.json()
-#    id = data.get('id', None)
-#    term_id = data.get('term_id', None)
-#
-#    ps = PublishedSchedule.query.filter_by(id=id).first()
-#    if ps is None:
-#       return "ERROR PUBLISHED SCHEDULE NOT FOUND"
-#    if term_id is not None:
-#       term = Terms.query.filter_by(id=term_id).first()
-#       ps.term = term
-#
-#    db.session.add(ps)
-#    db.session.commit()
-#    ps = PublishedSchedule.query.filter_by(id=id).first()
-#    return "Published Schedule with id %d updated" % (id)
-
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():
    data = request.json
    id = data.get('id', None)
+   faculty_id = data.get('faculty_id', None)
    term_id = data.get('term_id', None)
    day = data.get('day', None)
    time_start = data.get('time_start', None)
@@ -356,19 +339,23 @@ def edit_faculty_preference():
    fp = FacultyPreferences.query.filter_by(id=id).first()
    if fp is None:
       return "ERROR FACULTY PREFERENCE NOT FOUND"
+   if faculty_id is not None:
+      faculty = Faculty.query.filter_by(id=faculty_id).first()
+      fp.faculty_id = faculty
    if term_id is not None:
       term = Terms.query.filter_by(id=term_id).first()
-      fp.term = term
+      fp.term_id = term
    if day is not None:
       fp.day = day
    if time_start is not None:
       fp.time_start = time_start
    if time_end is not None:
       fp.time_end = time_end
+   if preference is not None:
+      fp.preference = preference
 
    db.session.add(fp)
    db.session.commit()
-   fp = FacultyPreferences.query.filter_by(id=id).first()
    return "Faculty Preference with id %d updated" % (id)
 
 @edit_api.route('/facultyConstraint', methods = ["POST"])
