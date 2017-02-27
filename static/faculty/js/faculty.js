@@ -286,7 +286,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         var quarterId = -1;
 
         angular.forEach($scope.terms, function (obj, index) {
-            console.log(obj);
             if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
                 lastIndex = index;
                 year = obj.year;
@@ -330,6 +329,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
             }
         }).then(function successCallback(response) {
             sharedData.faculty = response.data;
+            $scope.applyFilters();
             console.log("success");
         }, function errorCallback(response) {
             console.log("error");
