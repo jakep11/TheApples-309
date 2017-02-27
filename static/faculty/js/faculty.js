@@ -268,10 +268,9 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         }).then(function successCallback(response) {
             $scope.terms = response.data;
 
-            // ~~~~~~ NEED ANOTHER WAY TO GET DEFAULT TERM ~~~~~~~~~~~~
             // default select the current (newest/most recent) term
-//            $scope.findLastTermIndex();
-//            $scope.checkedTerms[sharedData.lastTermId] = true;
+            $scope.findLastTermIndex();
+            $scope.checkedTerms = $scope.terms[sharedData.lastTermIndex];
 
             console.log('success');
         }, function errorCallback(response) {
@@ -318,6 +317,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     }
     $scope.getInstructors();
 
+    // get the faculty_id from the user that is currently logged in to display only their schedules
     $scope.getFacultyFromUser = function () {
         $http({
             method: 'POST',

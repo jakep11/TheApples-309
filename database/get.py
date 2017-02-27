@@ -56,16 +56,16 @@ def get_courses_with_components():
 
 		if len(course.components) > 0 :
 			c1 = course.components[0].name
-			c1_workload_units = course.components[0].workload_units 
+			c1_workload_units = course.components[0].workload_units
 			c1_hours = course.components[0].hours
 		if len(course.components) > 1 :
 			c2 = course.components[1].name
-			c2_workload_units = course.components[1].workload_units 
+			c2_workload_units = course.components[1].workload_units
 			c2_hours = course.components[1].hours
 
 		temp = {
 			'id': course.id,
-			'number': course.number, 
+			'number': course.number,
 			'major': course.major,
 			'course_name': course.course_name,
 			'component_one': c1,
@@ -119,7 +119,7 @@ def get_comments():
    comments = Comments.query.all()
    return jsonify([i.serialize for i in comments])
 
-#given a user_id, find the faculty member associated with it
+# given a user_id, find the faculty member associated with it
 @get_api.route('/facultyFromUser', methods = ["POST"])
 def get_facultyFromUser():
    data = request.json
