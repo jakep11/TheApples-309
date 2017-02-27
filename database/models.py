@@ -89,16 +89,18 @@ class Terms(db.Model):
    @property
    def serialize(self):
 
-      # set quarterId and year for sorting purposes. quarterId: fall = 0, winter = 1, spring = 2
+      # set quarterId and year for sorting purposes. quarterId: spring = 0, summer = 1, fall = 2, winter = 3
       term = self.name.split()
       quarter = term[0]
       year = int(term[2])
       quarterId = 0
 
-      if quarter == "Winter":
+      if quarter == "Summer":
          quarterId = 1
-      elif quarter == "Spring":
+      elif quarter == "Fall":
          quarterId = 2
+      elif quarter == "Winter":
+         quarterId = 3
 
       #"""Return object data in easily serializeable format"""
       return {
@@ -203,6 +205,7 @@ class Schedule(db.Model):
    @property
    def serialize(self):
       return {
+         'id': self.id,
          'quarter': (Terms.query.filter_by(id=self.term_id).first()).name[:-5], # getting assigned quarter
          'year': (Terms.query.filter_by(id=self.term_id).first()).name[-4:], # getting assigned year
          'published': self.published, # whether the schedule is published or not
@@ -262,7 +265,7 @@ class Comments(db.Model):
    username = db.Column(db.String(32))
    comment = db.Column(db.Text)
    time = db.Column(db.String(30))
-   unread = db.Column(db.Boolean, default=False)
+   unread = db.Column(db.Boolean, default=True)
    type = db.Column(db.String(20))
 
    @property

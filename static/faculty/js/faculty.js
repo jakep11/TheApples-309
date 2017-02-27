@@ -71,6 +71,8 @@ app.service("sharedData", function () {
 
     var lastTermIndex = null;
     var lastTermId = null;
+
+    var faculty = null;
 });
 
 app.controller("facultyHome", function ($scope, $rootScope, $location, $cookies) {
@@ -193,9 +195,8 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                 this.push(key);
             }
         }, ids);
-        //~~~~~~~~~ THIS NEEDS TO BE FIXED TO MATCH FACULTY ID AND NOT USER ID ~~~~~~~~~
         // collect the current faculty_id and store in instructors array
-        instructors.push($rootScope.user_id);
+        instructors.push(sharedData.faculty.id);
         // collect the selected start time values and store in startTimes array
         angular.forEach($scope.checkedStartTimes, function (value, key) {
             if (value === true) {
@@ -267,10 +268,9 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         }).then(function successCallback(response) {
             $scope.terms = response.data;
 
-            // ~~~~~~ NEED ANOTHER WAY TO GET DEFAULT TERM ~~~~~~~~~~~~
             // default select the current (newest/most recent) term
-//            $scope.findLastTermIndex();
-//            $scope.checkedTerms[sharedData.lastTermId] = true;
+            $scope.findLastTermIndex();
+            $scope.checkedTerms = $scope.terms[sharedData.lastTermIndex];
 
             console.log('success');
         }, function errorCallback(response) {
@@ -286,7 +286,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         var quarterId = -1;
 
         angular.forEach($scope.terms, function (obj, index) {
-            console.log(obj);
             if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
                 lastIndex = index;
                 year = obj.year;
@@ -317,6 +316,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     }
     $scope.getInstructors();
 
+    // get the faculty_id from the user that is currently logged in to display only their schedules
     $scope.getFacultyFromUser = function () {
         $http({
             method: 'POST',
@@ -328,7 +328,8 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                 'userID': $rootScope.user_id
             }
         }).then(function successCallback(response) {
-            $scope.faculty = response.data;
+            sharedData.faculty = response.data;
+            $scope.applyFilters();
             console.log("success");
         }, function errorCallback(response) {
             console.log("error");

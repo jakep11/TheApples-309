@@ -204,17 +204,21 @@ def new_student_planning_data():
 @create_api.route('/schedule', methods = ['POST'])
 def new_schedule():
     data = request.json
-    term_id = data['term_id']
-    published = data['published']
+    term_name = data['name']
+    #term_id = data['term_id']
+    #published = data['published']
 
-    term = Terms.query.filter_by(id=term_id).first
+    term = Terms.query.filter_by(name=term_name).first()
     if term is None:
-        return "ERROR TERM NOT FOUND"
+        newTerm = Terms(name=term_name)
+        db.session.add(newTerm)
+        db.session.commit()
+        term = Terms.query.filter_by(name=term_name).first()
 
-    schedule = Schedule(term_id=term, published=published)
+    schedule = Schedule(term=term, published=False)
     db.session.add(schedule)
     db.session.commit()
-    return "Schedule: term %s" % (term)
+    return "Schedule added" 
 
 # @create_api.route('publishedSchedule', methods = ['POST'])
 # def new_published_schedule():
@@ -285,34 +289,18 @@ def new_comment():
     username = data['username']
     comment = data['comment']
     time = data['time']
+    unread = data['unread']
+    type = data['type']
 
     term = Terms.query.filter_by(id=term_id).first()
     if term is None:
         return "ERROR TERM NOT FOUND"
 
     comment = Comments(term=term, username=username,
-                        comment=comment, time=time)
+                        comment=comment, time=time, unread=unread, type=type)
     db.session.add(comment)
     db.session.commit()
     return "Comment added to database"
-
-@create_api.route('/notification', methods = ['POST'])
-def new_notification():
-    data = request.json
-    faculty_id = data['faculty_id']
-    message = data['message']
-    unread = data['unread']
-    time = data['time']
-
-    faculty = Faculty.query.filter_by(id=faculty_id).first()
-    if faculty is None:
-        return "ERROR FACULTY NOT FOUND"
-
-    n = Notifications(faculty=faculty, message=message,
-                        unread=unread, time=time)
-    db.session.add(n)
-    db.session.commit()
-    return "Notification added to database"
 
 @create_api.route('/componentType', methods = ['POST'])
 def new_component_type():

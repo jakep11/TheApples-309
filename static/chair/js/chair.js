@@ -616,6 +616,37 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
    // Calling the getComments function
    $scope.getNotifications();
 
+  $scope.readMore = function() {
+      var selectedComment = this.selectedComment;
+
+      // Find the existing comment
+      for (var i in $scope.comments) {
+         if ($scope.comments[i].id == selectedComment) {
+            console.log("The selected comment has been found");
+            $scope.popUpMessage = $scope.comments[i].comment;
+         }
+      }
+
+  }
+
+   $scope.markAsRead = function() {
+      $http({
+         method: 'POST',
+         url: '/edit/comment',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'id': this.selectedComment,
+            'unread': "false"
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
 })
 
 app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
@@ -781,7 +812,7 @@ $scope.deleteRoom = function () {
 
 })
 
-app.controller('schedules', function ($scope, $rootScope, $http) {
+app.controller('schedules', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Schedules';
 
    $scope.schedules = [];
@@ -803,6 +834,83 @@ app.controller('schedules', function ($scope, $rootScope, $http) {
 
    // Calling the function
    $scope.getSchedules();
+
+   $scope.radioSelected = false;
+
+$scope.radioChanged = function (schedule) {
+   console.log(schedule);
+   $scope.current = {
+      'id': schedule.id,
+      'quarter': schedule.quarter,
+      'year': parseInt(schedule.year),
+      'published': "0"
+      
+   }
+   $scope.radioSelected = true;
+   console.log("current set");
+
+}
+$scope.openEdit = function () {
+   $scope.edit = $scope.current;
+   console.log($scope.current);
+}
+
+
+$scope.addSchedule = function () {
+   $http({
+      method: 'POST',
+      url: '/create/schedule',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'name': $scope.quarter + " " + $scope.year,
+      }
+   }).then(function successCallback(response) {
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.editSchedule = function () {
+   $http({
+      method: 'POST',
+      url: '/edit/schedule',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.edit.id,
+         'name': $scope.edit.quarter + " " + $scope.edit.year
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling edit Schedule');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
+$scope.deleteSchedule = function () {
+   console.log("trying to delete schedule");
+   $http({
+      method: 'POST',
+      url: '/delete/schedule',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.current.id
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling delete schedule');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
+
 
 })
 

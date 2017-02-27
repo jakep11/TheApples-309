@@ -11,9 +11,9 @@
             <th>Published</th>
 
          </tr>
-         <tr ng-repeat="schedule in schedules">
+         <tr ng-repeat="schedule in schedules | orderBy: 'year'">
             <td>
-               <input type="radio" name="faculty-entry" value="tkearns" checked>
+               <input type="radio" ng-model="$parent.random" value="{{schedule.id}}" ng-click="radioChanged(schedule)">
             </td>
             <td><a href="#/generateSchedule?term={{schedule.term_id}}">{{schedule.quarter}}</a></td>
             <td>{{schedule.year}}</td>
@@ -28,10 +28,10 @@
             <button class="btn btn-default preference-btn col-xs-12">NEW SCHEDULE FROM PREVIOUS</button>
          </div>
          <div class="col-xs-2">
-            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal">EDIT</button>
+            <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-click="openEdit()" ng-disabled="!radioSelected">EDIT</button>
          </div>
          <div class="col-xs-2">
-            <button class="btn btn-default preference-btn col-xs-12">REMOVE</button>
+            <button class="btn btn-default preference-btn col-xs-12" ng-click="deleteSchedule()" ng-disabled="!radioSelected">REMOVE</button>
          </div>
       </div>
       <div id="add-modal" class="modal fade" role="dialog">
@@ -47,11 +47,11 @@
                            <label>Quarter</label>
                         </div>
                         <div class="col-xs-6">
-                           <select class="form-control">
-                              <option>FALL</option>
-                              <option>WINTER</option>
-                              <option>SPRING</option>
-                              <option>SUMMER</option>
+                           <select class="form-control" ng-model="quarter">
+                              <option value="Fall Quarter">Fall</option>
+                              <option value="Winter Quarter">Winter</option>
+                              <option value="Spring Quarter">Spring</option>
+                              <option value="Summer Quarter">Summer</option>
                            </select>
                         </div>
                      </div>
@@ -60,7 +60,7 @@
                            <label>Year</label>
                         </div>
                         <div class="col-xs-6">
-                           <input type="number" class="form-control">
+                           <input type="number" class="form-control" ng-model="year">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -69,7 +69,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addSchedule()">SAVE</button>
                            </div>
                         </div>
                      </div>
@@ -91,11 +91,11 @@
                            <label>Quarter</label>
                         </div>
                         <div class="col-xs-6">
-                           <select class="form-control">
-                              <option>FALL</option>
-                              <option>WINTER</option>
-                              <option>SPRING</option>
-                              <option>SUMMER</option>
+                           <select class="form-control" ng-model="edit.quarter">
+                              <option value="Fall Quarter">Fall</option>
+                              <option value="Winter Quarter">Winter</option>
+                              <option value="Spring Quarter">Spring</option>
+                              <option value="Summer Quarter">Summer</option>
                            </select>
                         </div>
                      </div>
@@ -104,7 +104,7 @@
                            <label>Year</label>
                         </div>
                         <div class="col-xs-6">
-                           <input type="number" class="form-control">
+                           <input type="number" class="form-control" ng-model="edit.year">
                         </div>
                      </div>
                      <div class="row modal-row">
@@ -113,7 +113,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="editSchedule()">SAVE</button>
                            </div>
                         </div>
                      </div>

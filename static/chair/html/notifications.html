@@ -12,7 +12,7 @@
             </tr>
             <tr ng-repeat="comment in comments">
                 <td>
-                    <input type="radio" ng-model="$parent.random" value="{{comment.id}}" ng-click="radioChanged(comment)">
+                    <input type="radio" ng-model="$parent.selectedComment" value="{{comment.id}}" ng-click="radioChanged(comment)">
                 </td>
                 <td>{{comment.username}}</td>
                 <td>{{comment.time}}</td>
@@ -21,7 +21,7 @@
         </table>
         <div class="col-xs-6 col-xs-offset-4">
             <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#read-more-modal">READ MORE</button>
+                <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" ng-click="readMore()" data-target="#read-more-modal">READ MORE</button>
             </div>
             <div id="read-more-modal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="modal-row">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet suscipit odio. Etiam odio purus, aliquam quis rhoncus nec, faucibus eu odio. Vestibulum lectus libero, ultrices sit amet eros ac, dictum bibendum justo. Nunc nec mi scelerisque, maximus turpis ac, condimentum risus. Curabitur fringilla nibh sapien, eu tristique enim auctor tempor. Sed eros arcu, placerat ac aliquet at, ullamcorper sed risus. Mauris id nisl et felis convallis finibus. Sed erat neque, commodo eget luctus a, venenatis ut tellus. Nam convallis porttitor gravida. Nullam magna sem, facilisis sit amet semper at, imperdiet in dui. Praesent eleifend tortor elit, id volutpat enim venenatis eget. Etiam ut tellus eu ante ornare viverra. Maecenas sit amet neque eget metus pharetra tempor eget eget orci. In bibendum sit amet urna vel vestibulum. Suspendisse sit amet arcu a nulla iaculis laoreet nec non mi. In et lobortis purus. Etiam tristique quam tortor, eu congue urna placerat id. Vivamus auctor erat vel dolor ullamcorper, ut sollicitudin massa luctus. Vivamus aliquet lacus purus, ut elementum tortor mollis eget. Vestibulum ultricies vel dui in elementum. Nulla risus nulla, porta posuere commodo ut, ornare sit amet nulla. Cras nec risus ut nisi aliquet gravida. Aliquam venenatis congue quam quis placerat. Ut ac quam sollicitudin, fermentum leo et, molestie risus.
+                                        {{popUpMessage}}
                                     </p>
                                 </div>
                                 <div class="modal-row">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col-xs-4">
-                <button class="btn btn-default preference-btn col-xs-12">MARK AS READ</button>
+                <button class="btn btn-default preference-btn col-xs-12" ng-click="markAsRead()">MARK AS READ</button>
             </div>
         </div>
     </div>
