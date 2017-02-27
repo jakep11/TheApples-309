@@ -225,6 +225,7 @@ class FacultyPreferences(db.Model):
    @property
    def serialize(self):
       return {
+         'id': self.id,
          'faculty_id': self.faculty_id,
          'day': self.day,
          'time_start': self.time_start.isoformat()[:-3],  #[:-3] Removes the seconds from time

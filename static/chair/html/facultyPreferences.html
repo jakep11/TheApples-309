@@ -6,7 +6,7 @@
    <form>
       <div class="row dropdown-row">
          <div class="col-xs-2 col-xs-offset-8">
-            <select class="form-control" id="termSelect" ng-change="changeDay()" ng-model="day">
+            <select class="form-control" id="termSelect" ng-model="day">
               <option value="M">Monday</option>
               <option value="T">Tuesday</option>
               <option value="W">Wednesday</option>
@@ -54,17 +54,17 @@
                </td>
                <td ng-if="preference.faculty_id == faculty_id && preference.day == day">
                   <div class="checkbox">
-                     <input type="radio" name="time{{preference.time_start}}" value="start-desirable-{{preference.time_start}}" ng-checked="preference.choice == 'desirable'" ng-model=time_pref> <br>
+                     <input type="radio" name="time{{preference.time_start}}" value="desirable-{{preference.time_start}}" ng-checked="preference.choice == 'desirable'" ng-model=$parent.time_pref ng-change="changeTime()"> <br>
                   </div>
                </td>
                <td ng-if="preference.faculty_id == faculty_id && preference.day == day">
                   <div class="checkbox">
-                     <input type="radio" name="time{{preference.time_start}}" value="start-available-{{preference.time_start}}" ng-checked="preference.choice == 'available'" ng-model=time_pref> <br>
+                     <input type="radio" name="time{{preference.time_start}}" value="available-{{preference.time_start}}" ng-checked="preference.choice == 'available'" ng-model=$parent.time_pref ng-change="changeTime()"> <br>
                   </div>
                </td>
                <td ng-if="preference.faculty_id == faculty_id && preference.day == day">
                   <div class="checkbox">
-                     <input type="radio" name="time{{preference.time_start}}" value="start-unavailable-{{preference.time_start}}" ng-checked="preference.choice == 'unavailable'" ng-model=time_pref> <br>
+                     <input type="radio" name="time{{preference.time_start}}" value="unavailable-{{preference.time_start}}" ng-checked="preference.choice == 'unavailable'" ng-model=$parent.time_pref ng-change="changeTime()"> <br>
                   </div>
                </td>
             </tr>
