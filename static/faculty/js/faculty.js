@@ -73,6 +73,9 @@ app.service("sharedData", function () {
     var lastTermId = null;
 
     var faculty = null;
+
+    var previousSpan = -1;
+    var previousDays = "";
 });
 
 app.controller("facultyHome", function ($scope, $rootScope, $location, $cookies) {
@@ -336,6 +339,43 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         });
     }
     $scope.getFacultyFromUser();
+
+    // set the sections into the calendar view
+    // ~~~~~~~ Array.splice(start, deleteCount) will be used for rowspan calculations ~~~~~~~
+    $scope.getNumCells = function (time) {
+        var defaultVal = 5;
+        var count = 0;
+        var days;
+        var hours;
+
+        var sections = new Array(defaultVal);
+
+         angular.forEach($scope.sections, function (obj) {
+            if (obj.time_start === time) {
+                days = obj.days;
+                if (days == "MWF") {
+                    this[0] = obj;
+                    this[2] = obj;
+                    this[4] = obj;
+                }
+                else {
+                    this[1] = obj;
+                    this[3] = obj;
+                }
+
+                hours = obj.hours;
+            }
+        }, sections);
+
+        if (sharedData.previousDays != "") {
+            
+        }
+
+        sharedData.previousDays = days;
+        sharedData.previousSpan = hours * 2;
+
+        return sections;
+    }
 
     //
     //    // return to login page when back button is clicked

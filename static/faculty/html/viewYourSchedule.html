@@ -54,13 +54,9 @@
                     <th>Fri</th>
                 </tr>
                 <tbody class="table-body">
-                    <tr ng-repeat="startTimes in startTimes" ng-if="section.faculty == faculty.id && section.term_id == term.id">
-                        <td>{{startTimes}}</td>
-                        <td>{{MWFsections}}</td>
-                        <td>{{TRsections}}</td>
-                        <td>{{MWFsections}}</td>
-                        <td>{{TRsections}}</td>
-                        <td>{{MWFsections}}</td>
+                    <tr ng-repeat="(value, time) in startTimes">
+                        <td>{{time}}</td>
+                        <td ng-repeat="data in getNumCells(time) track by $index" rowspan="{{data.hours * 2}}">{{data.course}} {{data.course_num}}</td>
                     </tr>
                 </tbody>
             </table>
