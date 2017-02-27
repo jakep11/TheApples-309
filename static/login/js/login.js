@@ -2,11 +2,11 @@ angular.module('TheApples').controller("login", function($scope, $rootScope, $ht
 
   //Reset all rootScope variables when you go back to login page
   $rootScope.role = null;
-  $rootScope.username = null;
-  $rootScope.first_name = null;
-  $rootScope.last_name = null;
+  $rootScope.user = null;
+  $rootScope.user_id = null;
   $cookies.remove('user');
   $cookies.remove('role');
+  $cookies.remove('user_id')
 
    $scope.continueAsGuest = function() {
       $rootScope.role = "student";
