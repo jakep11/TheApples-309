@@ -346,25 +346,17 @@ def edit_schedule():
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():
    data = request.json
-   id = data.get('id', None)
-   term_id = data.get('term_id', None)
-   day = data.get('day', None)
-   time_start = data.get('time_start', None)
-   time_end = data.get('time_end', None)
-   preference = data.get('preference', None)
+   id = data.get('p_id', None)
+   time_pref = data.get('time_pref', None)
+
+   pref = time_pref.split('-')[0]
+   print pref
+   print id
 
    fp = FacultyPreferences.query.filter_by(id=id).first()
    if fp is None:
       return "ERROR FACULTY PREFERENCE NOT FOUND"
-   if term_id is not None:
-      term = Terms.query.filter_by(id=term_id).first()
-      fp.term = term
-   if day is not None:
-      fp.day = day
-   if time_start is not None:
-      fp.time_start = time_start
-   if time_end is not None:
-      fp.time_end = time_end
+   fp.preference = pref 
 
    db.session.add(fp)
    db.session.commit()
@@ -405,7 +397,6 @@ def edit_faculty_course_preference():
    data = request.json
    cp_id = data.get('cp_id', None)
    pref = data.get('pref', None)
-   print "id %d" % (int(cp_id))
 
    fcp = FacultyCoursePreferences.query.filter_by(id=cp_id).first()
    if fcp is None:

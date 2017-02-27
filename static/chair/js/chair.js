@@ -432,8 +432,42 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
    // Saving any changes before the day is changed.
    $scope.changeTime = function () {
 
-         console.log(this.time_pref);
+      console.log(this.time_pref);
+      $http({
+         method: 'POST',
+         url: '/edit/facultyPreference',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'time_pref': this.time_pref,
+            'p_id': this.preference.id
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
 
+   }
+
+   // When a course preference is changed, update it in the database.
+   $scope.changePref = function() {
+      $http({
+         method: 'POST',
+         url: '/edit/facultyCoursePreference',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'pref': this.pref,
+            'cp_id': this.coursePreference.id
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      }); 
    }
 
    // Saving changes when 'save' is clicked. Only thing updated is faculty work units
@@ -454,25 +488,6 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
       }, function errorCallback(response) {
          console.log('error');
       });
-   }
-
-   // When a course preference is changed, update it in the database.
-   $scope.changePref = function() {
-      $http({
-         method: 'POST',
-         url: '/edit/facultyCoursePreference',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         data: {
-            'pref': this.pref,
-            'cp_id': this.coursePreference.id
-         }
-      }).then(function successCallback(response) {
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      }); 
    }
 
 
