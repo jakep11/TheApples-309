@@ -350,8 +350,6 @@ def edit_faculty_preference():
    time_pref = data.get('time_pref', None)
 
    pref = time_pref.split('-')[0]
-   print pref
-   print id
 
    fp = FacultyPreferences.query.filter_by(id=id).first()
    if fp is None:

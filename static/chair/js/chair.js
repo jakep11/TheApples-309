@@ -432,7 +432,6 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
    // Saving any changes before the day is changed.
    $scope.changeTime = function () {
 
-      console.log(this.time_pref);
       $http({
          method: 'POST',
          url: '/edit/facultyPreference',
