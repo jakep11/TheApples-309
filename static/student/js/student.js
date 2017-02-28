@@ -71,6 +71,9 @@ app.service("sharedData", function () {
 
     var lastTermIndex = null;
     var lastTermId = null;
+
+    this.previousSpan = [0, 0];
+    this.previousDays = ["", ""];
 });
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {

@@ -1,83 +1,5 @@
 var app = angular.module('TheApples')
 
-// service will be used to help transfer between table and calendar view
-app.service("sharedData", function () {
-    // lists of time integer values and their corresponding 12 hour time
-    this.startTimes = {
-        700: "7:00AM",
-        730: "7:30AM",
-        800: "8:00AM",
-        830: "8:30AM",
-        900: "9:00AM",
-        930: "9:30AM",
-        1000: "10:00AM",
-        1030: "10:30AM",
-        1100: "11:00AM",
-        1130: "11:30AM",
-        1200: "12:00PM",
-        1230: "12:30PM",
-        1300: "1:00PM",
-        1330: "1:30PM",
-        1400: "2:00PM",
-        1430: "2:30PM",
-        1500: "3:00PM",
-        1530: "3:30PM",
-        1600: "4:00PM",
-        1630: "4:30PM",
-        1700: "5:00PM",
-        1730: "5:30PM",
-        1800: "6:00PM",
-        1830: "6:30PM",
-        1900: "7:00PM",
-        1930: "7:30PM",
-        2000: "8:00PM",
-        2030: "8:30PM",
-        2100: "9:00PM",
-        2130: "9:30PM",
-        2200: "10:00PM"
-    };
-
-    this.endTimes = {
-        800: "8:00AM",
-        830: "8:30AM",
-        900: "9:00AM",
-        930: "9:30AM",
-        1000: "10:00AM",
-        1030: "10:30AM",
-        1100: "11:00AM",
-        1130: "11:30AM",
-        1200: "12:00PM",
-        1230: "12:30PM",
-        1300: "1:00PM",
-        1330: "1:30PM",
-        1400: "2:00PM",
-        1430: "2:30PM",
-        1500: "3:00PM",
-        1530: "3:30PM",
-        1600: "4:00PM",
-        1630: "4:30PM",
-        1700: "5:00PM",
-        1730: "5:30PM",
-        1800: "6:00PM",
-        1830: "6:30PM",
-        1900: "7:00PM",
-        1930: "7:30PM",
-        2000: "8:00PM",
-        2030: "8:30PM",
-        2100: "9:00PM",
-        2130: "9:30PM",
-        2200: "10:00PM"
-    };
-
-    var lastTermIndex = null;
-    var lastTermId = null;
-
-    var faculty = null;
-
-    var previousSpan = -1;
-    var previousDays = "";
-});
-
 app.controller("facultyHome", function ($scope, $rootScope, $location, $cookies) {
     $rootScope.bcrumb1 = null;
 
@@ -344,45 +266,53 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     // ~~~~~~~ Array.splice(start, deleteCount) will be used for rowspan calculations ~~~~~~~
     $scope.getNumCells = function (time) {
         var defaultVal = 5;
-        var count = 0;
-        var days = "";
-        var hours = 0;
+        var days = ["", ""];
+        var hours = [0, 0];
+        var span;
 
         var sections = new Array(defaultVal);
 
-         angular.forEach($scope.sections, function (obj) {
+        angular.forEach($scope.sections, function (obj) {
             if (obj.time_start === time) {
-                days = obj.days;
-                if (days == "MWF") {
+                if (obj.days == "MWF") {
                     this[0] = obj;
                     this[2] = obj;
                     this[4] = obj;
+
+                    days[0] = "MWF";
+                    hours[0] += obj.hours;
                 }
                 else {
                     this[1] = obj;
                     this[3] = obj;
-                }
 
-                hours += obj.hours;
+                    days[1] = "TR";
+                    hours[1] += obj.hours;
+                }
             }
         }, sections);
 
-        if (sharedData.previousDays != "" && sharedData.previousSpan > 1) {
-            if (sharedData.previousDays == "MWF") {
-                sections.splice(0, 1);
-                sections.splice(1, 1);
-                sections.splice(2, 1);
-                console.log("spliced MWF");
-            }
-            else {
-                sections.splice(1, 1);
-                sections.splice(2, 1);
-                console.log("spliced TR");
-            }
+        if (sharedData.previousDays[0] == "MWF" && sharedData.previousSpan[0] > 0) {
+            sections.splice(0, 1);
+            sections.splice(1, 1);
+            sections.splice(2, 1);
+            console.log("spliced MWF");
+            sharedData.previousSpan[0]--;
         }
+        if (sharedData.previousDays[1] == "TR" && sharedData.previousSpan[1] > 0) {
+            sections.splice(1, 1);
+            sections.splice(2, 1);
+            console.log("spliced TR");
+            sharedData.previousSpan[1]--;
+        }
+        //else {
+            sharedData.previousDays[0] = days[0];
+            sharedData.previousDays[1] = days[1];
+            sharedData.previousSpan[0] += Math.max((hours[0] * 2) - 1, 0); // calculate how many additional rows to span
+            sharedData.previousSpan[1] += Math.max((hours[1] * 2) - 1, 0); // calculate how many additional rows to span
+        //}
 
-        sharedData.previousDays = days;
-        sharedData.previousSpan = hours * 2;
+
 
         return sections;
     }
