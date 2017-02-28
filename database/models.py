@@ -281,14 +281,6 @@ class Comments(db.Model):
          'type': self.type
       }
 
-# #-- Description: Stores notifications for the scheduler about changing preferences & new comments
-# class Notifications(db.Model):
-#    id = db.Column(db.Integer, primary_key=True)
-#    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
-#    message = db.Column(db.Text)
-#    unread = db.Column(db.SmallInteger)
-#    time = db.Column(db.String(30))
-
 # -- Description: Stores the components of each of the courses
 class Components(db.Model):
    id = db.Column(db.Integer, primary_key=True)

@@ -6,6 +6,8 @@ edit_api = Blueprint('edit_api', __name__)
 from models import *
 from web_app import db
 
+# This function modifies the information of a user in the User table in the database. It is called
+# when a system administrator clicks "edit user" and saves their changes
 @edit_api.route('/user', methods = ["POST"])
 def edit_user(): 
     data = request.json
@@ -37,6 +39,8 @@ def edit_user():
     user = User.query.filter_by(id=id).first()
     return  "User %s updated" % (user.username)
 
+# This function modifies the information of a faculty member in the Faculty table in the database. It is called
+# when a system administrator clicks "edit user" and saves their changes (for a faculty user)
 @edit_api.route('/faculty', methods = ["POST"])
 def edit_faculty():
    data = request.json
@@ -62,6 +66,8 @@ def edit_faculty():
    db.session.commit()
    return "Faculty updated" 
 
+# This function modifies the information of a course in the Course table in the database. It is called
+# when a dept scheduler clicks "edit course" and saves their changes
 @edit_api.route('/course', methods = ["POST"])
 def edit_course():
    data = request.json
@@ -110,6 +116,8 @@ def edit_course():
    course = Courses.query.filter_by(id=id).first()
    return "Course edited"
 
+# This function modifies the information of a term in the Term table in the database. It is called
+# when a department scheduler clicks "edit term" and saves their changes
 @edit_api.route('/term', methods = ["POST"])
 def edit_term():
    data = request.json
@@ -127,6 +135,8 @@ def edit_term():
    term - Terms.query.filter_by(id=id).first()
    return "Term %s updated" % (term.name)
 
+# This function modifies the information of a room in the Room table in the database. It is called
+# when a department scheduler clicks "edit room" and saves their changes
 @edit_api.route('/room', methods = ["POST"])
 def edit_room():
    data = request.json
@@ -150,6 +160,8 @@ def edit_room():
    room = Rooms.query.filter_by(id=id).first()
    return "Room %s with capacity %d updated" % (room.type, room.capacity)
 
+# This function modifies the information of a section in the Section table in the database. It is called
+# when a department scheduler is working on a schedule and clicks "edit section" and saves their changes
 @edit_api.route('/section', methods = ["POST"])
 def edit_section():
    data = request.json
@@ -194,12 +206,13 @@ def edit_section():
       schedule = Schedule.query.filter_by(id=schedule_id).first()
       section.schedule = schedule
 
-
    db.session.add(section)
    db.session.commit()
    section = Sections.query.filter_by(id=id).first()
    return "Section #%d for course %s %d updated" % (section.number, section.course.major, section.course.number)
 
+# This function modifies the equipment information in the Equipment table in the database. It is called
+# when a department scheduler clicks "edit equipment" and saves their changes
 @edit_api.route('/equipment', methods = ["POST"])
 def edit_equipment():
    data = request.json
@@ -217,6 +230,9 @@ def edit_equipment():
    equipment = Equipment.query.filter_by(id=id).first()
    return "Equipment %s updated" % (equipment.name)
 
+# This function modifies a roomEquipment relationship in the roomEquipment table in the database. It is called
+# when a department scheduler is modifying a room entry and changes the type of equipment that that room
+# offers, and saves their changes
 @edit_api.route('/roomEquipment', methods = ["POST"])
 def edit_room_equipment():
    data = request.json
@@ -239,6 +255,8 @@ def edit_room_equipment():
    re = RoomEquipment.query.filter_by(id=id).first()
    return "Room Equipment %s in room %s updated" % (room.type, equipment.name)
 
+# This function modifies the schedule information from a previous term in the scheduleFinal table
+# in the database. It is never called at this time
 @edit_api.route('/scheduleFinal', methods = ["POST"])
 def edit_schedule_final():
    data = request.json
@@ -270,7 +288,9 @@ def edit_schedule_final():
    sf = ScheduleFinal.query.filter_by(id=id).first()
    return "Schedule Final with id %d updated" % (id)
 
-
+# This function modifies the student planning data in the studentPlanningData table in the database. It is
+# never currently called, but could be called by the dept scheduler to modify inaccurate student planning
+# data in the future.
 @edit_api.route('/studentPlanningData', methods = ["POST"])
 def edit_student_planning_data():
    data = request.json
@@ -305,6 +325,8 @@ def edit_student_planning_data():
    spd = StudentPlanningData.query.filter_by(id=id).first()
    return "Schedule Planning Data with id %d updated" % (id)
 
+# This function modifies the information of a schedule in the Schedule table in the database. It is called
+# when a department scheduler clicks "edit schedule" and saves their changes
 @edit_api.route('/schedule', methods = ["POST"])
 def edit_schedule():
    data = request.json
@@ -325,24 +347,9 @@ def edit_schedule():
    db.session.commit()
    return "Schedule with id %d updated" % (id)
 
-# @edit_api.route('/publishedSchedule', methods = ["POST"])
-# def edit_published_schedule():
-#    data = request.json()
-#    id = data.get('id', None)
-#    term_id = data.get('term_id', None)
-#
-#    ps = PublishedSchedule.query.filter_by(id=id).first()
-#    if ps is None:
-#       return "ERROR PUBLISHED SCHEDULE NOT FOUND"
-#    if term_id is not None:
-#       term = Terms.query.filter_by(id=term_id).first()
-#       ps.term = term
-#
-#    db.session.add(ps)
-#    db.session.commit()
-#    ps = PublishedSchedule.query.filter_by(id=id).first()
-#    return "Published Schedule with id %d updated" % (id)
-
+# This function modifies the information of a faculty preference entry in the facultyPreference table in
+# the database. It is called when a faculty member or a department scheduler makes changes to their
+# preferences and saves their changes
 @edit_api.route('/facultyPreference', methods = ["POST"])
 def edit_faculty_preference():
    data = request.json
@@ -361,6 +368,9 @@ def edit_faculty_preference():
    fp = FacultyPreferences.query.filter_by(id=id).first()
    return "Faculty Preference with id %d updated" % (id)
 
+# This function modifies the information of a faculty constraint in the facultyConstraint table in the
+# database. It is called when a system administrator changes the amount of workload units that a specified
+# faculty member user can work
 @edit_api.route('/facultyConstraint', methods = ["POST"])
 def edit_faculty_constraint():
    data = request.json
@@ -390,6 +400,9 @@ def edit_faculty_constraint():
    fc = FacultyConstraint.query.filter_by(id=id).first()
    return "Faculty Constraint with id %d updated" % (id)
 
+# This function modifies a faculty course preference in the facultyCoursePreferences table in the database.
+# It is called when a faculty member or department scheduler makes a change to the existing course
+# preferences for that faculty member and saves their changes
 @edit_api.route('/facultyCoursePreference', methods = ["POST"])
 def edit_faculty_course_preference():
    data = request.json
@@ -407,6 +420,8 @@ def edit_faculty_course_preference():
    fcp = FacultyCoursePreferences.query.filter_by(id=cp_id).first()
    return "Faculty Course Preference with id %d updated" % (cp_id)
 
+# This function modifies a comment in the Comment table in the database. It is called
+# when a department scheduler clicks "Mark as Read" in the Notifications tab
 @edit_api.route('/comment', methods = ["POST"])
 def edit_comment():
    data = request.json
@@ -432,33 +447,8 @@ def edit_comment():
    comment = Comments.query.filter_by(id=id).first()
    return "Comment with id %d updated" % (id)
 
-@edit_api.route('/notification', methods = ["POST"])
-def edit_notification():
-   data = request.json
-   id = data.get('id', None)
-   faculty_id = data.get('faculty_id', None)
-   message = data.get('message', None)
-   unread = data.get('unread', None)
-   time = data.get('time', None)
-
-   notification = Notifications.query.filter_by(id=id).first()
-   if notification is None:
-      return "ERROR COMMENT NOT FOUND"
-   if faculty_id is not None:
-      faculty = Faculty.query.filter_by(id=faculty_id).first()
-      notification.faculty = faculty
-   if message is not None:
-      notification.message = message
-   if unread is not None:
-      notification.unread = unread
-   if time is not None:
-      notification.time = time
-
-   db.session.add(notification)
-   db.session.commit()
-   notification = Notifications.query.filter_by(id=id).first()
-   return "Notification with id %d updated" % (id)
-
+# This function updates the Faculty table in the database, and modifies the min and max units the
+# faculty member is allowed to teach in a given term.
 @edit_api.route('/saveChanges', methods = ["POST"])
 def save_changes():
    data = request.json

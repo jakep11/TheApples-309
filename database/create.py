@@ -4,6 +4,8 @@ create_api = Blueprint('create_api', __name__)
 from models import *
 from web_app import db
 
+# This function adds a new user to the database. It is called when the
+# system administrator clicks "create new user"
 @create_api.route('/user', methods = ["POST"])
 def new_user():
     data = request.json
@@ -21,6 +23,8 @@ def new_user():
     db.session.commit()
     return  "User %s added to database" (username)
 
+# This function adds a new instructor to the faculty table in the database. It is called
+# when a scheduler clicks "create new instructor"
 @create_api.route('/faculty', methods = ["POST"])
 def new_faculty():
     data = request.json
@@ -35,6 +39,8 @@ def new_faculty():
     db.session.commit()
     return  "Faculty added to database" 
 
+# This function adds a new course to the course table in the database. It is called
+# when a scheduler clicks "add new course"
 @create_api.route('/course', methods = ["POST"])
 def new_course():
     data = request.json
@@ -68,6 +74,8 @@ def new_course():
     db.session.commit()
     return  "Course"
 
+# This function adds a new term to the Term table in the database. It is called
+# when a scheduler clicks "add new schedule" and specifies a term
 @create_api.route('/term', methods = ["POST"])
 def new_term():
     data = request.json
@@ -78,6 +86,8 @@ def new_term():
     db.session.commit()
     return "Term %s added to the database" % (name)
 
+# This function adds a new room to the Room table in the database. It is called
+# when a scheduler is managing the schedule resources and clicks "add new room"
 @create_api.route('/room', methods = ["POST"])
 def new_room():
     data = request.json
@@ -90,6 +100,8 @@ def new_room():
     db.session.commit()
     return " room with capacity added to database" 
 
+# This function adds a new section to the Section table in the database. It is called
+# when a scheduler is adding a new course section to a schedule for a given term
 @create_api.route('/section', methods = ["POST"])
 def new_section():
     data = request.json
@@ -127,6 +139,8 @@ def new_section():
     db.session.commit()
     return "Section %d of course %s %d added to database" % (number, course.name, course.number)
 
+# This function adds a new equipment to the Equipment table in the database. It is called
+# when a scheduler clicks "add equipment"
 @create_api.route('/equipment', methods = ['POST'])
 def new_equipment():
     data = request.json
@@ -137,6 +151,8 @@ def new_equipment():
     db.session.commit()
     return "Room %s added to database" % (room)
 
+# This function adds a new room / equipment relationship to the roomEquipment table in the database.
+# It is called when a scheduler adds an existing piece of equipment to a room.
 @create_api.route('/roomEquipment', methods = ['POST'])
 def new_room_equipment():
     data = request.json
@@ -155,6 +171,8 @@ def new_room_equipment():
     db.session.commit()
     return "%s added to room %s" % (equipment.name, room.type)
 
+# This function adds historic schedule information to the scheduleFinal table in the database. When a given term
+# has passed, it's historic information is added to the db via this function.
 @create_api.route('/scheduleFinal', methods = ['POST'])
 def new_schedule_final():
     data = request.json
@@ -177,6 +195,8 @@ def new_schedule_final():
     db.session.commit()
     return "ScheduleFinal for term %s and course %s %d added to database" % (term.name, course.major, course.number)
 
+# This function adds student planning data to the studentPlanningData table in the database.
+# Information includes the capacity, seat demand, and unmet seat demand for a given course.
 @create_api.route('/studentPlanningData', methods = ["POST"])
 def new_student_planning_data():
     data = request.json
@@ -201,6 +221,8 @@ def new_student_planning_data():
     db.session.commit()
     return "StudentPlanningData added to database"
 
+# This function adds a schedule to the schedule table in the database. It is called
+# when a scheduler clicks "create new schedule"
 @create_api.route('/schedule', methods = ['POST'])
 def new_schedule():
     data = request.json
@@ -234,6 +256,8 @@ def new_schedule():
 #     db.session.commit()
 #     return "PublishedSchedule: term %s" % (term)
 
+# This function adds faculty preferences to the facultyPreferences table in the database. It is called
+# when a faculty member (or a dept chair) submits preferences for a given term/
 @create_api.route('/facultyPreferences', methods = ['POST'])
 def new_faculty_preferences():
     data = request.json()
@@ -258,6 +282,8 @@ def new_faculty_preferences():
     db.session.commit()
     return "FacultyPreference added to database"
 
+# This function adds a new faculty constraint to the facultyConstraint table in the database. It is called
+# when a faculty member is added to the database, provided that their constraints are specified
 @create_api.route('/facultyConstraint', methods = ['POST'])
 def new_faculty_constraint():
     data = request.json()
@@ -282,6 +308,8 @@ def new_faculty_constraint():
     db.session.commit()
     return "FacultyConstraint added to db"
 
+# This function adds a new comment to the Comment table in the database. It is called
+# when a faculty member or student sends feedback on or comments on given schedule
 @create_api.route('/comment', methods = ['POST'])
 def new_comment():
     data = request.json
@@ -302,6 +330,8 @@ def new_comment():
     db.session.commit()
     return "Comment added to database"
 
+# This function adds a new component type to the componentType table in the database. It is called
+# when a scheduler clicks "add component type" under the course manager page
 @create_api.route('/componentType', methods = ['POST'])
 def new_component_type():
     data = request.json
@@ -312,6 +342,8 @@ def new_component_type():
     db.session.commit()
     return "Component Type added to database"
 
+# This function adds a new room type to the roomType table in the database. It is called
+# when a scheduler clicks "add room type" under the room manager page
 @create_api.route('/roomType', methods = ['POST'])
 def new_room_type():
     data = request.json

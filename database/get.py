@@ -6,41 +6,58 @@ from models import *
 from web_app import db
 import sys
 
+# This function gets all the terms from the Term table in the database. It is called
+# when loading the schedule in order to display the information in such a way that the scheduler
+# can use the Term to filter through and view the information that has been imported into the system
 @get_api.route('/terms', methods = ["GET"])
 def get_terms():
 	terms = Terms.query.all()
 	return jsonify([i.serialize for i in terms])
 
+# This function gets all the instructors from the Faculty table in the database. It is called
+# when loading the faculty manager page from the department chairs homepage.
 @get_api.route('/instructors', methods = ["GET"])
 def get_instructors():
 	instructors = Faculty.query.all()
 	return jsonify([i.serialize for i in instructors])
 
+# This function gets all the courses from the Course table in the database. It is called
+# when loading the course manager page from the department chairs homepage.
 @get_api.route('/allCourses', methods = ["GET"])
 def get_courses():
 	courses = Courses.query.all()
 	return jsonify([i.serialize for i in courses])
 
+# This function gets all the components from the Component table in the database. It is called
+# when loading the components (labs, lectures, etc) for the courses on the course manager page.
 @get_api.route('/allComponents', methods = ["GET"])
 def get_components():
 	components = Components.query.all()
 	return jsonify([i.serialize for i in components])
 
+# This function gets all the component types from the ComponentTypes table in the database. It is called
+# when loading the course manager page from the department chairs homepage.
 @get_api.route('/componentTypes', methods = ["GET"])
 def get_component_types():
 	componentTypes = ComponentTypes.query.all()
 	return jsonify([i.serialize for i in componentTypes])
 
+# This function gets all the rooms from the Room table in the database. It is called
+# when loading the room manager page from the department chairs homepage.
 @get_api.route('/roomTypes', methods = ["GET"])
 def get_room_types():
 	roomTypes = RoomTypes.query.all()
 	return jsonify([i.serialize for i in roomTypes])
 
+# This function gets all the file names from the ImportedFiles table in the database. It is called
+# when loading the imported files from the Import CSV page from the department chairs homepage.
 @get_api.route('/fileNames', methods = ["GET"])
 def get_file_names():
 	fileNames = ImportedFiles.query.all()
 	return jsonify([i.serialize for i in fileNames])
 
+# This function gets all the courses and components from the course and component tables in the database.
+# It is called when loading the course manager page from the department chairs homepage.
 @get_api.route('/allCoursesAndComponents', methods = ["GET"])
 def get_courses_with_components():
 	courses = Courses.query.all()
@@ -79,22 +96,29 @@ def get_courses_with_components():
 
 	return jsonify(data)
 
-
+# This function gets all the sections from the Section table in the database. It is called
+# when loading a schedule for a specified term.
 @get_api.route('/allSections', methods = ["GET"])
 def get_sections():
 	sections = Sections.query.all()
 	return jsonify([i.serialize for i in sections])
 
+# This function gets all the preferences from the Preferences table in the database. It is called
+# when a department chair views the faculty preferences page.
 @get_api.route('/preferences', methods = ["GET"])
 def get_preferences():
    preferences = FacultyPreferences.query.all()
    return jsonify([i.serialize for i in preferences])
 
+# This function gets all the coursePreferences from the FacultyCoursePreferences table in the database.
+# It is called when viewing faculty preferences on the faculty preferences page.
 @get_api.route('/coursePreferences', methods = ["GET"])
 def get_course_preferences():
    course_preferences = FacultyCoursePreferences.query.all()
    return jsonify([i.serialize for i in course_preferences])
 
+# This function gets all the courses from the Course table in the database that meet the specified filter.
+#  It is called when a user wishes to filter the information in a schedule by course.
 @get_api.route('/filterCourses', methods = ["POST"])
 def get_filtered_courses():
 	data = request.json
@@ -104,22 +128,30 @@ def get_filtered_courses():
 	courses = FacultyCoursePreferences.query.filter(Courses.course_name.contains(course)).all()
 	return jsonify([i.serialize for i in courses])
 
+# This function gets all the rooms from the Room table in the database. It is called
+# when loading the room manager page from the department chairs homepage.
 @get_api.route('/rooms', methods = ["GET"])
 def get_rooms():
    rooms = Rooms.query.all()
    return jsonify([i.serialize for i in rooms])
 
+# This function gets all the schedules from the Schedule table in the database. It is called
+# when loading the list of schedules from the department chairs homepage.
 @get_api.route('/schedules', methods = ["GET"])
 def get_schedules():
    schedules = Schedule.query.all()
    return jsonify([i.serialize for i in schedules])
 
+# This function gets all the comments from the Comment table in the database. It is called
+# when loading the list of notifications under the department chair's Notifications tab.
 @get_api.route('/comments', methods = ["GET"])
 def get_comments():
    comments = Comments.query.all()
    return jsonify([i.serialize for i in comments])
 
-# given a user_id, find the faculty member associated with it
+# This function gets all the instructors from the Faculty table in the database given a user ID. It is called
+# when a faculty member is logged in and wishes to view their information, such as preferences or schedule.
+# Given a user_id, find the faculty member associated with it
 @get_api.route('/facultyFromUser', methods = ["POST"])
 def get_facultyFromUser():
    data = request.json
