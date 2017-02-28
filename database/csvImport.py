@@ -11,6 +11,9 @@ from web_app import db
 csvImport_api = Blueprint('csvImport_api', __name__)
 
 # This function parses through a CSV file containing student plan data, and adds the information to the database
+# It is called when the chair imports a final containing the word "planning" in the title for simplicity (I know
+# this is not very maintainable, but it was the easiest way to differentiate between the various types of files.
+# In a later release, I would modify the following CSV importing code to be more reliable and maintainable).
 @csvImport_api.route("/importStudentData", methods = ['GET', 'POST'])
 def importStudentData():
 
@@ -80,6 +83,7 @@ def importStudentData():
 
 
 # This function parses through a CSV file containing historic plan data, and adds the information to the database
+# It is called when the chair imports a final containing the word "historic" in the title
 @csvImport_api.route("/importHistoricData", methods = ['GET', 'POST'])
 def importHistoricData():
 
@@ -180,6 +184,7 @@ def importHistoricData():
    return "successfully uploaded final schedule data"
 
 # This function parses through a CSV file containing room data, and adds the information to the database
+# It is called when the chair imports a final containing the word "room" in the title
 @csvImport_api.route("/importRoomData", methods = ['GET', 'POST'])
 def importRoomData():
 
@@ -215,13 +220,13 @@ def importRoomData():
             elif column == 3:
                roomCapacity = entry
 
-               # Create a new student planning data row in the ScheduleFinal database table
+               # Create a new room data row in the ScheduleFinal database table
                room = models.Rooms.query.filter_by(type=roomType, number=roomNum,
                                                    capacity=roomCapacity).first()
                if room is None:
                   room = models.Rooms(type=roomType, number=roomNum, capacity=roomCapacity)
 
-                  # Add new student planning data to database
+                  # Add new room data to database
                   db.session.add(room)
                   db.session.commit()
 
@@ -237,6 +242,7 @@ def importRoomData():
    return "successfully uploaded room data"
 
 # This function parses through a CSV file containing course data, and adds the information to the database
+# It is called when the chair imports a final containing the word "course" in the title
 @csvImport_api.route("/importCourseData", methods=['GET', 'POST'])
 def importCourseData():
 
@@ -357,6 +363,7 @@ def importCourseData():
 
 
 # # This function parses through a CSV file containing student cohort data, and adds the information to the database
+# It is called when the chair imports a final containing the word "cohort" in the title
 # @csvImport_api.route("/importCohortData", methods=['GET', 'POST'])
 # def importCohortData():
 #
@@ -377,7 +384,8 @@ def importCourseData():
 #
 #    return "successfully uploaded cohort data"
 
-# This function parses through a CSV file containing faculty data
+# This function parses through a CSV file containing faculty data and adds it to the database
+# It is called when the chair imports a final containing the word "faculty" in the title
 @csvImport_api.route("/importFacultyData", methods = ['GET', 'POST'])
 def importFacultyData():
 
@@ -428,6 +436,7 @@ def importFacultyData():
 
 
 # This function parses through a CSV file containing equipment data and adds it to the database
+# It is called when the chair imports a final containing the word "equipment" in the title
 @csvImport_api.route("/importEquipData", methods = ['GET', 'POST'])
 def importEquipData():
 
