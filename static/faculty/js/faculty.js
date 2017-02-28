@@ -345,8 +345,8 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     $scope.getNumCells = function (time) {
         var defaultVal = 5;
         var count = 0;
-        var days;
-        var hours;
+        var days = "";
+        var hours = 0;
 
         var sections = new Array(defaultVal);
 
@@ -363,12 +363,22 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                     this[3] = obj;
                 }
 
-                hours = obj.hours;
+                hours += obj.hours;
             }
         }, sections);
 
-        if (sharedData.previousDays != "") {
-            
+        if (sharedData.previousDays != "" && sharedData.previousSpan > 1) {
+            if (sharedData.previousDays == "MWF") {
+                sections.splice(0, 1);
+                sections.splice(1, 1);
+                sections.splice(2, 1);
+                console.log("spliced MWF");
+            }
+            else {
+                sections.splice(1, 1);
+                sections.splice(2, 1);
+                console.log("spliced TR");
+            }
         }
 
         sharedData.previousDays = days;
