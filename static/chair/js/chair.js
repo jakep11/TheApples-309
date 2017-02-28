@@ -174,7 +174,7 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
       console.log($scope.current);
    }
 
-
+   // Adds a user-specified course to the database
    $scope.addCourse = function () {
       $http({
          method: 'POST',
@@ -200,6 +200,7 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
       });
    }
 
+   // Edits a course in the database based on user-specified information
    $scope.editCourse = function () {
       $http({
          method: 'POST',
@@ -227,6 +228,7 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
       });
    }
 
+   // Removes a course from the database
    $scope.deleteCourse = function () {
       console.log("trying to delete course");
       $http({
@@ -294,7 +296,7 @@ $scope.openEdit = function () {
    console.log($scope.current);
 }
 
-
+// Adds a faculty member to the database given user-specified data
 $scope.addFaculty = function () {
    $http({
       method: 'POST',
@@ -505,6 +507,7 @@ app.controller('generateSchedule', function ($scope, $rootScope) {
    $rootScope.bcrumb2 = 'Current Schedule';
 })
 
+// Needed in order to upload a CSV file to the server in order to use it in the backend
 app.directive('fileModel', ['$parse', function ($parse) {
    return {
       restrict: 'A',
@@ -521,6 +524,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
    };
 }]);
 
+// Uploads a CSV file to the server so that it's information can be parsed through in Flask
 app.service('fileUpload', ['$http', function ($http) {
    this.uploadFileToUrl = function (file, uploadUrl) {
       var fd = new FormData();
@@ -545,6 +549,10 @@ app.service('fileUpload', ['$http', function ($http) {
 
 app.controller('importData', ['$scope', '$rootScope', 'fileUpload', '$http', function ($scope, $rootScope, fileUpload, $http) {
    $rootScope.bcrumb1 = 'Import Data';
+
+   // This function figures out which kind of CSV file is being imported into the system based on the
+   // name of the file, and calls the corresponding importCSV python function in order to add the
+   // included information to the right tables in the database
    $scope.uploadFile = function () {
       var file = $scope.myFile;
 
@@ -573,6 +581,7 @@ app.controller('importData', ['$scope', '$rootScope', 'fileUpload', '$http', fun
       console.log("done uploading file");
    };
 
+   // Gets all the imported filenames from the database to be displayed on the ImportCSV page
    $scope.getFileNames = function() {
       $http({
          method: 'GET',
@@ -615,6 +624,7 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
    // Calling the getComments function
    $scope.getNotifications();
 
+  // The function gets the entire message of the selected comment
   $scope.readMore = function() {
       var selectedComment = this.selectedComment;
 
@@ -628,6 +638,8 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
 
   }
 
+   // Changes comment.unread from true to false. Calling this function will change the color of the message
+   // on the notifications page.
    $scope.markAsRead = function() {
       $http({
          method: 'POST',
@@ -672,6 +684,7 @@ app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
    // Calling the function
    $scope.getRooms();
 
+   // Gets all of the roomtypes from the database
    $scope.getRoomTypes = function () {
       $http({
          method: 'GET',
@@ -687,6 +700,7 @@ app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
    }
    $scope.getRoomTypes();
 
+   // Adds a roomtype to the database
    $scope.addRoomType = function () {
       $http({
          method: 'POST',
@@ -704,6 +718,8 @@ app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
          console.log('error');
       });
    }
+
+   // Removes a roomtype from the database
    $scope.removeRoomType = function () {
       $http({
          method: 'POST',
@@ -749,7 +765,7 @@ $scope.openEdit = function () {
    console.log($scope.current);
 }
 
-
+// Adds a room to the database
 $scope.addRoom = function () {
    $http({
       method: 'POST',
@@ -769,6 +785,7 @@ $scope.addRoom = function () {
    });
 }
 
+// Edits a room in the database
 $scope.editRoom = function () {
    $http({
       method: 'POST',
@@ -790,6 +807,7 @@ $scope.editRoom = function () {
    });
 }
 
+// Removes a room from the database
 $scope.deleteRoom = function () {
    console.log("trying to delete room");
    $http({
@@ -836,6 +854,7 @@ app.controller('schedules', function ($scope, $rootScope, $http, $window) {
 
    $scope.radioSelected = false;
 
+// Handles keeping track of which schedule radio button is selected
 $scope.radioChanged = function (schedule) {
    console.log(schedule);
    $scope.current = {
@@ -854,7 +873,7 @@ $scope.openEdit = function () {
    console.log($scope.current);
 }
 
-
+// Adds a schedule to the database
 $scope.addSchedule = function () {
    $http({
       method: 'POST',
@@ -872,6 +891,7 @@ $scope.addSchedule = function () {
    });
 }
 
+// Edits a schedule in the database
 $scope.editSchedule = function () {
    $http({
       method: 'POST',
@@ -891,6 +911,7 @@ $scope.editSchedule = function () {
    });
 }
 
+// Removes a schedule from the database
 $scope.deleteSchedule = function () {
    console.log("trying to delete schedule");
    $http({
