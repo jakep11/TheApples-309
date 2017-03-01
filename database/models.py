@@ -30,10 +30,10 @@ class Faculty(db.Model):
    last_name = db.Column(db.String(32))
    max_work_units = db.Column(db.Integer)
    min_work_units = db.Column(db.Integer)
+   current_work_units = db.Column(db.Integer)
    faculty_sections = db.relationship("Sections", backref="faculty")
    preferences = db.relationship("FacultyPreferences", backref="faculty")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="faculty")
-   constraints = db.relationship("FacultyConstraint", backref="faculty")
 
    @property
    def serialize(self):
@@ -54,7 +54,6 @@ class Courses(db.Model):
    course_name = db.Column(db.String(100))
    components = db.relationship("Components", backref="course")
    course_sections = db.relationship("Sections", backref="course")
-   constraints = db.relationship("FacultyConstraint", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
    student_planning_data = db.relationship("StudentPlanningData", backref="course")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="course")
@@ -69,7 +68,6 @@ class Courses(db.Model):
       'course_name': self.course_name
       #'components': self.components
       #'course_sections': self.course_sections,
-      #'constraints': self.constraints,
       #'final_schedules': self.final_schedules,
       }
 
@@ -78,7 +76,6 @@ class Terms(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(64))
    term_sections = db.relationship("Sections", backref="term")
-   constraints = db.relationship("FacultyConstraint", backref="term")
    comments = db.relationship("Comments", backref="term")
    final_schedules = db.relationship("ScheduleFinal", backref="term")
    preferences = db.relationship("FacultyPreferences", backref="term")
@@ -250,13 +247,6 @@ class FacultyCoursePreferences(db.Model):
          'preference': self.preference
       }
 
-#-- Description: Stores what classes a faculty is allowed to teach
-class FacultyConstraint(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
-   term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
-   course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
-   constraint = db.Column(db.String(32))        # 'Not allowed' or 'Not desirable' or 'Allowed'
 
 #-- Description: Stores comments for a schedule of a given term
 class Comments(db.Model):
