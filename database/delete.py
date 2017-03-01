@@ -4,6 +4,9 @@ delete_api = Blueprint('delete_api', __name__)
 from models import *
 from web_app import db
 
+
+# This function removes a user from the User table in the database. It is called
+# when the admin selects an account to remove. 
 @delete_api.route('/user', methods = ["POST"])
 def delete_user():
     data = request.json
@@ -16,6 +19,8 @@ def delete_user():
     db.session.commit()
     return  "User %s removed from database" % (user.username)
 
+# This function removes a faculty member from the Faculty table in the database. It is called
+# when the admin selects a faculty member to remove. 
 @delete_api.route('/faculty', methods = ["POST"])
 def delete_faculty():
     data = request.json
@@ -28,6 +33,8 @@ def delete_faculty():
     db.session.commit()
     return  "Faculty %s removed from database" % (faculty.first_name)
 
+# This function removes a course from the Course table in the database. It is called
+# when the chair selects a course to remove. 
 @delete_api.route('/course', methods = ["POST"])
 def delete_course():
     data = request.json
@@ -40,6 +47,8 @@ def delete_course():
     db.session.commit()
     return  "Course %s %d removed from database" % (course.major, course.number)
 
+# This function removes a term from the Term table in the database. It is called
+# when the chair selects a term to remove.
 @delete_api.route('/term', methods = ["POST"])
 def delete_term():
     data = request.json
@@ -52,6 +61,8 @@ def delete_term():
     db.session.commit()
     return  "Term %s removed from database" % (term.name)
 
+# This function removes a room from the Room table in the database. It is called
+# when the chair selects a room to remove.
 @delete_api.route('/room', methods = ["POST"])
 def delete_room():
     data = request.json
@@ -64,6 +75,8 @@ def delete_room():
     db.session.commit()
     return  "Room %s removed from database" % (room.type)
 
+# This function removes a section from the Section table in the database. It is called
+# when the chair selects a section to remove.
 @delete_api.route('/section', methods = ["POST"])
 def delete_section():
     data = request.json
@@ -76,6 +89,8 @@ def delete_section():
     db.session.commit()
     return  "Section %d removed from database" % (section.number)
 
+# This function removes an equipment from the Equipment table in the database. It is called
+# when the chair selects an equipment to remove.
 @delete_api.route('/equipment', methods = ["POST"])
 def delete_equipment():
     data = request.json
@@ -88,6 +103,8 @@ def delete_equipment():
     db.session.commit()
     return  "Equipment %s removed from database" % (equipment.name)
 
+# This function removes a piece of equipment from a specific room from the 
+# roomEquipment table in the database. It is called when the chair selects a roomEquipment to remove.
 @delete_api.route('/roomEquipment', methods = ["POST"])
 def delete_room_equipment():
     data = request.json
@@ -100,6 +117,8 @@ def delete_room_equipment():
     db.session.commit()
     return  "%s in room %s removed from database" % (re.equipment.name, re.room_type)
 
+# This function removes a final schedule from the scheduleFinal table in the database. 
+# It is called when the chair selects a final schedule to remove.
 @delete_api.route('/scheduleFinal', methods = ["POST"])
 def delete_schedule_final():
     data = request.json
@@ -112,6 +131,8 @@ def delete_schedule_final():
     db.session.commit()
     return  "Schedule Final: term %s course %s %d removed" % (sf.term.name, sf.course.major, sf.course.number)
 
+# This function removes student planning data from the StudentPlanningData table in the database. 
+# It is called when the chair selects some student planning data  to remove.
 @delete_api.route('studentPlanningData', methods = ["POST"])
 def delete_student_planning_data():
     data = request.json
@@ -124,6 +145,8 @@ def delete_student_planning_data():
     db.session.commit()
     return "Student Planning Data removed form database"
 
+# This function removes a scheudle from the schedule table in the database. 
+# It is called when the chair selects a schedule to remove.
 @delete_api.route('/schedule', methods = ["POST"])
 def delete_schedule():
     data = request.json
@@ -148,6 +171,8 @@ def delete_schedule():
 #     db.session.commit()
 #     return  "Published Schedule %s removed from database" % (ps.term)
 
+# This function removes a faculty preference from the facultyPreference table in the database. 
+# It is called when the chair selects a faculty preference to remove.
 @delete_api.route('/facultyPreference', methods = ["POST"])
 def delete_faculty_preference():
     data = request.json
@@ -160,18 +185,22 @@ def delete_faculty_preference():
     db.session.commit()
     return  "Faculty Preference %s removed from database" % (fp.preference)
 
-@delete_api.route('/facultyConstraint', methods = ["POST"])
-def delete_faculty_constraint():
+# This function removes a faculty course preference from the facultyCoursePreference table in the database. 
+# It is called when the chair selects a faculty course preference to remove.
+@delete_api.route('/facultyCoursePreference', methods = ["POST"])
+def delete_faculty_course_preference():
     data = request.json
     id = data['id']
 
-    fc = FacultyConstraint.query.filter_by(id=id).first()
-    if fc is None:
-        return 'ERROR FACULTY CONSTRAINT NOT FOUND'
-    db.session.delete(fc)
+    fcp = facultyCoursePreference.query.filter_by(id=id).first()
+    if fcp is None:
+        return 'ERROR FACULTY COURSE PREFERENCE NOT FOUND'
+    db.session.delete(fcp)
     db.session.commit()
-    return  "Faculty Constraint %s removed from database" % (fc.constraint)
+    return  "Faculty Course Preference removed from database"
 
+# This function removes a comment from the Commnet table in the database. 
+# It is called when the chair selects a comment to remove.
 @delete_api.route('/comment', methods = ["POST"])
 def delete_comment():
     data = request.json
@@ -184,6 +213,8 @@ def delete_comment():
     db.session.commit()
     return  "Comment %s removed from database" % (comment.comment)
 
+# This function removes a notification from the Notification table in the database. 
+# It is called when the chair selects a notification to remove.
 @delete_api.route('/notification', methods = ["POST"])
 def delete_notification():
     data = request.json
@@ -196,6 +227,8 @@ def delete_notification():
     db.session.commit()
     return  "Notification %s removed from database" % (notification.message)
 
+# This function removes a component type from the componentType table in the database. 
+# It is called when the chair selects a component type to remove.
 @delete_api.route('/componentType', methods = ["POST"])
 def delete_component_type():
     data = request.json
@@ -208,6 +241,8 @@ def delete_component_type():
     db.session.commit()
     return  "Component Type %s removed from database" % (componentType.name)
 
+# This function removes a room type from the scheduleFinal table in the database. 
+# It is called when the chair selects a room type to remove.
 @delete_api.route('/roomType', methods = ["POST"])
 def delete_room_type():
     data = request.json
