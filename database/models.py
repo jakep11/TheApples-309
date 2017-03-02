@@ -136,7 +136,7 @@ class Sections(db.Model):
    faculty_id = db.Column(db.Integer, db.ForeignKey("faculty.id"))
    room_id = db.Column(db.Integer, db.ForeignKey("rooms.id"))
    number = db.Column(db.Integer)
-   section_type = db.Column(db.String(7))       # lecture of lab
+   section_type = db.Column(db.String(15))       # lecture of lab
    time_start = db.Column(db.Integer)
    time_end = db.Column(db.Integer)
    days = db.Column(db.String(3))               # 'MWF' or "TR"
@@ -148,18 +148,21 @@ class Sections(db.Model):
       #"""Return object data in easily serializeable format"""
       return {
       'id': self.id,
-      'course': (Courses.query.filter_by(id=self.course_id).first()).major,
+      'course': self.course.major,
+      'course_id': self.course.id,
       'course_num': (Courses.query.filter_by(id=self.course_id).first()).number,
       'term_id': self.term_id,
-      'faculty': (Faculty.query.filter_by(id=self.faculty_id).first()).last_name, #faculty name
-      'room': (Rooms.query.filter_by(id=self.room_id).first()).number, #room number/id
+      'faculty': self.faculty.last_name, #faculty name
+      'faculty_id': self.faculty.id,
+      'room': self.room.number, #room number/id
+      'room_id': self.room.id,
       'number': self.number,
       'section_type': self.section_type,
       'time_start': timeCalculations.twelveHourTime(self.time_start),
       'time_end': timeCalculations.twelveHourTime(self.time_end),
       'hours': timeCalculations.hoursBetween(self.time_end, self.time_start),
       'days': self.days,
-      'capacity': (Rooms.query.filter_by(id=self.room_id).first()).capacity
+      'capacity': self.room.capacity
       }
 
 #-- Description: Stores all equipment types that will be used in various rooms

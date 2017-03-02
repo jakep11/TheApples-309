@@ -505,10 +505,265 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
 
 })
 
-app.controller('generateSchedule', function ($scope, $rootScope) {
+app.controller('generateSchedule', function ($scope, $rootScope, $http, $location, sharedData, $window) {
    $rootScope.bcrumb1 = 'Schedules';
    $rootScope.bcrumb1Link = '#schedules';
    $rootScope.bcrumb2 = 'Current Schedule';
+
+   $scope.currentTerm = $location.search().term;
+   $scope.startTimes = sharedData.startTimes;
+   $scope.endTimes = sharedData.endTimes;
+
+   $scope.getSchedule = function() {
+      $http({
+            method: 'POST',
+            url: '/get/schedule',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+               term_id: $scope.currentTerm
+            }
+        }).then(function successCallback(response) {
+            $scope.schedule = response.data;
+            $scope.published = response.data.published;
+            console.log($scope.schedule);
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+   }
+   $scope.getSchedule();
+
+   $scope.publishSchedule = function(pub) {
+      $http({
+            method: 'POST',
+            url: '/edit/schedule',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+               id: $scope.schedule.id,
+               published: pub
+            }
+        }).then(function successCallback(response) {
+            console.log($scope.schedule);
+            $window.location.reload();
+
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+   }
+
+    $scope.getCourses = function () {
+        console.log("getting courses");
+        $http({
+            method: 'GET',
+            url: '/get/allCourses',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getCourses();
+
+    $scope.getTerms = function () {
+        $http({
+            method: 'GET',
+            url: '/get/terms',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.terms = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getTerms();
+
+    $scope.getFaculty = function () {
+        $http({
+            method: 'GET',
+            url: '/get/instructors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.faculty = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getFaculty();
+
+    $scope.getRooms = function () {
+        $http({
+            method: 'GET',
+            url: '/get/rooms',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.rooms = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getRooms();
+
+    $scope.getComponentTypes = function () {
+      $http({
+         method: 'GET',
+         url: 'get/componentTypes',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }).then(function successCallback(response) {
+         $scope.componentTypes = response.data;
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.getComponentTypes();
+
+   $scope.getSections = function () {
+      console.log($scope.currentTerm);
+      console.log("hi");
+      $http({
+         method: 'POST',
+         url: 'filter/sections',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'terms': [parseInt($scope.currentTerm)]
+         }
+      }).then(function successCallback(response) {
+         $scope.sections = response.data;
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+   $scope.getSections();
+
+   $scope.radioSelected = false;
+
+   $scope.radioChanged = function (section) {
+      console.log(section);
+      $scope.current = {
+         'id': section.id,
+      'course': section.course,
+      'course_id': section.course_id,
+      'course_num': section.course_num,
+      'term_id': section.term_id,
+      'faculty': section.faculty,
+      'faculty_id': section.faculty_id,
+      'room': section.room,
+      'room': section.room_id,
+      'number': section.number,
+      'section_type': section.section_type,
+      'time_start': section.time_start,
+      'time_end': section.time_end,
+      'hours': section.hours,
+      'days': section.days,
+      'capacity': section.capacity
+         
+      }
+      $scope.radioSelected = true;
+      console.log($scope.current);
+
+   }
+   $scope.openEdit = function () {
+      $scope.edit = $scope.current;
+      console.log($scope.current);
+   }
+
+   
+   // Adds a section to the database
+   $scope.addSection = function () {
+      console.log($scope.add.time_start);
+      $http({
+         method: 'POST',
+         url: 'create/section',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            course_id: parseInt($scope.add.course_id),
+            term_id: parseInt($scope.currentTerm),
+            faculty_id: parseInt($scope.add.faculty_id),
+            room_id: parseInt($scope.add.room_id),
+            number: $scope.add.sectionNumber,
+            section_type: $scope.add.compType,
+            time_start: parseInt($scope.add.time_start),
+            time_end: parseInt($scope.add.time_end),
+            days: $scope.add.days
+         }
+      }).then(function successCallback(response) {
+         console.log("Section added");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   // Edits a section in the database
+   $scope.editSection = function () {
+      $http({
+         method: 'POST',
+         url: 'edit/section',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            id: parseInt($scope.edit.id),
+            course_id: parseInt($scope.edit.course_id),
+            term_id: parseInt($scope.currentTerm),
+            faculty_id: parseInt($scope.edit.faculty_id),
+            room_id: parseInt($scope.edit.room_id),
+            number: $scope.edit.sectionNumber,
+            section_type: $scope.edit.compType,
+            time_start: $scope.edit.time_start,
+            time_end: $scope.edit.time_end,
+            days: $scope.edit.days
+         }
+      }).then(function successCallback(response) {
+         console.log("Section edited");
+         //$window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   // Removes a section from the database
+   $scope.deleteSection = function () {
+      $http({
+         method: 'POST',
+         url: 'delete/section',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            id: $scope.current.id
+         }
+      }).then(function successCallback(response) {
+         console.log("Section deleted");
+         $window.location.reload();
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+
+
 })
 
 // Needed in order to upload a CSV file to the server in order to use it in the backend

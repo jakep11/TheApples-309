@@ -142,16 +142,16 @@ def new_room():
 @create_api.route('/section', methods = ["POST"])
 def new_section():
     data = request.json
-    course_id = data['course_id']
-    term_id = data['term_id']
-    faculty_id = data['faculty_id']
-    room_id = data['room_id']
-    number = data['number']
-    section_type = data['section_type']
-    time_start = data['time_start']
-    time_end = data['time_end']
-    days = data['days']
-    schedule_id = data['schedule.id']
+    course_id = data.get('course_id', None)
+    term_id = data.get('term_id', None)
+    faculty_id = data.get('faculty_id', None)
+    room_id = data.get('room_id', None)
+    number = data.get('number', None)
+    section_type = data.get('section_type', None)
+    time_start = data.get('time_start', None)
+    time_end = data.get('time_end', None)
+    days = data.get('days', None)
+    schedule_id = data.get('schedule.id', None)
 
     course = Courses.query.filter_by(id=course_id).first()
     if course is None:
@@ -165,16 +165,16 @@ def new_section():
     room = Rooms.query.filter_by(id=room_id).first()
     if room is None:
         return "ERROR ROOM NOT FOUND"
-    schedule = Schedule.query.filter_by(id=schedule_id).first()
-    if schedule is None:
-        return "ERROR SCHEDULE NOT FOUND"
+    # schedule = Schedule.query.filter_by(id=schedule_id).first()
+    # if schedule is None:
+    #     return "ERROR SCHEDULE NOT FOUND"
 
     section = Sections(course=course, term=term, faculty=faculty,
                         room=room, number=number, section_type=section_type,
-                        time_start=time_start, time_end=time_end, days=days, schedule=schedule)
+                        time_start=time_start, time_end=time_end, days=days)
     db.session.add(section)
     db.session.commit()
-    return "Section %d of course %s %d added to database" % (number, course.name, course.number)
+    return "Section added" 
 
 # This function adds a new equipment to the Equipment table in the database. It is called
 # when a scheduler clicks "add equipment"
@@ -182,7 +182,7 @@ def new_section():
 def new_equipment():
     data = request.json
     name = data['name']
-
+ 
     room = Room(name=name)
     db.session.add(room)
     db.session.commit()

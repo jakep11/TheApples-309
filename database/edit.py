@@ -202,14 +202,14 @@ def edit_section():
       section.time_end = time_end
    if days is not None:
       section.days = days
-   if schedule_id is not None:
-      schedule = Schedule.query.filter_by(id=schedule_id).first()
-      section.schedule = schedule
+   # if schedule_id is not None:
+   #    schedule = Schedule.query.filter_by(id=schedule_id).first()
+   #    section.schedule = schedule
 
    db.session.add(section)
    db.session.commit()
-   section = Sections.query.filter_by(id=id).first()
-   return "Section #%d for course %s %d updated" % (section.number, section.course.major, section.course.number)
+   
+   return "Section updated" 
 
 # This function modifies the equipment information in the Equipment table in the database. It is called
 # when a department scheduler clicks "edit equipment" and saves their changes
