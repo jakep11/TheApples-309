@@ -16,11 +16,11 @@ def filtered_courses():
 @filters_api.route('/sections', methods = ["POST"])
 def filtered_sections():
    data = request.json
-   terms = data['terms']
-   ids = data['ids']
-   instructors = data['instructors']
-   startTimes = data['timeStart']
-   endTimes = data['timeEnd']
+   terms = data.get('terms', None)
+   ids = data.get('ids', None)
+   instructors = data.get('instructors', None)
+   startTimes = data.get('timeStart', None)
+   endTimes = data.get('timeEnd', None)
 
    # list of filters for the query
    filters = []

@@ -142,6 +142,15 @@ def get_schedules():
    schedules = Schedule.query.all()
    return jsonify([i.serialize for i in schedules])
 
+#This function gets a single schedule from the Schedule table in the database.
+@get_api.route('/schedule', methods = ["POST"])
+def get_schedule():
+   data = request.json
+   term_id = data.get('term_id', None)
+   schedule = Schedule.query.filter_by(term_id=term_id).first()
+
+   return jsonify(schedule.serialize)
+
 # This function gets all the comments from the Comment table in the database. It is called
 # when loading the list of notifications under the department chair's Notifications tab.
 @get_api.route('/comments', methods = ["GET"])
