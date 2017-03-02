@@ -32,12 +32,49 @@ def new_faculty():
     last_name = data['last_name']
     max_work_units = data['max_work_units']
     min_work_units = data['min_work_units']
-
+    days = ['M', 'T', 'W', 'H', 'F']
+    courses = Courses.query.all()
+    print courses
     faculty = Faculty(first_name=first_name, last_name=last_name,
                         max_work_units=max_work_units, min_work_units=min_work_units)
     db.session.add(faculty)
     db.session.commit()
+    for i in range(7, 22):
+        for day in days:
+            if i < 9:
+                time_start =  "0" + str(i) + ":00"  
+                time_end = "0" + str(i) + ":30" 
+                fp = FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+                time_start = "0" + str(i) + ":30"
+                time_end = "0" + str(i+1) + ":00"
+                fp = FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+            if i == 9:
+                time_start =  "0" + str(i) + ":00" 
+                time_end = "09:30"
+                fp = FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+                time_start = "09:30"
+                time_end = "10:00"
+                fp = FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+            if i > 9:
+                time_start =  str(i) + ":00" 
+                time_end = str(i) + ":30" 
+                fp = FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+                time_start = str(i) + ":30"
+                time_end = str(i+1) + ":00"
+                fp = FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+    for course in courses:
+        fcp = FacultyCoursePreferences(faculty=faculty, course=course, preference="C")
+        db.session.add(fcp)
+    db.session.commit()
     return  "Faculty added to database" 
+
+
 
 # This function adds a new course to the course table in the database. It is called
 # when a scheduler clicks "add new course"

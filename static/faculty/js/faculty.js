@@ -266,7 +266,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     // ~~~~~~~ Array.splice(start, deleteCount) will be used for rowspan calculations ~~~~~~~
     $scope.getNumCells = function (time) {
         var defaultVal = 5;
-        var days = ["", ""];
         var hours = [0, 0];
         var span;
 
@@ -279,40 +278,44 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                     this[2] = obj;
                     this[4] = obj;
 
-                    days[0] = "MWF";
                     hours[0] += obj.hours;
                 }
                 else {
                     this[1] = obj;
                     this[3] = obj;
 
-                    days[1] = "TR";
                     hours[1] += obj.hours;
                 }
             }
         }, sections);
 
-        if (sharedData.previousDays[0] == "MWF" && sharedData.previousSpan[0] > 0) {
+        if (sharedData.previousSpan[0] > 0 && sharedData.previousSpan[1] > 0) {
+            sections = new Array();
+            sharedData.previousSpan[0]--;
+            sharedData.previousSpan[1]--;
+        }
+        else if (sharedData.previousSpan[0] > 0) {
             sections.splice(0, 1);
             sections.splice(1, 1);
             sections.splice(2, 1);
             console.log("spliced MWF");
             sharedData.previousSpan[0]--;
         }
-        if (sharedData.previousDays[1] == "TR" && sharedData.previousSpan[1] > 0) {
+        else if (sharedData.previousSpan[1] > 0) {
             sections.splice(1, 1);
             sections.splice(2, 1);
             console.log("spliced TR");
             sharedData.previousSpan[1]--;
         }
-        //else {
-            sharedData.previousDays[0] = days[0];
-            sharedData.previousDays[1] = days[1];
-            sharedData.previousSpan[0] += Math.max((hours[0] * 2) - 1, 0); // calculate how many additional rows to span
-            sharedData.previousSpan[1] += Math.max((hours[1] * 2) - 1, 0); // calculate how many additional rows to span
-        //}
 
-
+        // keep track of how many rows the current MWF section spans
+        if (sharedData.previousSpan[0] === 0) {
+            sharedData.previousSpan[0] += Math.max((hours[0] * 2) - 1, 0);
+        }
+        // keep track of how many rows the current TR section spans
+        if (sharedData.previousSpan[1] === 0) {
+            sharedData.previousSpan[1] += Math.max((hours[1] * 2) - 1, 0);
+        }
 
         return sections;
     }

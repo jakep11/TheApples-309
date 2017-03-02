@@ -431,7 +431,7 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
       });
    }
 
-   // Saving any changes before the day is changed.
+   // Saving any changes made to a faculty's time preferences
    $scope.changeTime = function () {
 
       $http({
@@ -441,7 +441,7 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
             'Content-Type': 'application/json'
          },
          data: {
-            'time_pref': this.time_pref,
+            'time_pref': this.time_pref,     // Using 'this' because of ng-repeat scope
             'p_id': this.preference.id
          }
       }).then(function successCallback(response) {
@@ -452,7 +452,7 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
 
    }
 
-   // When a course preference is changed, update it in the database.
+   // Saving any changes made to a faculty's course preferences.
    $scope.changePref = function() {
       $http({
          method: 'POST',
@@ -461,7 +461,7 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
             'Content-Type': 'application/json'
          },
          data: {
-            'pref': this.pref,
+            'pref': this.pref,               // Using 'this' because of ng-repeat scope
             'cp_id': this.coursePreference.id
          }
       }).then(function successCallback(response) {
@@ -471,7 +471,7 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
       }); 
    }
 
-   // Saving changes when 'save' is clicked. Only thing updated is faculty work units
+   // Saving changes when 'save' is clicked. Faculty work units, and comments updated/saved.
    $scope.saveChanges = function() {
       $http({
          method: 'POST',
@@ -480,6 +480,10 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
             'Content-Type': 'application/json'
          },
          data: {
+            'comment': $scope.comment,
+            'time': new Date().toLocaleString(),
+            'unread': "true",
+            'type': "Comment",
             'min_units': $scope.min_units,
             'max_units': $scope.max_units,
             'id': $scope.faculty_id

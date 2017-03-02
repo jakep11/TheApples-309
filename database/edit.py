@@ -448,11 +448,15 @@ def edit_comment():
    return "Comment with id %d updated" % (id)
 
 # This function updates the Faculty table in the database, and modifies the min and max units the
-# faculty member is allowed to teach in a given term.
+# faculty member is allowed to teach in a given term. Also adds a comment if provided
 @edit_api.route('/saveChanges', methods = ["POST"])
 def save_changes():
    data = request.json
    id = data.get('id', None)
+   comment = data.get('comment', None)
+   time = data.get('time', None)
+   unread = data.get('unread', None)
+   commentType = data.get('type', None)
    min_units = data.get('min_units', None)
    max_units = data.get('max_units', None)
 
@@ -463,10 +467,25 @@ def save_changes():
       faculty.min_work_units = min_units
    if max_units is not None:
       faculty.max_work_units = max_units
+   if comment is not None:
+      # Adds a new comment to the database to be displayed on the chair's notification page
+      username = faculty.first_name[:1] + faculty.last_name
+      cmt = Comments(username=username, comment=comment, time=time, unread=unread, type=commentType)
+      db.session.add(cmt)
+      db.session.commit()
 
+   # Adds the changed faculty member preferences to the database
    db.session.add(faculty)
    db.session.commit()
    faculty = Faculty.query.filter_by(id=id).first()
+
+   # Sends the chair a notification that the preferences have been updated
+   username = faculty.first_name[:1] + faculty.last_name
+   updateComment = faculty.first_name + " " + faculty.last_name + " has updated their preferences!"
+   notification = Comments(username=username, comment=updateComment, time=time, unread="true", type="Update")
+   db.session.add(notification)
+   db.session.commit()
+
    return "Faculty with id %d updated" % (int(id))
 
 
