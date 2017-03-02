@@ -263,8 +263,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     $scope.getFacultyFromUser();
 
     // set the sections into the calendar view
-    // ~~~~~~~ Array.splice(start, deleteCount) will be used for rowspan calculations ~~~~~~~
-    $scope.getNumCells = function (time) {
+    $scope.setCalendarCells = function (time) {
         var defaultVal = 5;
         var hours = [0, 0];
         var span;
@@ -298,13 +297,13 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
             sections.splice(0, 1);
             sections.splice(1, 1);
             sections.splice(2, 1);
-            console.log("spliced MWF");
+
             sharedData.previousSpan[0]--;
         }
         else if (sharedData.previousSpan[1] > 0) {
             sections.splice(1, 1);
             sections.splice(2, 1);
-            console.log("spliced TR");
+
             sharedData.previousSpan[1]--;
         }
 

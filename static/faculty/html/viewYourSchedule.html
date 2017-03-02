@@ -56,7 +56,12 @@
                 <tbody class="table-body">
                     <tr ng-repeat="(value, time) in startTimes">
                         <td>{{time}}</td>
-                        <td ng-repeat="data in getNumCells(time) track by $index" rowspan="{{data.hours * 2}}">{{data.course}} {{data.course_num}}</td>
+                        <td ng-repeat="data in setCalendarCells(time) track by $index" rowspan="{{data.hours * 2}}" ng-class="{'courseCell': data != undefined}">
+                            <span ng-if="data != undefined">{{data.course}} {{data.course_num}}-{{data.number}}
+                                <br>{{data.section_type}}
+                                <br>Room {{data.room}}
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

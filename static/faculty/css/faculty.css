@@ -242,3 +242,7 @@ td {
 .range-inputs {
    margin-left: 65px;
 }
+
+.courseCell {
+    background-color: LightGreen;
+}
