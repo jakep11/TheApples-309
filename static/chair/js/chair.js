@@ -480,6 +480,10 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
             'Content-Type': 'application/json'
          },
          data: {
+            'comment': $scope.comment,
+            'time': new Date().toLocaleString(),
+            'unread': "true",
+            'type': "Comment",
             'min_units': $scope.min_units,
             'max_units': $scope.max_units,
             'id': $scope.faculty_id
