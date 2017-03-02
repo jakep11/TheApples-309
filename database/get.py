@@ -169,15 +169,15 @@ def get_facultyFromUser():
    return jsonify(id=faculty.id, first_name=faculty.first_name, last_name=faculty.last_name)
 
 
-# # This function gets the list of all faculty (with preferences) who are able and willing to teach a course
-# # given a course ID. The course will be under the suitable resources column in the course manager.
-# @get_api.route('/facultyFromCourse', methods = ["GET"])
-# def get_facultyFromCourse():
-#    data = request.json
-#    courseID = data['courseId']
-#
-#    fcps = FacultyCoursePreferences.query.filter_by(course_id=courseID).all
-#    return jsonify([i.serialize for i in fcps])
+# This function gets the list of all faculty (with preferences) who are able and willing to teach a course
+# given a course ID. The course will be under the suitable resources column in the course manager.
+@get_api.route('/facultyFromCourse', methods = ["GET"])
+def get_facultyFromCourse():
+   data = request.json
+   courseID = data['courseId']
+
+   fcps = FacultyCoursePreferences.query.filter_by(course_id=courseID).all
+   return jsonify([i.serialize for i in fcps])
 #
 #
 # # This function gets the list of all faculty who are able and willing to teach a course
