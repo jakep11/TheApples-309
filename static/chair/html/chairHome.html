@@ -1,13 +1,11 @@
+<!-- Home page displayed when chair logged in -->
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-md-4"></div>
-
         <div class="col-md-4">
             <div id="box-container">
+                <!-- Angular tag that displays logged in user -->
                 <h2>{{user}}</h2>
-
-
                 <button class="btn btn-lg btn-block" go-click="notifications">Notifications
                 <span class="badge badge-error">{{numNotifications}}</span></button>
                 <button class="btn btn-lg btn-block" go-click="importData">Import Data</button>
@@ -17,12 +15,8 @@
                 <button class="btn btn-lg btn-block" go-click="courseManager">Course Manager</button>
                 <button id="logoutBtn" class="btn btn-lg btn-block" ng-click="logout()">Log Out</button>
                 <p id="reportBug"><a href="#">Report a Bug</a></p>
-
             </div>
-
             <div class="col-md-4"></div>
-
-
         </div>
     </div>
 </div>
