@@ -718,6 +718,12 @@ app.controller('generateSchedule', function ($scope, $rootScope, $http, $locatio
          console.log("Section added");
          $window.location.reload();
       }, function errorCallback(response) {
+         if (response.status == 406) {
+            alert("Room Conflict");
+         }
+         if (response.status == 405) {
+            alert("Faculty Conflict");
+         }
          console.log('error');
       });
    }
@@ -744,8 +750,14 @@ app.controller('generateSchedule', function ($scope, $rootScope, $http, $locatio
          }
       }).then(function successCallback(response) {
          console.log("Section edited");
-         //$window.location.reload();
+         $window.location.reload();
       }, function errorCallback(response) {
+         if (response.status == 406) {
+            alert("Room Conflict");
+         }
+         if (response.status == 405) {
+            alert("Faculty Conflict");
+         }
          console.log('error');
       });
    }

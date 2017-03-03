@@ -1,4 +1,4 @@
-from flask import make_response, Blueprint, render_template, flash, redirect, request, url_for, jsonify, json, Response
+from flask import make_response, Blueprint, render_template, flash, redirect, request, url_for, jsonify, json, Response, abort
 from sqlalchemy import func
 get_api = Blueprint('get_api', __name__)
 
@@ -202,3 +202,9 @@ def get_facultyFromCourse():
 #
 #    rooms = Rooms.query.all()
 #    return jsonify([i.serialize for i in rooms])
+
+@get_api.route('/testing', methods = ["GET"])
+def get_error():
+   
+   
+   abort(406)

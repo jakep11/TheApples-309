@@ -1,6 +1,7 @@
-from flask import Blueprint, request, jsonify, json
+from flask import Blueprint, request, jsonify, json, abort
 create_api = Blueprint('create_api', __name__)
 
+from filters import roomConflict, facultyConflict
 from models import *
 from web_app import db
 
@@ -137,6 +138,7 @@ def new_room():
     db.session.commit()
     return " room with capacity added to database" 
 
+
 # This function adds a new section to the Section table in the database. It is called
 # when a scheduler is adding a new course section to a schedule for a given term
 @create_api.route('/section', methods = ["POST"])
@@ -151,27 +153,38 @@ def new_section():
     time_start = data.get('time_start', None)
     time_end = data.get('time_end', None)
     days = data.get('days', None)
-    schedule_id = data.get('schedule.id', None)
+    schedule_id = data.get('schedule.id', None) 
+
+    test = Sections.query.filter_by(id=40).first()
+    print test
 
     course = Courses.query.filter_by(id=course_id).first()
     if course is None:
-        return "ERROR COURSE NOT FOUND"
+        abort(404)
     term = Terms.query.filter_by(id=term_id).first()
-    if term is None:
-        return "ERROR TERM NOT FOUND"
+    if term is None: 
+        abort(404)
     faculty = Faculty.query.filter_by(id=faculty_id).first()
     if faculty is None:
-        return "ERROR FACULTY NOT FOUND"
+        abort(404)
     room = Rooms.query.filter_by(id=room_id).first()
     if room is None:
-        return "ERROR ROOM NOT FOUND"
+        abort(404)
+    
     # schedule = Schedule.query.filter_by(id=schedule_id).first()
     # if schedule is None:
     #     return "ERROR SCHEDULE NOT FOUND"
 
+    
+    if roomConflict(term_id, days, room_id, time_start, time_end):
+        abort(406)
+    if facultyConflict(term_id, days, faculty_id, time_start, time_end):
+        abort(405)
+
     section = Sections(course=course, term=term, faculty=faculty,
                         room=room, number=number, section_type=section_type,
                         time_start=time_start, time_end=time_end, days=days)
+    print "past room conflict"
     db.session.add(section)
     db.session.commit()
     return "Section added" 

@@ -46,3 +46,52 @@ def filtered_sections():
    sections = Sections.query.filter(and_(*filters)).all()
 
    return jsonify([i.serialize for i in sections])
+
+def roomConflict(term_id, days, room_id, time_start, time_end):
+   #need to check if there is another room on the same days, 
+   #same term, and same time as this one
+   filters = []  
+
+   #Checks same room
+   filters.append(Sections.room_id == room_id)
+
+   #Grabs section from the correct term
+   filters.append(Sections.term_id == term_id)
+
+   #Checks to make sure on the same day
+   filters.append(Sections.days == days)
+
+   #Checks time
+   filters.append(time_start < Sections.time_end)
+   filters.append(time_end > Sections.time_start)
+
+   sections = Sections.query.filter(and_(*filters)).all()
+   
+   if len(sections) >= 1:
+      return True
+
+   return False
+
+def facultyConflict(term_id, days, faculty_id, time_start, time_end):
+   #need to figure out if this faculty has another class on same day and time
+   filters = []  
+
+   #Checks same room
+   filters.append(Sections.faculty_id == faculty_id)
+
+   #Grabs section from the correct term
+   filters.append(Sections.term_id == term_id)
+
+   #Checks to make sure on the same day
+   filters.append(Sections.days == days)
+
+   #Checks time
+   filters.append(time_start < Sections.time_end)
+   filters.append(time_end > Sections.time_start)
+
+   sections = Sections.query.filter(and_(*filters)).all()
+
+   if len(sections) >= 1:
+      return True
+
+   return False
