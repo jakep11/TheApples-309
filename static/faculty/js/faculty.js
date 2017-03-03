@@ -278,8 +278,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
                     this[4] = obj;
 
                     hours[0] += obj.hours;
-                }
-                else {
+                } else {
                     this[1] = obj;
                     this[3] = obj;
 
@@ -292,15 +291,13 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
             sections = new Array();
             sharedData.previousSpan[0]--;
             sharedData.previousSpan[1]--;
-        }
-        else if (sharedData.previousSpan[0] > 0) {
+        } else if (sharedData.previousSpan[0] > 0) {
             sections.splice(0, 1);
             sections.splice(1, 1);
             sections.splice(2, 1);
 
             sharedData.previousSpan[0]--;
-        }
-        else if (sharedData.previousSpan[1] > 0) {
+        } else if (sharedData.previousSpan[1] > 0) {
             sections.splice(1, 1);
             sections.splice(2, 1);
 
@@ -318,10 +315,4 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
 
         return sections;
     }
-
-    //
-    //    // return to login page when back button is clicked
-    //    $scope.backButtonClicked = function () {
-    //        $location.path("/login");
-    //    }
 });

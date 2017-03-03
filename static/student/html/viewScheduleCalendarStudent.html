@@ -1,5 +1,7 @@
 <div class="container-fluid ">
     <div class="row top-selectors">
+
+        <!--only display back button if viewing as a student user-->
         <div ng-show="role == 'student'" class="row">
             <div class="col-xs-12">
                 <div class="col-xs-1 no-gutter">
@@ -9,6 +11,8 @@
                 </div>
             </div>
         </div>
+
+        <!--view switch buttons-->
         <div class="row">
             <div class="col-xs-4 col-xs-offset-4 no-gutter view-selectors">
                 <div class="col-xs-6 no-gutter">
@@ -18,6 +22,8 @@
                     <a class="btn btn-default view-switch" href="#/viewScheduleTableStudent" role="button">TABLE VIEW</a>
                 </div>
             </div>
+
+            <!--only enable post feedback button if viewing as a student user-->
             <div ng-show="role == 'student'" class="col-xs-2 no-gutter col-xs-offset-2 ">
                 <button id="post-btn" type="button" class="btn btn-default view-switch" data-toggle="modal" data-target="#myModal">POST FEEDBACK</button>
             </div>
@@ -27,20 +33,21 @@
                 <a class="btn btn-default view-switch" role="button" ng-click="applyFilters()">APPLY FILTERS</a>
             </div>
         </div>
-        <!-- Modal -->
+        <!-- Post Feedback Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-body" style="text-align: center">
                         <h3 class="modal-title">Feedback</h3>
                     </div>
+                    <!--Modal input fileds-->
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="userID">User ID:</label>
                             <input class="form-control" id="userID" ng-model="username">
                         </div>
+                        <!--Term selector-->
                         <div class="form-group">
                             <label for="termSelects">Term:</label>
                             <select class="form-control" id="termSelects" ng-model="term_id">
@@ -48,7 +55,6 @@
                             </select>
                         </div>
                         <div class="form-group">
-
                             <textarea class="form-control noresize" id="encCss" placeholder="Enter feedback here" ng-model="comment"></textarea>
                         </div>
                     </div>
@@ -59,12 +65,16 @@
                 </div>
             </div>
         </div>
+
+        <!--Filter boxes for terms/courses/instructors-->
         <div class="row filter-row">
             <div class="col-xs-2 col-xs-offset-3">
                 <label>Terms:</label>
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox" style="padding: 0px;">
+
+                            <!--display terms in order of most to least recent-->
                             <label style="padding: 0px;" ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">
                                 <input   style="margin: 5px;" type="radio" name="term" value="{{term.id}}" ng-model="$parent.checkedTerms">{{term.name}}
                             </label>
@@ -77,6 +87,8 @@
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
+
+                            <!--display courses in order of course number-->
                             <label ng-repeat="course in courses | orderBy: 'number'">
                                 <input type="checkbox" name="course{{course.id}}" value="{{course.id}}" ng-model="checkedCourses[course.id]">{{course.major}} {{course.number}}
                             </label>
@@ -89,6 +101,8 @@
                 <div class="col-xs-12 filter-selectors">
                     <form>
                         <div class="checkbox">
+
+                            <!--display instructors in order of last name-->
                             <label ng-repeat="instructor in instructors | orderBy: 'last_name'">
                                 <input type="checkbox" name="instructor{{instructor.id}}" value="{{instructor.id}}" ng-model="checkedInstructors[instructor.id]">{{instructor.last_name}}
                             </label>
@@ -96,43 +110,16 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xs-2">
-                <!--
-                <label>Start Times:</label>
-                <div class="col-xs-12 filter-selectors">
-                    <form>
-                        <div class="checkbox">
-                            <label ng-repeat="(value, time) in startTimes">
-                                <input type="checkbox" name="starttime{{value}}" value="{{value}}" ng-model="checkedStartTimes[value]">{{time}}
-                            </label>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-xs-2">
-                <label>End Times:</label>
-                <div class="col-xs-12 filter-selectors">
-                    <form>
-                        <div class="checkbox">
-                            <label ng-repeat="(value, time) in endTimes">
-                                <input type="checkbox" name="endtime{{value}}" value="{{value}}" ng-model="checkedEndTimes[value]">{{time}}
-                            </label>
-                        </div>
-                    </form>
-                </div>
-            </div>
--->
-            </div>
         </div>
 
 
-        <!--    calendar display-->
+        <!--Calendar grid display (not functional yet)-->
         <div class="row">
             <div class="col-xs-12">
                 <h3>{{term.name}}</h3>
             </div>
         </div>
-        <!--   Tables   -->
+        <!--   Grid cells   -->
         <div class="row">
             <div class="col-xs-10 col-xs-offset-1 cal-listing">
                 <table class="table table-striped fac-calendar-table table-bordered">
@@ -145,7 +132,6 @@
                         <th>Fri</th>
                     </tr>
                     <tbody class="table-body">
-
                         <tr ng-repeat="startTimes in startTimes">
                             <td>{{startTimes}}</td>
                             <td> </td>
