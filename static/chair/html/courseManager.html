@@ -1,8 +1,10 @@
+<!-- Page to manage all courses and components and component types -->
 <body>
     <div class="container-fluid">
         <div class="row title">
             <h1>Course Manager</h1>
         </div>
+        <!-- Displays component types -->
         <div class="col-xs-4 col-xs-offset-4 component-types-editor">
             <table class="table table-striped">
                 <tr class="success">
@@ -25,6 +27,7 @@
                 <button class="btn btn-default preference-btn col-xs-12" ng-click="removeComponentType()" ng-disabled="!compTypeRadioSelected">Remove</button>
             </div>
         </div>
+        <!-- Add component Modal -->
         <div id="types-add-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -56,6 +59,7 @@
                 </div>
             </div>
         </div>
+        <!-- Displays all courses and information about them -->
         <div class="row">
             <div class="col-xs-12 rooms-table">
                 <table class="table table-striped">
@@ -192,6 +196,7 @@
                 <button class="btn btn-default preference-btn col-xs-12" ng-disabled="!radioSelected" ng-click="deleteCourse()">Remove</button>
             </div>
         </div>
+        <!-- Modal to add a course -->
         <div id="add-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -291,6 +296,7 @@
                 </div>
             </div>
         </div>
+        <!-- Modal to edit a course -->
         <div id="edit-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">

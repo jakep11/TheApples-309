@@ -6,7 +6,7 @@ angular.module('TheApples').controller("login", function($scope, $rootScope, $ht
   $rootScope.user_id = null;
   $cookies.remove('user');
   $cookies.remove('role');
-  $cookies.remove('user_id')
+  $cookies.remove('user_id');
 
    $scope.continueAsGuest = function() {
       $rootScope.role = "student";

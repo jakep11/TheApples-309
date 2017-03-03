@@ -1,5 +1,7 @@
+//Initialize the angular application for this javascript page
 var app = angular.module('TheApples');
 
+//Each controller states what the breadcrumb for the page should be
 
 app.controller('chairHome', function ($scope, $rootScope, $location, $cookies) {
    $rootScope.bcrumb1 = null;
@@ -10,7 +12,6 @@ app.controller('chairHome', function ($scope, $rootScope, $location, $cookies) {
       console.log('logging out');
       $location.path('/login');
    }
-
 
 })
 
@@ -365,6 +366,11 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
    $rootScope.bcrumb1 = 'Faculty Manager';
    $rootScope.bcrumb1Link = '#facultyManager';
    $rootScope.bcrumb2 = 'Faculty Preferences';
+   if ($rootScope.role == 'faculty') {
+      $rootScope.bcrumb1 = 'Preferences';
+      $rootScope.bcrumb1Link = null;
+      $rootScope.bcrumb2 = null;
+   }
 
 
    // Getting preferences from the API and storing it into the preferences var
@@ -513,6 +519,7 @@ app.controller('generateSchedule', function ($scope, $rootScope, $http, $locatio
    $scope.currentTerm = $location.search().term;
    $scope.startTimes = sharedData.startTimes;
    $scope.endTimes = sharedData.endTimes;
+   $scope.schedule = null;
 
    $scope.getSchedule = function() {
       $http({

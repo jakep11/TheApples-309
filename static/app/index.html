@@ -48,12 +48,9 @@
 </head>
 
 <body>
+    <!-- Displays the navigation bar for every page. Changes depending on page and role -->
     <nav ng-hide="role == null || role == 'student' || role == 'admin'" class="navbar navbar-default">
         <div class="container-fluid">
-            <!-- <div class="navbar-header">
-      <a class="navbar-brand" ng-href="/">Home</a>
-      <a  class="navbar-brand" href="{{role == 'chair' ? '#link1' : '#link2'}}">Link</a>
-    </div> -->
             <ul class="nav navbar-nav">
                 <li><a ng-href="{{role == 'chair' ? '#chairHome' : '#facultyHome'}}">Home</a></li>
                 <li ng-show="bcrumb1 != null"><a>/</a></li>
@@ -66,8 +63,6 @@
 
         </div>
     </nav>
-
-
     <div ng-view></div>
 </body>
 

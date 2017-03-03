@@ -8,7 +8,7 @@ Things that change dynamically:
    In post feedback popup:
       - Terms available to leave feedback on
 -->
-
+<!-- Page to create sections for a particular quarter -->
 <div class="container-fluid ">
    <div class="row top-selectors">
       <div class="row">
@@ -19,11 +19,13 @@ Things that change dynamically:
             <button class="btn btn-default preference-btn col-xs-12" ng-click="publishSchedule(0)">UNPUBLISH</button>
          </div>
       </div>
+      <!-- Displays the selected quarter -->
       <div class="row">
          <div class="col-xs-12">
-            <h3>Spring Quarter</h3>
+            <h3>{{schedule.quarter}}</h3>
          </div>
       </div>
+      <!-- Displays all sections for the given quarter -->
       <div class="row">
          <div class="col-xs-12 listing">
             <table class="table table-striped">
@@ -59,11 +61,6 @@ Things that change dynamically:
          </div>
       </div>
 
-
-
-         
-      
-
       <div class="row">
          <div class="col-xs-2 col-xs-offset-3">
             <button class="btn btn-default preference-btn col-xs-12" data-target="#add-modal" data-toggle="modal" >ADD SECTION</button>
@@ -75,6 +72,7 @@ Things that change dynamically:
             <button class="btn btn-default preference-btn col-xs-12 " ng-disabled="!radioSelected" ng-click="deleteSection()">REMOVE SECTION</button>
          </div>
       </div>
+      <!-- Modal to add section to course -->
       <div id="add-modal" class="modal fade" role="dialog">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -184,7 +182,7 @@ Things that change dynamically:
             </div>
          </div>
       </div>
-      
+      <!-- Modal to edit section info -->
       <div id="edit-modal" class="modal fade" role="dialog">
          <div class="modal-dialog">
             <div class="modal-content">
