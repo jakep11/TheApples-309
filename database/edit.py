@@ -430,6 +430,7 @@ def edit_comment():
    username = data.get('username', None)
    comment = data.get('comment', None)
    time = data.get('time', None)
+   unread = data.get('unread', None)
 
    comment = Comments.query.filter_by(id=id).first()
    if comment is None:
@@ -441,6 +442,8 @@ def edit_comment():
       comment.username = username
    if time is not None:
       comment.time = time
+   if unread is not None:
+      comment.unread = unread
 
    db.session.add(comment)
    db.session.commit()
@@ -487,7 +490,3 @@ def save_changes():
    db.session.commit()
 
    return "Faculty with id %d updated" % (int(id))
-
-
-
-
