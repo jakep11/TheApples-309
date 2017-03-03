@@ -66,6 +66,30 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
    }
    $scope.getComponentTypes();
 
+   // get the faculty willing to teach the given course
+   $scope.getSuitableFaculty = function (courseID) {
+      $http({
+         method: 'POST',
+         url: '/get/facultyFromCourse',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'courseID': courseID
+         }
+      }).then(function successCallback(response) {
+         $scope.ableFaculty = response.data;
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
+   // call functions used to dynamically populate suitable resources for selected course
+   $scope.getSuitableResources = function (courseID) {
+      $scope.getSuitableFaculty(courseID);
+   }
+
    $scope.addComponentType = function () {
       $http({
          method: 'POST',

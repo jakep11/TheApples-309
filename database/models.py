@@ -246,6 +246,8 @@ class FacultyCoursePreferences(db.Model):
       return {
          'id': self.id,
          'faculty_id': self.faculty_id,
+         'faculty_first_name': self.faculty.first_name,
+         'faculty_last_name': self.faculty.last_name,
          'course_name': self.course.course_name, #course_name
          'preference': self.preference
       }

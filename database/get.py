@@ -1,5 +1,6 @@
 from flask import make_response, Blueprint, render_template, flash, redirect, request, url_for, jsonify, json, Response, abort
-from sqlalchemy import func
+from sqlalchemy import func, and_
+
 get_api = Blueprint('get_api', __name__)
 
 from models import *
@@ -178,25 +179,26 @@ def get_facultyFromUser():
    return jsonify(id=faculty.id, first_name=faculty.first_name, last_name=faculty.last_name)
 
 
-# # This function gets the list of all faculty (with preferences) who are able and willing to teach a course
-# # given a course ID. The course will be under the suitable resources column in the course manager.
-# @get_api.route('/facultyFromCourse', methods = ["GET"])
-# def get_facultyFromCourse():
-#    data = request.json
-#    courseID = data['courseId']
-#
-#    # Get the course that is being referenced
-#    course = Courses.query.filter_by(id=courseID).first()
-#
-#    # Get the course that is displayed in the database
-#    courseNum = course.number
-#    course = Courses.query.filter_by(number=courseNum).all()
-#
-#
-#    fcps = FacultyCoursePreferences.query.filter_by(course_id=courseID).all()
-#    return jsonify([i.serialize for i in fcps])
-#
-#
+# This function gets the list of all faculty (with preferences) who are able and willing to teach a course
+# given a course ID. The course will be under the suitable resources column in the course manager.
+@get_api.route('/facultyFromCourse', methods = ["POST"])
+def get_facultyFromCourse():
+   data = request.json
+   courseID = data['courseID']
+
+   # list of filters for the query
+   filters = []
+
+   # add the course_id to filter by
+   filters.append(FacultyCoursePreferences.course_id == courseID)
+   # filter out faculty that cannot teach the course
+   filters.append(FacultyCoursePreferences.preference != 'C')
+
+   fcps = FacultyCoursePreferences.query.filter(and_(*filters)).all()
+
+   return jsonify([i.serialize for i in fcps])
+
+
 # # This function gets the list of all rooms that are able to hold a course
 # # given a course ID. The course will be under the suitable resources column in the course manager.
 # @get_api.route('/roomsFromCourse', methods = ["GET"])
