@@ -178,33 +178,53 @@ def get_facultyFromUser():
    return jsonify(id=faculty.id, first_name=faculty.first_name, last_name=faculty.last_name)
 
 
-# This function gets the list of all faculty (with preferences) who are able and willing to teach a course
-# given a course ID. The course will be under the suitable resources column in the course manager.
-@get_api.route('/facultyFromCourse', methods = ["GET"])
-def get_facultyFromCourse():
-   data = request.json
-   courseID = data['courseId']
-
-   fcps = FacultyCoursePreferences.query.filter_by(course_id=courseID).all
-   return jsonify([i.serialize for i in fcps])
+# # This function gets the list of all faculty (with preferences) who are able and willing to teach a course
+# # given a course ID. The course will be under the suitable resources column in the course manager.
+# @get_api.route('/facultyFromCourse', methods = ["GET"])
+# def get_facultyFromCourse():
+#    data = request.json
+#    courseID = data['courseId']
+#
+#    # Get the course that is being referenced
+#    course = Courses.query.filter_by(id=courseID).first()
+#
+#    # Get the course that is displayed in the database
+#    courseNum = course.number
+#    course = Courses.query.filter_by(number=courseNum).all()
 #
 #
-# # This function gets the list of all faculty who are able and willing to teach a course
+#    fcps = FacultyCoursePreferences.query.filter_by(course_id=courseID).all()
+#    return jsonify([i.serialize for i in fcps])
+#
+#
+# # This function gets the list of all rooms that are able to hold a course
 # # given a course ID. The course will be under the suitable resources column in the course manager.
 # @get_api.route('/roomsFromCourse', methods = ["GET"])
 # def get_roomsFromCourse():
 #    data = request.json
 #    courseID = data['courseId']
 #
-#    courses = Courses.query.all()
-#    for i in courses:
-#
-#
 #    rooms = Rooms.query.all()
 #    return jsonify([i.serialize for i in rooms])
-
-@get_api.route('/testing', methods = ["GET"])
-def get_error():
-   
-   
-   abort(406)
+#
+#
+# # This function gets the student planning data for a given course
+# # given a course ID. The course will be under the suitable resources column in the course manager.
+# @get_api.route('/planningDataForCourse', methods = ["GET"])
+# def get_planningDataForCourse():
+#    data = request.json
+#    courseID = data['courseId']
+#
+#    spd = StudentPlanningData.query.filter_by(course_id=courseID).first()
+#    return jsonify(unmet_seat_demand=spd.unmet_seat_demand, seat_demand=spd.seat_demand)
+#
+#
+# # This function gets the historic enrollment data for a given course based on a
+# # given a course ID. The course will be under the suitable resources column in the course manager.
+# @get_api.route('/historicDataForCourse', methods = ["GET"])
+# def get_historicDataForCourse():
+#    data = request.json
+#    courseID = data['courseId']
+#
+#    historicData = ScheduleFinal.query.filter_by(course_id=courseID).all()
+#    return jsonify([i.serialize for i in historicData])
