@@ -365,6 +365,11 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
    $rootScope.bcrumb1 = 'Faculty Manager';
    $rootScope.bcrumb1Link = '#facultyManager';
    $rootScope.bcrumb2 = 'Faculty Preferences';
+   if ($rootScope.role == 'faculty') {
+      $rootScope.bcrumb1 = 'Preferences';
+      $rootScope.bcrumb1Link = null;
+      $rootScope.bcrumb2 = null;
+   }
 
 
    // Getting preferences from the API and storing it into the preferences var

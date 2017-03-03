@@ -246,7 +246,7 @@ class FacultyCoursePreferences(db.Model):
       return {
          'id': self.id,
          'faculty_id': self.faculty_id,
-         'course_name': (Courses.query.filter_by(id=self.course_id).first()).course_name, #course_name
+         'course_name': self.course.course_name, #course_name
          'preference': self.preference
       }
 
