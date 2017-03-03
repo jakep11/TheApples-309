@@ -936,6 +936,26 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
       });
    }
 
+   // Changes comment.unread from true to false. Calling this function will change the color of the message
+   // on the notifications page.
+   $scope.markAsUnread = function() {
+      $http({
+         method: 'POST',
+         url: '/edit/comment',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {
+            'id': this.selectedComment,
+            'unread': "true"
+         }
+      }).then(function successCallback(response) {
+         console.log('success');
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
 })
 
 app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
