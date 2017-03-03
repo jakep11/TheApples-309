@@ -59,6 +59,25 @@ app.controller("preferences", function ($scope, $rootScope, $http) {
 
     }
 
+    // get the faculty_id from the user that is currently logged in to display their preferences
+    $scope.getFacultyFromUser = function () {
+        $http({
+            method: 'POST',
+            url: '/get/facultyFromUser',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                'userID': $rootScope.user_id
+            }
+        }).then(function successCallback(response) {
+            sharedData.faculty = response.data;
+            console.log("success");
+        }, function errorCallback(response) {
+            console.log("error");
+        });
+    }
+    $scope.getFacultyFromUser();
 })
 
 app.controller("viewScheduleCalendar", function ($scope, $rootScope) {

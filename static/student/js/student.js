@@ -74,6 +74,8 @@ app.service("sharedData", function () {
 
     this.previousSpan = [0, 0];
     this.previousDays = ["", ""];
+
+    this.faculty = null;
 });
 
 app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {
