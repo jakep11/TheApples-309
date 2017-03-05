@@ -122,29 +122,8 @@
                                 <div class="col-xs-4 col-xs-offset-2">
                                     <div class="table-dim">
                                         <table class="table info-table">
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-301</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-303</td>
+                                            <tr ng-repeat="room in suitableRooms | orderBy: 'number'">
+                                                <td>{{room.number}}</td>
                                             </tr>
                                         </table>
                                     </div>
