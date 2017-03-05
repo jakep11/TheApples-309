@@ -76,8 +76,8 @@
                   <td>{{room.number}}</td>
                   <td>{{room.capacity}}</td>
                   <td>{{room.type}}</td>
-                  <td>None</td>
-                  <td>None</td>
+                  <td><span ng-if="room.equipment == null">--</span>{{room.equipment}}</td>
+                  <td><span ng-if="room.comments == null">--</span>{{room.comments}}</td>
                </tr>
             </table>
          </div>
