@@ -430,17 +430,20 @@ def edit_faculty_course_preference():
 # when a department scheduler clicks "Mark as Read" in the Notifications tab
 @edit_api.route('/comment', methods = ["POST"])
 def edit_comment():
+   print "made it to edit comment"
+
    data = request.json
    id = data.get('id', None)
+   unread = data.get('unread', None)
    term_id = data.get('term_id', None)
    username = data.get('username', None)
-   comment = data.get('comment', None)
    time = data.get('time', None)
-   unread = data.get('unread', None)
 
    comment = Comments.query.filter_by(id=id).first()
    if comment is None:
       return "ERROR COMMENT NOT FOUND"
+   if unread is not None:
+      comment.unread = unread
    if term_id is not None:
       term = Terms.query.filter_by(id=term_id).first()
       comment.term - term
@@ -448,13 +451,12 @@ def edit_comment():
       comment.username = username
    if time is not None:
       comment.time = time
-   if unread is not None:
-      comment.unread = unread
+
+   print "unread is " + comment.unread
 
    db.session.add(comment)
    db.session.commit()
-   comment = Comments.query.filter_by(id=id).first()
-   return "Comment with id %d updated" % (id)
+   return "Comment updated"
 
 # This function updates the Faculty table in the database, and modifies the min and max units the
 # faculty member is allowed to teach in a given term. Also adds a comment if provided

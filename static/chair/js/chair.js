@@ -987,6 +987,7 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
    // Changes comment.unread from true to false. Calling this function will change the color of the message
    // on the notifications page.
    $scope.markAsRead = function() {
+      console.log("made it to mark as read");
       $http({
          method: 'POST',
          url: '/edit/comment',
