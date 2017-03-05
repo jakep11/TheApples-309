@@ -1,0 +1,60 @@
+<!-- Page that displays all faculty preference information -->
+<div class="container-fluid" style="margin-top: 10px;">
+   <!--   Page Title   -->
+   <div class="row title-pref">
+      <h1 class="title-pref text-center">Select a Term</h1>
+   </div>
+   <form>
+      <div class="row dropdown-row">
+         <div class="col-xs-4 col-xs-offset-4">
+            <select class="form-control" id="termSelect" ng-change="selectTerm()" ng-model="currentTerm">
+              <option ng-repeat="term in terms" value="{{term.name}}">{{term.name}}</option>
+           </select>
+        </div>
+     </div>
+  </form>
+  <div class="row">
+   <h2 class="text-center">Historic Data</h2>
+   <div class="col-xs-12 listing" style="height:300px">
+      
+      <table class="table table-striped">
+         <tr class="success">
+            <th>Course</th>
+            <th>Number of Sections</th>
+            <th>Total Enrollment</th>
+            <th>Waitlist</th>
+         </tr>
+         <tr ng-repeat="hData in historicData | orderBy: 'course_number'">
+            <td>{{hData.course_major}} {{hData.course_number}}</td>
+            <td>{{hData.number_sections}}</td>
+            <td>{{hData.total_enrollment}}</td>
+            <td>{{hData.waitlist}}</td>
+         </tr>
+      </table>
+   </div>
+</div>
+
+<div class="row">
+   <h2 class="text-center">Planning Data</h2>
+
+   <div class="col-xs-12 listing" style="height:300px">
+      <table class="table table-striped">
+         <tr class="success">
+            <th>Course</th>
+            <th>Number Sections</th>
+            <th>Capacity</th>
+            <th>Seat Demand</th>
+            <th>Unmet Seat Demand</th>
+         </tr>
+         <tr ng-repeat="pData in planningData | orderBy: 'course_number'">
+            <td>{{pData.course_major}} {{pData.course_number}}</td>
+            <td>{{pData.number_sections}}</td>
+            <td>{{pData.capacity}}</td>
+            <td>{{pData.seat_demand}}</td>
+            <td>{{pData.unmet_seat_demand}}</td>
+            <td>
+            </tr>
+         </table>
+      </div>
+   </div>
+</div>

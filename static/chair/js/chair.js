@@ -1261,3 +1261,73 @@ app.controller('viewSchedule', function ($scope, $rootScope) {
    $rootScope.bcrumb1Link = '#schedules';
    $rootScope.bcrumb2 = 'Current Schedule';
 })
+
+app.controller('historicData', function ($scope, $rootScope, $http) {
+   $rootScope.bcrumb1 = 'Historic & Planning Data';  
+
+    $scope.getScheduleFinal = function (term) {
+        $http({
+            method: 'POST',
+            url: '/get/scheduleFinal',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+               term: term
+            }
+        }).then(function successCallback(response) {
+            $scope.historicData = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+
+    $scope.getPlanningData = function (term) {
+        $http({
+            method: 'POST',
+            url: '/get/planningData',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+               term: term
+            }
+        }).then(function successCallback(response) {
+            $scope.planningData = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+
+    $scope.getTerms = function () {
+        $http({
+            method: 'GET',
+            url: '/get/terms',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.terms = response.data;
+            //$scope.currentTermId = $scope.terms[0].id;
+            $scope.currentTerm = $scope.terms[0].name;
+            $scope.getScheduleFinal($scope.currentTerm);
+            $scope.getPlanningData($scope.currentTerm);
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getTerms();
+
+    $scope.selectTerm = function() {
+      //$scope.currentTermId = term.id;
+      //$scope.current
+      console.log("Select term");
+      $scope.getScheduleFinal($scope.currentTerm);
+      $scope.getPlanningData($scope.currentTerm);
+
+    }
+
+})

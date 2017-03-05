@@ -185,6 +185,17 @@ class ScheduleFinal(db.Model):
    total_enrollment = db.Column(db.String(4))
    waitlist = db.Column(db.String(4))
 
+   @property
+   def serialize(self):
+      return {
+         'id': self.id,
+         'course_major': self.course.major,
+         'course_number': self.course.number,
+         'number_sections': self.number_sections,
+         'total_enrollment': self.total_enrollment,
+         'waitlist': self.waitlist
+      }
+
 #-- Description: Stores the student planning data information imported from CSV
 class StudentPlanningData(db.Model):
    id = db.Column(db.Integer, primary_key=True)
@@ -194,6 +205,18 @@ class StudentPlanningData(db.Model):
    capacity = db.Column(db.Integer)
    seat_demand = db.Column(db.Integer)
    unmet_seat_demand = db.Column(db.Integer)
+
+   @property
+   def serialize(self):
+      return {
+         'id': self.id,
+         'course_major': self.course.major,
+         'course_number': self.course.number,
+         'number_sections': self.number_sections,
+         'capacity': self.capacity,
+         'seat_demand': self.seat_demand,
+         'unmet_seat_demand': self.unmet_seat_demand
+      }
 
 #-- Description: Stores all of the sections that are scheduled in a specific term
 class Schedule(db.Model):

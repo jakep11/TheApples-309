@@ -198,6 +198,26 @@ def get_facultyFromCourse():
 
    return jsonify([i.serialize for i in fcps])
 
+#This function gets the schedule final for a specific term
+@get_api.route('/scheduleFinal', methods = ["POST"])
+def get_schedule_final():
+   data = request.json
+   term_name = data.get('term', None)
+   term_id = Terms.query.filter_by(name = term_name).first().id
+   scheduleFinal = ScheduleFinal.query.filter_by(term_id=term_id).all()
+
+   return jsonify([i.serialize for i in scheduleFinal])
+
+#This function gets the planning data for a specific term
+@get_api.route('/planningData', methods = ["POST"])
+def get_planning_data():
+   data = request.json
+   term_name = data.get('term', None)
+   term_id = Terms.query.filter_by(name = term_name).first().id
+   studentPlanningData = StudentPlanningData.query.filter_by(term_id=term_id).all()
+
+   return jsonify([i.serialize for i in studentPlanningData])
+
 
 # # This function gets the list of all rooms that are able to hold a course
 # # given a course ID. The course will be under the suitable resources column in the course manager.

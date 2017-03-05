@@ -119,6 +119,10 @@ app.config(['$routeProvider', function($routeProvider) {
        templateUrl: 'static/chair/html/viewSchedule.html',
        controller: "viewSchedule",
     })
+    .when('/historicData', {
+       templateUrl: 'static/chair/html/historicData.html',
+       controller: "historicData",
+    })
     
     //If none of the "when"s are matched then it defaults to the home page. 
     .otherwise({
