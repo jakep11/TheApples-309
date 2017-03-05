@@ -75,7 +75,7 @@
                         <th>Class Hours</th>
                         <th>Suitable Resources</th>
                     </tr>
-                    <tr ng-repeat="course in courses | orderBy: 'number'">
+                    <tr ng-repeat="course in courses | orderBy: 'number'" ng-if="course.course_name != null">
                         <td><input type="radio" ng-model="$parent.id" value="{{course.id}}" ng-click="radioChanged(course)" /></td>
                         <td>{{course.major}} {{course.number}}</td>
                         <td>{{course.course_name}}</td>
