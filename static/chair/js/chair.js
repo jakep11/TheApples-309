@@ -85,9 +85,26 @@ app.controller('courseManager', function ($scope, $rootScope, $http, $window) {
       });
    }
 
+   // get the rooms suitable for a course - currently gets all rooms
+   $scope.getSuitableRooms = function() {
+      $http({
+         method: 'GET',
+         url: 'get/rooms',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }).then(function successCallback(response) {
+         $scope.suitableRooms = response.data;
+         console.log("success");
+      }, function errorCallback(response) {
+         console.log('error');
+      });
+   }
+
    // call functions used to dynamically populate suitable resources for selected course
    $scope.getSuitableResources = function (courseID) {
       $scope.getSuitableFaculty(courseID);
+      $scope.getSuitableRooms();
    }
 
    $scope.addComponentType = function () {
