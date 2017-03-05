@@ -114,8 +114,8 @@ class Rooms(db.Model):
    number = db.Column(db.String(32))
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
+   equipment = db.Column(db.String(128))
    room_sections = db.relationship("Sections", backref="room")
-   room_equipment = db.relationship("RoomEquipment", backref="room")
    
    @property
    def serialize(self):
@@ -125,7 +125,7 @@ class Rooms(db.Model):
          'number': self.number,
          'capacity': self.capacity,
          'type': self.type,
-         'room_equipment': self.room_equipment
+         'equipment': self.equipment
       }
 
 #-- Description: Stores all sections that have occurred and are planned on the schedule
@@ -170,11 +170,11 @@ class Equipment(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(32))
 
-#-- Description: Stores what equipment is required in each room type
-class RoomEquipment(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   room_id = db.Column(db.Integer, db.ForeignKey("rooms.id"))
-   equipment_id = db.Column(db.Integer, db.ForeignKey("equipment.id"))
+# #-- Description: Stores what equipment is required in each room type
+# class RoomEquipment(db.Model):
+#    id = db.Column(db.Integer, primary_key=True)
+#    room_id = db.Column(db.Integer, db.ForeignKey("rooms.id"))
+#    equipment_id = db.Column(db.Integer, db.ForeignKey("equipment.id"))
 
 #-- Description: Stores the course and section enrollment/waitlist information for what was actually offered by the University in previous quarters
 class ScheduleFinal(db.Model):
