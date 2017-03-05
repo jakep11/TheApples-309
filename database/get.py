@@ -167,14 +167,9 @@ def get_facultyFromUser():
    data = request.json
    userID = data['userID']
 
-   print("userID:", userID)
-   sys.stdout.flush()
-
    user = User.query.filter_by(id=userID).first()
+   
    faculty = Faculty.query.filter_by(first_name = user.first_name, last_name = user.last_name).first()
-
-   print("faculty:", faculty.id)
-   sys.stdout.flush()
 
    return jsonify(id=faculty.id, first_name=faculty.first_name, last_name=faculty.last_name)
 
@@ -187,7 +182,7 @@ def get_facultyFromCourse():
    courseID = data['courseID']
 
    # list of filters for the query
-   filters = []
+   filters = [] 
 
    # add the course_id to filter by
    filters.append(FacultyCoursePreferences.course_id == courseID)

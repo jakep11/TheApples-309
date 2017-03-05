@@ -386,7 +386,7 @@ $scope.deleteFaculty = function () {
 
 })
 
-app.controller('facultyPreferences', function ($scope, $rootScope, $http, $routeParams) {
+app.controller('facultyPreferences', function ($scope, $rootScope, $http, $routeParams, sharedData) {
    $rootScope.bcrumb1 = 'Faculty Manager';
    $rootScope.bcrumb1Link = '#facultyManager';
    $rootScope.bcrumb2 = 'Faculty Preferences';
@@ -525,9 +525,36 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
       });
    }
 
+    // get the faculty_id from the user that is currently logged in to display their preferences
+    $scope.getFacultyFromUser = function () {
+        $http({
+            method: 'POST',
+            url: '/get/facultyFromUser',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                'userID': parseInt($rootScope.user_id)
+            }
+        }).then(function successCallback(response) {
+            sharedData.faculty = response.data;
+            $scope.faculty_id = sharedData.faculty.id;
+            console.log(sharedData.faculty);
+            console.log("success");
+        }, function errorCallback(response) {
+            console.log("error");
+        });
+    }
+    
 
-
-   $scope.faculty_id = $routeParams.faculty_id;
+   console.log(sharedData.faculty);
+   //If faculty id isn't provided in the Url then check user vs faculty for id
+   if ($routeParams.faculty_id) {
+      $scope.faculty_id = $routeParams.faculty_id;
+   }
+   else {
+      $scope.getFacultyFromUser();
+   }
    $scope.day = 'M'; // Starting day value is Monday
 
    $scope.formGroupID = 1;
