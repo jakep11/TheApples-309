@@ -115,6 +115,7 @@ class Rooms(db.Model):
    type = db.Column(db.String(32))
    capacity = db.Column(db.Integer)
    equipment = db.Column(db.String(128))
+   comments = db.Column(db.String(128))
    room_sections = db.relationship("Sections", backref="room")
    
    @property
@@ -125,7 +126,8 @@ class Rooms(db.Model):
          'number': self.number,
          'capacity': self.capacity,
          'type': self.type,
-         'equipment': self.equipment
+         'equipment': self.equipment,
+         'comments': self.comments
       }
 
 #-- Description: Stores all sections that have occurred and are planned on the schedule

@@ -132,8 +132,10 @@ def new_room():
     type = data['type']
     capacity = data['capacity']
     number = data['number']
+    equipment = data['equipment']
+    comments = data['comments']
 
-    room = Rooms(type=type, capacity=capacity, number=number)
+    room = Rooms(type=type, capacity=capacity, number=number, equipment=equipment, comments=comments)
     db.session.add(room)
     db.session.commit()
     return " room with capacity added to database" 

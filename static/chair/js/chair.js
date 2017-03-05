@@ -1125,7 +1125,9 @@ $scope.addRoom = function () {
       data: {
          'number': $scope.add.number,
          'capacity': $scope.add.capacity,
-         'type': $scope.add.type
+         'type': $scope.add.type,
+         'equipment': $scope.add.equipment,
+         'comments': $scope.add.comments
       }
    }).then(function successCallback(response) {
       $window.location.reload();
@@ -1146,7 +1148,9 @@ $scope.editRoom = function () {
          'id': $scope.edit.id,
          'number': $scope.edit.number,
          'capacity': $scope.edit.capacity,
-         'type': $scope.edit.type
+         'type': $scope.edit.type,
+         'equipment': $scope.edit.equipment,
+         'comments': $scope.edit.comments
       }
    }).then(function successCallback(response) {
       console.log('Calling edit Room');
