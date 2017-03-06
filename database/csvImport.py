@@ -413,11 +413,10 @@ def importFacultyData():
                workUnits = entry
 
                # Create a new instructor data row in the Faculty database table
-               instructor = models.Faculty.query.filter_by(first_name=firstName, last_name=lastName,
-                                                           allowed_work_units=workUnits).first()
+               instructor = models.Faculty.query.filter_by(first_name=firstName, last_name=lastName).first()
                if instructor is None:
-                  instructor = models.Faculty(first_name=firstName, last_name=lastName,
-                                        allowed_work_units=workUnits)
+                  # Add new faculty member and prefs
+                  new_faculty_prefs(firstName, lastName, workUnits, 0)
 
                   # Add new instructor data to database
                   db.session.add(instructor)
@@ -433,6 +432,53 @@ def importFacultyData():
       db.session.commit()
 
    return "successfully uploaded faculty data"
+
+
+# This function adds a new instructor to the faculty table in the database. It is called
+# when a scheduler clicks "create new instructor"
+def new_faculty_prefs(first_name, last_name, max_work_units, min_work_units):
+    days = ['M', 'T', 'W', 'H', 'F']
+    courses = models.Courses.query.all()
+    print courses
+    faculty = models.Faculty(first_name=first_name, last_name=last_name,
+                        max_work_units=max_work_units, min_work_units=min_work_units)
+    db.session.add(faculty)
+    db.session.commit()
+    for i in range(7, 22):
+        for day in days:
+            if i < 9:
+                time_start =  "0" + str(i) + ":00"
+                time_end = "0" + str(i) + ":30"
+                fp = models.FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+                time_start = "0" + str(i) + ":30"
+                time_end = "0" + str(i+1) + ":00"
+                fp = models.FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+            if i == 9:
+                time_start =  "0" + str(i) + ":00"
+                time_end = "09:30"
+                fp = models.FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+                time_start = "09:30"
+                time_end = "10:00"
+                fp = models.FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+            if i > 9:
+                time_start =  str(i) + ":00"
+                time_end = str(i) + ":30"
+                fp = models.FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+                time_start = str(i) + ":30"
+                time_end = str(i+1) + ":00"
+                fp = models.FacultyPreferences(faculty=faculty, day=day, time_start=time_start, time_end=time_end, preference="unavailable")
+                db.session.add(fp)
+    for course in courses:
+        fcp = models.FacultyCoursePreferences(faculty=faculty, course=course, preference="C")
+        db.session.add(fcp)
+    db.session.commit()
+    return  "Faculty added to database"
+
 
 
 # This function parses through a CSV file containing equipment data and adds it to the database
