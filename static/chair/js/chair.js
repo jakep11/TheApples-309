@@ -1335,13 +1335,12 @@ app.controller('historicData', function ($scope, $rootScope, $http) {
     $scope.getTerms = function () {
         $http({
             method: 'GET',
-            url: '/get/terms',
+            url: '/get/historicDataTerms',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(response) {
             $scope.terms = response.data;
-            //$scope.currentTermId = $scope.terms[0].id;
             $scope.currentTerm = $scope.terms[0].name;
             $scope.getScheduleFinal($scope.currentTerm);
             console.log('success');

@@ -220,6 +220,13 @@ def get_planning_data_courses():
 
 	return jsonify([i.serialize for i in terms])
 
+@get_api.route('/historicDataTerms', methods = ["GET"])
+def get_historic_data_courses():
+	sfTerms = ScheduleFinal.query.with_entities(ScheduleFinal.term_id).distinct()
+	terms = Terms.query.filter(Terms.id.in_(sfTerms))
+
+	return jsonify([i.serialize for i in terms])
+
 
 # # This function gets the list of all rooms that are able to hold a course
 # # given a course ID. The course will be under the suitable resources column in the course manager.
