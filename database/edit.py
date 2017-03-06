@@ -446,13 +446,11 @@ def edit_comment():
       comment.unread = unread
    if term_id is not None:
       term = Terms.query.filter_by(id=term_id).first()
-      comment.term - term
+      comment.term = term
    if username is not None:
       comment.username = username
    if time is not None:
       comment.time = time
-
-   print "unread is " + comment.unread
 
    db.session.add(comment)
    db.session.commit()
