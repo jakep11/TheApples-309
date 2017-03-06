@@ -996,7 +996,7 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
          },
          data: {
             'id': this.selectedComment,
-            'unread': "false"
+            'unread': false
          }
       }).then(function successCallback(response) {
          console.log('success');
@@ -1016,7 +1016,7 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
          },
          data: {
             'id': this.selectedComment,
-            'unread': "true"
+            'unread': true
          }
       }).then(function successCallback(response) {
          console.log('success');
