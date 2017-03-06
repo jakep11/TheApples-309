@@ -1383,7 +1383,7 @@ app.controller('planningData', function ($scope, $rootScope, $http) {
     $scope.getTerms = function () {
         $http({
             method: 'GET',
-            url: '/get/terms',
+            url: '/get/planningDataTerms',
             headers: {
                 'Content-Type': 'application/json'
             }

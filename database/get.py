@@ -213,6 +213,13 @@ def get_planning_data():
 
    return jsonify([i.serialize for i in studentPlanningData])
 
+@get_api.route('/planningDataTerms', methods = ["GET"])
+def get_planning_data_courses():
+	spdTerms = StudentPlanningData.query.with_entities(StudentPlanningData.term_id).distinct()
+	terms = Terms.query.filter(Terms.id.in_(spdTerms))
+
+	return jsonify([i.serialize for i in terms])
+
 
 # # This function gets the list of all rooms that are able to hold a course
 # # given a course ID. The course will be under the suitable resources column in the course manager.
