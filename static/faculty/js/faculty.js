@@ -13,6 +13,7 @@ app.controller("preferences", function ($scope, $rootScope, $http) {
     $rootScope.bcrumb1 = "Preferences";
     $scope.day = "Monday";
 
+    // retrieve all courses from the database
     $scope.getCourses = function () {
         console.log("getting courses");
         $http({
@@ -89,20 +90,15 @@ app.controller("viewScheduleTable", function ($scope, $rootScope) {
 })
 
 app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $http, sharedData) {
-    // arrays to hold sections by day
-    $scope.MWFsections = [];
-    $scope.TRsections = [];
-
     $rootScope.bcrumb1 = "Your Schedule";
 
     $scope.startTimes = sharedData.startTimes;
 
-
+    // function to help with sorting
     $scope.sortBy = function (sortType) {
         $scope.reverse = ($scope.sortType === sortType) ? !$scope.reverse : false;
         $scope.sortType = sortType;
     };
-
 
     // grab list of times from sharedData and populate UI
     $scope.startTimes = sharedData.startTimes;
@@ -115,15 +111,8 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
     $scope.checkedStartTimes = [];
     $scope.checkedEndTimes = [];
 
+    // filter the course sections that will be displayed
     $scope.applyFilters = function () {
-        // testing checked checkbox values
-        console.log($scope.terms);
-        console.log($scope.checkedTerms);
-        console.log($scope.checkedCourses);
-        console.log($scope.checkedInstructors);
-        console.log($scope.checkedStartTimes);
-        console.log($scope.checkedEndTimes);
-
         // arrays to hold selected filter values
         var terms = []
         var ids = [];
@@ -154,13 +143,6 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
             }
         }, timeEnd);
 
-        // testing selected values arrays
-        console.log(terms.length)
-        console.log(ids.length);
-        console.log(instructors.length);
-        console.log(timeStart.length);
-        console.log(timeEnd.length);
-
         // POST filter data to filters.py and retrieve filtered courses
         $http({
             method: 'POST',
@@ -183,8 +165,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         });
     }
 
-    console.log("work?"); // remove debugging for final version
-
+    // retrieve all courses from the database
     $scope.getCourses = function () {
         console.log("getting courses");
         $http({
