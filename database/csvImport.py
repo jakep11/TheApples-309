@@ -418,10 +418,6 @@ def importFacultyData():
                   # Add new faculty member and prefs
                   new_faculty_prefs(firstName, lastName, workUnits, 0)
 
-                  # Add new instructor data to database
-                  db.session.add(instructor)
-                  db.session.commit()
-
       rowNum += 1
 
    # upon success, add file name to database
@@ -441,7 +437,7 @@ def new_faculty_prefs(first_name, last_name, max_work_units, min_work_units):
     courses = models.Courses.query.all()
     print courses
     faculty = models.Faculty(first_name=first_name, last_name=last_name,
-                        max_work_units=max_work_units, min_work_units=min_work_units)
+                        max_work_units=max_work_units, min_work_units=min_work_units, current_work_units=0)
     db.session.add(faculty)
     db.session.commit()
     for i in range(7, 22):
