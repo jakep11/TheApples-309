@@ -787,10 +787,13 @@ app.controller('generateSchedule', function ($scope, $rootScope, $http, $locatio
          $window.location.reload();
       }, function errorCallback(response) {
          if (response.status == 406) {
-            alert("Room Conflict");
+            alert("Room Time Conflict. Unable to add section.");
          }
          if (response.status == 405) {
-            alert("Faculty Conflict");
+            alert("Faculty Time Conflict. Unable to add section.");
+         }
+         if (response.status == 403) {
+            alert("Faculty Workload Units Exceeded. Unable to add section.");
          }
          console.log('error');
       });

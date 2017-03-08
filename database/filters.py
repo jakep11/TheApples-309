@@ -94,4 +94,42 @@ def facultyConflict(term_id, days, faculty_id, time_start, time_end):
    if len(sections) >= 1:
       return True
 
+   return False 
+
+#Function that checks if adding a section to a faculty's schedule would exceed their
+#maximum allowed workload_units
+def facultyWorkloadConflict(term_id, faculty_id, course_id):
+   filters = []  
+
+   #get faculty max workload
+   max_workload = Faculty.query.filter_by(id=faculty_id).first().max_work_units
+
+   #determine amount of units for section being added
+   this_units = 0
+   this_course = Courses.query.filter_by(id=course_id).first()
+   for comp in this_course.components:
+      this_units = this_units + int(comp.workload_units)
+
+   
+   #Checks same room
+   filters.append(Sections.faculty_id == faculty_id)
+
+   #Grabs section from the correct term
+   filters.append(Sections.term_id == term_id)
+ 
+ 
+   sections = Sections.query.filter(and_(*filters)).all()
+  
+   temp_units = 0
+
+   for i in sections: 
+      #print i
+      for j in i.course.components:
+         temp_units = temp_units + int(j.workload_units)
+
+   total_units = temp_units + this_units
+   print total_units
+   if total_units > max_workload:
+      return True
+ 
    return False
