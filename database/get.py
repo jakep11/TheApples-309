@@ -136,21 +136,14 @@ def get_rooms():
    rooms = Rooms.query.all()
    return jsonify([i.serialize for i in rooms])
 
-# This function gets all the schedules from the Schedule table in the database. It is called
-# when loading the list of schedules from the department chairs homepage.
-@get_api.route('/schedules', methods = ["GET"])
-def get_schedules():
-   schedules = Schedule.query.all()
-   return jsonify([i.serialize for i in schedules])
-
 #This function gets a single schedule from the Schedule table in the database.
-@get_api.route('/schedule', methods = ["POST"])
+@get_api.route('/term', methods = ["POST"])
 def get_schedule():
    data = request.json
    term_id = data.get('term_id', None)
-   schedule = Schedule.query.filter_by(term_id=term_id).first()
+   term = Terms.query.filter_by(id=term_id).first()
 
-   return jsonify(schedule.serialize)
+   return jsonify(term.serialize)
 
 # This function gets all the comments from the Comment table in the database. It is called
 # when loading the list of notifications under the department chair's Notifications tab.

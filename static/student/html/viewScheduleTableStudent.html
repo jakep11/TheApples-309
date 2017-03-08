@@ -75,11 +75,11 @@ Things that change dynamically:
                 <label>Terms:</label>
                 <div class="col-xs-12 filter-selectors">
                     <form>
-                        <div class="checkbox">
-                            <label ng-repeat="term in terms | orderBy: ['-year', '-quarterId']">
+                        <fieldset class="checkbox" ng-disabled="role == 'student'">
+                            <label ng-repeat="term in terms | orderBy: ['-year', '-quarterId']" ng-if="term.published">
                                 <input type="checkbox" name="term{{term.id}}" value="{{term.id}}" ng-model="checkedTerms[term.id]">{{term.name}}
                             </label>
-                        </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>

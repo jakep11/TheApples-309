@@ -13,16 +13,16 @@ Things that change dynamically:
    <div class="row top-selectors">
       <div class="row">
          <div ng-show="!published" class="col-xs-2 col-xs-offset-5">
-            <button class="btn btn-default preference-btn col-xs-12" ng-click="publishSchedule(1)">PUBLISH</button>
+            <button class="btn btn-default preference-btn col-xs-12" ng-click="publishTerm(1)">PUBLISH</button>
          </div>
          <div ng-show="published" class="col-xs-2 col-xs-offset-5">
-            <button class="btn btn-default preference-btn col-xs-12" ng-click="publishSchedule(0)">UNPUBLISH</button>
+            <button class="btn btn-default preference-btn col-xs-12" ng-click="publishTerm(0)">UNPUBLISH</button>
          </div>
       </div>
       <!-- Displays the selected quarter -->
       <div class="row">
          <div class="col-xs-12">
-            <h3>{{schedule.quarter}}</h3>
+            <h3>{{term.name}}</h3>
          </div>
       </div>
       <!-- Displays all sections for the given quarter -->

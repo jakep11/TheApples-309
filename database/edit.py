@@ -123,17 +123,19 @@ def edit_term():
    data = request.json
    id = data.get('id', None)
    name = data.get('name', None)
+   published = data.get('published', None)
 
    term = Terms.query.filter_by(id=id).first()
    if term is None:
       return 'ERROR TERM NOT FOUND'
    if name is not None:
       term.name = name
+   if published is not None:
+      term.published = published;
 
    db.session.add(term)
    db.session.commit()
-   term - Terms.query.filter_by(id=id).first()
-   return "Term %s updated" % (term.name)
+   return "Term updated"
 
 # This function modifies the information of a room in the Room table in the database. It is called
 # when a department scheduler clicks "edit room" and saves their changes
@@ -330,28 +332,6 @@ def edit_student_planning_data():
    db.session.commit()
    spd = StudentPlanningData.query.filter_by(id=id).first()
    return "Schedule Planning Data with id %d updated" % (id)
-
-# This function modifies the information of a schedule in the Schedule table in the database. It is called
-# when a department scheduler clicks "edit schedule" and saves their changes
-@edit_api.route('/schedule', methods = ["POST"])
-def edit_schedule():
-   data = request.json
-   id = data.get('id', None)
-   term_id = data.get('term_id', None)
-   published = data.get('published', None)
-
-   s = Schedule.query.filter_by(id=id).first()
-   if s is None:
-      return "ERROR SCHEDULE NOT FOUND"
-   if term_id is not None:
-      term = Terms.query.filter_by(id=term_id).first()
-      s.term = term
-   if published is not None:
-      s.published = published
-
-   db.session.add(s)
-   db.session.commit()
-   return "Schedule with id %d updated" % (id)
 
 # This function modifies the information of a faculty preference entry in the facultyPreference table in
 # the database. It is called when a faculty member or a department scheduler makes changes to their

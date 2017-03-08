@@ -237,7 +237,7 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
 
         angular.forEach($scope.terms, function (obj, index) {
             console.log(obj);
-            if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
+            if (obj.published && obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
                 lastIndex = index;
                 year = obj.year;
                 quarterId = obj.quarterId;
