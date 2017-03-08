@@ -1,248 +1,248 @@
 #box-container {
-   background-color: white;
-   padding: 30px;
-   border-radius: 3px;
-   max-width: 600px;
-   margin: 0 auto;
-   margin-top: 2em;
+    background-color: white;
+    padding: 30px;
+    border-radius: 3px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2em;
 }
 
 #box-container * {
-   margin-bottom: 8px;
-   margin-top: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 #box-container h2 {
-   text-align: center;
-   font-weight: bold;
-   margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
 #box-container button {
-   background-color: #00A4D3;
-   color: white;
-   border-radius: 2px;
-   padding: 15px;
+    background-color: #00A4D3;
+    color: white;
+    border-radius: 2px;
+    padding: 15px;
 }
 
 #box-container button:hover {
-   background-color: #20bae5;
+    background-color: #20bae5;
 }
 
 #box-container #logoutBtn {
-   background-color: #A7A7A7;
+    background-color: #A7A7A7;
 }
 
 #box-container #logoutBtn:hover {
-   background-color: #C0C0C0;
+    background-color: #C0C0C0;
 }
 
 #reportBug {
-   text-align: center;
+    text-align: center;
 }
 
 .close-btn {
-   font-weight: 600;
-   border: 2px solid #aaaaaa;
-   width: 200px;
-   margin-top: 10px;
-   margin-bottom: 0px;
+    font-weight: 600;
+    border: 2px solid #aaaaaa;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 .fac-calendar-table td {
-   padding-top: 10px;
-   text-align: center;
-   height: 40px;
+    padding-top: 10px;
+    text-align: center;
+    height: 40px;
 }
 
 .fac-calendar-table th {
-   text-align: center;
-   width: 250px;
+    text-align: center;
+    width: 250px;
 }
 
 .cal-listing {
-   margin-top: 8px;
-   text-align: center;
-   padding: 0px;
+    margin-top: 8px;
+    text-align: center;
+    padding: 0px;
 }
 
 .info-table {
-   text-align: left !important;
-   padding: 0px !important;
-   overflow: auto;
-   margin: 0px !important;
+    text-align: left !important;
+    padding: 0px !important;
+    overflow: auto;
+    margin: 0px !important;
 }
 
 .label-row {
-   font-weight: bold !important;
+    font-weight: bold !important;
 }
 
 .dropdown-row {
-   text-align: right;
-   display: inline;
-   padding: 0px;
-   margin-top: 5px;
-   margin-bottom: 0px;
+    text-align: right;
+    display: inline;
+    padding: 0px;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 .table-dim {
-   height: 200px;
-   overflow: auto;
-   padding: 0px !important;
+    height: 200px;
+    overflow: auto;
+    padding: 0px !important;
 }
 
 .no-padding {
-   padding: 0px;
-   margin: 0px;
-   padding-left: 10px;
-   margin-right: 0px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 10px;
+    margin-right: 0px;
 }
 
 .pref-table-1>th {
-   text-align: left !important;
+    text-align: left !important;
 }
 
 .pref-table-1>td {
-   text-align: left;
+    text-align: left;
 }
 
 .pref-table-2>th {
-   text-align: center !important;
+    text-align: center !important;
 }
 
 .pref-table-2>td {
-   text-align: center !important;
+    text-align: center !important;
 }
 
 .checkbox {
-   text-align: left;
+    text-align: left;
 }
 
 .pref-table-1 {
-   height: 400px !important;
-   overflow: auto;
-   padding: 0px !important;
-   text-align: left;
-   margin-left: 50px;
+    height: 400px !important;
+    overflow: auto;
+    padding: 0px !important;
+    text-align: left;
+    margin-left: 50px;
 }
 
 .pref-table-1 th,
 td {
-   border-left: 0px;
-   border-right: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
 .pref-table-2 {
-   height: 400px;
-   overflow: auto;
-   padding: 0px !important;
-   text-align: center !important;
+    height: 400px;
+    overflow: auto;
+    padding: 0px !important;
+    text-align: center !important;
 }
 
 .pref-table-2 th,
 td {
-   border-left: none;
-   border-right: none;
+    border-left: none;
+    border-right: none;
 }
 
 .modal-title {
-   margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .text-center {
-   text-align: center;
-   margin-top: 60px;
-   margin-bottom: 20px;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 20px;
 }
 
 .text-center-condensed {
-   text-align: center;
-   margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .table-row {
-   display: inline;
-   margin-top: -15px;
+    display: inline;
+    margin-top: -15px;
 }
 
 .work-input {
-   width: 100px;
-   padding: 2px;
+    width: 100px;
+    padding: 2px;
 }
 
 .title-pref {
-   margin-top: 0px;
+    margin-top: 0px;
 }
 
 .form-group-a {
-   text-align: right;
-   padding-left: 10px;
-   margin-left: 10px;
+    text-align: right;
+    padding-left: 10px;
+    margin-left: 10px;
 }
 
 .form-group-c {
-   text-align: right;
-   padding-left: 10px;
-   margin-left: 55px;
-   padding-right
+    text-align: right;
+    padding-left: 10px;
+    margin-left: 55px;
+    padding-right
 }
 
 .bottom-row {
-   margin-top: 30px;
+    margin-top: 30px;
 }
 
 .form-group-b {
-   text-align: left;
-   padding-right: 0px;
+    text-align: left;
+    padding-right: 0px;
 }
 
 .search-row {
-   padding-left: 10px;
-   padding-top: 0px;
-   padding-bottom: 0px;
-   display: inlnie;
+    padding-left: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    display: inlnie;
 }
 
 .save-btn {
-   margin-top: 20px;
-   width: 100%;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .plus-btn {
-   color: transparent;
-   background-color: transparent;
-   border-color: transparent;
-   padding-top: 2px;
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+    padding-top: 2px;
 }
 
 .plusBtn {
-   width: 27px;
-   height: 27px;
+    width: 27px;
+    height: 27px;
 }
 
 .select-label {
-   font-size: 120%;
-   font-weight: 200;
-   margin: 5px;
+    font-size: 120%;
+    font-weight: 200;
+    margin: 5px;
 }
 
 .term-selector {
-   font-size: 120%;
+    font-size: 120%;
 }
 
 .details-table th,
 td {
-   border: none;
+    border: none;
 }
 
 .selector {
-   width: 150px !important;
+    width: 150px !important;
 }
 
 .range-inputs {
-   margin-left: 65px;
+    margin-left: 65px;
 }
 
 .courseCell {
-    background-color: LightGreen;
+    background-color: #cbe8ba;
 }

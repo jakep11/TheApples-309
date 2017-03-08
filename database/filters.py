@@ -15,6 +15,7 @@ def filtered_courses():
 # grab filtered sections
 @filters_api.route('/sections', methods = ["POST"])
 def filtered_sections():
+   # retrieve JSON data
    data = request.json
    terms = data.get('terms', None)
    ids = data.get('ids', None)
@@ -24,11 +25,6 @@ def filtered_sections():
 
    # list of filters for the query
    filters = []
-
-   # ~~~~~ SAVING FOR REFERENCE ~~~~~ DELETE FOR FINAL VERSION ~~~~~
-   # if no terms are selected, select the current (default) term
-   # if not terms:
-   #    terms.append(Terms.query.order_by(desc(Terms.id)).first().id)
 
    # add term to filter
    filters.append(Sections.term_id.in_(terms))

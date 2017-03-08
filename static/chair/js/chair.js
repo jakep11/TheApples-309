@@ -999,7 +999,7 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
          },
          data: {
             'id': this.selectedComment,
-            'unread': "false"
+            'unread': false
          }
       }).then(function successCallback(response) {
          console.log('success');
@@ -1019,7 +1019,7 @@ app.controller('notifications', function ($scope, $rootScope, $http, $window) {
          },
          data: {
             'id': this.selectedComment,
-            'unread': "true"
+            'unread': true
          }
       }).then(function successCallback(response) {
          console.log('success');
@@ -1338,13 +1338,12 @@ app.controller('historicData', function ($scope, $rootScope, $http) {
     $scope.getTerms = function () {
         $http({
             method: 'GET',
-            url: '/get/terms',
+            url: '/get/historicDataTerms',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(response) {
             $scope.terms = response.data;
-            //$scope.currentTermId = $scope.terms[0].id;
             $scope.currentTerm = $scope.terms[0].name;
             $scope.getScheduleFinal($scope.currentTerm);
             console.log('success');
@@ -1386,7 +1385,7 @@ app.controller('planningData', function ($scope, $rootScope, $http) {
     $scope.getTerms = function () {
         $http({
             method: 'GET',
-            url: '/get/terms',
+            url: '/get/planningDataTerms',
             headers: {
                 'Content-Type': 'application/json'
             }
