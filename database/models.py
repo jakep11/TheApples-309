@@ -57,7 +57,7 @@ class Courses(db.Model):
    course_sections = db.relationship("Sections", backref="course")
    final_schedules = db.relationship("ScheduleFinal", backref="course")
    student_planning_data = db.relationship("StudentPlanningData", backref="course")
-   course_preferences = db.relationship("FacultyCoursePreferences", backref="course")
+   course_preferences = db.relationship("FacultyCoursePreferences", backref=db.backref("course", lazy="joined"))
 
    @property
    def serialize(self):
