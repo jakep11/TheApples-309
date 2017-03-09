@@ -466,8 +466,7 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
             'Content-Type': 'application/json'
          },
          data: {
-            'filter': $scope.filter,
-            'faculty_id': $scope.faculty_id
+            'filter': $scope.filter
          }
       }).then(function successCallback(response) {
          console.log($scope.filter);
