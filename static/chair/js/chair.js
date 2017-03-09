@@ -624,7 +624,6 @@ app.controller('generateSchedule', function ($scope, $rootScope, $http, $locatio
    }
    $scope.getTerm();
 
-<<<<<<< HEAD
    $scope.publishTerm = function(pub) {
       $http({
             method: 'POST',
@@ -711,94 +710,6 @@ app.controller('generateSchedule', function ($scope, $rootScope, $http, $locatio
     $scope.getRooms();
 
     $scope.getComponentTypes = function () {
-=======
-   $scope.publishSchedule = function (pub) {
-      $http({
-         method: 'POST',
-         url: '/edit/schedule',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         data: {
-            id: $scope.schedule.id,
-            published: pub
-         }
-      }).then(function successCallback(response) {
-         console.log($scope.schedule);
-         $window.location.reload();
-
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-
-   $scope.getCourses = function () {
-      console.log("getting courses");
-      $http({
-         method: 'GET',
-         url: '/get/allCourses',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.courses = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getCourses();
-
-   $scope.getTerms = function () {
-      $http({
-         method: 'GET',
-         url: '/get/terms',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.terms = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getTerms();
-
-   $scope.getFaculty = function () {
-      $http({
-         method: 'GET',
-         url: '/get/instructors',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.faculty = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getFaculty();
-
-   $scope.getRooms = function () {
-      $http({
-         method: 'GET',
-         url: '/get/rooms',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.rooms = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getRooms();
-
-   $scope.getComponentTypes = function () {
->>>>>>> 5821b8c9a20942bcd9c9ba632314bc49c49e939e
       $http({
          method: 'GET',
          url: 'get/componentTypes',
