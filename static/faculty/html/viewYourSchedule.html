@@ -1,6 +1,6 @@
 <div class="container-fluid no-gutter">
     <div class="row form-inline text-center">
-        <select class="form-control term-selector" id="quarterSelect" ng-options="term.name for term in terms | orderBy: ['-year', '-quarterId']" ng-model="checkedTerms" ng-change="applyFilters()"></select>
+        <select class="form-control term-selector" id="quarterSelect" ng-options="term.name for term in terms  | filter: {published:true} | orderBy: ['-year', '-quarterId']" ng-model="checkedTerms" ng-change="applyFilters()"></select>
     </div>
 
     <!--    calendar display-->

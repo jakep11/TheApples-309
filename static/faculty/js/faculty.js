@@ -211,7 +211,7 @@ app.controller("viewYourSchedule", function ($scope, $rootScope, $location, $htt
         var quarterId = -1;
 
         angular.forEach($scope.terms, function (obj, index) {
-            if (obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
+            if (obj.published && obj.year > year || (obj.year === year && obj.quarterId > quarterId)) {
                 lastIndex = index;
                 year = obj.year;
                 quarterId = obj.quarterId;
