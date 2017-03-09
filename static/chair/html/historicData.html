@@ -24,9 +24,9 @@
             </tr>
             <tr ng-repeat="hData in historicData | orderBy: 'course_number'">
                <td>{{hData.course_major}} {{hData.course_number}}</td>
-               <td>{{hData.number_sections}}</td>
-               <td>{{hData.total_enrollment}}</td>
-               <td>{{hData.waitlist}}</td>
+               <td><span ng-if="hData.number_sections == ''">--</span>{{hData.number_sections}}</td>
+               <td><span ng-if="hData.total_enrollment == ''">--</span>{{hData.total_enrollment}}</td>
+               <td><span ng-if="hData.waitlist == ''">--</span>{{hData.waitlist}}</td>
             </tr>
          </table>
       </div>
