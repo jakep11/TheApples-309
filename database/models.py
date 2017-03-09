@@ -43,7 +43,8 @@ class Faculty(db.Model):
       'first_name': self.first_name,
       'last_name': self.last_name,
       'min_work_units': self.min_work_units,
-      'max_work_units': self.max_work_units
+      'max_work_units': self.max_work_units,
+      'current_work_units': self.current_work_units
       }
 
 #-- Description: Stores all courses taught by the University

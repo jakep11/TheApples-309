@@ -12,97 +12,97 @@ import sys
 # can use the Term to filter through and view the information that has been imported into the system
 @get_api.route('/terms', methods = ["GET"])
 def get_terms():
-	terms = Terms.query.all()
-	return jsonify([i.serialize for i in terms])
+   terms = Terms.query.all()
+   return jsonify([i.serialize for i in terms])
 
 # This function gets all the instructors from the Faculty table in the database. It is called
 # when loading the faculty manager page from the department chairs homepage.
 @get_api.route('/instructors', methods = ["GET"])
 def get_instructors():
-	instructors = Faculty.query.all()
-	return jsonify([i.serialize for i in instructors])
+   instructors = Faculty.query.all()
+   return jsonify([i.serialize for i in instructors])
 
 # This function gets all the courses from the Course table in the database. It is called
 # when loading the course manager page from the department chairs homepage.
 @get_api.route('/allCourses', methods = ["GET"])
 def get_courses():
-	courses = Courses.query.all()
-	return jsonify([i.serialize for i in courses])
+   courses = Courses.query.all()
+   return jsonify([i.serialize for i in courses])
 
 # This function gets all the components from the Component table in the database. It is called
 # when loading the components (labs, lectures, etc) for the courses on the course manager page.
 @get_api.route('/allComponents', methods = ["GET"])
 def get_components():
-	components = Components.query.all()
-	return jsonify([i.serialize for i in components])
+   components = Components.query.all()
+   return jsonify([i.serialize for i in components])
 
 # This function gets all the component types from the ComponentTypes table in the database. It is called
 # when loading the course manager page from the department chairs homepage.
 @get_api.route('/componentTypes', methods = ["GET"])
 def get_component_types():
-	componentTypes = ComponentTypes.query.all()
-	return jsonify([i.serialize for i in componentTypes])
+   componentTypes = ComponentTypes.query.all()
+   return jsonify([i.serialize for i in componentTypes])
 
 # This function gets all the rooms from the Room table in the database. It is called
 # when loading the room manager page from the department chairs homepage.
 @get_api.route('/roomTypes', methods = ["GET"])
 def get_room_types():
-	roomTypes = RoomTypes.query.all()
-	return jsonify([i.serialize for i in roomTypes])
+   roomTypes = RoomTypes.query.all()
+   return jsonify([i.serialize for i in roomTypes])
 
 # This function gets all the file names from the ImportedFiles table in the database. It is called
 # when loading the imported files from the Import CSV page from the department chairs homepage.
 @get_api.route('/fileNames', methods = ["GET"])
 def get_file_names():
-	fileNames = ImportedFiles.query.all()
-	return jsonify([i.serialize for i in fileNames])
+   fileNames = ImportedFiles.query.all()
+   return jsonify([i.serialize for i in fileNames])
 
 # This function gets all the courses and components from the course and component tables in the database.
 # It is called when loading the course manager page from the department chairs homepage.
 @get_api.route('/allCoursesAndComponents', methods = ["GET"])
 def get_courses_with_components():
-	courses = Courses.query.all()
+   courses = Courses.query.all()
 
-	data = []
-	for course in courses:
-		c1 = None
-		c2 = None
-		c1_hours = None
-		c1_workload_units = None
-		c2_hours = None
-		c2_workload_units = None
+   data = []
+   for course in courses:
+      c1 = None
+      c2 = None
+      c1_hours = None
+      c1_workload_units = None
+      c2_hours = None
+      c2_workload_units = None
 
-		if len(course.components) > 0 :
-			c1 = course.components[0].name
-			c1_workload_units = course.components[0].workload_units
-			c1_hours = course.components[0].hours
-		if len(course.components) > 1 :
-			c2 = course.components[1].name
-			c2_workload_units = course.components[1].workload_units
-			c2_hours = course.components[1].hours
+      if len(course.components) > 0 :
+         c1 = course.components[0].name
+         c1_workload_units = course.components[0].workload_units
+         c1_hours = course.components[0].hours
+      if len(course.components) > 1 :
+         c2 = course.components[1].name
+         c2_workload_units = course.components[1].workload_units
+         c2_hours = course.components[1].hours
 
-		temp = {
-			'id': course.id,
-			'number': course.number,
-			'major': course.major,
-			'course_name': course.course_name,
-			'component_one': c1,
-			'c1_workload_units': c1_workload_units,
-			'c1_hours': c1_hours,
-			'component_two': c2,
-			'c2_workload_units': c2_workload_units,
-			'c2_hours': c2_hours,
-		}
-		data.append(temp)
+      temp = {
+         'id': course.id,
+         'number': course.number,
+         'major': course.major,
+         'course_name': course.course_name,
+         'component_one': c1,
+         'c1_workload_units': c1_workload_units,
+         'c1_hours': c1_hours,
+         'component_two': c2,
+         'c2_workload_units': c2_workload_units,
+         'c2_hours': c2_hours,
+      }
+      data.append(temp)
 
-	return jsonify(data)
+   return jsonify(data)
 
 # This function gets all the sections from the Section table in the database. It is called
 # when loading a schedule for a specified term.
 @get_api.route('/allSections', methods = ["GET"])
 def get_sections():
-	sections = Sections.query.all()
-	return jsonify([i.serialize for i in sections])
+   sections = Sections.query.all()
+   return jsonify([i.serialize for i in sections])
 
 # This function gets all the preferences from the Preferences table in the database. It is called
 # when a department chair views the faculty preferences page.
@@ -122,12 +122,12 @@ def get_course_preferences():
 #  It is called when a user wishes to filter the information in a schedule by course.
 @get_api.route('/filterCourses', methods = ["POST"])
 def get_filtered_courses():
-	data = request.json
-	course = data['filter']
-	id = int(data['faculty_id'])
+   data = request.json
+   course = data['filter']
+   id = int(data['faculty_id'])
 
-	courses = FacultyCoursePreferences.query.filter(Courses.course_name.contains(course)).all()
-	return jsonify([i.serialize for i in courses])
+   courses = FacultyCoursePreferences.query.filter(Courses.course_name.contains(course)).all()
+   return jsonify([i.serialize for i in courses])
 
 # This function gets all the rooms from the Room table in the database. It is called
 # when loading the room manager page from the department chairs homepage.
@@ -208,17 +208,17 @@ def get_planning_data():
 
 @get_api.route('/planningDataTerms', methods = ["GET"])
 def get_planning_data_courses():
-	spdTerms = StudentPlanningData.query.with_entities(StudentPlanningData.term_id).distinct()
-	terms = Terms.query.filter(Terms.id.in_(spdTerms))
+   spdTerms = StudentPlanningData.query.with_entities(StudentPlanningData.term_id).distinct()
+   terms = Terms.query.filter(Terms.id.in_(spdTerms))
 
-	return jsonify([i.serialize for i in terms])
+   return jsonify([i.serialize for i in terms])
 
 @get_api.route('/historicDataTerms', methods = ["GET"])
 def get_historic_data_courses():
-	sfTerms = ScheduleFinal.query.with_entities(ScheduleFinal.term_id).distinct()
-	terms = Terms.query.filter(Terms.id.in_(sfTerms))
+   sfTerms = ScheduleFinal.query.with_entities(ScheduleFinal.term_id).distinct()
+   terms = Terms.query.filter(Terms.id.in_(sfTerms))
 
-	return jsonify([i.serialize for i in terms])
+   return jsonify([i.serialize for i in terms])
 
 
 # # This function gets the list of all rooms that are able to hold a course
