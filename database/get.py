@@ -123,11 +123,18 @@ def get_course_preferences():
 @get_api.route('/filterCourses', methods = ["POST"])
 def get_filtered_courses():
    data = request.json
-   course = data['filter']
-   id = int(data['faculty_id'])
 
-   courses = FacultyCoursePreferences.query.filter(Courses.course_name.contains(course)).all()
-   return jsonify([i.serialize for i in courses])
+   # get the course name to filter by; if no name is specified, use an empty string to not filter
+   course = data.get('filter', '')
+
+   # get the course ids that contain the filter
+   courses = Courses.query.filter(Courses.course_name.contains(course)).with_entities(Courses.id).all()
+   course_ids = [i.id for i in courses]
+
+   # filter the preferences by the filtered course_ids
+   fcps = FacultyCoursePreferences.query.filter(FacultyCoursePreferences.course_id.in_(course_ids))
+
+   return jsonify([i.serialize for i in fcps])
 
 # This function gets all the rooms from the Room table in the database. It is called
 # when loading the room manager page from the department chairs homepage.
