@@ -13,13 +13,13 @@
             <th>Published</th>
 
          </tr>
-         <tr ng-repeat="schedule in schedules | orderBy: 'year'">
+         <tr ng-repeat="term in terms | orderBy: 'year'">
             <td>
-               <input type="radio" ng-model="$parent.random" value="{{schedule.id}}" ng-click="radioChanged(schedule)">
+               <input type="radio" ng-model="$parent.random" value="{{term.id}}" ng-click="radioChanged(term)">
             </td>
-            <td><a href="#/generateSchedule?term={{schedule.term_id}}">{{schedule.quarter}}</a></td>
-            <td>{{schedule.year}}</td>
-            <td>{{schedule.published}}</td>
+            <td><a href="#/generateSchedule?term={{term.id}}">{{term.name}}</a></td>
+            <td>{{term.year}}</td>
+            <td>{{term.published}}</td>
          </tr>
       </table>
       <div class="row">
@@ -33,7 +33,7 @@
             <button class="btn btn-default preference-btn col-xs-12" data-toggle="modal" data-target="#edit-modal" ng-click="openEdit()" ng-disabled="!radioSelected">EDIT</button>
          </div>
          <div class="col-xs-2">
-            <button class="btn btn-default preference-btn col-xs-12" ng-click="deleteSchedule()" ng-disabled="!radioSelected">REMOVE</button>
+            <button class="btn btn-default preference-btn col-xs-12" ng-click="deleteTerm()" ng-disabled="!radioSelected">REMOVE</button>
          </div>
       </div>
       <!-- Modal to add a schedule -->
@@ -72,7 +72,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns" ng-click="addSchedule()">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="addTerm()">SAVE</button>
                            </div>
                         </div>
                      </div>
@@ -117,7 +117,7 @@
                               <button class="btn btn-default preference-btn add-btns" data-dismiss="modal">CANCEL</button>
                            </div>
                            <div class="col-xs-4">
-                              <button class="btn btn-default preference-btn add-btns" ng-click="editSchedule()">SAVE</button>
+                              <button class="btn btn-default preference-btn add-btns" ng-click="editTerm()">SAVE</button>
                            </div>
                         </div>
                      </div>

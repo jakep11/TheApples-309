@@ -76,13 +76,14 @@ class Courses(db.Model):
 class Terms(db.Model):                    
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(64))
+   published = db.Column(db.Boolean)
    term_sections = db.relationship("Sections", backref="term")
    comments = db.relationship("Comments", backref="term")
    final_schedules = db.relationship("ScheduleFinal", backref="term")
    preferences = db.relationship("FacultyPreferences", backref="term")
    course_preferences = db.relationship("FacultyCoursePreferences", backref="term")
    student_planning_data = db.relationship("StudentPlanningData", backref="term")
-   schedules = db.relationship("Schedule", backref="term")
+   # schedules = db.relationship("Schedule", backref="term")
 
    @property
    def serialize(self):
@@ -105,7 +106,8 @@ class Terms(db.Model):
       'id'  : self.id,
       'name': self.name,
       'quarterId': quarterId,
-      'year': year
+      'year': year,
+      'published': self.published
       }
 
 
@@ -143,7 +145,7 @@ class Sections(db.Model):
    time_start = db.Column(db.Integer)
    time_end = db.Column(db.Integer)
    days = db.Column(db.String(3))               # 'MWF' or "TR"
-   schedule_id = db.Column(db.Integer, db.ForeignKey("schedule.id"))
+   #schedule_id = db.Column(db.Integer, db.ForeignKey("schedule.id"))
 
    # want course name, faculty name, room number,
    @property
@@ -219,23 +221,6 @@ class StudentPlanningData(db.Model):
          'capacity': self.capacity,
          'seat_demand': self.seat_demand,
          'unmet_seat_demand': self.unmet_seat_demand
-      }
-
-#-- Description: Stores all of the sections that are scheduled in a specific term
-class Schedule(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   term_id = db.Column(db.Integer, db.ForeignKey("terms.id"))
-   sections = db.relationship("Sections", backref="schedule")
-   published = db.Column(db.Boolean)
-   
-   @property
-   def serialize(self):
-      return {
-         'id': self.id,
-         'quarter': (Terms.query.filter_by(id=self.term_id).first()).name[:-5], # getting assigned quarter
-         'year': (Terms.query.filter_by(id=self.term_id).first()).name[-4:], # getting assigned year
-         'published': self.published, # whether the schedule is published or not
-         'term_id': self.term_id # see which specific term_id the schedule is part of
       }
 
 #-- Description: Stores faculty preferences for what days and times they would like to teach in a specific term 

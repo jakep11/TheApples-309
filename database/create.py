@@ -119,7 +119,8 @@ def new_term():
     data = request.json
     name = data['name']
 
-    term = Terms(name=name)
+
+    term = Terms(name=name, published=0)
     db.session.add(term)
     db.session.commit()
     return "Term %s added to the database" % (name)
@@ -270,41 +271,6 @@ def new_student_planning_data():
     db.session.add(spd)
     db.session.commit()
     return "StudentPlanningData added to database"
-
-# This function adds a schedule to the schedule table in the database. It is called
-# when a scheduler clicks "create new schedule"
-@create_api.route('/schedule', methods = ['POST'])
-def new_schedule():
-    data = request.json
-    term_name = data['name']
-    #term_id = data['term_id']
-    #published = data['published']
-
-    term = Terms.query.filter_by(name=term_name).first()
-    if term is None:
-        newTerm = Terms(name=term_name)
-        db.session.add(newTerm)
-        db.session.commit()
-        term = Terms.query.filter_by(name=term_name).first()
-
-    schedule = Schedule(term=term, published=False)
-    db.session.add(schedule)
-    db.session.commit()
-    return "Schedule added" 
-
-# @create_api.route('publishedSchedule', methods = ['POST'])
-# def new_published_schedule():
-#     data = request.json
-#     term_id = data['term_id']
-#
-#     if term_id is None:
-#         return "ERROR TERM NOT FOUND"
-#
-#     term = Terms.query.filter_by(id=term_id).first()
-#     publishedSchedule = PublishedSchedule(term=term)
-#     db.session.add(publishedSchedule)
-#     db.session.commit()
-#     return "PublishedSchedule: term %s" % (term)
 
 # This function adds faculty preferences to the facultyPreferences table in the database. It is called
 # when a faculty member (or a dept chair) submits preferences for a given term/

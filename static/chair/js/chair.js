@@ -3,10 +3,27 @@ var app = angular.module('TheApples');
 
 //Each controller states what the breadcrumb for the page should be
 
-app.controller('chairHome', function ($scope, $rootScope, $location, $cookies) {
+app.controller('chairHome', function ($scope, $rootScope, $location, $cookies, $http) {
    $rootScope.bcrumb1 = null;
 
    $scope.numNotifications = 12;
+   $scope.getNotifications = function () {
+      $http({
+         method: 'GET',
+         url: '/get/comments',
+         headers: {
+            'Content-Type': "application/json"
+         }
+      }).then(function successCallback(response) {
+         $scope.notifications = response.data;
+         $scope.numNotifications = response.data.length;
+      }, function errorCallback(response) {
+         console.log("error");
+      });
+   }
+
+   // Calling the getComments function
+   $scope.getNotifications();
 
    $scope.logout = function () {
       console.log('logging out');
@@ -587,112 +604,111 @@ app.controller('generateSchedule', function ($scope, $rootScope, $http, $locatio
    $scope.endTimes = sharedData.endTimes;
    $scope.schedule = null;
 
-   $scope.getSchedule = function () {
+   $scope.getTerm = function() {
       $http({
-         method: 'POST',
-         url: '/get/schedule',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         data: {
-            term_id: $scope.currentTerm
-         }
-      }).then(function successCallback(response) {
-         $scope.schedule = response.data;
-         $scope.published = response.data.published;
-         console.log($scope.schedule);
-      }, function errorCallback(response) {
-         console.log('error');
-      });
+            method: 'POST',
+            url: '/get/term',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+               term_id: parseInt($scope.currentTerm)
+            }
+        }).then(function successCallback(response) {
+            $scope.term = response.data;
+            $scope.published = response.data.published;
+        }, function errorCallback(response) {
+            console.log('error');
+        });
    }
-   $scope.getSchedule();
+   $scope.getTerm();
 
-   $scope.publishSchedule = function (pub) {
+   $scope.publishTerm = function(pub) {
       $http({
-         method: 'POST',
-         url: '/edit/schedule',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         data: {
-            id: $scope.schedule.id,
-            published: pub
-         }
-      }).then(function successCallback(response) {
-         console.log($scope.schedule);
-         $window.location.reload();
+            method: 'POST',
+            url: '/edit/term',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+               id: $scope.term.id,
+               published: pub
+            }
+        }).then(function successCallback(response) {
+            console.log($scope.term);
+            $window.location.reload();
 
-      }, function errorCallback(response) {
-         console.log('error');
-      });
+        }, function errorCallback(response) {
+            console.log('error');
+        });
    }
 
-   $scope.getCourses = function () {
-      console.log("getting courses");
-      $http({
-         method: 'GET',
-         url: '/get/allCourses',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.courses = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getCourses();
+    $scope.getCourses = function () {
+        console.log("getting courses");
+        $http({
+            method: 'GET',
+            url: '/get/allCourses',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.courses = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getCourses();
 
-   $scope.getTerms = function () {
-      $http({
-         method: 'GET',
-         url: '/get/terms',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.terms = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getTerms();
+    $scope.getTerms = function () {
+        $http({
+            method: 'GET',
+            url: '/get/terms',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.terms = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getTerms();
 
-   $scope.getFaculty = function () {
-      $http({
-         method: 'GET',
-         url: '/get/instructors',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.faculty = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getFaculty();
+    $scope.getFaculty = function () {
+        $http({
+            method: 'GET',
+            url: '/get/instructors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.faculty = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getFaculty();
 
-   $scope.getRooms = function () {
-      $http({
-         method: 'GET',
-         url: '/get/rooms',
-         headers: {
-            'Content-Type': 'application/json'
-         }
-      }).then(function successCallback(response) {
-         $scope.rooms = response.data;
-         console.log('success');
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-   $scope.getRooms();
+    $scope.getRooms = function () {
+        $http({
+            method: 'GET',
+            url: '/get/rooms',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            $scope.rooms = response.data;
+            console.log('success');
+        }, function errorCallback(response) {
+            console.log('error');
+        });
+    }
+    $scope.getRooms();
 
-   $scope.getComponentTypes = function () {
+    $scope.getComponentTypes = function () {
       $http({
          method: 'GET',
          url: 'get/componentTypes',
@@ -1206,105 +1222,104 @@ app.controller('roomManager', function ($scope, $rootScope, $http, $window) {
 app.controller('schedules', function ($scope, $rootScope, $http, $window) {
    $rootScope.bcrumb1 = 'Schedules';
 
-   $scope.schedules = [];
-   $scope.getSchedules = function () {
+   $scope.terms = [];
+   $scope.getTerms = function () {
       $http({
          method: 'GET',
-         url: '/get/schedules',
+         url: '/get/terms',
          headers: {
             'Content-Type': "application/json"
          }
       }).then(function successCallback(response) {
          console.log("success");
          console.log(response.data);
-         $scope.schedules = response.data;
+         $scope.terms = response.data;
       }, function errorCallback(response) {
          console.log("error");
       });
    }
 
    // Calling the function
-   $scope.getSchedules();
+   $scope.getTerms();
 
    $scope.radioSelected = false;
 
-   // Handles keeping track of which schedule radio button is selected
-   $scope.radioChanged = function (schedule) {
-      console.log(schedule);
-      $scope.current = {
-         'id': schedule.id,
-         'quarter': schedule.quarter,
-         'year': parseInt(schedule.year),
-         'published': "0"
+// Handles keeping track of which schedule radio button is selected
+$scope.radioChanged = function (term) {
+   console.log(term);
+   $scope.current = {
+      'id': term.id,
+      'quarter': term.name,
+      'year': parseInt(term.year),
+      'published': "0"
+      
+   }
+   $scope.radioSelected = true;
+   console.log("current set");
 
+}
+$scope.openEdit = function () {
+   $scope.edit = $scope.current;
+   console.log($scope.current);
+}
+
+// Adds a schedule to the database
+$scope.addTerm = function () {
+   $http({
+      method: 'POST',
+      url: '/create/term',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'name': $scope.quarter + " " + $scope.year,
       }
-      $scope.radioSelected = true;
-      console.log("current set");
+   }).then(function successCallback(response) {
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
 
-   }
-   $scope.openEdit = function () {
-      $scope.edit = $scope.current;
-      console.log($scope.current);
-   }
+// Edits a schedule in the database
+$scope.editTerm = function () {
+   $http({
+      method: 'POST',
+      url: '/edit/term',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.edit.id,
+         'name': $scope.edit.quarter + " " + $scope.edit.year
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling edit Term');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
 
-   // Adds a schedule to the database
-   $scope.addSchedule = function () {
-      $http({
-         method: 'POST',
-         url: '/create/schedule',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         data: {
-            'name': $scope.quarter + " " + $scope.year,
-         }
-      }).then(function successCallback(response) {
-         $window.location.reload();
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-
-   // Edits a schedule in the database
-   $scope.editSchedule = function () {
-      $http({
-         method: 'POST',
-         url: '/edit/schedule',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         data: {
-            'id': $scope.edit.id,
-            'name': $scope.edit.quarter + " " + $scope.edit.year
-         }
-      }).then(function successCallback(response) {
-         console.log('Calling edit Schedule');
-         $window.location.reload();
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-
-   // Removes a schedule from the database
-   $scope.deleteSchedule = function () {
-      console.log("trying to delete schedule");
-      $http({
-         method: 'POST',
-         url: '/delete/schedule',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         data: {
-            'id': $scope.current.id
-         }
-      }).then(function successCallback(response) {
-         console.log('Calling delete schedule');
-         $window.location.reload();
-      }, function errorCallback(response) {
-         console.log('error');
-      });
-   }
-
+// Removes a schedule from the database
+$scope.deleteTerm = function () {
+   console.log("trying to delete schedule");
+   $http({
+      method: 'POST',
+      url: '/delete/term',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      data: {
+         'id': $scope.current.id
+      }
+   }).then(function successCallback(response) {
+      console.log('Calling delete term');
+      $window.location.reload();
+   }, function errorCallback(response) {
+      console.log('error');
+   });
+}
 
 })
 
