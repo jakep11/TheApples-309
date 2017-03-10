@@ -420,7 +420,7 @@ app.controller('facultyManager', function ($scope, $rootScope, $http, $window) {
 
 })
 
-app.controller('facultyPreferences', function ($scope, $rootScope, $http, $routeParams, sharedData) {
+app.controller('facultyPreferences', function ($scope, $rootScope, $http, $routeParams, $window, sharedData) {
    $rootScope.bcrumb1 = 'Faculty Manager';
    $rootScope.bcrumb1Link = '#facultyManager';
    $rootScope.bcrumb2 = 'Faculty Preferences';
@@ -552,6 +552,7 @@ app.controller('facultyPreferences', function ($scope, $rootScope, $http, $route
             'id': $scope.faculty_id
          }
       }).then(function successCallback(response) {
+         $window.location.reload();
          console.log('success');
       }, function errorCallback(response) {
          console.log('error');
