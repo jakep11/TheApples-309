@@ -55,8 +55,8 @@ class Courses(db.Model):
    course_name = db.Column(db.String(100))
    components = db.relationship("Components", backref="course")
    course_sections = db.relationship("Sections", backref="course")
-   final_schedules = db.relationship("ScheduleFinal", backref="course")
-   student_planning_data = db.relationship("StudentPlanningData", backref="course")
+   final_schedules = db.relationship("ScheduleFinal", backref=db.backref("course", lazy="joined"))
+   student_planning_data = db.relationship("StudentPlanningData", backref=db.backref("course", lazy="joined"))
    course_preferences = db.relationship("FacultyCoursePreferences", backref=db.backref("course", lazy="joined"))
 
    @property
