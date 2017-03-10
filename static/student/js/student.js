@@ -78,7 +78,7 @@ app.service("sharedData", function () {
     this.faculty = null;
 });
 
-app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $http, sharedData) {
+app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $location, $window, $http, sharedData) {
     $rootScope.bcrumb1 = "Published Schedules";
 
     $scope.sortType = 'course_num';
@@ -327,7 +327,8 @@ app.controller("viewScheduleTableStudent", function ($scope, $rootScope, $locati
                 'type': "Feedback"
           }
         }).then(function successCallback(response) {
-            $scope.courses = response.data;
+            $window.location.reload();
+
             console.log('success');
         }, function errorCallback(response) {
             console.log('error');
