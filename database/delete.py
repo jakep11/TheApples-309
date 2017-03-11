@@ -27,8 +27,10 @@ def delete_faculty():
     id = data['id']
 
     faculty = Faculty.query.filter_by(id=id).first()
-    if faculty is None:
-        return 'ERROR FACULTY NOT FOUND'
+    faculty_course_preferences = FacultyCoursePreferences.query.filter_by(faculty_id=id).all()
+    for f in faculty_course_preferences:
+        db.session.delete(f)
+    
     db.session.delete(faculty)
     db.session.commit()
     return  "Faculty %s removed from database" % (faculty.first_name)
@@ -133,7 +135,7 @@ def delete_schedule_final():
 
 # This function removes student planning data from the StudentPlanningData table in the database. 
 # It is called when the chair selects some student planning data  to remove.
-@delete_api.route('studentPlanningData', methods = ["POST"])
+@delete_api.route('/studentPlanningData', methods = ["POST"])
 def delete_student_planning_data():
     data = request.json
     id = data['id']
